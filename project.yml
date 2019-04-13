@@ -1,0 +1,39 @@
+name: Kakebo
+
+options:
+  bundleIdPrefix: com.sbs
+  xcodeVersion: 10.2
+  usesTabs: false
+  indentWidth: 4
+  deploymentTarget:
+    iOS: 11.0
+
+settings:
+  base:
+    SWIFT_VERSION: '5'
+  configs:
+    Release:
+      SWIFT_COMPILATION_MODE: 'wholemodule'
+
+targets:
+  Kakebo:
+    type: application
+    platform: iOS
+    sources:
+      - kakebo
+    preBuildScripts:
+      - name: Swift lint
+        script: |
+                if which swiftlint >/dev/null; then
+                    swiftlint
+                else
+                    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+
+  KakeboTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - kakeboTests
+    dependencies:
+      - target: Kakebo

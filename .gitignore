@@ -1,0 +1,11 @@
+# Xcode
+*.xcodeproj
+
+# Carthage
+Carthage/*
+
+# Slather
+coverage/*
+
+# OS X
+.DS_Store
