@@ -7,5 +7,5 @@ Carthage/*
 # Slather
 coverage/*
 
-# OS X
+# macOS
 .DS_Store

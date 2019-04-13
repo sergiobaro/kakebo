@@ -4,7 +4,7 @@ options:
   bundleIdPrefix: com.sbs
   xcodeVersion: 10.2
   usesTabs: false
-  indentWidth: 4
+  indentWidth: 2
   deploymentTarget:
     iOS: 11.0
 
@@ -21,6 +21,9 @@ targets:
     platform: iOS
     sources:
       - kakebo
+    dependencies:
+      - carthage: Realm
+      - carthage: RealmSwift
     preBuildScripts:
       - name: Swift lint
         script: |
@@ -37,3 +40,5 @@ targets:
       - kakeboTests
     dependencies:
       - target: Kakebo
+      - carthage: Quick
+      - carthage: Nimble
