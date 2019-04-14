@@ -21,7 +21,7 @@ class AddExpenseViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = NSLocalizedString("Add Expense", comment: "")
+    self.title = localize("Add Expense")
     
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .cancel,
