@@ -9,12 +9,9 @@ options:
     iOS: 11.0
 
 settings:
-  base:
-    SWIFT_VERSION: '5'
-  configs:
-    Release:
-      SWIFT_COMPILATION_MODE: 'wholemodule'
-
+  base: 
+    SWIFT_VERSION: 5
+    
 targets:
   Kakebo:
     type: application
@@ -24,6 +21,12 @@ targets:
     dependencies:
       - carthage: Realm
       - carthage: RealmSwift
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: '1'
+      configs:
+        Release:
+          SWIFT_COMPILATION_MODE: 'wholemodule'
     preBuildScripts:
       - name: Swift lint
         script: |
