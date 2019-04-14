@@ -11,11 +11,21 @@ class ExpensesPresenter {
   }
   
   func numberOfExpenses() -> Int {
-    return self.repository.allExpenses().count
+    return self.repository.numberOfExpenses()
   }
   
   func expense(at index: Int) -> Expense? {
-    return self.repository.allExpenses()[index]
+    return self.repository.expense(at: index)
+  }
+  
+  func deleteExpense(at index: Int) -> Bool {
+    do {
+      _ = try self.repository.deleteExpense(at: index)
+      return true
+    } catch {
+      print(error)
+      return false
+    }
   }
 
   func userTapAdd() {

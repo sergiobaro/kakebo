@@ -11,8 +11,12 @@ class AddExpensePresenter {
   }
   
   func userTapDone(text: String?) {
-    if let amount = text {
-      self.repository.add(expense: Expense(amount: amount))
+    if let name = text {
+      do {
+        try self.repository.add(expense: Expense(name: name))
+      } catch {
+        print(error)
+      }
     }
     
     self.router.navigateBack()

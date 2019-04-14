@@ -19,7 +19,9 @@ class ExpensesViewController: UIViewController {
       action: #selector(tapAdd)
     )
     
+    self.tableView.allowsSelection = false
     self.tableView.dataSource = self
+    self.tableView.delegate = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +50,25 @@ extension ExpensesViewController: UITableViewDataSource {
     }
     
     if let expense = self.presenter.expense(at: indexPath.row) {
-      cell.textLabel?.text = expense.amount
+      cell.textLabel?.text = expense.name
     }
     
     return cell
   }
   
+}
+
+extension ExpensesViewController: UITableViewDelegate {
+  
+  func tableView(
+    _ tableView: UITableView,
+    commit editingStyle: UITableViewCell.EditingStyle,
+    forRowAt indexPath: IndexPath
+  ) {
+    if editingStyle == .delete {
+      if self.presenter.deleteExpense(at: indexPath.row) {
+        self.tableView.deleteRows(at: [indexPath], with: .left)
+      }
+    }
+  }
 }
