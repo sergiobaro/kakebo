@@ -17,7 +17,7 @@ targets:
     type: application
     platform: iOS
     sources:
-      - kakebo
+      - Kakebo
     dependencies:
       - carthage: Realm
       - carthage: RealmSwift
@@ -40,7 +40,7 @@ targets:
     type: bundle.unit-test
     platform: iOS
     sources:
-      - kakeboTests
+      - KakeboTests
     dependencies:
       - target: Kakebo
       - carthage: Quick
