@@ -1,5 +1,15 @@
 import UIKit
 
+protocol AddExpensePresenter {
+  
+  func viewIsReady()
+  
+  func userTapDone(text: String?)
+  func userTapCancel()
+  func userChangedName(text: String?)
+  
+}
+
 class AddExpenseViewController: UIViewController {
   
   @IBOutlet weak var textField: UITextField!
@@ -27,6 +37,8 @@ class AddExpenseViewController: UIViewController {
     
     self.textField.delegate = self
     self.textField.becomeFirstResponder()
+    
+    self.presenter.viewIsReady()
   }
   
   // MARK: - Actions
@@ -51,6 +63,18 @@ extension AddExpenseViewController: UITextFieldDelegate {
       self.presenter.userTapDone(text: textField.text)
       return false
     }
+    
+    if let text = textField.text?.replacing(in: range, with: string) {
+      self.presenter.userChangedName(text: text)
+    }
+    
     return true
+  }
+}
+
+extension AddExpenseViewController: AddExpenseView {
+  
+  func done(enabled: Bool) {
+    self.navigationItem.rightBarButtonItem?.isEnabled = enabled
   }
 }

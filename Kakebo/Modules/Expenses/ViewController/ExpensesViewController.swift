@@ -1,5 +1,15 @@
 import UIKit
 
+protocol ExpensesPresenter {
+  
+  func numberOfExpenses() -> Int
+  func expense(at index: Int) -> Expense?
+  func deleteExpense(at index: Int) -> Bool
+  
+  func userTapAdd()
+  
+}
+
 class ExpensesViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!

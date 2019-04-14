@@ -1,6 +1,6 @@
 import Foundation
 
-class ExpensesPresenter {
+class DefaultExpensesPresenter {
 
   private let router: ExpensesRouter
   private let repository: ExpensesRepository
@@ -9,6 +9,10 @@ class ExpensesPresenter {
     self.router = router
     self.repository = repository
   }
+  
+}
+
+extension DefaultExpensesPresenter: ExpensesPresenter {
   
   func numberOfExpenses() -> Int {
     return self.repository.numberOfExpenses()

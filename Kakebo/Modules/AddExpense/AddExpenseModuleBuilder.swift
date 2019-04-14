@@ -12,9 +12,12 @@ class AddExpenseModuleBuilder {
     let viewController = AddExpenseViewController()
     
     let router = AddExpenseRouter(viewController: viewController)
-    let presenter = AddExpensePresenter(router: router, repository: self.repository)
     
-    viewController.presenter = presenter
+    viewController.presenter = DefaultAddExpensePresenter(
+      view: viewController,
+      router: router,
+      repository: self.repository
+    )
     
     return UINavigationController(rootViewController: viewController)
   }

@@ -16,12 +16,10 @@ class ExpensesModuleBuilder {
       addExpensesModuleBuilder: AddExpenseModuleBuilder(repository: self.repository)
     )
     
-    let presenter = ExpensesPresenter(
+    viewController.presenter = DefaultExpensesPresenter(
       router: router,
       repository: repository
     )
-    
-    viewController.presenter = presenter
     
     return UINavigationController(rootViewController: viewController)
   }
