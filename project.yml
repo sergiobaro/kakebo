@@ -42,3 +42,13 @@ targets:
       - target: Kakebo
       - carthage: Quick
       - carthage: Nimble
+
+schemes:
+  Kakebo:
+    build:
+      targets:
+        Kakebo: all
+    test:
+      gatherCoverageData: true
+      targets:
+        - KakeboTests
