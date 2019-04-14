@@ -19,13 +19,7 @@ class ExpensesPresenter {
   }
   
   func deleteExpense(at index: Int) -> Bool {
-    do {
-      _ = try self.repository.deleteExpense(at: index)
-      return true
-    } catch {
-      print(error)
-      return false
-    }
+    return self.repository.deleteExpense(at: index)
   }
 
   func userTapAdd() {

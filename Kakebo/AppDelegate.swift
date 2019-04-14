@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,10 +11,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
 
-    let expenses = RealmExpensesRepository()
-    
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    self.window!.rootViewController = ExpensesModuleBuilder(repository: expenses).build()
+    
+    do {
+      let realm = try Realm()
+      let expensesRepository = RealmExpensesRepository(realm: realm)
+      self.window!.rootViewController = ExpensesModuleBuilder(repository: expensesRepository).build()
+    } catch {
+      fatalError()
+    }
+    
     self.window!.makeKeyAndVisible()
     
     return true
