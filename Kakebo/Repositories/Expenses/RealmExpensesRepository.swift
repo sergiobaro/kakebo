@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-private class ExpenseRealm: Object {
+class ExpenseRealm: Object {
   @objc dynamic var name = ""
 }
 
