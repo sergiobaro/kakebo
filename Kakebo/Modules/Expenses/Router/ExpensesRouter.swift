@@ -3,15 +3,15 @@ import UIKit
 class ExpensesRouter {
 
   private weak var viewController: UIViewController?
-  private let repository: ExpensesRepository
+  private let addExpensesModuleBuilder: AddExpenseModuleBuilder
 
-  init(viewController: UIViewController, repository: ExpensesRepository) {
+  init(viewController: UIViewController, addExpensesModuleBuilder: AddExpenseModuleBuilder) {
     self.viewController = viewController
-    self.repository = repository
+    self.addExpensesModuleBuilder = addExpensesModuleBuilder
   }
 
   func navigateToAddExpense() {
-    guard let addExpense = AddExpenseModuleBuilder(repository: self.repository).build() else {
+    guard let addExpense = self.addExpensesModuleBuilder.build() else {
       return
     }
     

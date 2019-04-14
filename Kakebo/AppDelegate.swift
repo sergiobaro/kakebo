@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
 
-    let expenses = ExpensesRepository()
+    let expenses = RealmExpensesRepository()
     
     self.window = UIWindow(frame: UIScreen.main.bounds)
     self.window!.rootViewController = ExpensesModuleBuilder(repository: expenses).build()

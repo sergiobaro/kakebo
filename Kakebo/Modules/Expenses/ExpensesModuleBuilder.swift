@@ -11,7 +11,11 @@ class ExpensesModuleBuilder {
   func build() -> UIViewController? {
     let viewController = ExpensesViewController()
     
-    let router = ExpensesRouter(viewController: viewController, repository: self.repository)
+    let router = ExpensesRouter(
+      viewController: viewController,
+      addExpensesModuleBuilder: AddExpenseModuleBuilder(repository: self.repository)
+    )
+    
     let presenter = ExpensesPresenter(
       router: router,
       repository: repository
