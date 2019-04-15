@@ -2,6 +2,7 @@ import Foundation
 
 struct Expense {
   let name: String
+  let amount: Int
 }
 
 protocol ExpensesRepository {

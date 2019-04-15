@@ -14,10 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
     do {
-      let realm = try Realm()
+      let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+      let realm = try Realm(configuration: config)
+      
       let expensesRepository = RealmExpensesRepository(realm: realm)
       self.window!.rootViewController = ExpensesModuleBuilder(repository: expensesRepository).build()
     } catch {
+      print(error)
       fatalError()
     }
     

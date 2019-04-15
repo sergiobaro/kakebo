@@ -3,6 +3,7 @@ import RealmSwift
 
 class ExpenseRealm: Object {
   @objc dynamic var name = ""
+  @objc dynamic var amount = 0
 }
 
 class RealmExpensesRepository {
@@ -28,11 +29,11 @@ extension RealmExpensesRepository: ExpensesRepository {
   
   func allExpenses() -> [Expense] {
     let results = self.realm.objects(ExpenseRealm.self)
-    return results.map({ Expense(name: $0.name) })
+    return results.map({ Expense(name: $0.name, amount: $0.amount) })
   }
   
   func expense(at index: Int) -> Expense? {
-    return self.findExpense(at: index).map({ Expense(name: $0.name) })
+    return self.findExpense(at: index).map({ Expense(name: $0.name, amount: $0.amount) })
   }
   
   func add(expense: Expense) -> Bool {
@@ -40,6 +41,7 @@ extension RealmExpensesRepository: ExpensesRepository {
       try self.realm.write {
         let newExpense = ExpenseRealm()
         newExpense.name = expense.name
+        newExpense.amount = expense.amount
         realm.add(newExpense)
       }
       return true

@@ -56,11 +56,12 @@ extension ExpensesViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell")
     if cell == nil {
-      cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+      cell = UITableViewCell(style: .value2, reuseIdentifier: "cell")
     }
     
     if let expense = self.presenter.expense(at: indexPath.row) {
       cell.textLabel?.text = expense.name
+      cell.detailTextLabel?.text = String(expense.amount)
     }
     
     return cell
