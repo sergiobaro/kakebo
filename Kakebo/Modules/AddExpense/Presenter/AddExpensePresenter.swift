@@ -41,7 +41,7 @@ class DefaultAddExpensePresenter {
         return nil
     }
     
-    return Expense(name: name, amount: amount)
+    return Expense(name: name, amount: amount, createdAt: Date())
   }
   
   private func currentExpense() -> Expense? {

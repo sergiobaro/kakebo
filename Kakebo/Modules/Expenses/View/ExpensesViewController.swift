@@ -2,6 +2,9 @@ import UIKit
 
 protocol ExpensesPresenter {
   
+  func viewReady()
+  func viewAppear()
+  
   func numberOfExpenses() -> Int
   func expense(at index: Int) -> Expense?
   func deleteExpense(at index: Int) -> Bool
@@ -13,6 +16,19 @@ protocol ExpensesPresenter {
 class ExpensesViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
+  
+  private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .short
+    dateFormatter.timeStyle = .none
+    return dateFormatter
+  }()
+  
+  private let numberFormatter: NumberFormatter = {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .currency
+    return numberFormatter
+  }()
 
   var presenter: ExpensesPresenter!
 
@@ -29,14 +45,19 @@ class ExpensesViewController: UIViewController {
       action: #selector(tapAdd)
     )
     
+    self.tableView.register(ExpenseCell.self)
+    
     self.tableView.allowsSelection = false
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    
+    self.presenter.viewReady()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    self.presenter.viewAppear()
     self.tableView.reloadData()
   }
 
@@ -54,14 +75,12 @@ extension ExpensesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell")
-    if cell == nil {
-      cell = UITableViewCell(style: .value2, reuseIdentifier: "cell")
-    }
+    let cell = tableView.dequeue(ExpenseCell.self, for: indexPath)!
     
     if let expense = self.presenter.expense(at: indexPath.row) {
-      cell.textLabel?.text = expense.name
-      cell.detailTextLabel?.text = String(expense.amount)
+      cell.nameLabel.text = expense.name
+      cell.amountLabel.text = self.numberFormatter.string(from: expense.amount as NSNumber)
+      cell.dateLabel.text = self.dateFormatter.string(from: expense.createdAt)
     }
     
     return cell

@@ -4,6 +4,7 @@ import RealmSwift
 class ExpenseRealm: Object {
   @objc dynamic var name = ""
   @objc dynamic var amount = 0
+  @objc dynamic var createdAt = Date()
 }
 
 class RealmExpensesRepository {
@@ -16,8 +17,17 @@ class RealmExpensesRepository {
   
   // MARK: - Private
   
-  private func findExpense(at index: Int) -> ExpenseRealm? {
-    return self.realm.objects(ExpenseRealm.self)[index]
+  private func findExpense(name: String) -> ExpenseRealm? {
+    return self.realm.objects(ExpenseRealm.self)
+      .first(where: { $0.name == name })
+  }
+  
+  private func map(expense: ExpenseRealm) -> Expense {
+    return Expense(
+      name: expense.name,
+      amount: expense.amount,
+      createdAt: expense.createdAt
+    )
   }
 }
 
@@ -28,12 +38,9 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func allExpenses() -> [Expense] {
-    let results = self.realm.objects(ExpenseRealm.self)
-    return results.map({ Expense(name: $0.name, amount: $0.amount) })
-  }
-  
-  func expense(at index: Int) -> Expense? {
-    return self.findExpense(at: index).map({ Expense(name: $0.name, amount: $0.amount) })
+    return self.realm.objects(ExpenseRealm.self)
+      .sorted(byKeyPath: "createdAt", ascending: false)
+      .map(self.map(expense:))
   }
   
   func add(expense: Expense) -> Bool {
@@ -50,8 +57,8 @@ extension RealmExpensesRepository: ExpensesRepository {
     }
   }
   
-  func deleteExpense(at index: Int) -> Bool {
-    guard let expense = self.findExpense(at: index) else {
+  func delete(expense: Expense) -> Bool {
+    guard let expense = self.findExpense(name: expense.name) else {
       return false
     }
     

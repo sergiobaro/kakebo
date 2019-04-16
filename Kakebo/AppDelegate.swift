@@ -14,7 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
     do {
-      let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+      let config = Realm.Configuration(
+        schemaVersion: 1,
+        migrationBlock: { _, oldSchemaVersion in
+          if oldSchemaVersion == 0 {
+            // nothing to migrate
+          }
+        }
+      )
       let realm = try Realm(configuration: config)
       
       let expensesRepository = RealmExpensesRepository(realm: realm)
