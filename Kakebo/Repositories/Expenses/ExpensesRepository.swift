@@ -1,6 +1,7 @@
 import Foundation
 
 struct Expense {
+  let expenseId: String
   let name: String
   let amount: Int
   let createdAt: Date

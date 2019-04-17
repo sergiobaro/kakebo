@@ -15,10 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     do {
       let config = Realm.Configuration(
-        schemaVersion: 1,
-        migrationBlock: { _, oldSchemaVersion in
-          if oldSchemaVersion == 0 {
+        schemaVersion: 2,
+        migrationBlock: { migration, oldSchemaVersion in
+          switch oldSchemaVersion {
+          case 0:
             // nothing to migrate
+            break
+          case 1:
+            migration.enumerateObjects(ofType: ExpenseRealm.className(), { _, newExpense in
+              newExpense!["expenseId"] = UUID().uuidString
+            })
+          default:
+            break
           }
         }
       )

@@ -2,9 +2,16 @@ import Foundation
 import RealmSwift
 
 class ExpenseRealm: Object {
+  
+  @objc dynamic var expenseId = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var amount = 0
   @objc dynamic var createdAt = Date()
+  
+  override static func primaryKey() -> String? {
+    return "expenseId"
+  }
+  
 }
 
 class RealmExpensesRepository {
@@ -17,13 +24,13 @@ class RealmExpensesRepository {
   
   // MARK: - Private
   
-  private func findExpense(name: String) -> ExpenseRealm? {
-    return self.realm.objects(ExpenseRealm.self)
-      .first(where: { $0.name == name })
+  private func findExpense(expense: Expense) -> ExpenseRealm? {
+    return self.realm.object(ofType: ExpenseRealm.self, forPrimaryKey: expense.expenseId)
   }
   
   private func map(expense: ExpenseRealm) -> Expense {
     return Expense(
+      expenseId: expense.expenseId,
       name: expense.name,
       amount: expense.amount,
       createdAt: expense.createdAt
@@ -58,7 +65,7 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func delete(expense: Expense) -> Bool {
-    guard let expense = self.findExpense(name: expense.name) else {
+    guard let expense = self.findExpense(expense: expense) else {
       return false
     }
     
