@@ -7,14 +7,14 @@ protocol AddExpensePresenter {
   func userTapDone()
   func userTapCancel()
   func userChanged(name: String?) -> Bool
-  func userChanged(amount: String?) -> Bool
+  func userChanged(amount: Int?)
   
 }
 
 class AddExpenseViewController: UIViewController {
   
   @IBOutlet weak var nameTextField: UITextField!
-  @IBOutlet weak var amountTextField: UITextField!
+  @IBOutlet weak var amountView: AmountView!
 
   var presenter: AddExpensePresenter!
   
@@ -62,12 +62,10 @@ class AddExpenseViewController: UIViewController {
   private func setupTextFields() {
     self.nameTextField.placeholder = localize("Name")
     self.nameTextField.delegate = self
-    self.nameTextField.keyboardType = .default
     self.nameTextField.autocapitalizationType = .sentences
     
-    self.amountTextField.placeholder = localize("Amount")
-    self.amountTextField.delegate = self
-    self.amountTextField.keyboardType = .numberPad
+    self.amountView.placeholder = localize("Amount")
+    self.amountView.delegate = self
   }
   
   // MARK: - Actions
@@ -89,22 +87,19 @@ extension AddExpenseViewController: UITextFieldDelegate {
     replacementString string: String
   ) -> Bool {
     if string == "\n" {
-      if textField == self.nameTextField {
-        self.amountTextField.becomeFirstResponder()
-      } else if textField == self.amountTextField {
-        self.presenter.userTapDone()
-      }
+      self.amountView.becomeFirstResponder()
+      return false
     }
     
     let text = textField.text?.replacing(in: range, with: string)
-    
-    if textField == self.nameTextField {
-      return self.presenter.userChanged(name: text)
-    } else if textField == self.amountTextField {
-      return self.presenter.userChanged(amount: text)
-    }
-    
-    return true
+    return self.presenter.userChanged(name: text)
+  }
+}
+
+extension AddExpenseViewController: AmountViewDelegate {
+  
+  func amountView(_ amountView: AmountView, didChangeValue value: Int?) {
+    self.presenter.userChanged(amount: value)
   }
 }
 
@@ -118,7 +113,7 @@ extension AddExpenseViewController: AddExpenseView {
     return self.nameTextField.text
   }
   
-  func currentAmount() -> String? {
-    return self.amountTextField.text
+  func currentAmount() -> Int? {
+    return self.amountView.value
   }
 }

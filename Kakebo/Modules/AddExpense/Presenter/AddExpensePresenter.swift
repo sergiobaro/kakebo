@@ -4,7 +4,7 @@ protocol AddExpenseView: class {
   
   func done(enabled: Bool)
   func currentName() -> String?
-  func currentAmount() -> String?
+  func currentAmount() -> Int?
   
 }
 
@@ -22,20 +22,21 @@ class DefaultAddExpensePresenter {
   
   // MARK: - Private
   
-  private func valuesChanged(name: String?, amount: String?) {
+  private func valuesChanged(name: String?, amount: Int?) {
     let enabled = self.isValid(name: name, amount: amount)
     self.view?.done(enabled: enabled)
   }
   
-  private func isValid(name: String?, amount: String?) -> Bool {
+  private func isValid(name: String?, amount: Int?) -> Bool {
     return (self.expense(name: name, amount: amount) != nil)
   }
   
-  private func expense(name: String?, amount: String?) -> Expense? {
+  private func expense(name: String?, amount: Int?) -> Expense? {
     guard
       let name = name?.trimmingCharacters(in: .whitespaces),
       !name.isEmpty,
-      let amount = amount.flatMap({ Int($0) })
+      let amount = amount,
+      amount > 0
       else {
         return nil
     }
@@ -82,9 +83,7 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
     return (name != nil && name!.count <= 20)
   }
   
-  func userChanged(amount: String?) -> Bool {
+  func userChanged(amount: Int?) {
     self.valuesChanged(name: self.view?.currentName(), amount: amount)
-    
-    return (amount != nil && (amount!.isEmpty || Int(amount!) != nil))
   }
 }

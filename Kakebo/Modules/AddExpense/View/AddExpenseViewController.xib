@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddExpenseViewController" customModule="Kakebo" customModuleProvider="target">
             <connections>
-                <outlet property="amountTextField" destination="Th7-aK-T7A" id="2j9-fs-BWh"/>
+                <outlet property="amountView" destination="ajH-7i-Sk1" id="Zat-PT-YFT"/>
                 <outlet property="nameTextField" destination="ekx-OZ-rJ9" id="nHf-TD-2WF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekx-OZ-rJ9">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekx-OZ-rJ9" customClass="TextField" customModule="Kakebo" customModuleProvider="target">
                     <rect key="frame" x="107" y="84" width="200" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="6Jp-Xp-3Lw"/>
@@ -31,22 +31,21 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Th7-aK-T7A">
-                    <rect key="frame" x="147" y="134" width="120" height="30"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajH-7i-Sk1" customClass="AmountView" customModule="Kakebo" customModuleProvider="target">
+                    <rect key="frame" x="157" y="134" width="100" height="30"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="W5a-6d-WcN"/>
+                        <constraint firstAttribute="width" constant="100" id="Ah3-qK-bDB"/>
+                        <constraint firstAttribute="height" constant="30" id="Uik-8U-nNb"/>
                     </constraints>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done"/>
-                </textField>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="ajH-7i-Sk1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6o9-vX-BvD"/>
                 <constraint firstItem="ekx-OZ-rJ9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ABV-0J-V88"/>
+                <constraint firstItem="ajH-7i-Sk1" firstAttribute="top" secondItem="ekx-OZ-rJ9" secondAttribute="bottom" constant="20" id="VJt-GQ-KI9"/>
                 <constraint firstItem="ekx-OZ-rJ9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="Zsq-cs-a3F"/>
-                <constraint firstItem="Th7-aK-T7A" firstAttribute="top" secondItem="ekx-OZ-rJ9" secondAttribute="bottom" constant="20" id="qIn-cK-j8D"/>
-                <constraint firstItem="Th7-aK-T7A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sbM-j4-s4w"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
