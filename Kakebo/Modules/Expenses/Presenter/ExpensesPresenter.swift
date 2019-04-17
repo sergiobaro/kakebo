@@ -4,8 +4,8 @@ class DefaultExpensesPresenter {
   
   private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .none
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .short
     return dateFormatter
   }()
   
