@@ -23,36 +23,36 @@ class DefaultAddExpensePresenter {
   // MARK: - Private
   
   private func valuesChanged(name: String?, amount: String?) {
-    var enabled = false
-    if self.expense(name: name, amount: amount) != nil {
-      enabled = true
-    }
-    
+    let enabled = self.isValid(name: name, amount: amount)
     self.view?.done(enabled: enabled)
+  }
+  
+  private func isValid(name: String?, amount: String?) -> Bool {
+    return (self.expense(name: name, amount: amount) != nil)
   }
   
   private func expense(name: String?, amount: String?) -> Expense? {
     guard
-      let name = name,
-      let amountString = amount,
+      let name = name?.trimmingCharacters(in: .whitespaces),
       !name.isEmpty,
-      let amount = Int(amountString)
+      let amount = amount.flatMap({ Int($0) })
       else {
         return nil
     }
     
-    return Expense(expenseId: UUID().uuidString, name: name, amount: amount, createdAt: Date())
+    return Expense(
+      expenseId: UUID().uuidString,
+      name: name,
+      amount: amount,
+      createdAt: Date()
+    )
   }
   
   private func currentExpense() -> Expense? {
-    guard
-      let name = self.view?.currentName(),
-      let amount = self.view?.currentAmount()
-      else {
-        return nil
-    }
-    
-    return self.expense(name: name, amount: amount)
+    return self.expense(
+      name: self.view?.currentName(),
+      amount: self.view?.currentAmount()
+    )
   }
 }
 
@@ -85,6 +85,6 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
   func userChanged(amount: String?) -> Bool {
     self.valuesChanged(name: self.view?.currentName(), amount: amount)
     
-    return (amount != nil && Int(amount!) != nil)
+    return (amount != nil && (amount!.isEmpty || Int(amount!) != nil))
   }
 }
