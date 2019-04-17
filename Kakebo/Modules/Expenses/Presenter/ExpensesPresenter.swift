@@ -36,7 +36,8 @@ class DefaultExpensesPresenter {
   }
   
   private func map(amount: Int) -> String {
-    return self.numberFormatter.string(from: amount as NSNumber) ?? ""
+    let number = (Float(amount) / 100) as NSNumber
+    return self.numberFormatter.string(from: number) ?? ""
   }
   
   private func map(createdAt date: Date) -> String {
