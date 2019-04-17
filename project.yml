@@ -24,6 +24,7 @@ targets:
     settings:
       base:
         TARGETED_DEVICE_FAMILY: '1'
+        DEVELOPMENT_TEAM: U45ZNT55FZ
       configs:
         Release:
           SWIFT_COMPILATION_MODE: 'wholemodule'
