@@ -63,6 +63,7 @@ class AddExpenseViewController: UIViewController {
     self.nameTextField.placeholder = localize("Name")
     self.nameTextField.delegate = self
     self.nameTextField.keyboardType = .default
+    self.nameTextField.autocapitalizationType = .sentences
     
     self.amountTextField.placeholder = localize("Amount")
     self.amountTextField.delegate = self
