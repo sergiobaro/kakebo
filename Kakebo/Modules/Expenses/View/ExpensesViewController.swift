@@ -1,12 +1,20 @@
 import UIKit
 
+struct ExpenseViewModel {
+  
+  let name: String
+  let amount: String
+  let date: String
+  
+}
+
 protocol ExpensesPresenter {
   
   func viewReady()
   func viewAppear()
   
   func numberOfExpenses() -> Int
-  func expense(at index: Int) -> Expense?
+  func expense(at index: Int) -> ExpenseViewModel?
   func deleteExpense(at index: Int) -> Bool
   
   func userTapAdd()
@@ -16,19 +24,6 @@ protocol ExpensesPresenter {
 class ExpensesViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
-  
-  private let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .short
-    dateFormatter.timeStyle = .none
-    return dateFormatter
-  }()
-  
-  private let numberFormatter: NumberFormatter = {
-    let numberFormatter = NumberFormatter()
-    numberFormatter.numberStyle = .currency
-    return numberFormatter
-  }()
 
   var presenter: ExpensesPresenter!
 
@@ -36,23 +31,9 @@ class ExpensesViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    self.title = localize("Expenses")
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-      barButtonSystemItem: .add,
-      target: self,
-      action: #selector(tapAdd)
-    )
-    
-    self.tableView.register(ExpenseCell.self)
-    
-    self.tableView.allowsSelection = false
-    self.tableView.dataSource = self
-    self.tableView.delegate = self
-    
-    self.tableView.rowHeight = UITableView.automaticDimension
-    self.tableView.estimatedRowHeight = ExpenseCell.height
+    self.setupNavBar()
+    self.setupTableView()
     
     self.presenter.viewReady()
   }
@@ -64,6 +45,32 @@ class ExpensesViewController: UIViewController {
     self.tableView.reloadData()
   }
 
+  // MARK: - Setup
+  
+  private func setupNavBar() {
+    self.title = localize("Expenses")
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .add,
+      target: self,
+      action: #selector(tapAdd)
+    )
+  }
+  
+  private func setupTableView() {
+    self.tableView.register(ExpenseCell.self)
+    
+    self.tableView.allowsSelection = false
+    self.tableView.dataSource = self
+    self.tableView.delegate = self
+    
+    self.tableView.rowHeight = UITableView.automaticDimension
+    self.tableView.estimatedRowHeight = ExpenseCell.height
+    
+    self.tableView.tableFooterView = UIView()
+    self.tableView.separatorInset = .zero
+  }
+  
   // MARK: - Actions
 
   @objc func tapAdd() {
@@ -82,8 +89,8 @@ extension ExpensesViewController: UITableViewDataSource {
     
     if let expense = self.presenter.expense(at: indexPath.row) {
       cell.nameLabel.text = expense.name
-      cell.amountLabel.text = self.numberFormatter.string(from: expense.amount as NSNumber)
-      cell.dateLabel.text = self.dateFormatter.string(from: expense.createdAt)
+      cell.amountLabel.text = expense.amount
+      cell.dateLabel.text = expense.date
     }
     
     return cell

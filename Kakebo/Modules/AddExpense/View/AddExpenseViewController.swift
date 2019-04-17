@@ -23,27 +23,8 @@ class AddExpenseViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = localize("Add Expense")
-    
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-      barButtonSystemItem: .cancel,
-      target: self,
-      action: #selector(tapCancel)
-    )
-    
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-      barButtonSystemItem: .done,
-      target: self,
-      action: #selector(tapDone)
-    )
-    
-    self.nameTextField.placeholder = localize("Name")
-    self.nameTextField.delegate = self
-    self.nameTextField.keyboardType = .default
-    
-    self.amountTextField.placeholder = localize("Amount")
-    self.amountTextField.delegate = self
-    self.amountTextField.keyboardType = .numberPad
+    self.setupNavBar()
+    self.setupTextFields()
     
     self.presenter.viewIsReady()
   }
@@ -58,6 +39,34 @@ class AddExpenseViewController: UIViewController {
     super.viewWillDisappear(animated)
     
     self.view.endEditing(true)
+  }
+  
+  // MARK: - Setup
+  
+  private func setupNavBar() {
+    self.title = localize("Add Expense")
+    
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .cancel,
+      target: self,
+      action: #selector(tapCancel)
+    )
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .done,
+      target: self,
+      action: #selector(tapDone)
+    )
+  }
+  
+  private func setupTextFields() {
+    self.nameTextField.placeholder = localize("Name")
+    self.nameTextField.delegate = self
+    self.nameTextField.keyboardType = .default
+    
+    self.amountTextField.placeholder = localize("Amount")
+    self.amountTextField.delegate = self
+    self.amountTextField.keyboardType = .numberPad
   }
   
   // MARK: - Actions
