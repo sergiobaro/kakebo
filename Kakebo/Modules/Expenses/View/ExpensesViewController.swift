@@ -51,6 +51,9 @@ class ExpensesViewController: UIViewController {
     self.tableView.dataSource = self
     self.tableView.delegate = self
     
+    self.tableView.rowHeight = UITableView.automaticDimension
+    self.tableView.estimatedRowHeight = ExpenseCell.height
+    
     self.presenter.viewReady()
   }
   
