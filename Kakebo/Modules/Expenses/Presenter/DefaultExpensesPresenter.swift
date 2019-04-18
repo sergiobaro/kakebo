@@ -9,11 +9,7 @@ class DefaultExpensesPresenter {
     return dateFormatter
   }()
   
-  private let numberFormatter: NumberFormatter = {
-    let numberFormatter = NumberFormatter()
-    numberFormatter.numberStyle = .currency
-    return numberFormatter
-  }()
+  private let amountFormatter = AmountFormatter()
 
   private let router: ExpensesRouter
   private let repository: ExpensesRepository
@@ -30,14 +26,9 @@ class DefaultExpensesPresenter {
   private func map(expense: Expense) -> ExpenseViewModel {
     return ExpenseViewModel(
       name: expense.name,
-      amount: self.map(amount: expense.amount),
+      amount: self.amountFormatter.formatInt(from: expense.amount),
       date: self.map(createdAt: expense.createdAt)
     )
-  }
-  
-  private func map(amount: Int) -> String {
-    let number = (Float(amount) / 100) as NSNumber
-    return self.numberFormatter.string(from: number) ?? ""
   }
   
   private func map(createdAt date: Date) -> String {

@@ -1,36 +1,30 @@
 import UIKit
 
-protocol AmountViewDelegate: class {
+protocol AmountFieldDelegate: class {
   
-  func amountView(_ amountView: AmountView, didChangeValue value: Int?)
+  func amountField(_ amountField: AmountField, didChangeValue value: Int?)
+  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?)
   
 }
 
-class AmountView: UIView {
+class AmountField: UIView {
   
-  weak var delegate: AmountViewDelegate?
+  var value: Int? {
+    get {
+      return self.text.flatMap(Int.init)
+    }
+    set {
+      self.updateValue(newValue.flatMap(String.init))
+    }
+  }
+  
+  weak var delegate: AmountFieldDelegate?
   
   private weak var label: UILabel!
   private weak var placeholderLabel: UILabel!
   
-  var value: Int? {
-    get {
-      return self.label.text.flatMap(Int.init)
-    }
-    set {
-      self.label.text = newValue.flatMap(String.init)
-      self.valueChanged()
-    }
-  }
-  
-  var placeholder: String? {
-    get {
-      return self.placeholderLabel.text
-    }
-    set {
-      self.placeholderLabel.text = newValue
-    }
-  }
+  private let formatter = AmountFormatter()
+  private var text: String?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -39,8 +33,9 @@ class AmountView: UIView {
     
     self.setupBorder()
     self.setupLabel()
-    self.setupPlaceholderLabel()
     self.setupTap()
+    
+    self.updateValue("0")
   }
   
   // MARK: - Setup
@@ -52,29 +47,20 @@ class AmountView: UIView {
   }
   
   private func setupLabel() {
-    self.label = self.makeLabel()
-  }
-  
-  private func setupPlaceholderLabel() {
-    self.placeholderLabel = self.makeLabel()
-    self.placeholderLabel.textColor = .lightGray
-  }
-  
-  private func makeLabel() -> UILabel {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 14.0)
+    label.textAlignment = .right
+    label.font = UIFont.systemFont(ofSize: 16.0)
     self.addSubview(label)
     
     NSLayoutConstraint.activate([
-      label.topAnchor.constraint(equalTo: self.topAnchor),
-      label.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-      label.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      label.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+      label.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+      label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+      label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+      label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
     ])
     
-    return label
+    self.label = label
   }
   
   private func setupTap() {
@@ -109,6 +95,7 @@ class AmountView: UIView {
   @discardableResult
   override func resignFirstResponder() -> Bool {
     self.layer.borderColor = UIColor.lightGray.cgColor
+    self.backgroundColor = .clear
     
     return super.resignFirstResponder()
   }
@@ -116,24 +103,23 @@ class AmountView: UIView {
   // MARK: - Private
   
   private func updateValue(_ string: String?) {
-    self.label.text = string
+    self.text = string
+    self.label.text = string.flatMap({ self.formatter.formatString(from: $0) })
     self.valueChanged()
   }
   
   private func valueChanged() {
-    let value = self.label.text
-    let hasValue = value.flatMap({ !$0.isEmpty }) ?? false
-    self.placeholderLabel.isHidden = hasValue
+    let value = self.text
     
     let intValue = value.flatMap(Int.init)
-    self.delegate?.amountView(self, didChangeValue: intValue)
+    self.delegate?.amountField(self, didChangeValue: intValue)
   }
 }
 
-extension AmountView: UIKeyInput {
+extension AmountField: UIKeyInput {
   
   var hasText: Bool {
-    guard let text = self.label.text else {
+    guard let text = self.text else {
       return false
     }
     
@@ -141,17 +127,21 @@ extension AmountView: UIKeyInput {
   }
   
   func insertText(_ text: String) {
+    guard text != "\n" else {
+      self.delegate?.amountField(self, didFinishEditingWithValue: self.value)
+      return
+    }
     guard Int(text) != nil else {
       return
     }
     
-    let newValue = self.label.text.flatMap({ $0 + text }) ?? text
+    let newValue = self.text.flatMap({ $0 + text }) ?? text
     self.updateValue(newValue)
   }
   
   func deleteBackward() {
     guard
-      let text = self.label.text,
+      let text = self.text,
       !text.isEmpty else {
         return
     }

@@ -14,7 +14,7 @@ protocol AddExpensePresenter {
 class AddExpenseViewController: UIViewController {
   
   @IBOutlet weak var nameTextField: UITextField!
-  @IBOutlet weak var amountView: AmountView!
+  @IBOutlet weak var amountField: AmountField!
 
   var presenter: AddExpensePresenter!
   
@@ -24,7 +24,7 @@ class AddExpenseViewController: UIViewController {
     super.viewDidLoad()
     
     self.setupNavBar()
-    self.setupTextFields()
+    self.setupFields()
     
     self.presenter.viewIsReady()
   }
@@ -59,13 +59,12 @@ class AddExpenseViewController: UIViewController {
     )
   }
   
-  private func setupTextFields() {
+  private func setupFields() {
     self.nameTextField.placeholder = localize("Name")
     self.nameTextField.delegate = self
     self.nameTextField.autocapitalizationType = .sentences
     
-    self.amountView.placeholder = localize("Amount")
-    self.amountView.delegate = self
+    self.amountField.delegate = self
   }
   
   // MARK: - Actions
@@ -87,7 +86,7 @@ extension AddExpenseViewController: UITextFieldDelegate {
     replacementString string: String
   ) -> Bool {
     if string == "\n" {
-      self.amountView.becomeFirstResponder()
+      self.amountField.becomeFirstResponder()
       return false
     }
     
@@ -96,10 +95,15 @@ extension AddExpenseViewController: UITextFieldDelegate {
   }
 }
 
-extension AddExpenseViewController: AmountViewDelegate {
+extension AddExpenseViewController: AmountFieldDelegate {
   
-  func amountView(_ amountView: AmountView, didChangeValue value: Int?) {
+  func amountField(_ amountField: AmountField, didChangeValue value: Int?) {
     self.presenter.userChanged(amount: value)
+  }
+  
+  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?) {
+    self.presenter.userChanged(amount: value)
+    self.presenter.userTapDone()
   }
 }
 
@@ -114,6 +118,6 @@ extension AddExpenseViewController: AddExpenseView {
   }
   
   func currentAmount() -> Int? {
-    return self.amountView.value
+    return self.amountField.value
   }
 }
