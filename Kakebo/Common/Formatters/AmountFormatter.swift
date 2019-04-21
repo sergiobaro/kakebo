@@ -8,13 +8,13 @@ class AmountFormatter {
     return numberFormatter
   }()
   
-  func formatInt(from integer: Int) -> String {
+  func string(integer: Int) -> String {
     let number = (Double(integer) / 100) as NSNumber
     return self.numberFormatter.string(from: number) ?? ""
   }
   
-  func formatString(from string: String) -> String {
-    return self.formatInt(from: Int(string) ?? 0)
+  func string(string: String) -> String {
+    return self.string(integer: Int(string) ?? 0)
   }
   
 }

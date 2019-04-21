@@ -5,6 +5,7 @@ protocol AddExpenseView: class {
   func done(enabled: Bool)
   func currentName() -> String?
   func currentAmount() -> Int?
+  func currentCreatedAt() -> Date?
   
 }
 
@@ -22,21 +23,22 @@ class DefaultAddExpensePresenter {
   
   // MARK: - Private
   
-  private func valuesChanged(name: String?, amount: Int?) {
-    let enabled = self.isValid(name: name, amount: amount)
+  private func valuesChanged(name: String?, amount: Int?, createdAt: Date?) {
+    let enabled = self.isValid(name: name, amount: amount, createdAt: createdAt)
     self.view?.done(enabled: enabled)
   }
   
-  private func isValid(name: String?, amount: Int?) -> Bool {
-    return (self.expense(name: name, amount: amount) != nil)
+  private func isValid(name: String?, amount: Int?, createdAt: Date?) -> Bool {
+    return (self.expense(name: name, amount: amount, createdAt: createdAt) != nil)
   }
   
-  private func expense(name: String?, amount: Int?) -> Expense? {
+  private func expense(name: String?, amount: Int?, createdAt: Date?) -> Expense? {
     guard
       let name = name?.trimmingCharacters(in: .whitespaces),
       !name.isEmpty,
       let amount = amount,
-      amount > 0
+      amount > 0,
+      let createdAt = createdAt
       else {
         return nil
     }
@@ -45,14 +47,15 @@ class DefaultAddExpensePresenter {
       expenseId: UUID().uuidString,
       name: name,
       amount: amount,
-      createdAt: Date()
+      createdAt: createdAt
     )
   }
   
   private func currentExpense() -> Expense? {
     return self.expense(
       name: self.view?.currentName(),
-      amount: self.view?.currentAmount()
+      amount: self.view?.currentAmount(),
+      createdAt: self.view?.currentCreatedAt()
     )
   }
 }
@@ -78,12 +81,28 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
   }
   
   func userChanged(name: String?) -> Bool {
-    self.valuesChanged(name: name, amount: self.view?.currentAmount())
+    self.valuesChanged(
+      name: name,
+      amount: self.view?.currentAmount(),
+      createdAt: self.view?.currentCreatedAt()
+    )
     
     return (name != nil && name!.count <= 20)
   }
   
   func userChanged(amount: Int?) {
-    self.valuesChanged(name: self.view?.currentName(), amount: amount)
+    self.valuesChanged(
+      name: self.view?.currentName(),
+      amount: amount,
+      createdAt: self.view?.currentCreatedAt()
+    )
+  }
+  
+  func userChanged(createdAt: Date?) {
+    self.valuesChanged(
+      name: self.view?.currentName(),
+      amount: self.view?.currentAmount(),
+      createdAt: createdAt
+    )
   }
 }

@@ -54,8 +54,11 @@ extension RealmExpensesRepository: ExpensesRepository {
     do {
       try self.realm.write {
         let newExpense = ExpenseRealm()
+        
         newExpense.name = expense.name
         newExpense.amount = expense.amount
+        newExpense.createdAt = expense.createdAt
+        
         realm.add(newExpense)
       }
       return true

@@ -1,41 +1,43 @@
 import UIKit
 
-protocol AmountFieldDelegate: class {
+protocol DateFieldDelegate: class {
   
-  func amountField(_ amountField: AmountField, didChangeValue value: Int?)
-  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?)
+  func dateField(_ dateField: DateField, didChangeValue value: Date?)
+  func dateField(_ dateField: DateField, didFinishEditingWithValue value: Date?)
   
 }
 
-class AmountField: UIView {
+class DateField: UIView {
   
-  var value: Int? {
+  var value: Date? {
     get {
-      return self.text.flatMap(Int.init)
+      if self.text.isEmpty {
+        return Date()
+      }
+      return self.dateFormatter.date(string: self.text)
     }
     set {
-      self.updateValue(newValue.flatMap(String.init))
+      let value = self.dateFormatter.string(date: newValue ?? Date())
+      self.updateValue(value)
     }
   }
   
-  weak var delegate: AmountFieldDelegate?
+  weak var delegate: DateFieldDelegate?
   
   private weak var label: UILabel!
   private weak var placeholderLabel: UILabel!
   
-  private let formatter = AmountFormatter()
-  private var text: String?
-  
+  private let dateFormatter = ExpenseDateFormatter()
+  private var text = ""
+
   override func awakeFromNib() {
     super.awakeFromNib()
     
     self.backgroundColor = .clear
     
     self.setupBorder()
-    self.setupLabel()
+    self.setupLabels()
     self.setupTap()
-    
-    self.updateValue("0")
   }
   
   // MARK: - Setup
@@ -46,10 +48,18 @@ class AmountField: UIView {
     self.layer.cornerRadius = 2.0
   }
   
-  private func setupLabel() {
+  private func setupLabels() {
+    self.label = self.makeLabel()
+    
+    self.placeholderLabel = self.makeLabel()
+    self.placeholderLabel.textColor = .lightGray
+    self.placeholderLabel.text = self.dateFormatter.dateFormat
+  }
+  
+  private func makeLabel() -> UILabel {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .right
+    label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 16.0)
     self.addSubview(label)
     
@@ -60,7 +70,7 @@ class AmountField: UIView {
       label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
     ])
     
-    self.label = label
+    return label
   }
   
   private func setupTap() {
@@ -78,7 +88,7 @@ class AmountField: UIView {
   
   var keyboardType: UIKeyboardType = .numberPad
   var autocorrectionType: UITextAutocorrectionType = .no
-
+  
   // MARK: - UIResponder
   
   override var canBecomeFirstResponder: Bool {
@@ -94,53 +104,45 @@ class AmountField: UIView {
   
   @discardableResult
   override func resignFirstResponder() -> Bool {
-    self.layer.borderColor = UIColor.lightGray.cgColor
+    self.layer.borderColor = (self.value != nil ? UIColor.lightGray : UIColor.red).cgColor
     
     return super.resignFirstResponder()
   }
   
   // MARK: - Private
   
-  private func updateValue(_ string: String?) {
-    self.text = string
-    self.label.text = string.flatMap({ self.formatter.string(string: $0) })
+  private func updateValue(_ string: String) {
+    self.text = self.dateFormatter.trim(string: string)
+    self.label.text = self.dateFormatter.string(string: self.text)
     
-    let intValue = string.flatMap(Int.init)
-    self.delegate?.amountField(self, didChangeValue: intValue)
+    self.delegate?.dateField(self, didChangeValue: self.value)
+    
+    self.placeholderLabel.isHidden = self.hasText
   }
 }
 
-extension AmountField: UIKeyInput {
+extension DateField: UIKeyInput {
   
   var hasText: Bool {
-    guard let text = self.text else {
-      return false
-    }
-    
-    return !text.isEmpty
+    return !self.text.isEmpty
   }
   
   func insertText(_ text: String) {
     guard text != "\n" else {
-      self.delegate?.amountField(self, didFinishEditingWithValue: self.value)
-      return
-    }
-    guard Int(text) != nil else {
+      self.delegate?.dateField(self, didFinishEditingWithValue: self.value)
       return
     }
     
-    let newValue = self.text.flatMap({ $0 + text }) ?? text
+    let newValue = self.text + text
     self.updateValue(newValue)
   }
   
   func deleteBackward() {
-    guard
-      let text = self.text,
-      !text.isEmpty else {
-        return
+    guard !self.text.isEmpty else {
+      return
     }
     
-    let newValue = String(text.dropLast())
+    let newValue = self.text.dropLast().asString()
     self.updateValue(newValue)
   }
 }

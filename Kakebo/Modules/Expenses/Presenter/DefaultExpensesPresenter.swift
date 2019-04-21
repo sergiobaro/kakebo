@@ -26,7 +26,7 @@ class DefaultExpensesPresenter {
   private func map(expense: Expense) -> ExpenseViewModel {
     return ExpenseViewModel(
       name: expense.name,
-      amount: self.amountFormatter.formatInt(from: expense.amount),
+      amount: self.amountFormatter.string(integer: expense.amount),
       date: self.map(createdAt: expense.createdAt)
     )
   }

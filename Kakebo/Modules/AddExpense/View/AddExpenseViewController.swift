@@ -8,6 +8,7 @@ protocol AddExpensePresenter {
   func userTapCancel()
   func userChanged(name: String?) -> Bool
   func userChanged(amount: Int?)
+  func userChanged(createdAt: Date?)
   
 }
 
@@ -15,6 +16,7 @@ class AddExpenseViewController: UIViewController {
   
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var amountField: AmountField!
+  @IBOutlet weak var dateField: DateField!
 
   var presenter: AddExpensePresenter!
   
@@ -63,8 +65,11 @@ class AddExpenseViewController: UIViewController {
     self.nameTextField.placeholder = localize("Name")
     self.nameTextField.delegate = self
     self.nameTextField.autocapitalizationType = .sentences
+    self.nameTextField.returnKeyType = .next
     
     self.amountField.delegate = self
+    
+    self.dateField.delegate = self
   }
   
   // MARK: - Actions
@@ -103,6 +108,18 @@ extension AddExpenseViewController: AmountFieldDelegate {
   
   func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?) {
     self.presenter.userChanged(amount: value)
+    self.dateField.becomeFirstResponder()
+  }
+}
+
+extension AddExpenseViewController: DateFieldDelegate {
+  
+  func dateField(_ dateField: DateField, didChangeValue value: Date?) {
+    self.presenter.userChanged(createdAt: value)
+  }
+  
+  func dateField(_ dateField: DateField, didFinishEditingWithValue value: Date?) {
+    self.presenter.userChanged(createdAt: value)
     self.presenter.userTapDone()
   }
 }
@@ -119,5 +136,9 @@ extension AddExpenseViewController: AddExpenseView {
   
   func currentAmount() -> Int? {
     return self.amountField.value
+  }
+  
+  func currentCreatedAt() -> Date? {
+    return self.dateField.value
   }
 }
