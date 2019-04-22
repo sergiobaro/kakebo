@@ -2,12 +2,19 @@ import Foundation
 
 class DefaultExpensesPresenter {
   
-  private typealias ExpenseSections = Sections<String, Expense>
+  private typealias ExpenseSections = Sections<Date, Expense>
   
-  private let dateFormatter: DateFormatter = {
+  private let rowDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .none
+    dateFormatter.timeStyle = .short
+    return dateFormatter
+  }()
+  
+  private let sectionDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .short
+    dateFormatter.timeStyle = .none
     return dateFormatter
   }()
   
@@ -29,24 +36,18 @@ class DefaultExpensesPresenter {
     return ExpenseViewModel(
       name: expense.name,
       amount: self.amountFormatter.string(integer: expense.amount),
-      date: self.map(createdAt: expense.createdAt)
+      date: self.rowDateFormatter.string(from: expense.createdAt)
     )
   }
   
-  private func map(createdAt date: Date) -> String {
-    return self.dateFormatter.string(from: date)
-  }
-  
   private func sections(from expenses: [Expense]) -> ExpenseSections {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
-    dateFormatter.timeStyle = .none
-    
-    return .init(elements: expenses, groupBy: { expense in
-      return dateFormatter.string(from: expense.createdAt)
-    })
+    return .init(elements: expenses, groupBy: { self.flat(date: $0.createdAt) })
   }
   
+  private func flat(date: Date) -> Date {
+    let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
+    return Calendar.current.date(from: components) ?? date
+  }
 }
 
 extension DefaultExpensesPresenter: ExpensesPresenter {
@@ -66,7 +67,11 @@ extension DefaultExpensesPresenter: ExpensesPresenter {
   }
   
   func sectionTitle(for section: Int) -> String? {
-    return self.expenses.section(at: section)
+    guard let date = self.expenses.section(at: section) else {
+      return nil
+    }
+    
+    return self.sectionDateFormatter.string(from: date)
   }
   
   func numberOfExpenses(section: Int) -> Int {

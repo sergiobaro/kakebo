@@ -16,7 +16,6 @@ class SectionsSpec: QuickSpec {
         expect(sections.numberOfElements(section: 0)).to(equal(0))
         expect(sections.element(at: IndexPath(row: 0, section: 0))).to(beNil())
       }
-      
       it("when has one section") {
         let sections = Sections<Int, Int>(elements: [1, 1, 1], groupBy: { return $0 })
         
@@ -66,6 +65,15 @@ class SectionsSpec: QuickSpec {
         expect(sections.numberOfSections).to(equal(1))
         expect(sections.delete(section: 0)).to(beTrue())
         expect(sections.numberOfSections).to(equal(0))
+      }
+    }
+    
+    context("sections order") {
+      it("when has two sections") {
+        let sections = Sections<Int, Int>(elements: [1, 2], groupBy: { return $0 })
+        
+        expect(sections.section(at: 0)).to(equal(2))
+        expect(sections.section(at: 1)).to(equal(1))
       }
     }
     

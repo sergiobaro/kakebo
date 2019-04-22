@@ -34,11 +34,13 @@ class Sections<G: Comparable & Hashable, E> {
   }
   
   convenience init(elements: [E], groupBy: (E) -> G) {
-    let groups = elements.group(by: groupBy)
-    let sections = groups.reduce(into: [Section]()) { result, group in
-      let (section, elements) = group
-      result.append(Section(section: section, elements: elements))
-    }
+    let sections = elements
+      .group(by: groupBy)
+      .reduce(into: [Section]()) { result, group in
+        let (section, elements) = group
+        result.append(Section(section: section, elements: elements))
+      }
+      .sorted(by: >)
     
     self.init(sections: sections)
   }
