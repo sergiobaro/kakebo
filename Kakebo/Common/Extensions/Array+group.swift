@@ -16,7 +16,3 @@ extension Array {
     return result
   }
 }
-
-extension Array where Element: Equatable {
-  
-}

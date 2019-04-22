@@ -2,10 +2,15 @@ import Foundation
 
 struct Sections<G: Comparable & Hashable, E> {
   
-  private struct Section: Comparable {
+  private class Section: Comparable {
     
     let section: G
     var elements: [E]
+    
+    init(section: G, elements: [E]) {
+      self.section = section
+      self.elements = elements
+    }
     
     static func < (lhs: Section, rhs: Section) -> Bool {
       return lhs.section < rhs.section
@@ -40,7 +45,7 @@ struct Sections<G: Comparable & Hashable, E> {
   
   // MARK: - Public
   
-  var count: Int {
+  var numberOfSections: Int {
     return self.sections.count
   }
   
@@ -49,19 +54,24 @@ struct Sections<G: Comparable & Hashable, E> {
   }
   
   func numberOfElements(section: Int) -> Int {
-    return (self.sections.element(at: section)?.elements.count ?? 0)
+    guard let count = self.sections.element(at: section)?.elements.count else {
+      return 0
+    }
+    
+    return count
   }
+  
   func element(at indexPath: IndexPath) -> E? {
     return self.sections.element(at: indexPath.section)?.elements.element(at: indexPath.row)
   }
   
   @discardableResult
   func deleteElement(at indexPath: IndexPath) -> Bool {
-    guard var section = self.sections.element(at: indexPath.section) else {
+    guard let section = self.sections.element(at: indexPath.section) else {
       return false
     }
     
     let element = section.elements.removeElement(at: indexPath.row)
-    return element != nil
+    return (element != nil)
   }
 }

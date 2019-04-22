@@ -62,7 +62,7 @@ extension DefaultExpensesPresenter: ExpensesPresenter {
   }
   
   func numberOfSections() -> Int {
-    return self.expenses.count
+    return self.expenses.numberOfSections
   }
   
   func sectionTitle(for section: Int) -> String? {
