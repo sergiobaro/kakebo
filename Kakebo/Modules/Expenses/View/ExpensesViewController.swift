@@ -13,9 +13,11 @@ protocol ExpensesPresenter {
   func viewReady()
   func viewAppear()
   
-  func numberOfExpenses() -> Int
-  func expense(at index: Int) -> ExpenseViewModel?
-  func deleteExpense(at index: Int) -> Bool
+  func numberOfSections() -> Int
+  func numberOfExpenses(section: Int) -> Int
+  func sectionTitle(for section: Int) -> String?
+  func expense(at indexPath: IndexPath) -> ExpenseViewModel?
+  func deleteExpense(at indexPath: IndexPath) -> Bool
   
   func userTapAdd()
   
@@ -80,14 +82,22 @@ class ExpensesViewController: UIViewController {
 
 extension ExpensesViewController: UITableViewDataSource {
   
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return self.presenter.numberOfSections()
+  }
+  
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return self.presenter.sectionTitle(for: section)
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.presenter.numberOfExpenses()
+    return self.presenter.numberOfExpenses(section: section)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeue(ExpenseCell.self, for: indexPath)!
     
-    if let expense = self.presenter.expense(at: indexPath.row) {
+    if let expense = self.presenter.expense(at: indexPath) {
       cell.nameLabel.text = expense.name
       cell.amountLabel.text = expense.amount
       cell.dateLabel.text = expense.date
@@ -95,7 +105,6 @@ extension ExpensesViewController: UITableViewDataSource {
     
     return cell
   }
-  
 }
 
 extension ExpensesViewController: UITableViewDelegate {
@@ -106,7 +115,7 @@ extension ExpensesViewController: UITableViewDelegate {
     forRowAt indexPath: IndexPath
   ) {
     if editingStyle == .delete {
-      if self.presenter.deleteExpense(at: indexPath.row) {
+      if self.presenter.deleteExpense(at: indexPath) {
         self.tableView.deleteRows(at: [indexPath], with: .left)
       }
     }

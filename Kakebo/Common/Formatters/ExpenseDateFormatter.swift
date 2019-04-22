@@ -64,5 +64,4 @@ class ExpenseDateFormatter {
   func string(date: Date) -> String {
     return self.dateFormatter.string(from: date)
   }
-  
 }

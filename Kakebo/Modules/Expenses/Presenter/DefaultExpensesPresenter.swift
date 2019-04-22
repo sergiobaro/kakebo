@@ -2,6 +2,8 @@ import Foundation
 
 class DefaultExpensesPresenter {
   
+  private typealias ExpenseSections = Sections<String, Expense>
+  
   private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .medium
@@ -14,7 +16,7 @@ class DefaultExpensesPresenter {
   private let router: ExpensesRouter
   private let repository: ExpensesRepository
   
-  private var expenses = [Expense]()
+  private var expenses = ExpenseSections()
   
   init(router: ExpensesRouter, repository: ExpensesRepository) {
     self.router = router
@@ -35,6 +37,16 @@ class DefaultExpensesPresenter {
     return self.dateFormatter.string(from: date)
   }
   
+  private func sections(from expenses: [Expense]) -> ExpenseSections {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    
+    return .init(elements: expenses, groupBy: { expense in
+      return dateFormatter.string(from: expense.createdAt)
+    })
+  }
+  
 }
 
 extension DefaultExpensesPresenter: ExpensesPresenter {
@@ -44,27 +56,37 @@ extension DefaultExpensesPresenter: ExpensesPresenter {
   }
   
   func viewAppear() {
-    self.expenses = self.repository.allExpenses()
+    let expenses = self.repository.allExpenses()
+    
+    self.expenses = self.sections(from: expenses)
   }
   
-  func numberOfExpenses() -> Int {
+  func numberOfSections() -> Int {
     return self.expenses.count
   }
   
-  func expense(at index: Int) -> ExpenseViewModel? {
-    return self.expenses.element(at: index).map(self.map(expense:))
+  func sectionTitle(for section: Int) -> String? {
+    return self.expenses.section(at: section)
   }
   
-  func deleteExpense(at index: Int) -> Bool {
-    guard let expense = self.expenses.element(at: index) else {
+  func numberOfExpenses(section: Int) -> Int {
+    return self.expenses.numberOfElements(section: section)
+  }
+  
+  func expense(at indexPath: IndexPath) -> ExpenseViewModel? {
+    return self.expenses.element(at: indexPath).map(self.map(expense:))
+  }
+  
+  func deleteExpense(at indexPath: IndexPath) -> Bool {
+    guard let expense = self.expenses.element(at: indexPath) else {
       return false
     }
     guard self.repository.delete(expense: expense) else {
       return false
     }
-    
-    self.expenses = self.repository.allExpenses()
-    
+
+    self.expenses.deleteElement(at: indexPath)
+
     return true
   }
 
