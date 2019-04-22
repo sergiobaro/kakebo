@@ -10,30 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
     do {
-      let config = Realm.Configuration(
-        schemaVersion: 2,
-        migrationBlock: { migration, oldSchemaVersion in
-          switch oldSchemaVersion {
-          case 0:
-            // nothing to migrate
-            break
-          case 1:
-            migration.enumerateObjects(ofType: ExpenseRealm.className(), { _, newExpense in
-              newExpense!["expenseId"] = UUID().uuidString
-            })
-          default:
-            break
-          }
-        }
-      )
-      let realm = try Realm(configuration: config)
-      
-      let expensesRepository = RealmExpensesRepository(realm: realm)
-      self.window!.rootViewController = ExpensesModuleBuilder(repository: expensesRepository).build()
+      let expensesRepository = try RealmExpensesRepository.make()
+      self.window!.rootViewController = ExpensesListModuleBuilder().build(repository: expensesRepository)
     } catch {
       print(error)
       fatalError()

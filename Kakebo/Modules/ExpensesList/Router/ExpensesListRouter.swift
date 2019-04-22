@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpensesRouter {
+class ExpensesListRouter {
 
   private weak var viewController: UIViewController?
   private let addExpensesModuleBuilder: AddExpenseModuleBuilder

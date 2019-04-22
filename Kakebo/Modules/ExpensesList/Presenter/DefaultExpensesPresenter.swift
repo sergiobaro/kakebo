@@ -1,6 +1,6 @@
 import Foundation
 
-class DefaultExpensesPresenter {
+class DefaultExpensesListPresenter {
   
   private typealias ExpenseSections = Sections<Date, Expense>
   
@@ -20,12 +20,12 @@ class DefaultExpensesPresenter {
   
   private let amountFormatter = AmountFormatter()
 
-  private let router: ExpensesRouter
+  private let router: ExpensesListRouter
   private let repository: ExpensesRepository
   
   private var expenses = ExpenseSections()
   
-  init(router: ExpensesRouter, repository: ExpensesRepository) {
+  init(router: ExpensesListRouter, repository: ExpensesRepository) {
     self.router = router
     self.repository = repository
   }
@@ -50,7 +50,7 @@ class DefaultExpensesPresenter {
   }
 }
 
-extension DefaultExpensesPresenter: ExpensesPresenter {
+extension DefaultExpensesListPresenter: ExpensesListPresenter {
   
   func viewReady() {
     // nop

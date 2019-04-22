@@ -8,7 +8,7 @@ struct ExpenseViewModel {
   
 }
 
-protocol ExpensesPresenter {
+protocol ExpensesListPresenter {
   
   func viewReady()
   func viewAppear()
@@ -23,11 +23,11 @@ protocol ExpensesPresenter {
   
 }
 
-class ExpensesViewController: UIViewController {
+class ExpensesListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
 
-  var presenter: ExpensesPresenter!
+  var presenter: ExpensesListPresenter!
 
   // MARK: - View lifecycle
 
@@ -60,14 +60,14 @@ class ExpensesViewController: UIViewController {
   }
   
   private func setupTableView() {
-    self.tableView.register(ExpenseCell.self)
+    self.tableView.register(ExpensesListCell.self)
     
     self.tableView.allowsSelection = false
     self.tableView.dataSource = self
     self.tableView.delegate = self
     
     self.tableView.rowHeight = UITableView.automaticDimension
-    self.tableView.estimatedRowHeight = ExpenseCell.height
+    self.tableView.estimatedRowHeight = ExpensesListCell.height
     
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
@@ -80,7 +80,7 @@ class ExpensesViewController: UIViewController {
   }
 }
 
-extension ExpensesViewController: UITableViewDataSource {
+extension ExpensesListViewController: UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return self.presenter.numberOfSections()
@@ -95,7 +95,7 @@ extension ExpensesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeue(ExpenseCell.self, for: indexPath)!
+    let cell = tableView.dequeue(ExpensesListCell.self, for: indexPath)!
     
     if let expense = self.presenter.expense(at: indexPath) {
       cell.nameLabel.text = expense.name
@@ -107,7 +107,7 @@ extension ExpensesViewController: UITableViewDataSource {
   }
 }
 
-extension ExpensesViewController: UITableViewDelegate {
+extension ExpensesListViewController: UITableViewDelegate {
   
   func tableView(
     _ tableView: UITableView,
