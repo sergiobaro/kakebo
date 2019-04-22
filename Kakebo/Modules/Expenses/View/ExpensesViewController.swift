@@ -114,10 +114,14 @@ extension ExpensesViewController: UITableViewDelegate {
     commit editingStyle: UITableViewCell.EditingStyle,
     forRowAt indexPath: IndexPath
   ) {
-    if editingStyle == .delete {
-      if self.presenter.deleteExpense(at: indexPath) {
-        self.tableView.deleteRows(at: [indexPath], with: .left)
-      }
+    guard editingStyle == .delete && self.presenter.deleteExpense(at: indexPath) else {
+      return
+    }
+    
+    if self.presenter.numberOfExpenses(section: indexPath.section) == 0 {
+      self.tableView.deleteSection(at: indexPath.section, with: .left)
+    } else {
+      self.tableView.deleteRow(at: indexPath, with: .left)
     }
   }
 }

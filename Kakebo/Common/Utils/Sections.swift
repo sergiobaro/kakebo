@@ -1,6 +1,6 @@
 import Foundation
 
-struct Sections<G: Comparable & Hashable, E> {
+class Sections<G: Comparable & Hashable, E> {
   
   private class Section: Comparable {
     
@@ -25,7 +25,7 @@ struct Sections<G: Comparable & Hashable, E> {
   
   // MARK: - Init
   
-  init() {
+  convenience init() {
     self.init(sections: [])
   }
   
@@ -33,7 +33,7 @@ struct Sections<G: Comparable & Hashable, E> {
     self.sections = sections
   }
   
-  init(elements: [E], groupBy: (E) -> G) {
+  convenience init(elements: [E], groupBy: (E) -> G) {
     let groups = elements.group(by: groupBy)
     let sections = groups.reduce(into: [Section]()) { result, group in
       let (section, elements) = group
@@ -72,6 +72,17 @@ struct Sections<G: Comparable & Hashable, E> {
     }
     
     let element = section.elements.removeElement(at: indexPath.row)
+    
+    if section.elements.isEmpty {
+      self.delete(section: indexPath.section)
+    }
+    
     return (element != nil)
+  }
+  
+  @discardableResult
+  func delete(section: Int) -> Bool {
+    let section = self.sections.removeElement(at: section)
+    return (section != nil)
   }
 }
