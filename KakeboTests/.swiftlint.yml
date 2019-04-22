@@ -1,0 +1,15 @@
+disabled_rules:
+  - identifier_name
+  - line_length
+  - force_try
+  - type_body_length
+  - trailing_whitespace
+  - trailing_newline
+  - force_cast
+  - closing_brace
+  - cyclomatic_complexity
+  - file_length
+  - function_parameter_count
+  - function_body_length
+  - type_name
+  - shorthand_operator
