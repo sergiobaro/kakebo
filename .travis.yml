@@ -12,5 +12,5 @@ before_install:
   - brew outdated xcodegen || brew upgrade xcodegen
 
 before_script:
-  - carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+  - carthage bootstrap --platform iOS --cache-builds
   - xcodegen
