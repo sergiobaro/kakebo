@@ -1,5 +1,8 @@
 language: swift
 osx_image: xcode10.2
+cache:
+  directories:
+    - Carthage
 
 xcode_project: Kakebo.xcodeproj
 xcode_scheme: KakeboTests
