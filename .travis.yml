@@ -1,0 +1,19 @@
+language: swift
+osx_image: xcode10.2
+cache:
+  directories:
+    - Carthage
+
+xcode_project: Kakebo.xcodeproj
+xcode_scheme: Kakebo
+xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
+
+before_install:
+  - brew install carthage || true
+  - brew outdated carthage || brew upgrade carthage
+  - brew install xcodegen || true
+  - brew outdated xcodegen || brew upgrade xcodegen
+
+before_script:
+  - travis_wait carthage bootstrap --platform iOS --cache-builds
+  - xcodegen
