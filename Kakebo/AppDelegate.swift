@@ -12,6 +12,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   ) -> Bool {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
+    #if DEBUG
+    if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+      return true
+    }
+    #endif
+    
     do {
       let expensesRepository = try RealmExpensesRepository.make()
       self.window!.rootViewController = ExpensesListModuleBuilder().build(repository: expensesRepository)

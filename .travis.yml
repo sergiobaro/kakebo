@@ -1,5 +1,9 @@
 language: swift
 osx_image: xcode10.2
+
+env:
+  - CODECOV_TOKEN="dad7732d-7fb3-472e-82c0-a3234ce83b8d"
+ 
 cache:
   directories:
     - Carthage
@@ -17,3 +21,7 @@ before_install:
 before_script:
   - travis_wait 30 carthage bootstrap --platform iOS --cache-builds
   - xcodegen
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -f slather/cobertura.xml -X coveragepy -X gcov -X xcode
+  

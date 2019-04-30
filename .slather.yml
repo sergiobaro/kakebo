@@ -1,0 +1,5 @@
+coverage_service: cobertura_xml
+xcodeproj: Kakebo.xcodeproj
+scheme: Kakebo
+source_directory: Kakebo
+output_directory: slather

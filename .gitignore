@@ -5,7 +5,7 @@
 Carthage/*
 
 # Slather
-coverage/*
+slather/*
 
 # macOS
 .DS_Store
