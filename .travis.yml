@@ -23,5 +23,6 @@ before_script:
   - xcodegen
 
 after_success:
+  - slather
   - bash <(curl -s https://codecov.io/bash) -f slather/cobertura.xml -X coveragepy -X gcov -X xcode
   
