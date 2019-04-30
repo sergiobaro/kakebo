@@ -26,6 +26,6 @@ before_script:
   - xcodegen
 
 after_success:
-  - slather
+  - bundle exec slather
   - bash <(curl -s https://codecov.io/bash) -f slather/c  obertura.xml -X coveragepy -X gcov -X xcode
   
