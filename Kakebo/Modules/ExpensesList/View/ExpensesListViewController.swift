@@ -8,6 +8,13 @@ struct ExpenseViewModel {
   
 }
 
+struct ExpenseSectionViewModel {
+  
+  let title: String
+  let totalAmount: String
+  
+}
+
 protocol ExpensesListPresenter {
   
   func viewReady()
@@ -15,7 +22,7 @@ protocol ExpensesListPresenter {
   
   func numberOfSections() -> Int
   func numberOfExpenses(section: Int) -> Int
-  func sectionTitle(for section: Int) -> String?
+  func expenseSection(for section: Int) -> ExpenseSectionViewModel?
   func expense(at indexPath: IndexPath) -> ExpenseViewModel?
   func deleteExpense(at indexPath: IndexPath) -> Bool
   
@@ -69,6 +76,9 @@ class ExpensesListViewController: UIViewController {
     self.tableView.rowHeight = UITableView.automaticDimension
     self.tableView.estimatedRowHeight = ExpensesListCell.height
     
+    self.tableView.sectionHeaderHeight = UITableView.automaticDimension
+    self.tableView.estimatedSectionHeaderHeight = ExpensesListSectionHeader.height
+    
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
   }
@@ -86,8 +96,16 @@ extension ExpensesListViewController: UITableViewDataSource {
     return self.presenter.numberOfSections()
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return self.presenter.sectionTitle(for: section)
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    guard let expenseSection = self.presenter.expenseSection(for: section) else {
+      return nil
+    }
+    
+    let header = UIView.loadFromNib(type: ExpensesListSectionHeader.self)
+    header.titleLabel.text = expenseSection.title
+    header.amountLabel.text = expenseSection.totalAmount
+    
+    return header
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

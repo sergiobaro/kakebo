@@ -66,12 +66,21 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
     return self.expenses.numberOfSections
   }
   
-  func sectionTitle(for section: Int) -> String? {
+  func expenseSection(for section: Int) -> ExpenseSectionViewModel? {
     guard let date = self.expenses.section(at: section) else {
       return nil
     }
     
-    return self.sectionDateFormatter.string(from: date)
+    let dateString = self.sectionDateFormatter.string(from: date)
+    let totalAmount = self.expenses.elements(section: section)
+      .map({ $0.amount })
+      .reduce(0) { return $0 + $1 }
+    let totalString = self.amountFormatter.string(integer: totalAmount)
+    
+    return ExpenseSectionViewModel(
+      title: dateString,
+      totalAmount: totalString
+    )
   }
   
   func numberOfExpenses(section: Int) -> Int {

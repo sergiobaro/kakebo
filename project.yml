@@ -41,7 +41,9 @@ targets:
     type: bundle.unit-test
     platform: iOS
     sources:
-      - KakeboTests
+      - path: KakeboTests
+        excludes: 
+          - ".swiftlint.yml"
     dependencies:
       - target: Kakebo
       - carthage: Quick

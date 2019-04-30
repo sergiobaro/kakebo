@@ -1,13 +1,13 @@
 import Foundation
 
-class Sections<G: Comparable & Hashable, E> {
+class Sections<Group: Comparable & Hashable, Element> {
   
   private class Section: Comparable {
     
-    let section: G
-    var elements: [E]
+    let section: Group
+    var elements: [Element]
     
-    init(section: G, elements: [E]) {
+    init(section: Group, elements: [Element]) {
       self.section = section
       self.elements = elements
     }
@@ -33,7 +33,7 @@ class Sections<G: Comparable & Hashable, E> {
     self.sections = sections
   }
   
-  convenience init(elements: [E], groupBy: (E) -> G) {
+  convenience init(elements: [Element], groupBy: (Element) -> Group) {
     let sections = elements
       .group(by: groupBy)
       .reduce(into: [Section]()) { result, group in
@@ -51,7 +51,7 @@ class Sections<G: Comparable & Hashable, E> {
     return self.sections.count
   }
   
-  func section(at index: Int) -> G? {
+  func section(at index: Int) -> Group? {
     return self.sections.element(at: index)?.section
   }
   
@@ -63,7 +63,11 @@ class Sections<G: Comparable & Hashable, E> {
     return count
   }
   
-  func element(at indexPath: IndexPath) -> E? {
+  func elements(section: Int) -> [Element] {
+    return self.sections.element(at: section)?.elements ?? []
+  }
+  
+  func element(at indexPath: IndexPath) -> Element? {
     return self.sections.element(at: indexPath.section)?.elements.element(at: indexPath.row)
   }
   
