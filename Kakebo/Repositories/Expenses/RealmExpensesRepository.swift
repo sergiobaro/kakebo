@@ -42,7 +42,7 @@ class RealmExpensesRepository {
   
   private let realm: Realm
   
-  private init(realm: Realm) {
+  init(realm: Realm) {
     self.realm = realm
   }
   
@@ -69,8 +69,15 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func allExpenses() -> [Expense] {
-    return self.realm.objects(ExpenseRealm.self)
+    return self.realm
+      .objects(ExpenseRealm.self)
       .sorted(byKeyPath: "createdAt", ascending: false)
+      .map(self.map(expense:))
+  }
+  
+  func find(expenseId: String) -> Expense? {
+    return self.realm
+      .object(ofType: ExpenseRealm.self, forPrimaryKey: expenseId)
       .map(self.map(expense:))
   }
   
@@ -79,6 +86,7 @@ extension RealmExpensesRepository: ExpensesRepository {
       try self.realm.write {
         let newExpense = ExpenseRealm()
         
+        newExpense.expenseId = expense.expenseId
         newExpense.name = expense.name
         newExpense.amount = expense.amount
         newExpense.createdAt = expense.createdAt
