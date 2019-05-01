@@ -46,8 +46,6 @@ class AddExpenseViewController: UIViewController {
   // MARK: - Setup
   
   private func setupNavBar() {
-    self.title = localize("Add Expense")
-    
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .cancel,
       target: self,
@@ -126,7 +124,17 @@ extension AddExpenseViewController: DateFieldDelegate {
 
 extension AddExpenseViewController: AddExpenseView {
   
-  func done(enabled: Bool) {
+  func display(title: String) {
+    self.title = localize(title)
+  }
+  
+  func display(expense: Expense) {
+    self.nameTextField.text = expense.name
+    self.amountField.value = expense.amount
+    self.dateField.value = expense.createdAt
+  }
+  
+  func displayDone(enabled: Bool) {
     self.navigationItem.rightBarButtonItem?.isEnabled = enabled
   }
   

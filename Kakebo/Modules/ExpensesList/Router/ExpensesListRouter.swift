@@ -11,10 +11,14 @@ class ExpensesListRouter {
   }
 
   func navigateToAddExpense() {
-    guard let addExpense = self.addExpensesModuleBuilder.build() else {
-      return
+    if let addExpense = self.addExpensesModuleBuilder.buildAddExpense() {
+      self.viewController?.present(addExpense, animated: true)
     }
-    
-    self.viewController?.present(addExpense, animated: true)
+  }
+  
+  func navigateToExpenseDetail(expense: Expense) {
+    if let expenseDetail = self.addExpensesModuleBuilder.buildEditExpense(expense: expense) {
+      self.viewController?.present(expenseDetail, animated: true)
+    }
   }
 }

@@ -27,6 +27,7 @@ protocol ExpensesListPresenter {
   func deleteExpense(at indexPath: IndexPath) -> Bool
   
   func userTapAdd()
+  func userSelectExpense(indexPath: IndexPath)
   
 }
 
@@ -69,7 +70,6 @@ class ExpensesListViewController: UIViewController {
   private func setupTableView() {
     self.tableView.register(ExpensesListCell.self)
     
-    self.tableView.allowsSelection = false
     self.tableView.dataSource = self
     self.tableView.delegate = self
     
@@ -141,5 +141,9 @@ extension ExpensesListViewController: UITableViewDelegate {
     } else {
       self.tableView.deleteRow(at: indexPath, with: .left)
     }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.presenter.userSelectExpense(indexPath: indexPath)
   }
 }

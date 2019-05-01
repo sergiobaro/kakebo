@@ -105,4 +105,21 @@ extension RealmExpensesRepository: ExpensesRepository {
       return false
     }
   }
+  
+  func update(expense: Expense) -> Bool {
+    guard let expenseRealm = self.findExpense(expense: expense) else {
+      return false
+    }
+    
+    do {
+      try self.realm.write {
+        expenseRealm.name = expense.name
+        expenseRealm.amount = expense.amount
+        expenseRealm.createdAt = expense.createdAt
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
 }

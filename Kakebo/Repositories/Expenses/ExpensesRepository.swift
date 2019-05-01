@@ -10,6 +10,8 @@ struct Expense {
 protocol ExpensesRepository {
   func numberOfExpenses() -> Int
   func allExpenses() -> [Expense]
+  
   func add(expense: Expense) -> Bool
   func delete(expense: Expense) -> Bool
+  func update(expense: Expense) -> Bool
 }

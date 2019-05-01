@@ -2,7 +2,10 @@ import Foundation
 
 protocol AddExpenseView: class {
   
-  func done(enabled: Bool)
+  func display(title: String)
+  func display(expense: Expense)
+  func displayDone(enabled: Bool)
+  
   func currentName() -> String?
   func currentAmount() -> Int?
   func currentCreatedAt() -> Date?
@@ -14,18 +17,20 @@ class DefaultAddExpensePresenter {
   private weak var view: AddExpenseView?
   private let router: AddExpenseRouter
   private let repository: ExpensesRepository
+  private let expense: Expense?
   
-  init(view: AddExpenseView, router: AddExpenseRouter, repository: ExpensesRepository) {
+  init(view: AddExpenseView, router: AddExpenseRouter, repository: ExpensesRepository, expense: Expense?) {
     self.view = view
     self.router = router
     self.repository = repository
+    self.expense = expense
   }
   
   // MARK: - Private
   
   private func valuesChanged(name: String?, amount: Int?, createdAt: Date?) {
     let enabled = self.isValid(name: name, amount: amount, createdAt: createdAt)
-    self.view?.done(enabled: enabled)
+    self.view?.displayDone(enabled: enabled)
   }
   
   private func isValid(name: String?, amount: Int?, createdAt: Date?) -> Bool {
@@ -44,7 +49,7 @@ class DefaultAddExpensePresenter {
     }
     
     return Expense(
-      expenseId: UUID().uuidString,
+      expenseId: self.expense?.expenseId ?? UUID().uuidString,
       name: name,
       amount: amount,
       createdAt: createdAt
@@ -63,7 +68,14 @@ class DefaultAddExpensePresenter {
 extension DefaultAddExpensePresenter: AddExpensePresenter {
   
   func viewIsReady() {
-    self.view?.done(enabled: false)
+    if let expense = expense {
+      self.view?.display(title: "Edit")
+      self.view?.display(expense: expense)
+    } else {
+      self.view?.display(title: "Add")
+    }
+    
+    self.view?.displayDone(enabled: false)
   }
   
   func userTapDone() {
@@ -71,7 +83,9 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
       return
     }
     
-    if self.repository.add(expense: expense) {
+    if self.expense != nil && self.repository.update(expense: expense) {
+      self.router.navigateBack()
+    } else if self.repository.add(expense: expense) {
       self.router.navigateBack()
     }
   }
@@ -87,7 +101,7 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
       createdAt: self.view?.currentCreatedAt()
     )
     
-    return (name != nil && name!.count <= 20)
+    return (name != nil && name!.count <= 30)
   }
   
   func userChanged(amount: Int?) {

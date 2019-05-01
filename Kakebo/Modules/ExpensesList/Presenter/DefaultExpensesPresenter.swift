@@ -107,4 +107,11 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
   func userTapAdd() {
     self.router.navigateToAddExpense()
   }
+  
+  func userSelectExpense(indexPath: IndexPath) {
+    guard let expense = self.expenses.element(at: indexPath) else {
+      return
+    }
+    self.router.navigateToExpenseDetail(expense: expense)
+  }
 }
