@@ -1,9 +1,6 @@
 # Xcode
 xcuserdata
 
-# Carthage
-Carthage/*
-
 # Slather
 slather/*
 
