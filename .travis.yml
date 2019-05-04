@@ -15,15 +15,12 @@ xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
 before_install:
   - brew install carthage || true
   - brew outdated carthage || brew upgrade carthage
-  - brew install xcodegen || true
-  - brew outdated xcodegen || brew upgrade xcodegen
   - rvm use $RVM_RUBY_VERSION
 
 install: bundle install --without=documentation --path ../travis_bundle_dir
 
 before_script:
   - travis_wait 60 carthage bootstrap --platform iOS --cache-builds
-  - xcodegen
 
 after_success:
   - bundle exec slather

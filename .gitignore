@@ -1,5 +1,5 @@
 # Xcode
-*.xcodeproj
+xcuserdata
 
 # Carthage
 Carthage/*
