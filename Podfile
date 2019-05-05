@@ -9,8 +9,8 @@ target 'Kakebo' do
   target 'KakeboTests' do
     inherit! :search_paths
 
-    pod 'Quick', '~> 2.0.0'
-    pod 'Nimble', '~> 6.0.0'
+    pod 'Quick'
+    pod 'Nimble'
   end
 
 end
