@@ -32,6 +32,16 @@ class ExpenseDateFormatterSpec: QuickSpec {
       
       expect(formatter.trim(string: "123456789")).to(equal("12345678"))
     }
+
+    it("date from string") {
+      expect(formatter.date(string: "04042019")).toNot(beNil())
+      expect(formatter.date(string: "12")).to(beNil())
+    }
     
+    it("string from date") {
+      let date = Date(timeIntervalSince1970: 0)
+
+      expect(formatter.string(date: date)).to(equal("01 / 01 / 1970"))
+    }
   }
 }
