@@ -5,6 +5,7 @@ target 'Kakebo' do
 
   pod 'Realm'
   pod 'RealmSwift'
+  pod 'SnapKit'
 
   target 'KakeboTests' do
     inherit! :search_paths

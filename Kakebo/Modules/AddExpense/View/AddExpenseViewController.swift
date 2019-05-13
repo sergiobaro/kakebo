@@ -13,10 +13,8 @@ protocol AddExpensePresenter {
 }
 
 class AddExpenseViewController: UIViewController {
-  
-  @IBOutlet weak var nameTextField: UITextField!
-  @IBOutlet weak var amountField: AmountField!
-  @IBOutlet weak var dateField: DateField!
+
+  private var formView: FormView!
 
   var presenter: AddExpensePresenter!
   
@@ -26,7 +24,7 @@ class AddExpenseViewController: UIViewController {
     super.viewDidLoad()
     
     self.setupNavBar()
-    self.setupFields()
+    self.setupForm()
     
     self.presenter.viewIsReady()
   }
@@ -34,13 +32,13 @@ class AddExpenseViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.nameTextField.becomeFirstResponder()
+    self.formView.becomeFirstResponder()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    self.view.endEditing(true)
+    self.formView.resignFirstResponder()
   }
   
   // MARK: - Setup
@@ -57,17 +55,28 @@ class AddExpenseViewController: UIViewController {
       target: self,
       action: #selector(tapDone)
     )
+
+    self.navigationController?.navigationBar.isTranslucent = false
   }
   
-  private func setupFields() {
-    self.nameTextField.placeholder = localize("Name")
-    self.nameTextField.delegate = self
-    self.nameTextField.autocapitalizationType = .sentences
-    self.nameTextField.returnKeyType = .next
-    
-    self.amountField.delegate = self
-    
-    self.dateField.delegate = self
+  private func setupForm() {
+    let nameField = FormField(
+      type: .text(nil),
+      identifier: "name",
+      title: localize("Name"),
+      placeholder: nil
+    )
+    let testField = FormField(
+      type: .text("Value"),
+      identifier: "test",
+      title: localize("Title"),
+      placeholder: "Placeholder"
+    )
+
+    self.formView = FormBuilder()
+      .add(field: nameField)
+      .add(field: testField)
+      .add(to: self.view)
   }
   
   // MARK: - Actions
@@ -81,46 +90,29 @@ class AddExpenseViewController: UIViewController {
   }
 }
 
-extension AddExpenseViewController: UITextFieldDelegate {
-  
-  func textField(
-    _ textField: UITextField,
-    shouldChangeCharactersIn range: NSRange,
-    replacementString string: String
-  ) -> Bool {
-    if string == "\n" {
-      self.amountField.becomeFirstResponder()
-      return false
-    }
-    
-    let text = textField.text?.replacing(in: range, with: string)
-    return self.presenter.userChanged(name: text)
-  }
-}
+//extension AddExpenseViewController: AmountFieldDelegate {
+//
+//  func amountField(_ amountField: AmountField, didChangeValue value: Int?) {
+//    self.presenter.userChanged(amount: value)
+//  }
+//
+//  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?) {
+//    self.presenter.userChanged(amount: value)
+//    self.dateField.becomeFirstResponder()
+//  }
+//}
 
-extension AddExpenseViewController: AmountFieldDelegate {
-  
-  func amountField(_ amountField: AmountField, didChangeValue value: Int?) {
-    self.presenter.userChanged(amount: value)
-  }
-  
-  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?) {
-    self.presenter.userChanged(amount: value)
-    self.dateField.becomeFirstResponder()
-  }
-}
-
-extension AddExpenseViewController: DateFieldDelegate {
-  
-  func dateField(_ dateField: DateField, didChangeValue value: Date?) {
-    self.presenter.userChanged(createdAt: value)
-  }
-  
-  func dateField(_ dateField: DateField, didFinishEditingWithValue value: Date?) {
-    self.presenter.userChanged(createdAt: value)
-    self.presenter.userTapDone()
-  }
-}
+//extension AddExpenseViewController: DateFieldDelegate {
+//
+//  func dateField(_ dateField: DateField, didChangeValue value: Date?) {
+//    self.presenter.userChanged(createdAt: value)
+//  }
+//
+//  func dateField(_ dateField: DateField, didFinishEditingWithValue value: Date?) {
+//    self.presenter.userChanged(createdAt: value)
+//    self.presenter.userTapDone()
+//  }
+//}
 
 extension AddExpenseViewController: AddExpenseView {
   
@@ -129,9 +121,9 @@ extension AddExpenseViewController: AddExpenseView {
   }
   
   func display(expense: Expense) {
-    self.nameTextField.text = expense.name
-    self.amountField.value = expense.amount
-    self.dateField.value = expense.createdAt
+//    self.nameTextField.text = expense.name
+//    self.amountField.value = expense.amount
+//    self.dateField.value = expense.createdAt
   }
   
   func displayDone(enabled: Bool) {
@@ -139,14 +131,14 @@ extension AddExpenseViewController: AddExpenseView {
   }
   
   func currentName() -> String? {
-    return self.nameTextField.text
+    return self.formView.value(for: "name") as? String
   }
   
   func currentAmount() -> Int? {
-    return self.amountField.value
+    return self.formView.value(for: "amount") as? Int
   }
   
   func currentCreatedAt() -> Date? {
-    return self.dateField.value
+    return self.formView.value(for: "date") as? Date
   }
 }

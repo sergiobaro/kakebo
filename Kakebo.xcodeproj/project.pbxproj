@@ -21,6 +21,12 @@
 		4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5226C8F20345613BAEB240E4AAF93C /* TableView+delete.swift */; };
 		4E4782FCFB7302C116155205 /* Pods_Kakebo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B58BEBFCEC65008A58B4E9 /* Pods_Kakebo.framework */; };
 		5665355E46B9AAF166920A1E /* Pods_KakeboTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */; };
+		5A0B65AB228972B500DA6587 /* FormFieldSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */; };
+		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
+		5A45F1B122820D490005AA68 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B022820D490005AA68 /* FormFieldView.swift */; };
+		5A45F1B322820DB10005AA68 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B222820DB10005AA68 /* FormField.swift */; };
+		5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B422820EAA0005AA68 /* FormView.swift */; };
+		5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B62282170D0005AA68 /* FormBuilder.swift */; };
 		5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */; };
 		5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */; };
 		5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */; };
@@ -34,7 +40,7 @@
 		8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpensesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B1923E1C31ED4A6B64872BCDC6961 /* ExpensesListCell.swift */; };
 		99F6F35222717FBD5F0B0E773844F305 /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBAAB6122309AB3EB0F7EFF5BC119D9 /* DateField.swift */; };
 		9C0AE6E0CEAB9666A83907737D17C808 /* ArrayGroupSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A6FD05CF0C9C4A944FE7E5A547F893 /* ArrayGroupSpec.swift */; };
-		9FA73AEA08D63F487872C9D0E3D7E67E /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C698838244DB5DF92C383B698B1FC1 /* TextField.swift */; };
+		9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C698838244DB5DF92C383B698B1FC1 /* TextFormFieldView.swift */; };
 		A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCF2CE15E775EA5476A1AE6AC053ABA /* RealmExpensesRepository.swift */; };
 		A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB589B09DE19B3EA5431250FB8274EA /* AddExpenseViewController.swift */; };
 		A4056B504DB2E81C6686338C6ADB44C7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02355A72E20332829C86CFA38B9F2456 /* Nimble.framework */; };
@@ -90,6 +96,12 @@
 		4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakeboTests.debug.xcconfig"; path = "Target Support Files/Pods-KakeboTests/Pods-KakeboTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListRouter.swift; sourceTree = "<group>"; };
 		57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSpec.swift; sourceTree = "<group>"; };
+		5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparator.swift; sourceTree = "<group>"; };
+		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
+		5A45F1B022820D490005AA68 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
+		5A45F1B222820DB10005AA68 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		5A45F1B422820EAA0005AA68 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		5A45F1B62282170D0005AA68 /* FormBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBuilder.swift; sourceTree = "<group>"; };
 		5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElementSpec.swift; sourceTree = "<group>"; };
 		5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringReplacingSpec.swift; sourceTree = "<group>"; };
 		5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubstringSpec.swift; sourceTree = "<group>"; };
@@ -118,7 +130,7 @@
 		E5C6261B09E1F63A019CB4EFAA5A1815 /* String+replacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+replacing.swift"; sourceTree = "<group>"; };
 		E78FB59D8954684F220322B118CC7680 /* String+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+subscript.swift"; sourceTree = "<group>"; };
 		E7BDBDB7D76EF40F0FCE79AE7A4AEEB4 /* ExpensesListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListModuleBuilder.swift; sourceTree = "<group>"; };
-		F1C698838244DB5DF92C383B698B1FC1 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		F1C698838244DB5DF92C383B698B1FC1 /* TextFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormFieldView.swift; sourceTree = "<group>"; };
 		F2DB32A3BB799C7262F001C1807C9CA5 /* AmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormatter.swift; sourceTree = "<group>"; };
 		F469BE2DBCE3CDCF547181257E0963D4 /* TableView+register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+register.swift"; sourceTree = "<group>"; };
 		F51C48EBC4F77637D394B9A59488ED0E /* ExpensesListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesListCell.xib; sourceTree = "<group>"; };
@@ -155,7 +167,6 @@
 			children = (
 				6583661DEF02CDE623866E748209FDA7 /* AmountField.swift */,
 				9BBAAB6122309AB3EB0F7EFF5BC119D9 /* DateField.swift */,
-				F1C698838244DB5DF92C383B698B1FC1 /* TextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -244,6 +255,44 @@
 				F2474A9EF1D84B8E877D23E190AFA9FA /* Repositories */,
 			);
 			path = Kakebo;
+			sourceTree = "<group>";
+		};
+		5A0B65A9228972A200DA6587 /* Separator */ = {
+			isa = PBXGroup;
+			children = (
+				5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */,
+			);
+			path = Separator;
+			sourceTree = "<group>";
+		};
+		5A0B65AD22898FC300DA6587 /* Amount */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Amount;
+			sourceTree = "<group>";
+		};
+		5A41D9F12281EEA300794A8F /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				5A45F1B422820EAA0005AA68 /* FormView.swift */,
+				5A45F1B62282170D0005AA68 /* FormBuilder.swift */,
+				5A45F1B222820DB10005AA68 /* FormField.swift */,
+				5A45F1B022820D490005AA68 /* FormFieldView.swift */,
+				5A0B65AD22898FC300DA6587 /* Amount */,
+				5A0B65A9228972A200DA6587 /* Separator */,
+				5A41D9F22281EEA900794A8F /* Text */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		5A41D9F22281EEA900794A8F /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				F1C698838244DB5DF92C383B698B1FC1 /* TextFormFieldView.swift */,
+				5A41D9F32281EED400794A8F /* TextFormFieldView.xib */,
+			);
+			path = Text;
 			sourceTree = "<group>";
 		};
 		5ACE92B3227F4B47009092D8 /* Array */ = {
@@ -479,6 +528,7 @@
 		FD08A59E93AA36F6E35836C6EDD22B4B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5A41D9F12281EEA300794A8F /* Form */,
 				FC71E398EF37DFDAB0964A845EB114B2 /* Extensions */,
 				034D3B760798F27BEA0E41AD045A17FA /* Formatters */,
 				BC08D386F753FB1E4B0DEA6F1E2E4574 /* Utils */,
@@ -574,6 +624,7 @@
 				447A94FB3784972DFC36D17F84039C0B /* AddExpenseViewController.xib in Resources */,
 				AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */,
 				799628C939BE48A55A0CA33A26CC00EC /* ExpensesListCell.xib in Resources */,
+				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
 				71D4873757587F941196A77256FB374A /* ExpensesListSectionHeader.xib in Resources */,
 				101EBE3A20A55FEA46927D2F1890EF69 /* ExpensesListViewController.xib in Resources */,
 				B8265A91F9823B3177F60B3C9C39F4FC /* LaunchScreen.storyboard in Resources */,
@@ -618,6 +669,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Kakebo/Pods-Kakebo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -625,6 +677,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -719,7 +772,10 @@
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
 				C5B909FECA846FCB36F4F4935430CFC8 /* AmountField.swift in Sources */,
+				5A0B65AB228972B500DA6587 /* FormFieldSeparator.swift in Sources */,
+				5A45F1B322820DB10005AA68 /* FormField.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
+				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
 				5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */,
 				A66A5351279702857BD5D451E4840551 /* Array+element.swift in Sources */,
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
@@ -737,11 +793,13 @@
 				A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */,
 				C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */,
 				D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */,
+				5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */,
+				5A45F1B122820D490005AA68 /* FormFieldView.swift in Sources */,
 				3CC54CAA9DC4DF3A262FA28C4BF52435 /* String+subscript.swift in Sources */,
 				D69E6BF8EBC838C045CE12AFA8ED7FC9 /* Substring.swift in Sources */,
 				4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */,
 				C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */,
-				9FA73AEA08D63F487872C9D0E3D7E67E /* TextField.swift in Sources */,
+				9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */,
 				CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -773,6 +831,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbs.Kakebo;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -791,6 +850,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbs.KakeboTests;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kakebo.app/Kakebo";
 				TEST_TARGET_NAME = Kakebo;
@@ -924,6 +984,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbs.KakeboTests;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kakebo.app/Kakebo";
 				TEST_TARGET_NAME = Kakebo;
@@ -947,6 +1008,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbs.Kakebo;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

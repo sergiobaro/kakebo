@@ -14,11 +14,11 @@ extension Array {
     guard self.isValid(index: index) else {
       return nil
     }
-    
+
     return self.remove(at: index)
   }
   
   func isValid(index: Int) -> Bool {
-    return (index >= 0 && index < self.count)
+    return (index >= self.startIndex && index < self.endIndex)
   }
 }
