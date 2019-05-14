@@ -13,7 +13,6 @@
 		1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79849DF7C8A6DFEFE8F308ACC782CBFE /* AddExpenseModuleBuilder.swift */; };
 		1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F936E723E0639B7472CF6D56C4B0987 /* DefaultAddExpensePresenter.swift */; };
 		2272F3FF647D684F0CDF34965B784ED4 /* AmountFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */; };
-		2E6DCEF42A6AA9BB591B7B6A0DC68BC8 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC6A63AF4855893A2EDE545465FF0F37 /* RealmSwift.framework */; };
 		323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DB32A3BB799C7262F001C1807C9CA5 /* AmountFormatter.swift */; };
 		3CC54CAA9DC4DF3A262FA28C4BF52435 /* String+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78FB59D8954684F220322B118CC7680 /* String+subscript.swift */; };
 		428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */; };
@@ -38,7 +37,6 @@
 		5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */; };
 		5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */; };
 		61F9F205F0DEB544AFFABB970074328A /* ExpensesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75AA432513FB3621AFFDD76C7210792 /* ExpensesListViewController.swift */; };
-		6AE0B180C2C6B21801D0008C58FE2CB8 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FED4334A57EB7BA1281B357F97C960F /* Realm.framework */; };
 		71D4873757587F941196A77256FB374A /* ExpensesListSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionView.xib */; };
 		799628C939BE48A55A0CA33A26CC00EC /* ExpensesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51C48EBC4F77637D394B9A59488ED0E /* ExpensesListCell.xib */; };
 		8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341F65A7795C044A8EB202B04D07B28 /* Array+group.swift */; };
@@ -163,8 +161,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AE0B180C2C6B21801D0008C58FE2CB8 /* Realm.framework in Frameworks */,
-				2E6DCEF42A6AA9BB591B7B6A0DC68BC8 /* RealmSwift.framework in Frameworks */,
 				4E4782FCFB7302C116155205 /* Pods_Kakebo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -863,7 +859,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D2564D201747F14FF6502A4F /* Pods-Kakebo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = U45ZNT55FZ;
@@ -1039,7 +1034,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B10A56ECCEF411FC76A4E3A /* Pods-Kakebo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = U45ZNT55FZ;
