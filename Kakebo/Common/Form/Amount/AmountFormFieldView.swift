@@ -1,22 +1,48 @@
 import UIKit
 
+protocol AmountFormFieldPresenter {
+
+  var formDelegate: FormFieldDelegate? { get set }
+  var field: FormFieldModel! { get set }
+
+  var value: Int? { get set }
+  var hasText: Bool { get }
+
+  func userInsertText(_ text: String)
+  func userDeleteBackward()
+
+}
+
 class AmountFormFieldView: FormFieldView {
+
+  override var formDelegate: FormFieldDelegate? {
+    get { return self.presenter.formDelegate }
+    set { self.presenter.formDelegate = newValue }
+  }
+
+  override var field: FormFieldModel! {
+    get { return self.presenter.field }
+    set { self.presenter.field = newValue }
+  }
   
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var valueLabel: UILabel!
-  
-  private let formatter = AmountFormatter()
-  private var text: String?
+
+  private var presenter: AmountFormFieldPresenter!
 
   override func awakeFromNib() {
     super.awakeFromNib()
-    
+
     self.backgroundColor = .clear
 
     self.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
     self.titleLabel.textColor = .darkGray
+    self.titleLabel.text = nil
     self.valueLabel.font = UIFont.systemFont(ofSize: 18.0)
-    self.valueLabel.textColor = .lightGray
+    self.valueLabel.textColor = .darkGray
+    self.valueLabel.text = nil
+
+    self.presenter = AmountFormFieldDefaultPresenter(view: self)
   }
 
   // MARK: - Actions
@@ -46,28 +72,9 @@ class AmountFormFieldView: FormFieldView {
   
   @discardableResult
   override func resignFirstResponder() -> Bool {
-    self.valueLabel.textColor = .lightGray
+    self.valueLabel.textColor = .darkGray
     
     return super.resignFirstResponder()
-  }
-  
-  // MARK: - Private
-  
-  private func updateValue(string: String?) {
-    self.text = string
-    self.valueLabel.text = string.flatMap({ self.formatter.string(string: $0) })
-    
-    let intValue = string.flatMap(Int.init)
-    self.field.type = .amount(intValue)
-    self.formDelegate?.fieldDidChange(self.field)
-  }
-
-  private func updateValue(integer: Int?) {
-    guard let value = integer else {
-      return
-    }
-
-    self.updateValue(string: String(value))
   }
 }
 
@@ -79,8 +86,8 @@ extension AmountFormFieldView: FormFieldProtocol {
   }
 
   var value: Any? {
-    get { return self.text.flatMap(Int.init) }
-    set { self.updateValue(integer: newValue as? Int) }
+    get { return self.presenter.value }
+    set { self.presenter.value = newValue as? Int }
   }
 
   func setReturnKeyType(_ type: UIReturnKeyType) {
@@ -88,37 +95,24 @@ extension AmountFormFieldView: FormFieldProtocol {
   }
 }
 
+extension AmountFormFieldView: AmountFormFieldViewProtocol {
+  
+  func updateValue(_ value: String?) {
+    self.valueLabel.text = value
+  }
+}
+
 extension AmountFormFieldView: UIKeyInput {
   
   var hasText: Bool {
-    guard let text = self.text else {
-      return false
-    }
-
-    return !text.isEmpty
+    return self.presenter.hasText
   }
   
   func insertText(_ text: String) {
-    guard text != "\n" else {
-      self.formDelegate?.fieldDidEndEditing(self.field)
-      return
-    }
-    guard Int(text) != nil else {
-      return
-    }
-    
-    let newValue = self.text.flatMap({ $0 + text }) ?? text
-    self.updateValue(string: newValue)
+    self.presenter.userInsertText(text)
   }
   
   func deleteBackward() {
-    guard
-      let text = self.text,
-      !text.isEmpty else {
-        return
-    }
-    
-    let newValue = String(text.dropLast())
-    self.updateValue(string: newValue)
+    self.presenter.userDeleteBackward()
   }
 }

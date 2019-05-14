@@ -23,6 +23,8 @@
 		5665355E46B9AAF166920A1E /* Pods_KakeboTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */; };
 		5A0B65AB228972B500DA6587 /* FormFieldSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */; };
 		5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */; };
+		5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */; };
+		5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift */; };
 		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
 		5A45F1B122820D490005AA68 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B022820D490005AA68 /* FormFieldView.swift */; };
 		5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B422820EAA0005AA68 /* FormView.swift */; };
@@ -101,6 +103,8 @@
 		57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSpec.swift; sourceTree = "<group>"; };
 		5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparator.swift; sourceTree = "<group>"; };
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
+		5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenter.swift; sourceTree = "<group>"; };
+		5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldDefaultPresenterSpec.swift; sourceTree = "<group>"; };
 		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
 		5A45F1B022820D490005AA68 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		5A45F1B422820EAA0005AA68 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
@@ -267,8 +271,17 @@
 			children = (
 				6583661DEF02CDE623866E748209FDA7 /* AmountFormFieldView.swift */,
 				5A93CACF228A48E50066ED4F /* AmountFormFieldView.xib */,
+				5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */,
 			);
 			path = Amount;
+			sourceTree = "<group>";
+		};
+		5A2C3EB8228AF29C00D3F019 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift */,
+			);
+			path = Form;
 			sourceTree = "<group>";
 		};
 		5A41D9F12281EEA300794A8F /* Form */ = {
@@ -475,6 +488,7 @@
 		BEFFFE5708C6D1454CFBA10B2A9D29C4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5A2C3EB8228AF29C00D3F019 /* Form */,
 				B8C5E62B75DA354C386BCD8357A53629 /* Extensions */,
 				77E87CF15B8892B2D5755798FF042F3E /* Formatters */,
 				2219573B0760C159652545D015349F62 /* Utils */,
@@ -786,6 +800,7 @@
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
 				D981F1A7E8DA24B16911AF5C4EF79D73 /* ExpenseDateFormatterTests.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,
+				5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift in Sources */,
 				5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,6 +830,7 @@
 				BA2F8EC21BC778A610708C621EE1F042 /* ExpensesListRouter.swift in Sources */,
 				FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpensesListSectionHeader.swift in Sources */,
 				61F9F205F0DEB544AFFABB970074328A /* ExpensesListViewController.swift in Sources */,
+				5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */,
 				0AD87E1E4C2E7483C884B52B64107E8D /* ExpensesRepository.swift in Sources */,
 				EECFC2C39B9EE020B8F9BABB7701A5AF /* Localization.swift in Sources */,
 				A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */,

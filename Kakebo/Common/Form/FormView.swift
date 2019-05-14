@@ -99,7 +99,7 @@ class FormView: UIView {
   }
 }
 
-extension FormView: FieldFormDelegate {
+extension FormView: FormFieldDelegate {
 
   func fieldDidChange(_ field: FormFieldModel) {
     self.delegate?.fieldDidChange(field)

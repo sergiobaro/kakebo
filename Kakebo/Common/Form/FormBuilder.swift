@@ -43,10 +43,7 @@ private extension FormBuilder {
   func makeTextField(_ field: FormFieldModel) -> FormField {
     let textField = UIView.loadFromNib(type: TextFormFieldView.self)
     textField.field = field
-    
-    if case let FormFieldType.text(value) = field.type {
-      textField.value = value
-    }
+    textField.value = field.value
     textField.title = field.title
 
     return textField
@@ -55,12 +52,9 @@ private extension FormBuilder {
   func makeAmountField(_ field: FormFieldModel) -> FormField {
     let amountField = UIView.loadFromNib(type: AmountFormFieldView.self)
     amountField.field = field
-
-    if case let FormFieldType.amount(value) = field.type {
-      amountField.value = value
-    }
+    amountField.value = field.value
     amountField.title = field.title
-
+    
     return amountField
   }
 

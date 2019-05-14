@@ -1,14 +1,15 @@
 import Foundation
 
 enum FormFieldType {
-  case text(String?)
-  case amount(Int?)
+  case text
+  case amount
 }
 
 struct FormFieldModel {
   var type: FormFieldType
   let identifier: String
   let title: String?
+  var value: Any?
 }
 
 extension FormFieldModel: Equatable {

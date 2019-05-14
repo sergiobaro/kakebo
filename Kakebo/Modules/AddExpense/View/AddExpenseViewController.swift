@@ -61,14 +61,16 @@ class AddExpenseViewController: UIViewController {
   
   private func setupForm() {
     let nameField = FormFieldModel(
-      type: .text(nil),
+      type: .text,
       identifier: "name",
-      title: localize("Name")
+      title: localize("Name"),
+      value: ""
     )
     let amountField = FormFieldModel(
-      type: .amount(0),
+      type: .amount,
       identifier: "amount",
-      title: localize("Amount")
+      title: localize("Amount"),
+      value: 0
     )
 
     self.formView = FormBuilder()

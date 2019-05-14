@@ -55,13 +55,18 @@ extension TextFormFieldView: UITextFieldDelegate {
     }
     
     if let text = textField.text?.replacing(in: range, with: string) {
-      self.field?.type = .text(text)
+      self.field?.value = text
       self.formDelegate?.fieldDidChange(self.field)
     }
     return true
   }
 
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.textColor = .black
+  }
+
   func textFieldDidEndEditing(_ textField: UITextField) {
+    textField.textColor = .darkGray
     self.formDelegate?.fieldDidEndEditing(self.field)
   }
 }

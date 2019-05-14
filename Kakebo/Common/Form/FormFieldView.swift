@@ -1,6 +1,6 @@
 import UIKit
 
-protocol FieldFormDelegate: class {
+protocol FormFieldDelegate: class {
 
   func fieldDidChange(_ field: FormFieldModel)
   func fieldDidEndEditing(_ field: FormFieldModel)
@@ -20,7 +20,7 @@ protocol FormFieldProtocol: class {
 
 class FormFieldView: UIView {
 
-  weak var formDelegate: FieldFormDelegate?
+  weak var formDelegate: FormFieldDelegate?
   var field: FormFieldModel!
 
 }
