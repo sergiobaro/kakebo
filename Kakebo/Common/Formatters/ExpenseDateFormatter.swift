@@ -17,11 +17,12 @@ class ExpenseDateFormatter {
   }
   
   func trim(string: String) -> String {
-    return string
+    let result = string
       .components(separatedBy: CharacterSet.decimalDigits.inverted)
       .joined()
       .prefix(self.maxLength)
-      .asString()
+
+    return String(result)
   }
   
   func string(string: String?) -> String {

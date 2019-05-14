@@ -37,15 +37,17 @@ class FormView: UIView {
       fieldView.formDelegate = self
       self.addSubview(fieldView)
 
+      fieldView.snp.makeConstraints({ $0.height.equalTo(FormStyle.fieldHeight) })
+
       if previousView == nil { // first field
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalToSuperview().offset(verticalOffset)
+          $0.top.equalToSuperview().offset(FormStyle.fieldVerticalPadding)
         })
       } else {
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalTo(previousView.snp.bottom).offset(verticalOffset)
+          $0.top.equalTo(previousView.snp.bottom).offset(FormStyle.fieldVerticalPadding)
         })
       }
 
@@ -53,7 +55,7 @@ class FormView: UIView {
       self.addSubview(separator)
       separator.snp.makeConstraints({
         $0.left.right.equalToSuperview()
-        $0.top.equalTo(fieldView.snp.bottom).offset(verticalOffset)
+        $0.top.equalTo(fieldView.snp.bottom).offset(FormStyle.fieldVerticalPadding)
       })
 
       previousView = separator

@@ -72,10 +72,17 @@ class AddExpenseViewController: UIViewController {
       title: localize("Amount"),
       value: 0
     )
+    let dateField = FormFieldModel(
+      type: .date,
+      identifier: "date",
+      title: localize("Date"),
+      value: Date()
+    )
 
     self.formView = FormBuilder()
       .add(field: nameField)
       .add(field: amountField)
+      .add(field: dateField)
       .add(to: self.view)
   }
   

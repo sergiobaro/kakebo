@@ -1,11 +1,11 @@
 import UIKit
 
-protocol AmountFormFieldPresenter {
+protocol InputFormFieldPresenter {
 
   var formDelegate: FormFieldDelegate? { get set }
   var field: FormFieldModel! { get set }
 
-  var value: Int? { get set }
+  var value: Any? { get set }
   var hasText: Bool { get }
 
   func userInsertText(_ text: String)
@@ -13,7 +13,13 @@ protocol AmountFormFieldPresenter {
 
 }
 
-class AmountFormFieldView: FormFieldView {
+protocol InputFormFieldViewProtocol: class {
+
+  func updateValue(_ value: String?)
+
+}
+
+class InputFormFieldView: FormFieldView {
 
   override var formDelegate: FormFieldDelegate? {
     get { return self.presenter.formDelegate }
@@ -28,22 +34,20 @@ class AmountFormFieldView: FormFieldView {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var valueLabel: UILabel!
 
-  private var presenter: AmountFormFieldPresenter!
+  var presenter: InputFormFieldPresenter!
 
   override func awakeFromNib() {
     super.awakeFromNib()
 
     self.backgroundColor = .clear
 
-    self.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
-    self.titleLabel.textColor = .darkGray
+    self.titleLabel.font = FormStyle.titleFont
+    self.titleLabel.textColor = FormStyle.titleTextColor
     self.titleLabel.text = nil
     
-    self.valueLabel.font = UIFont.systemFont(ofSize: 18.0)
-    self.valueLabel.textColor = .darkGray
+    self.valueLabel.font = FormStyle.textFont
+    self.valueLabel.textColor = FormStyle.inactiveTextColor
     self.valueLabel.text = nil
-
-    self.presenter = AmountFormFieldDefaultPresenter(view: self)
   }
 
   // MARK: - Actions
@@ -66,20 +70,20 @@ class AmountFormFieldView: FormFieldView {
   
   @discardableResult
   override func becomeFirstResponder() -> Bool {
-    self.valueLabel.textColor = .black
+    self.valueLabel.textColor = FormStyle.activeTextColor
 
     return super.becomeFirstResponder()
   }
   
   @discardableResult
   override func resignFirstResponder() -> Bool {
-    self.valueLabel.textColor = .darkGray
+    self.valueLabel.textColor = FormStyle.inactiveTextColor
     
     return super.resignFirstResponder()
   }
 }
 
-extension AmountFormFieldView: FormFieldProtocol {
+extension InputFormFieldView: FormFieldProtocol {
 
   var title: String? {
     get { return self.titleLabel.text }
@@ -88,7 +92,7 @@ extension AmountFormFieldView: FormFieldProtocol {
 
   var value: Any? {
     get { return self.presenter.value }
-    set { self.presenter.value = newValue as? Int }
+    set { self.presenter.value = newValue }
   }
 
   func setReturnKeyType(_ type: UIReturnKeyType) {
@@ -96,14 +100,14 @@ extension AmountFormFieldView: FormFieldProtocol {
   }
 }
 
-extension AmountFormFieldView: AmountFormFieldViewProtocol {
+extension InputFormFieldView: InputFormFieldViewProtocol {
   
   func updateValue(_ value: String?) {
     self.valueLabel.text = value
   }
 }
 
-extension AmountFormFieldView: UIKeyInput {
+extension InputFormFieldView: UIKeyInput {
   
   var hasText: Bool {
     return self.presenter.hasText

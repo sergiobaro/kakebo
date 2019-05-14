@@ -4,9 +4,9 @@ class FormFieldSeparatorView: UIView {
 
   static func make() -> UIView {
     let separator = UIView()
-    separator.backgroundColor = .lightGray
+    separator.backgroundColor = FormStyle.separatorColor
 
-    separator.snp.makeConstraints({ $0.height.equalTo(0.5) })
+    separator.snp.makeConstraints({ $0.height.equalTo(FormStyle.separatorHeight) })
 
     return separator
   }

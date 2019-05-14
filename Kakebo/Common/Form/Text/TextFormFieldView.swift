@@ -12,11 +12,12 @@ class TextFormFieldView: FormFieldView {
 
     self.textField.delegate = self
 
-    self.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
-    self.titleLabel.textColor = .darkGray
-    self.textField.font = UIFont.systemFont(ofSize: 18.0)
-    self.textField.textColor = .black
-    self.textField.tintColor = .black
+    self.titleLabel.font = FormStyle.titleFont
+    self.titleLabel.textColor = FormStyle.titleTextColor
+
+    self.textField.font = FormStyle.textFont
+    self.textField.textColor = FormStyle.activeTextColor
+    self.textField.tintColor = FormStyle.inactiveTextColor
   }
 
   override func becomeFirstResponder() -> Bool {

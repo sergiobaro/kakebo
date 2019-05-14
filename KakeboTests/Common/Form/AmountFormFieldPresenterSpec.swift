@@ -3,7 +3,7 @@ import Nimble
 
 @testable import Kakebo
 
-class AmountFormFieldViewMock: AmountFormFieldViewProtocol {
+class InputFormFieldViewProtocolMock: InputFormFieldViewProtocol {
 
   var updateValueCalled = false
   var valueCalled: String?
@@ -31,20 +31,20 @@ class FormFieldDelegateMock: FormFieldDelegate {
   }
 }
 
-class AmountFormFieldDefaultPresenterSpec: QuickSpec {
+class AmountFormFieldPresenterSpec: QuickSpec {
     override func spec() {
 
-      var viewMock: AmountFormFieldViewMock!
+      var viewMock: InputFormFieldViewProtocolMock!
       var formDelegateMock: FormFieldDelegateMock!
       var field: FormFieldModel!
-      var presenter: AmountFormFieldDefaultPresenter!
+      var presenter: AmountFormFieldPresenter!
 
       beforeEach {
-        viewMock = AmountFormFieldViewMock()
+        viewMock = InputFormFieldViewProtocolMock()
         formDelegateMock = FormFieldDelegateMock()
         field = FormFieldModel(type: .amount, identifier: "amount", title: "Amount", value: 0)
 
-        presenter = AmountFormFieldDefaultPresenter(view: viewMock)
+        presenter = AmountFormFieldPresenter(view: viewMock)
         presenter.formDelegate = formDelegateMock
         presenter.field = field
       }
@@ -96,7 +96,7 @@ class AmountFormFieldDefaultPresenterSpec: QuickSpec {
         presenter.userInsertText("1")
         presenter.userInsertText("2")
 
-        expect(presenter.value).to(equal(12))
+        expect(presenter.value as? Int).to(equal(12))
       }
 
       it("user delete backward") {

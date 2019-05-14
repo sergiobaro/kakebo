@@ -1,21 +1,16 @@
 import Foundation
 
-protocol AmountFormFieldViewProtocol: class {
-
-  func updateValue(_ value: String?)
-
-}
-
-class AmountFormFieldDefaultPresenter {
+class AmountFormFieldPresenter {
 
   weak var formDelegate: FormFieldDelegate?
   var field: FormFieldModel!
 
-  private weak var view: AmountFormFieldViewProtocol?
+  private weak var view: InputFormFieldViewProtocol?
+
   private let formatter = AmountFormatter()
   private var text: String?
 
-  init(view: AmountFormFieldViewProtocol) {
+  init(view: InputFormFieldViewProtocol) {
     self.view = view
   }
 
@@ -27,8 +22,7 @@ class AmountFormFieldDefaultPresenter {
     let formatted = string.flatMap({ self.formatter.string(string: $0) })
     self.view?.updateValue(formatted)
 
-    let intValue = string.flatMap(Int.init)
-    self.field.value = intValue
+    self.field.value = self.value
     self.formDelegate?.fieldDidChange(self.field)
   }
 
@@ -39,11 +33,11 @@ class AmountFormFieldDefaultPresenter {
   }
 }
 
-extension AmountFormFieldDefaultPresenter: AmountFormFieldPresenter {
+extension AmountFormFieldPresenter: InputFormFieldPresenter {
 
-  var value: Int? {
+  var value: Any? {
     get { return self.text.flatMap(Int.init) }
-    set { self.updateValue(integer: newValue) }
+    set { self.updateValue(integer: newValue as? Int) }
   }
 
   var hasText: Bool {

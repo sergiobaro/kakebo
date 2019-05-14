@@ -36,6 +36,8 @@ private extension FormBuilder {
       return self.makeTextField(field)
     case .amount:
       return self.makeAmountField(field)
+    case .date:
+      return self.makeDateField(field)
     }
   }
 
@@ -49,11 +51,24 @@ private extension FormBuilder {
   }
 
   func makeAmountField(_ field: FormFieldModel) -> FormField {
-    let amountField = UIView.loadFromNib(type: AmountFormFieldView.self)
+    let amountField = UIView.loadFromNib(type: InputFormFieldView.self)
+    amountField.presenter = AmountFormFieldPresenter(view: amountField)
+
     amountField.field = field
     amountField.value = field.value
     amountField.title = field.title
     
     return amountField
+  }
+
+  func makeDateField(_ field: FormFieldModel) -> FormField {
+    let dateField = UIView.loadFromNib(type: InputFormFieldView.self)
+    dateField.presenter = DateFormFieldPresenter(view: dateField)
+
+    dateField.field = field
+    dateField.value = field.value
+    dateField.title = field.title
+
+    return dateField
   }
 }

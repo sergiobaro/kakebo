@@ -10,7 +10,7 @@ class ExpensesListSectionView: UIView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    self.backgroundColor = .lightBackground
+    self.backgroundColor = .headerBackground
   }
 
 }

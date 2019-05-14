@@ -3,6 +3,7 @@ import Foundation
 enum FormFieldType {
   case text
   case amount
+  case date
 }
 
 struct FormFieldModel {
