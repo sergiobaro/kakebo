@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     #endif
 
-    Appearance.apply()
+    Style.applyApperance()
 
     self.window = UIWindow(frame: UIScreen.main.bounds)
 

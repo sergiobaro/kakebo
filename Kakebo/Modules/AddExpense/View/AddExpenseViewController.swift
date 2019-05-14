@@ -6,9 +6,8 @@ protocol AddExpensePresenter {
   
   func userTapDone()
   func userTapCancel()
-  func userChanged(name: String?) -> Bool
-  func userChanged(amount: Int?)
-  func userChanged(createdAt: Date?)
+
+  func userChanged(fields: [FormFieldModel])
   
 }
 
@@ -24,7 +23,6 @@ class AddExpenseViewController: UIViewController {
     super.viewDidLoad()
     
     self.setupNavBar()
-    self.setupForm()
     
     self.presenter.viewIsReady()
   }
@@ -57,33 +55,6 @@ class AddExpenseViewController: UIViewController {
     )
   }
   
-  private func setupForm() {
-    let nameField = FormFieldModel(
-      type: .text,
-      identifier: "name",
-      title: localize("Name"),
-      value: ""
-    )
-    let amountField = FormFieldModel(
-      type: .amount,
-      identifier: "amount",
-      title: localize("Amount"),
-      value: 0
-    )
-    let dateField = FormFieldModel(
-      type: .date,
-      identifier: "date",
-      title: localize("Date"),
-      value: Date()
-    )
-
-    self.formView = FormBuilder()
-      .add(field: nameField)
-      .add(field: amountField)
-      .add(field: dateField)
-      .add(to: self.view)
-  }
-  
   // MARK: - Actions
   
   @objc func tapCancel() {
@@ -95,55 +66,36 @@ class AddExpenseViewController: UIViewController {
   }
 }
 
-//extension AddExpenseViewController: AmountFieldDelegate {
-//
-//  func amountField(_ amountField: AmountField, didChangeValue value: Int?) {
-//    self.presenter.userChanged(amount: value)
-//  }
-//
-//  func amountField(_ amountField: AmountField, didFinishEditingWithValue value: Int?) {
-//    self.presenter.userChanged(amount: value)
-//    self.dateField.becomeFirstResponder()
-//  }
-//}
+extension AddExpenseViewController: FormViewDelegate {
 
-//extension AddExpenseViewController: DateFieldDelegate {
-//
-//  func dateField(_ dateField: DateField, didChangeValue value: Date?) {
-//    self.presenter.userChanged(createdAt: value)
-//  }
-//
-//  func dateField(_ dateField: DateField, didFinishEditingWithValue value: Date?) {
-//    self.presenter.userChanged(createdAt: value)
-//    self.presenter.userTapDone()
-//  }
-//}
+  func fieldDidChange(_ field: FormFieldModel) {
+    self.presenter.userChanged(fields: self.formView.allFields())
+  }
+
+  func formDidFinish() {
+    self.presenter.userTapDone()
+  }
+}
 
 extension AddExpenseViewController: AddExpenseView {
   
   func display(title: String) {
     self.title = localize(title)
   }
-  
-  func display(expense: Expense) {
-//    self.nameTextField.text = expense.name
-//    self.amountField.value = expense.amount
-//    self.dateField.value = expense.createdAt
+
+  func display(fields: [FormFieldModel]) {
+    self.formView = FormBuilder()
+      .add(fields: fields)
+      .add(to: self.view)
+
+    self.formView.delegate = self
   }
   
-  func displayDone(enabled: Bool) {
+  func displaySave(enabled: Bool) {
     self.navigationItem.rightBarButtonItem?.isEnabled = enabled
   }
-  
-  func currentName() -> String? {
-    return self.formView.value(for: "name") as? String
-  }
-  
-  func currentAmount() -> Int? {
-    return self.formView.value(for: "amount") as? Int
-  }
-  
-  func currentCreatedAt() -> Date? {
-    return self.formView.value(for: "date") as? Date
+
+  func currentFields() -> [FormFieldModel] {
+    return self.formView.allFields()
   }
 }

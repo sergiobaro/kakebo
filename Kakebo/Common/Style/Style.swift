@@ -1,8 +1,8 @@
 import UIKit
 
-class Appearance {
+class Style {
 
-  static func apply() {
+  static func applyApperance() {
     UINavigationBar.appearance().isTranslucent = false
     UINavigationBar.appearance().tintColor = .black
   }

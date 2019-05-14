@@ -5,9 +5,17 @@ class FormBuilder {
 
   private var fields = [FormField]()
 
-  func add(field: FormFieldModel) -> FormBuilder {
+  @discardableResult
+  func add(field: FormFieldModel) -> Self {
     let fieldView = self.makeField(field)
     self.fields.append(fieldView)
+
+    return self
+  }
+
+  @discardableResult
+  func add(fields: [FormFieldModel]) -> Self {
+    fields.forEach({ self.add(field: $0) })
 
     return self
   }

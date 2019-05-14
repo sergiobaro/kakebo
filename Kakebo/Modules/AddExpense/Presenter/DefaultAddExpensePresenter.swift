@@ -3,12 +3,10 @@ import Foundation
 protocol AddExpenseView: class {
   
   func display(title: String)
-  func display(expense: Expense)
-  func displayDone(enabled: Bool)
-  
-  func currentName() -> String?
-  func currentAmount() -> Int?
-  func currentCreatedAt() -> Date?
+  func display(fields: [FormFieldModel])
+  func displaySave(enabled: Bool)
+
+  func currentFields() -> [FormFieldModel]
   
 }
 
@@ -18,6 +16,10 @@ class DefaultAddExpensePresenter {
   private let router: AddExpenseRouter
   private let repository: ExpensesRepository
   private let expense: Expense?
+
+  private var isEditing: Bool {
+    return self.expense != nil
+  }
   
   init(view: AddExpenseView, router: AddExpenseRouter, repository: ExpensesRepository, expense: Expense?) {
     self.view = view
@@ -27,16 +29,23 @@ class DefaultAddExpensePresenter {
   }
   
   // MARK: - Private
-  
-  private func valuesChanged(name: String?, amount: Int?, createdAt: Date?) {
-    let enabled = self.isValid(name: name, amount: amount, createdAt: createdAt)
-    self.view?.displayDone(enabled: enabled)
+
+  private func currentExpense() -> Expense? {
+    guard let fields = self.view?.currentFields() else {
+      return nil
+    }
+
+    return self.expense(with: fields)
   }
-  
-  private func isValid(name: String?, amount: Int?, createdAt: Date?) -> Bool {
-    return (self.expense(name: name, amount: amount, createdAt: createdAt) != nil)
+
+  private func expense(with fields: [FormFieldModel]) -> Expense? {
+    let name = fields.first(where: { $0.identifier == "name" })?.value as? String
+    let amount = fields.first(where: { $0.identifier == "amount" })?.value as? Int
+    let createdAt = fields.first(where: { $0.identifier == "date" })?.value as? Date
+
+    return self.expense(name: name, amount: amount, createdAt: createdAt)
   }
-  
+
   private func expense(name: String?, amount: Int?, createdAt: Date?) -> Expense? {
     guard
       let name = name?.trimmingCharacters(in: .whitespaces),
@@ -47,7 +56,7 @@ class DefaultAddExpensePresenter {
       else {
         return nil
     }
-    
+
     return Expense(
       expenseId: self.expense?.expenseId ?? UUID().uuidString,
       name: name,
@@ -55,27 +64,46 @@ class DefaultAddExpensePresenter {
       createdAt: createdAt
     )
   }
-  
-  private func currentExpense() -> Expense? {
-    return self.expense(
-      name: self.view?.currentName(),
-      amount: self.view?.currentAmount(),
-      createdAt: self.view?.currentCreatedAt()
+
+  private func fields(from expense: Expense?) -> [FormFieldModel] {
+    let nameField = FormFieldModel(
+      type: .text,
+      identifier: "name",
+      title: localize("Name"),
+      value: expense?.name
     )
+    let amountField = FormFieldModel(
+      type: .amount,
+      identifier: "amount",
+      title: localize("Amount"),
+      value: expense?.amount ?? 0
+    )
+    let dateField = FormFieldModel(
+      type: .date,
+      identifier: "date",
+      title: localize("Date"),
+      value: expense?.createdAt ?? Date()
+    )
+
+    return [nameField, amountField, dateField]
   }
 }
 
 extension DefaultAddExpensePresenter: AddExpensePresenter {
   
   func viewIsReady() {
-    if let expense = expense {
-      self.view?.display(title: "Edit")
-      self.view?.display(expense: expense)
-    } else {
-      self.view?.display(title: "Add")
-    }
+    let title = self.isEditing ? "Edit" : "Add"
+    self.view?.display(title: title)
+
+    let fields = self.fields(from: expense)
+    self.view?.display(fields: fields)
     
-    self.view?.displayDone(enabled: false)
+    self.view?.displaySave(enabled: false)
+  }
+
+  func userChanged(fields: [FormFieldModel]) {
+    let isValid = (self.expense(with: fields) != nil)
+    self.view?.displaySave(enabled: isValid)
   }
   
   func userTapDone() {
@@ -83,7 +111,7 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
       return
     }
     
-    if self.expense != nil && self.repository.update(expense: expense) {
+    if self.isEditing && self.repository.update(expense: expense) {
       self.router.navigateBack()
     } else if self.repository.add(expense: expense) {
       self.router.navigateBack()
@@ -92,31 +120,5 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
   
   func userTapCancel() {
     self.router.navigateBack()
-  }
-  
-  func userChanged(name: String?) -> Bool {
-    self.valuesChanged(
-      name: name,
-      amount: self.view?.currentAmount(),
-      createdAt: self.view?.currentCreatedAt()
-    )
-    
-    return (name != nil && name!.count <= 30)
-  }
-  
-  func userChanged(amount: Int?) {
-    self.valuesChanged(
-      name: self.view?.currentName(),
-      amount: amount,
-      createdAt: self.view?.currentCreatedAt()
-    )
-  }
-  
-  func userChanged(createdAt: Date?) {
-    self.valuesChanged(
-      name: self.view?.currentName(),
-      amount: self.view?.currentAmount(),
-      createdAt: createdAt
-    )
   }
 }

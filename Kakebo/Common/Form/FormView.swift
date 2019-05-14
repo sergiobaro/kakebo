@@ -84,6 +84,10 @@ class FormView: UIView {
     return field?.value
   }
 
+  func allFields() -> [FormFieldModel] {
+    return self.fields.map({ $0.field })
+  }
+
   func setReturnKeyType(_ type: UIReturnKeyType) {
     self.fields.last?.setReturnKeyType(type)
   }
