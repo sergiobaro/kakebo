@@ -244,12 +244,11 @@
 			isa = PBXGroup;
 			children = (
 				ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */,
-				6E404879358782C7C011BCC4EC023390 /* Assets.xcassets */,
 				1221A1A2ECC92424C5DD1F427AC2E3A8 /* Info.plist */,
-				225C673CE7E89A21FD3D6BFBCA38E827 /* LaunchScreen.storyboard */,
 				FD08A59E93AA36F6E35836C6EDD22B4B /* Common */,
 				1A8F70F1036E5BDD5E8BA268D7E71E50 /* Modules */,
 				F2474A9EF1D84B8E877D23E190AFA9FA /* Repositories */,
+				5A50EDFE228B372400EECB30 /* Resources */,
 			);
 			path = Kakebo;
 			sourceTree = "<group>";
@@ -303,6 +302,15 @@
 				5A41D9F32281EED400794A8F /* TextFormFieldView.xib */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		5A50EDFE228B372400EECB30 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6E404879358782C7C011BCC4EC023390 /* Assets.xcassets */,
+				225C673CE7E89A21FD3D6BFBCA38E827 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		5A830C3C228AAF9900FF6DF1 /* Style */ = {
