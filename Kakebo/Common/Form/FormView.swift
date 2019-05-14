@@ -49,7 +49,7 @@ class FormView: UIView {
         })
       }
 
-      let separator = FormFieldSeparator.make()
+      let separator = FormFieldSeparatorView.make()
       self.addSubview(separator)
       separator.snp.makeConstraints({
         $0.left.right.equalToSuperview()

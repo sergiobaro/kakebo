@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpensesListSectionHeader: UIView {
+class ExpensesListSectionView: UIView {
   
   static let height: CGFloat = 50.0
   

@@ -77,7 +77,7 @@ class ExpensesListViewController: UIViewController {
     self.tableView.estimatedRowHeight = ExpensesListCell.height
     
     self.tableView.sectionHeaderHeight = UITableView.automaticDimension
-    self.tableView.estimatedSectionHeaderHeight = ExpensesListSectionHeader.height
+    self.tableView.estimatedSectionHeaderHeight = ExpensesListSectionView.height
     
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
@@ -101,7 +101,7 @@ extension ExpensesListViewController: UITableViewDataSource {
       return nil
     }
     
-    let header = UIView.loadFromNib(type: ExpensesListSectionHeader.self)
+    let header = UIView.loadFromNib(type: ExpensesListSectionView.self)
     header.titleLabel.text = expenseSection.title
     header.amountLabel.text = expenseSection.totalAmount
     

@@ -1,6 +1,6 @@
 import UIKit
 
-class FormFieldSeparator: UIView {
+class FormFieldSeparatorView: UIView {
 
   static func make() -> UIView {
     let separator = UIView()

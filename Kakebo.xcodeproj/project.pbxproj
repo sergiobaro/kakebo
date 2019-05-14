@@ -21,7 +21,7 @@
 		4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5226C8F20345613BAEB240E4AAF93C /* TableView+delete.swift */; };
 		4E4782FCFB7302C116155205 /* Pods_Kakebo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B58BEBFCEC65008A58B4E9 /* Pods_Kakebo.framework */; };
 		5665355E46B9AAF166920A1E /* Pods_KakeboTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */; };
-		5A0B65AB228972B500DA6587 /* FormFieldSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */; };
+		5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */; };
 		5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */; };
 		5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */; };
 		5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift */; };
@@ -39,7 +39,7 @@
 		5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */; };
 		61F9F205F0DEB544AFFABB970074328A /* ExpensesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75AA432513FB3621AFFDD76C7210792 /* ExpensesListViewController.swift */; };
 		6AE0B180C2C6B21801D0008C58FE2CB8 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FED4334A57EB7BA1281B357F97C960F /* Realm.framework */; };
-		71D4873757587F941196A77256FB374A /* ExpensesListSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionHeader.xib */; };
+		71D4873757587F941196A77256FB374A /* ExpensesListSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionView.xib */; };
 		799628C939BE48A55A0CA33A26CC00EC /* ExpensesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F51C48EBC4F77637D394B9A59488ED0E /* ExpensesListCell.xib */; };
 		8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341F65A7795C044A8EB202B04D07B28 /* Array+group.swift */; };
 		8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpensesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B1923E1C31ED4A6B64872BCDC6961 /* ExpensesListCell.swift */; };
@@ -65,7 +65,7 @@
 		DDA94D591480917206DF50EA7AEFA80E /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45745C0E608B958D789016AD3554CE18 /* Quick.framework */; };
 		EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F8266052C2C5092491DF56B5C876AB /* AddExpenseRouter.swift */; };
 		EECFC2C39B9EE020B8F9BABB7701A5AF /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62097DE0CC6568F323DEF40FAC073E0 /* Localization.swift */; };
-		FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpensesListSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionHeader.swift */; };
+		FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpensesListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +85,7 @@
 		0C789E0BA520F100B39CF1308ADE8C2C /* ExpensesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesListViewController.xib; sourceTree = "<group>"; };
 		0DCF2CE15E775EA5476A1AE6AC053ABA /* RealmExpensesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpensesRepository.swift; sourceTree = "<group>"; };
 		1221A1A2ECC92424C5DD1F427AC2E3A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesListSectionHeader.xib; sourceTree = "<group>"; };
+		1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesListSectionView.xib; sourceTree = "<group>"; };
 		16A005027CECFFF92C1104DE86D57301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakeboTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		225C673CE7E89A21FD3D6BFBCA38E827 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakeboTests.debug.xcconfig"; path = "Target Support Files/Pods-KakeboTests/Pods-KakeboTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListRouter.swift; sourceTree = "<group>"; };
 		57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSpec.swift; sourceTree = "<group>"; };
-		5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparator.swift; sourceTree = "<group>"; };
+		5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparatorView.swift; sourceTree = "<group>"; };
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenter.swift; sourceTree = "<group>"; };
 		5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldDefaultPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldDefaultPresenterSpec.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormatterSpec.swift; sourceTree = "<group>"; };
 		980B1923E1C31ED4A6B64872BCDC6961 /* ExpensesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListCell.swift; sourceTree = "<group>"; };
 		9BBAAB6122309AB3EB0F7EFF5BC119D9 /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
-		9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListSectionHeader.swift; sourceTree = "<group>"; };
+		9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListSectionView.swift; sourceTree = "<group>"; };
 		9FA6450355CC3404FFB9273508B63AFC /* ExpenseDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDateFormatter.swift; sourceTree = "<group>"; };
 		9FED4334A57EB7BA1281B357F97C960F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		5A0B65A9228972A200DA6587 /* Separator */ = {
 			isa = PBXGroup;
 			children = (
-				5A0B65AA228972B500DA6587 /* FormFieldSeparator.swift */,
+				5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */,
 			);
 			path = Separator;
 			sourceTree = "<group>";
@@ -523,8 +523,8 @@
 		E5F564ACD8EF229016AD725A4C531F7D /* SectionHeader */ = {
 			isa = PBXGroup;
 			children = (
-				9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionHeader.swift */,
-				1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionHeader.xib */,
+				9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionView.swift */,
+				1329B943996EC7382077DC14A585FE29 /* ExpensesListSectionView.xib */,
 			);
 			path = SectionHeader;
 			sourceTree = "<group>";
@@ -665,7 +665,7 @@
 				AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */,
 				799628C939BE48A55A0CA33A26CC00EC /* ExpensesListCell.xib in Resources */,
 				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
-				71D4873757587F941196A77256FB374A /* ExpensesListSectionHeader.xib in Resources */,
+				71D4873757587F941196A77256FB374A /* ExpensesListSectionView.xib in Resources */,
 				101EBE3A20A55FEA46927D2F1890EF69 /* ExpensesListViewController.xib in Resources */,
 				B8265A91F9823B3177F60B3C9C39F4FC /* LaunchScreen.storyboard in Resources */,
 			);
@@ -814,7 +814,7 @@
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
 				5A830C3E228AAFA100FF6DF1 /* Colors.swift in Sources */,
 				C5B909FECA846FCB36F4F4935430CFC8 /* AmountFormFieldView.swift in Sources */,
-				5A0B65AB228972B500DA6587 /* FormFieldSeparator.swift in Sources */,
+				5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
 				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
@@ -828,7 +828,7 @@
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpensesListCell.swift in Sources */,
 				AFEE71C49E68C5A673D7A42F5360540D /* ExpensesListModuleBuilder.swift in Sources */,
 				BA2F8EC21BC778A610708C621EE1F042 /* ExpensesListRouter.swift in Sources */,
-				FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpensesListSectionHeader.swift in Sources */,
+				FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpensesListSectionView.swift in Sources */,
 				61F9F205F0DEB544AFFABB970074328A /* ExpensesListViewController.swift in Sources */,
 				5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */,
 				0AD87E1E4C2E7483C884B52B64107E8D /* ExpensesRepository.swift in Sources */,
