@@ -2,19 +2,21 @@ import UIKit
 
 class TextFormFieldView: FormFieldView {
 
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var textField: UITextField!
+  @IBOutlet private weak var titleLabel: UILabel!
+  @IBOutlet private weak var textField: UITextField!
 
   override func awakeFromNib() {
     super.awakeFromNib()
 
+    self.backgroundColor = .clear
+
     self.textField.delegate = self
-    self.textField.returnKeyType = .next
 
     self.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
     self.titleLabel.textColor = .darkGray
-    self.textField.font = UIFont.systemFont(ofSize: 16.0)
+    self.textField.font = UIFont.systemFont(ofSize: 18.0)
     self.textField.textColor = .black
+    self.textField.tintColor = .black
   }
 
   override func becomeFirstResponder() -> Bool {
@@ -24,8 +26,21 @@ class TextFormFieldView: FormFieldView {
   override func resignFirstResponder() -> Bool {
     return self.textField.resignFirstResponder()
   }
+}
 
-  override func setReturnKeyType(_ type: UIReturnKeyType) {
+extension TextFormFieldView: FormFieldProtocol {
+
+  var title: String? {
+    get { return self.titleLabel.text }
+    set { self.titleLabel.text = newValue }
+  }
+
+  var value: Any? {
+    get { return self.textField.text }
+    set { self.textField.text = newValue as? String }
+  }
+
+  func setReturnKeyType(_ type: UIReturnKeyType) {
     self.textField.returnKeyType = type
   }
 }

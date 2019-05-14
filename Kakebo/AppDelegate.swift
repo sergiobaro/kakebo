@@ -8,14 +8,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   // swiftlint:disable:next line_length
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    self.window = UIWindow(frame: UIScreen.main.bounds)
-    
     #if DEBUG
     if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
       return true
     }
     #endif
-    
+
+    UINavigationBar.appearance().tintColor = .black
+
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+
     do {
       let expensesRepository = try RealmExpensesRepository.make()
       self.window!.rootViewController = ExpensesListModuleBuilder().build(repository: expensesRepository)

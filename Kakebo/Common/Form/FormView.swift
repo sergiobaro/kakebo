@@ -2,7 +2,7 @@ import UIKit
 
 protocol FormViewDelegate: class {
 
-  func fieldDidChange(_ field: FormField)
+  func fieldDidChange(_ field: FormFieldModel)
   func formDidFinish()
 
 }
@@ -11,10 +11,10 @@ class FormView: UIView {
 
   weak var delegate: FormViewDelegate?
 
-  private var fieldViews = [FormFieldView]()
+  private var fields = [FormField]()
 
-  init(fieldViews: [FormFieldView]) {
-    self.fieldViews = fieldViews
+  init(fields: [FormField]) {
+    self.fields = fields
 
     super.init(frame: .zero)
 
@@ -27,14 +27,13 @@ class FormView: UIView {
 
   private func setup() {
     self.setupFields()
-    self.setReturnKeyType(.done)
   }
 
   private func setupFields() {
     let verticalOffset: CGFloat = 10.0
     var previousView: UIView!
     
-    for fieldView in self.fieldViews {
+    for fieldView in self.fields {
       fieldView.formDelegate = self
       self.addSubview(fieldView)
 
@@ -69,16 +68,16 @@ class FormView: UIView {
 
   @discardableResult
   override func becomeFirstResponder() -> Bool {
-    return self.fieldViews.first?.becomeFirstResponder() ?? false
+    return self.fields.first?.becomeFirstResponder() ?? false
   }
 
   @discardableResult
   override func resignFirstResponder() -> Bool {
-    return self.fieldViews.first(where: { $0.isFirstResponder })?.resignFirstResponder() ?? false
+    return self.fields.first(where: { $0.isFirstResponder })?.resignFirstResponder() ?? false
   }
 
   func value(for identifier: String) -> Any? {
-    guard let field = self.fieldViews.first(where: { $0.field.identifier == identifier }) else {
+    guard let field = self.fields.first(where: { $0.field.identifier == identifier }) else {
       return nil
     }
 
@@ -86,31 +85,31 @@ class FormView: UIView {
   }
 
   func setReturnKeyType(_ type: UIReturnKeyType) {
-    self.fieldViews.last?.setReturnKeyType(type)
+    self.fields.last?.setReturnKeyType(type)
   }
 
   // MARK: - Private
 
-  private func nextFieldView(field: FormField) -> FormFieldView? {
-    guard let index = self.fieldViews.firstIndex(where: { $0.field == field }) else {
+  private func nextFieldView(field: FormFieldModel) -> FormFieldView? {
+    guard let index = self.fields.firstIndex(where: { $0.field == field }) else {
       return nil
     }
 
-    return self.fieldViews.element(at: index + 1)
+    return self.fields.element(at: index + 1)
   }
 }
 
 extension FormView: FieldFormDelegate {
 
-  func fieldDidChange(_ field: FormField) {
+  func fieldDidChange(_ field: FormFieldModel) {
     self.delegate?.fieldDidChange(field)
   }
 
-  func fieldDidEndEditing(_ field: FormField) {
+  func fieldDidEndEditing(_ field: FormFieldModel) {
     if let nextFieldView = self.nextFieldView(field: field) {
       nextFieldView.becomeFirstResponder()
     } else {
-      self.fieldViews.last?.resignFirstResponder()
+      self.fields.last?.resignFirstResponder()
       self.delegate?.formDidFinish()
     }
   }

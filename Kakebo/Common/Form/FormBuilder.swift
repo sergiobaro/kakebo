@@ -3,18 +3,20 @@ import SnapKit
 
 class FormBuilder {
 
-  private var fieldViews = [FormFieldView]()
+  private var fields = [FormField]()
 
-  func add(field: FormField) -> FormBuilder {
+  func add(field: FormFieldModel) -> FormBuilder {
     let fieldView = self.makeField(field)
-    self.fieldViews.append(fieldView)
+    self.fields.append(fieldView)
 
     return self
   }
 
   func add(to view: UIView) -> FormView {
     let formView = self.makeFormView()
-    self.add(formView: formView, to: view)
+
+    view.addSubview(formView)
+    formView.snp.makeConstraints({ $0.top.left.right.equalToSuperview() })
 
     return formView
   }
@@ -24,32 +26,42 @@ class FormBuilder {
 private extension FormBuilder {
 
   func makeFormView() -> FormView {
-    let formView = FormView(fieldViews: self.fieldViews)
+    let formView = FormView(fields: self.fields)
 
     return formView
   }
 
-  func makeField(_ field: FormField) -> FormFieldView {
+  func makeField(_ field: FormFieldModel) -> FormField {
     switch field.type {
     case .text:
       return self.makeTextField(field)
+    case .amount:
+      return self.makeAmountField(field)
     }
   }
 
-  func makeTextField(_ field: FormField) -> FormFieldView {
+  func makeTextField(_ field: FormFieldModel) -> FormField {
     let textField = UIView.loadFromNib(type: TextFormFieldView.self)
     textField.field = field
+    
     if case let FormFieldType.text(value) = field.type {
-      textField.textField.text = value
+      textField.value = value
     }
-    textField.titleLabel.text = field.title
+    textField.title = field.title
 
     return textField
   }
 
-  func add(formView: FormView, to view: UIView) {
-    formView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(formView)
-    formView.snp.makeConstraints({ $0.top.left.right.equalToSuperview() })
+  func makeAmountField(_ field: FormFieldModel) -> FormField {
+    let amountField = UIView.loadFromNib(type: AmountFormFieldView.self)
+    amountField.field = field
+
+    if case let FormFieldType.amount(value) = field.type {
+      amountField.value = value
+    }
+    amountField.title = field.title
+
+    return amountField
   }
+
 }

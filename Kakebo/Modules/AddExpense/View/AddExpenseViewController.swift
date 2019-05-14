@@ -51,31 +51,29 @@ class AddExpenseViewController: UIViewController {
     )
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-      barButtonSystemItem: .done,
+      barButtonSystemItem: .save,
       target: self,
-      action: #selector(tapDone)
+      action: #selector(tapSave)
     )
 
     self.navigationController?.navigationBar.isTranslucent = false
   }
   
   private func setupForm() {
-    let nameField = FormField(
+    let nameField = FormFieldModel(
       type: .text(nil),
       identifier: "name",
-      title: localize("Name"),
-      placeholder: nil
+      title: localize("Name")
     )
-    let testField = FormField(
-      type: .text("Value"),
-      identifier: "test",
-      title: localize("Title"),
-      placeholder: "Placeholder"
+    let amountField = FormFieldModel(
+      type: .amount(0),
+      identifier: "amount",
+      title: localize("Amount")
     )
 
     self.formView = FormBuilder()
       .add(field: nameField)
-      .add(field: testField)
+      .add(field: amountField)
       .add(to: self.view)
   }
   
@@ -85,7 +83,7 @@ class AddExpenseViewController: UIViewController {
     self.presenter.userTapCancel()
   }
   
-  @objc func tapDone() {
+  @objc func tapSave() {
     self.presenter.userTapDone()
   }
 }
