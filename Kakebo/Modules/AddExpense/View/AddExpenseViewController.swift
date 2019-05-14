@@ -55,8 +55,6 @@ class AddExpenseViewController: UIViewController {
       target: self,
       action: #selector(tapSave)
     )
-
-    self.navigationController?.navigationBar.isTranslucent = false
   }
   
   private func setupForm() {

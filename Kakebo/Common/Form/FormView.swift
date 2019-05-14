@@ -30,7 +30,7 @@ class FormView: UIView {
   }
 
   private func setupFields() {
-    let verticalOffset: CGFloat = 10.0
+    let verticalOffset = FormStyle.fieldVerticalPadding
     var previousView: UIView!
     
     for fieldView in self.fields {
@@ -42,12 +42,12 @@ class FormView: UIView {
       if previousView == nil { // first field
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalToSuperview().offset(FormStyle.fieldVerticalPadding)
+          $0.top.equalToSuperview().offset(verticalOffset)
         })
       } else {
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalTo(previousView.snp.bottom).offset(FormStyle.fieldVerticalPadding)
+          $0.top.equalTo(previousView.snp.bottom).offset(verticalOffset)
         })
       }
 
@@ -55,7 +55,7 @@ class FormView: UIView {
       self.addSubview(separator)
       separator.snp.makeConstraints({
         $0.left.right.equalToSuperview()
-        $0.top.equalTo(fieldView.snp.bottom).offset(FormStyle.fieldVerticalPadding)
+        $0.top.equalTo(fieldView.snp.bottom).offset(verticalOffset)
       })
 
       previousView = separator

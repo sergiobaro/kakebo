@@ -31,7 +31,9 @@
 		5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDF7228B2D4100EECB30 /* FormStyle.swift */; };
 		5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDF9228B303900EECB30 /* InputFormFieldView.swift */; };
 		5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDFB228B311000EECB30 /* DateFormFieldPresenter.swift */; };
-		5A830C3E228AAFA100FF6DF1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C3D228AAFA100FF6DF1 /* Colors.swift */; };
+		5A50EE01228B38E200EECB30 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EE00228B38E200EECB30 /* Colors.swift */; };
+		5A50EE03228B392B00EECB30 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EE02228B392B00EECB30 /* Fonts.swift */; };
+		5A830C3E228AAFA100FF6DF1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C3D228AAFA100FF6DF1 /* Appearance.swift */; };
 		5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C40228AAFE100FF6DF1 /* Color+hex.swift */; };
 		5A93CAD0228A48E50066ED4F /* InputFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */; };
 		5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */; };
@@ -110,7 +112,9 @@
 		5A50EDF7228B2D4100EECB30 /* FormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormStyle.swift; sourceTree = "<group>"; };
 		5A50EDF9228B303900EECB30 /* InputFormFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputFormFieldView.swift; sourceTree = "<group>"; };
 		5A50EDFB228B311000EECB30 /* DateFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormFieldPresenter.swift; sourceTree = "<group>"; };
-		5A830C3D228AAFA100FF6DF1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5A50EE00228B38E200EECB30 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5A50EE02228B392B00EECB30 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		5A830C3D228AAFA100FF6DF1 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		5A830C40228AAFE100FF6DF1 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
 		5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputFormFieldView.xib; sourceTree = "<group>"; };
 		5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElementSpec.swift; sourceTree = "<group>"; };
@@ -243,8 +247,8 @@
 		58C502E86B2FE5E132C184B9F2B6D928 /* Kakebo */ = {
 			isa = PBXGroup;
 			children = (
-				ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */,
 				1221A1A2ECC92424C5DD1F427AC2E3A8 /* Info.plist */,
+				5A50EDFF228B37AD00EECB30 /* App */,
 				FD08A59E93AA36F6E35836C6EDD22B4B /* Common */,
 				1A8F70F1036E5BDD5E8BA268D7E71E50 /* Modules */,
 				F2474A9EF1D84B8E877D23E190AFA9FA /* Repositories */,
@@ -313,12 +317,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		5A830C3C228AAF9900FF6DF1 /* Style */ = {
+		5A50EDFF228B37AD00EECB30 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				5A830C3D228AAFA100FF6DF1 /* Colors.swift */,
+				ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */,
 			);
-			path = Style;
+			path = App;
+			sourceTree = "<group>";
+		};
+		5A830C3C228AAF9900FF6DF1 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				5A830C3D228AAFA100FF6DF1 /* Appearance.swift */,
+				5A50EE00228B38E200EECB30 /* Colors.swift */,
+				5A50EE02228B392B00EECB30 /* Fonts.swift */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		5A830C3F228AAFDA00FF6DF1 /* Color */ = {
@@ -563,7 +577,7 @@
 		FD08A59E93AA36F6E35836C6EDD22B4B /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5A830C3C228AAF9900FF6DF1 /* Style */,
+				5A830C3C228AAF9900FF6DF1 /* Appearance */,
 				5A41D9F12281EEA300794A8F /* Form */,
 				FC71E398EF37DFDAB0964A845EB114B2 /* Extensions */,
 				034D3B760798F27BEA0E41AD045A17FA /* Formatters */,
@@ -808,7 +822,7 @@
 				1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */,
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
-				5A830C3E228AAFA100FF6DF1 /* Colors.swift in Sources */,
+				5A830C3E228AAFA100FF6DF1 /* Appearance.swift in Sources */,
 				5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
@@ -832,6 +846,7 @@
 				A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */,
 				C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */,
 				D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */,
+				5A50EE01228B38E200EECB30 /* Colors.swift in Sources */,
 				5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */,
 				5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */,
 				5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */,
@@ -840,6 +855,7 @@
 				4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */,
 				C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */,
 				9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */,
+				5A50EE03228B392B00EECB30 /* Fonts.swift in Sources */,
 				CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

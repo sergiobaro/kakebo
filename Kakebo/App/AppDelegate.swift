@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     #endif
 
-    UINavigationBar.appearance().tintColor = .black
+    Appearance.apply()
 
     self.window = UIWindow(frame: UIScreen.main.bounds)
 

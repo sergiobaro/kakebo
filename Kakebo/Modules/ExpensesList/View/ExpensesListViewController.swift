@@ -69,18 +69,19 @@ class ExpensesListViewController: UIViewController {
   
   private func setupTableView() {
     self.tableView.register(ExpensesListCell.self)
-    
+
     self.tableView.dataSource = self
     self.tableView.delegate = self
     
     self.tableView.rowHeight = UITableView.automaticDimension
     self.tableView.estimatedRowHeight = ExpensesListCell.height
     
-    self.tableView.sectionHeaderHeight = UITableView.automaticDimension
+    self.tableView.sectionHeaderHeight = ExpensesListSectionView.height
     self.tableView.estimatedSectionHeaderHeight = ExpensesListSectionView.height
     
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
+    self.tableView.separatorColor = .separator
   }
   
   // MARK: - Actions
@@ -126,12 +127,9 @@ extension ExpensesListViewController: UITableViewDataSource {
 }
 
 extension ExpensesListViewController: UITableViewDelegate {
-  
-  func tableView(
-    _ tableView: UITableView,
-    commit editingStyle: UITableViewCell.EditingStyle,
-    forRowAt indexPath: IndexPath
-  ) {
+
+  // swiftlint:disable:next line_length
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     guard editingStyle == .delete && self.presenter.deleteExpense(at: indexPath) else {
       return
     }

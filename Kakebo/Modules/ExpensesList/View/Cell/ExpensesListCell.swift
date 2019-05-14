@@ -10,13 +10,19 @@ class ExpensesListCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+
+    self.backgroundColor = .clear
+    self.selectedBackgroundView = UIView()
+    self.selectedBackgroundView?.backgroundColor = .selected
+
+    self.nameLabel.textColor = .textDark
+    self.nameLabel.font = .big
+
+    self.amountLabel.textColor = .textDark
+    self.amountLabel.font = .big
     
-    self.nameLabel.font = UIFont.systemFont(ofSize: 20.0)
-    
-    self.amountLabel.font = UIFont.systemFont(ofSize: 20.0)
-    
-    self.dateLabel.font = UIFont.systemFont(ofSize: 14.0)
-    self.dateLabel.textColor = .darkGray
+    self.dateLabel.font = .small
+    self.dateLabel.textColor = .textDark
   }
   
 }
