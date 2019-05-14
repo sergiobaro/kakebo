@@ -38,6 +38,7 @@ class AmountFormFieldView: FormFieldView {
     self.titleLabel.font = UIFont.systemFont(ofSize: 14.0)
     self.titleLabel.textColor = .darkGray
     self.titleLabel.text = nil
+    
     self.valueLabel.font = UIFont.systemFont(ofSize: 18.0)
     self.valueLabel.textColor = .darkGray
     self.valueLabel.text = nil

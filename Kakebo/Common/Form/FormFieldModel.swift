@@ -17,5 +17,4 @@ extension FormFieldModel: Equatable {
   static func == (lhs: FormFieldModel, rhs: FormFieldModel) -> Bool {
     return lhs.identifier == rhs.identifier
   }
-
 }

@@ -77,11 +77,9 @@ class FormView: UIView {
   }
 
   func value(for identifier: String) -> Any? {
-    guard let field = self.fields.first(where: { $0.field.identifier == identifier }) else {
-      return nil
-    }
+    let field = self.fields.first(where: { $0.field.identifier == identifier })
 
-    return field.value
+    return field?.value
   }
 
   func setReturnKeyType(_ type: UIReturnKeyType) {
@@ -113,5 +111,4 @@ extension FormView: FormFieldDelegate {
       self.delegate?.formDidFinish()
     }
   }
-
 }

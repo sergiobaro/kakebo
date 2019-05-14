@@ -20,7 +20,6 @@ class FormBuilder {
 
     return formView
   }
-
 }
 
 private extension FormBuilder {
@@ -57,5 +56,4 @@ private extension FormBuilder {
     
     return amountField
   }
-
 }

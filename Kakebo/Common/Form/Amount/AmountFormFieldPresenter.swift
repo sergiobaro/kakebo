@@ -73,5 +73,4 @@ extension AmountFormFieldDefaultPresenter: AmountFormFieldPresenter {
     let newValue = String(text.dropLast())
     self.updateValue(string: newValue)
   }
-
 }
