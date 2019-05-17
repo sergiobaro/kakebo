@@ -41,9 +41,29 @@ class DefaultAddExpensePresenter {
   private func expense(with fields: [FormFieldModel]) -> Expense? {
     let name = fields.first(where: { $0.identifier == "name" })?.value as? String
     let amount = fields.first(where: { $0.identifier == "amount" })?.value as? Int
-    let createdAt = fields.first(where: { $0.identifier == "date" })?.value as? Date
+    let date = fields.first(where: { $0.identifier == "date" })?.value as? Date
+    let time = fields.first(where: { $0.identifier == "time" })?.value as? Date
+
+    let createdAt = self.createdAt(date: date, time: time)
 
     return self.expense(name: name, amount: amount, createdAt: createdAt)
+  }
+
+  private func createdAt(date: Date?, time: Date?) -> Date? {
+    guard
+      let date = date,
+      let time = time
+      else {
+        return nil
+    }
+
+    var dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
+    let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
+
+    dateComponents.hour = timeComponents.hour
+    dateComponents.minute = timeComponents.minute
+
+    return Calendar.current.date(from: dateComponents)
   }
 
   private func expense(name: String?, amount: Int?, createdAt: Date?) -> Expense? {
@@ -84,8 +104,14 @@ class DefaultAddExpensePresenter {
       title: localize("Date"),
       value: expense?.createdAt ?? Date()
     )
+    let timeField = FormFieldModel(
+      type: .time,
+      identifier: "time",
+      title: localize("Time"),
+      value: expense?.createdAt ?? Date()
+    )
 
-    return [nameField, amountField, dateField]
+    return [nameField, amountField, dateField, timeField]
   }
 }
 

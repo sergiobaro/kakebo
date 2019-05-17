@@ -6,8 +6,7 @@ class DefaultExpensesListPresenter {
   
   private let rowDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .none
-    dateFormatter.timeStyle = .short
+    dateFormatter.dateFormat = "HH:mm"
     return dateFormatter
   }()
   

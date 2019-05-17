@@ -4,6 +4,7 @@ enum FormFieldType {
   case text
   case amount
   case date
+  case time
 }
 
 struct FormFieldModel {
