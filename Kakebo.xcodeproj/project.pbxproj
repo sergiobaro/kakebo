@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03661A34DFFCCD226C69FC8D1EA57280 /* ExpenseDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA6450355CC3404FFB9273508B63AFC /* ExpenseDateFormatter.swift */; };
 		0AD87E1E4C2E7483C884B52B64107E8D /* ExpensesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321790082891000F97DCD6916BE8B926 /* ExpensesRepository.swift */; };
 		101EBE3A20A55FEA46927D2F1890EF69 /* ExpensesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C789E0BA520F100B39CF1308ADE8C2C /* ExpensesListViewController.xib */; };
 		1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79849DF7C8A6DFEFE8F308ACC782CBFE /* AddExpenseModuleBuilder.swift */; };
@@ -23,8 +22,8 @@
 		5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */; };
 		5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */; };
 		5A1E841E228F311C008DA9D1 /* TimeFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E841D228F311C008DA9D1 /* TimeFormFieldPresenter.swift */; };
-		5A1E8420228F329C008DA9D1 /* ExpenseTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E841F228F329C008DA9D1 /* ExpenseTimeFormatter.swift */; };
-		5A1E8422228F34F2008DA9D1 /* ExpenseTimeFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8421228F34F2008DA9D1 /* ExpenseTimeFormatterSpec.swift */; };
+		5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */; };
+		5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */; };
 		5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */; };
 		5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */; };
 		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
@@ -64,7 +63,6 @@
 		C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422426E5194B147159B3009BBF19FFDD /* Sections.swift */; };
 		CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACB34EDF298E01FC6592700C9B1AD3 /* UIView+nib.swift */; };
 		D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C6261B09E1F63A019CB4EFAA5A1815 /* String+replacing.swift */; };
-		D981F1A7E8DA24B16911AF5C4EF79D73 /* ExpenseDateFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239B7A85B44FD3460F4ADEE102F4B60A /* ExpenseDateFormatterSpec.swift */; };
 		DDA94D591480917206DF50EA7AEFA80E /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45745C0E608B958D789016AD3554CE18 /* Quick.framework */; };
 		EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F8266052C2C5092491DF56B5C876AB /* AddExpenseRouter.swift */; };
 		EECFC2C39B9EE020B8F9BABB7701A5AF /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62097DE0CC6568F323DEF40FAC073E0 /* Localization.swift */; };
@@ -93,7 +91,6 @@
 		20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakeboTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		225C673CE7E89A21FD3D6BFBCA38E827 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23256FBB6A9A475223ECB7B273D7E847 /* DefaultExpensesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExpensesPresenter.swift; sourceTree = "<group>"; };
-		239B7A85B44FD3460F4ADEE102F4B60A /* ExpenseDateFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDateFormatterSpec.swift; sourceTree = "<group>"; };
 		243B3D8E92366CCF1998D1A6 /* Pods-KakeboTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakeboTests.release.xcconfig"; path = "Target Support Files/Pods-KakeboTests/Pods-KakeboTests.release.xcconfig"; sourceTree = "<group>"; };
 		321790082891000F97DCD6916BE8B926 /* ExpensesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesRepository.swift; sourceTree = "<group>"; };
 		3B10A56ECCEF411FC76A4E3A /* Pods-Kakebo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kakebo.release.xcconfig"; path = "Target Support Files/Pods-Kakebo/Pods-Kakebo.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,8 +104,8 @@
 		5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparatorView.swift; sourceTree = "<group>"; };
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		5A1E841D228F311C008DA9D1 /* TimeFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenter.swift; sourceTree = "<group>"; };
-		5A1E841F228F329C008DA9D1 /* ExpenseTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTimeFormatter.swift; sourceTree = "<group>"; };
-		5A1E8421228F34F2008DA9D1 /* ExpenseTimeFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTimeFormatterSpec.swift; sourceTree = "<group>"; };
+		5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatter.swift; sourceTree = "<group>"; };
+		5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatterSpec.swift; sourceTree = "<group>"; };
 		5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenter.swift; sourceTree = "<group>"; };
 		5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenterSpec.swift; sourceTree = "<group>"; };
 		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormatterSpec.swift; sourceTree = "<group>"; };
 		980B1923E1C31ED4A6B64872BCDC6961 /* ExpensesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListCell.swift; sourceTree = "<group>"; };
 		9DE731A714AD3D6F1AA1518F08507454 /* ExpensesListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListSectionView.swift; sourceTree = "<group>"; };
-		9FA6450355CC3404FFB9273508B63AFC /* ExpenseDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDateFormatter.swift; sourceTree = "<group>"; };
 		9FED4334A57EB7BA1281B357F97C960F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3ACB34EDF298E01FC6592700C9B1AD3 /* UIView+nib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+nib.swift"; sourceTree = "<group>"; };
@@ -182,8 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				F2DB32A3BB799C7262F001C1807C9CA5 /* AmountFormatter.swift */,
-				9FA6450355CC3404FFB9273508B63AFC /* ExpenseDateFormatter.swift */,
-				5A1E841F228F329C008DA9D1 /* ExpenseTimeFormatter.swift */,
+				5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -419,8 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */,
-				239B7A85B44FD3460F4ADEE102F4B60A /* ExpenseDateFormatterSpec.swift */,
-				5A1E8421228F34F2008DA9D1 /* ExpenseTimeFormatterSpec.swift */,
+				5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -815,10 +809,9 @@
 				2272F3FF647D684F0CDF34965B784ED4 /* AmountFormatterSpec.swift in Sources */,
 				5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */,
 				5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */,
-				5A1E8422228F34F2008DA9D1 /* ExpenseTimeFormatterSpec.swift in Sources */,
 				9C0AE6E0CEAB9666A83907737D17C808 /* ArrayGroupSpec.swift in Sources */,
+				5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */,
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
-				D981F1A7E8DA24B16911AF5C4EF79D73 /* ExpenseDateFormatterSpec.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,
 				5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */,
 				5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */,
@@ -829,12 +822,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A1E8420228F329C008DA9D1 /* ExpenseTimeFormatter.swift in Sources */,
 				1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */,
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
 				5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */,
 				5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */,
+				5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
 				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
@@ -844,7 +837,6 @@
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */,
 				B66D8E586D05264A90716B8EFF0A30A2 /* DefaultExpensesPresenter.swift in Sources */,
-				03661A34DFFCCD226C69FC8D1EA57280 /* ExpenseDateFormatter.swift in Sources */,
 				5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */,
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpensesListCell.swift in Sources */,

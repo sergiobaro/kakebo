@@ -7,7 +7,7 @@ class DateFormFieldPresenter {
 
   private weak var view: InputFormFieldViewProtocol?
   
-  private let dateFormatter = ExpenseDateFormatter()
+  private let dateFormatter = GeneralDateFormatter(fields: ["dd", "MM", "yyyy"], separator: " / ")
   private var text = ""
 
   init(view: InputFormFieldViewProtocol) {

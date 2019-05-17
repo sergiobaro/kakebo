@@ -7,7 +7,7 @@ class TimeFormFieldPresenter {
 
   private weak var view: InputFormFieldViewProtocol?
 
-  private let timeFormatter = ExpenseTimeFormatter()
+  private let timeFormatter = GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
   private var text = ""
 
   init(view: InputFormFieldViewProtocol) {
