@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpensesListSectionView: UIView {
+class ExpensesListHeaderView: UITableViewHeaderFooterView {
   
   static let height: CGFloat = 30.0
   
@@ -9,8 +9,9 @@ class ExpensesListSectionView: UIView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
-    self.backgroundColor = .backgroundDark
+
+    self.backgroundView = UIView()
+    self.backgroundView?.backgroundColor = .backgroundDark
 
     self.titleLabel.textColor = .textLight
     self.titleLabel.font = .medium

@@ -1,7 +1,14 @@
 import Foundation
 
+protocol ExpensesListViewProtocol: class {
+
+  func delete(section: Int)
+  func deleteRow(at indexPath: IndexPath)
+
+}
+
 class DefaultExpensesListPresenter {
-  
+
   private typealias ExpenseSections = Sections<Date, Expense>
   
   private let rowDateFormatter: DateFormatter = {
@@ -18,13 +25,14 @@ class DefaultExpensesListPresenter {
   }()
   
   private let amountFormatter = AmountFormatter()
+  private var expenses = ExpenseSections()
 
+  private weak var view: ExpensesListViewProtocol?
   private let router: ExpensesListRouter
   private let repository: ExpensesRepository
   
-  private var expenses = ExpenseSections()
-  
-  init(router: ExpensesListRouter, repository: ExpensesRepository) {
+  init(view: ExpensesListViewProtocol, router: ExpensesListRouter, repository: ExpensesRepository) {
+    self.view = view
     self.router = router
     self.repository = repository
   }
@@ -90,17 +98,23 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
     return self.expenses.element(at: indexPath).map(self.map(expense:))
   }
   
-  func deleteExpense(at indexPath: IndexPath) -> Bool {
+  func deleteExpense(at indexPath: IndexPath) {
     guard let expense = self.expenses.element(at: indexPath) else {
-      return false
-    }
-    guard self.repository.delete(expense: expense) else {
-      return false
+      return
     }
 
+    guard self.repository.delete(expense: expense) else {
+      return
+    }
+
+    let numberOfExpensesInSection = self.expenses.numberOfElements(section: indexPath.section)
     self.expenses.deleteElement(at: indexPath)
 
-    return true
+    if numberOfExpensesInSection == 1 {
+      self.view?.delete(section: indexPath.section)
+    } else {
+      self.view?.deleteRow(at: indexPath)
+    }
   }
 
   func userTapAdd() {

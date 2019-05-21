@@ -11,6 +11,7 @@ class ExpensesListModuleBuilder {
     )
     
     viewController.presenter = DefaultExpensesListPresenter(
+      view: viewController,
       router: router,
       repository: repository
     )

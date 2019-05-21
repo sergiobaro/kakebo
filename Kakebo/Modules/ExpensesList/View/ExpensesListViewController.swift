@@ -24,7 +24,7 @@ protocol ExpensesListPresenter {
   func numberOfExpenses(section: Int) -> Int
   func expenseSection(for section: Int) -> ExpenseSectionViewModel?
   func expense(at indexPath: IndexPath) -> ExpenseViewModel?
-  func deleteExpense(at indexPath: IndexPath) -> Bool
+  func deleteExpense(at indexPath: IndexPath)
   
   func userTapAdd()
   func userSelectExpense(indexPath: IndexPath)
@@ -69,6 +69,7 @@ class ExpensesListViewController: UIViewController {
   
   private func setupTableView() {
     self.tableView.register(ExpensesListCell.self)
+    self.tableView.register(ExpensesListHeaderView.self)
 
     self.tableView.dataSource = self
     self.tableView.delegate = self
@@ -76,8 +77,8 @@ class ExpensesListViewController: UIViewController {
     self.tableView.rowHeight = UITableView.automaticDimension
     self.tableView.estimatedRowHeight = ExpensesListCell.height
     
-    self.tableView.sectionHeaderHeight = ExpensesListSectionView.height
-    self.tableView.estimatedSectionHeaderHeight = ExpensesListSectionView.height
+    self.tableView.sectionHeaderHeight = ExpensesListHeaderView.height
+    self.tableView.estimatedSectionHeaderHeight = ExpensesListHeaderView.height
     
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
@@ -89,6 +90,21 @@ class ExpensesListViewController: UIViewController {
   @objc func tapAdd() {
     self.presenter.userTapAdd()
   }
+
+  // MARK: - Private
+
+  private func fill(header: ExpensesListHeaderView?, section: Int) {
+    let expenseSection = self.presenter.expenseSection(for: section)
+    header?.titleLabel.text = expenseSection?.title
+    header?.amountLabel.text = expenseSection?.totalAmount
+  }
+
+  func refreshHeader(at section: Int) {
+    let header = self.tableView.headerView(forSection: section) as? ExpensesListHeaderView
+    self.fill(header: header, section: section)
+
+    header?.setNeedsDisplay()
+  }
 }
 
 extension ExpensesListViewController: UITableViewDataSource {
@@ -98,14 +114,9 @@ extension ExpensesListViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    guard let expenseSection = self.presenter.expenseSection(for: section) else {
-      return nil
-    }
-    
-    let header = UIView.loadFromNib(type: ExpensesListSectionView.self)
-    header.titleLabel.text = expenseSection.title
-    header.amountLabel.text = expenseSection.totalAmount
-    
+    let header = tableView.dequeue(ExpensesListHeaderView.self)
+    self.fill(header: header, section: section)
+
     return header
   }
   
@@ -130,18 +141,24 @@ extension ExpensesListViewController: UITableViewDelegate {
 
   // swiftlint:disable:next line_length
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    guard editingStyle == .delete && self.presenter.deleteExpense(at: indexPath) else {
-      return
-    }
-    
-    if self.presenter.numberOfExpenses(section: indexPath.section) == 0 {
-      self.tableView.deleteSection(at: indexPath.section, with: .left)
-    } else {
-      self.tableView.deleteRow(at: indexPath, with: .left)
+    if editingStyle == .delete {
+      self.presenter.deleteExpense(at: indexPath)
     }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     self.presenter.userSelectExpense(indexPath: indexPath)
+  }
+}
+
+extension ExpensesListViewController: ExpensesListViewProtocol {
+
+  func delete(section: Int) {
+    self.tableView.deleteSection(at: section, with: .left)
+  }
+
+  func deleteRow(at indexPath: IndexPath) {
+    self.tableView.deleteRow(at: indexPath, with: .left)
+    self.refreshHeader(at: indexPath.section)
   }
 }
