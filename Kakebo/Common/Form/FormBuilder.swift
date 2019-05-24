@@ -3,7 +3,7 @@ import SnapKit
 
 class FormBuilder {
 
-  private var fields = [FormField]()
+  private var fields = [FormFieldContainerView]()
 
   @discardableResult
   func add(field: FormFieldModel) -> Self {
@@ -38,7 +38,7 @@ private extension FormBuilder {
     return formView
   }
 
-  func makeField(_ field: FormFieldModel) -> FormField {
+  func makeField(_ field: FormFieldModel) -> FormFieldContainerView {
     switch field.type {
     case .text:
       return self.makeTextField(field)
@@ -51,45 +51,75 @@ private extension FormBuilder {
     }
   }
 
-  func makeTextField(_ field: FormFieldModel) -> FormField {
-    let textField = UIView.loadFromNib(type: TextFormFieldView.self)
-    textField.field = field
-    textField.value = field.value
-    textField.title = field.title
+  func makeTextField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
+    fieldContainer.field = field
 
-    return textField
+    let textField = self.makeTextFieldView()
+    fieldContainer.setFieldView(textField)
+
+    return fieldContainer
   }
 
-  func makeAmountField(_ field: FormFieldModel) -> FormField {
-    let amountField = UIView.loadFromNib(type: InputFormFieldView.self)
-    amountField.presenter = AmountFormFieldPresenter(view: amountField)
+  func makeAmountField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
+    fieldContainer.field = field
 
-    amountField.field = field
-    amountField.value = field.value
-    amountField.title = field.title
-    
-    return amountField
+    let inputField = self.makeInputFieldView()
+    fieldContainer.setFieldView(inputField)
+
+    return fieldContainer
   }
 
-  func makeDateField(_ field: FormFieldModel) -> FormField {
-    let dateField = UIView.loadFromNib(type: InputFormFieldView.self)
-    dateField.presenter = DateFormFieldPresenter(view: dateField)
+  func makeDateField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
+    fieldContainer.field = field
 
-    dateField.field = field
-    dateField.value = field.value
-    dateField.title = field.title
+    let inputField = self.makeInputFieldView()
+    fieldContainer.setFieldView(inputField)
 
-    return dateField
+    return fieldContainer
+
+//    let dateField = UIView.loadFromNib(type: InputFormFieldView.self)
+//    dateField.presenter = DateFormFieldPresenter(
+//      view: dateField,
+//      formatter: GeneralDateFormatter(fields: ["dd", "MM", "yyyy"], separator: " / ")
+//    )
+//
+//    dateField.field = field
+//    dateField.value = field.value
+//    dateField.title = field.title
+//
+//    return dateField
   }
 
-  func makeTimeField(_ field: FormFieldModel) -> FormField {
-    let timeField = UIView.loadFromNib(type: InputFormFieldView.self)
-    timeField.presenter = TimeFormFieldPresenter(view: timeField)
+  func makeTimeField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
+    fieldContainer.field = field
 
-    timeField.field = field
-    timeField.value = field.value
-    timeField.title = field.title
+    let inputField = self.makeInputFieldView()
+    fieldContainer.setFieldView(inputField)
 
-    return timeField
+    return fieldContainer
+
+//    let timeField = UIView.loadFromNib(type: InputFormFieldView.self)
+//    timeField.presenter = DateFormFieldPresenter(
+//      view: timeField,
+//      formatter: GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
+//    )
+//
+//    timeField.field = field
+//    timeField.value = field.value
+//    timeField.title = field.title
+//
+//    return timeField
+  }
+
+  func makeTextFieldView() -> FormFieldView {
+    return UIView.loadFromNib(type: TextFormFieldView.self)
+  }
+
+  func makeInputFieldView() -> FormFieldView {
+    return UIView.loadFromNib(type: InputFormFieldView.self)
   }
 }

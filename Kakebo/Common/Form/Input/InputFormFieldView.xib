@@ -15,14 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjm-wk-3Ii">
-                    <rect key="frame" x="10" y="5" width="42" height="36"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gna-P4-7Se">
-                    <rect key="frame" x="62" y="5" width="342" height="36"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -31,25 +25,21 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="gna-P4-7Se" secondAttribute="trailing" constant="10" id="JAL-QP-EdG"/>
-                <constraint firstItem="Fjm-wk-3Ii" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="OHP-A8-WXJ"/>
-                <constraint firstAttribute="bottom" secondItem="Fjm-wk-3Ii" secondAttribute="bottom" constant="5" id="OJk-HA-DAr"/>
-                <constraint firstAttribute="bottom" secondItem="gna-P4-7Se" secondAttribute="bottom" constant="5" id="bFo-I0-BfR"/>
-                <constraint firstItem="gna-P4-7Se" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="c36-C5-kMW"/>
-                <constraint firstItem="gna-P4-7Se" firstAttribute="leading" secondItem="Fjm-wk-3Ii" secondAttribute="trailing" constant="10" id="duh-nk-E5h"/>
-                <constraint firstItem="Fjm-wk-3Ii" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="kdY-kN-jPE"/>
+                <constraint firstAttribute="trailing" secondItem="gna-P4-7Se" secondAttribute="trailing" id="JAL-QP-EdG"/>
+                <constraint firstAttribute="bottom" secondItem="gna-P4-7Se" secondAttribute="bottom" id="bFo-I0-BfR"/>
+                <constraint firstItem="gna-P4-7Se" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c36-C5-kMW"/>
+                <constraint firstItem="gna-P4-7Se" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="chY-gD-S5h"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="titleLabel" destination="Fjm-wk-3Ii" id="tCH-66-xRN"/>
                 <outlet property="valueLabel" destination="gna-P4-7Se" id="DKh-IW-Fzc"/>
-                <outletCollection property="gestureRecognizers" destination="jde-HV-9np" appends="YES" id="iiN-Wn-Dpu"/>
+                <outletCollection property="gestureRecognizers" destination="eUu-wO-2B9" appends="YES" id="8DI-Y6-rqx"/>
             </connections>
             <point key="canvasLocation" x="71.014492753623188" y="-5.3571428571428568"/>
         </view>
-        <tapGestureRecognizer id="jde-HV-9np">
+        <tapGestureRecognizer id="eUu-wO-2B9">
             <connections>
-                <action selector="tapView" destination="iN0-l3-epB" id="Vig-LQ-J6j"/>
+                <action selector="tapView" destination="iN0-l3-epB" id="atf-DK-hXR"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

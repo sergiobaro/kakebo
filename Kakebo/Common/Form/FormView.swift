@@ -7,13 +7,22 @@ protocol FormViewDelegate: class {
 
 }
 
+// sourcery: AutoMockable
+protocol FormFieldDelegate: class {
+
+  func fieldDidChange(_ field: FormFieldContainerView)
+  func fieldDidBeginEditing(_ field: FormFieldContainerView)
+  func fieldDidEndEditing(_ field: FormFieldContainerView)
+
+}
+
 class FormView: UIView {
 
   weak var delegate: FormViewDelegate?
 
-  private var fields = [FormField]()
+  private var fields = [FormFieldContainerView]()
 
-  init(fields: [FormField]) {
+  init(fields: [FormFieldContainerView]) {
     self.fields = fields
 
     super.init(frame: .zero)
@@ -30,8 +39,7 @@ class FormView: UIView {
   }
 
   private func setupFields() {
-    let verticalOffset = FormStyle.fieldVerticalPadding
-    var previousView: UIView!
+    var previousView: FormFieldContainerView!
     
     for fieldView in self.fields {
       fieldView.formDelegate = self
@@ -42,46 +50,35 @@ class FormView: UIView {
       if previousView == nil { // first field
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalToSuperview().offset(verticalOffset)
+          $0.top.equalToSuperview().offset(FormStyle.margin)
         })
       } else {
         fieldView.snp.makeConstraints({
           $0.left.right.equalToSuperview()
-          $0.top.equalTo(previousView.snp.bottom).offset(verticalOffset)
+          $0.top.equalTo(previousView.snp.bottom)
         })
       }
 
-      let separator = FormFieldSeparatorView.make()
-      self.addSubview(separator)
-      separator.snp.makeConstraints({
-        $0.left.right.equalToSuperview()
-        $0.top.equalTo(fieldView.snp.bottom).offset(verticalOffset)
-      })
-
-      previousView = separator
+      previousView = fieldView
     }
 
-    previousView.snp.makeConstraints({
-      $0.bottom.equalToSuperview().inset(verticalOffset)
-    })
+    previousView.snp.makeConstraints({ $0.bottom.equalToSuperview() })
   }
 
   // MARK: - Public
 
-  @discardableResult
-  override func becomeFirstResponder() -> Bool {
-    return self.fields.first?.becomeFirstResponder() ?? false
+  func focus() {
+    self.fields.first?.focus()
   }
 
-  @discardableResult
-  override func resignFirstResponder() -> Bool {
-    return self.fields.first(where: { $0.isFirstResponder })?.resignFirstResponder() ?? false
+  func blur() {
+    self.fields.first(where: { $0.isFirstResponder })?.blur()
   }
 
   func value(for identifier: String) -> Any? {
     let field = self.fields.first(where: { $0.field.identifier == identifier })
 
-    return field?.value
+    return field?.field.value
   }
 
   func allFields() -> [FormFieldModel] {
@@ -94,7 +91,7 @@ class FormView: UIView {
 
   // MARK: - Private
 
-  private func nextFieldView(field: FormFieldModel) -> FormFieldView? {
+  private func nextFieldView(field: FormFieldModel) -> FormFieldContainerView? {
     guard let index = self.fields.firstIndex(where: { $0.field == field }) else {
       return nil
     }
@@ -105,15 +102,20 @@ class FormView: UIView {
 
 extension FormView: FormFieldDelegate {
 
-  func fieldDidChange(_ field: FormFieldModel) {
-    self.delegate?.fieldDidChange(field)
+  func fieldDidChange(_ field: FormFieldContainerView) {
+    self.delegate?.fieldDidChange(field.field)
   }
 
-  func fieldDidEndEditing(_ field: FormFieldModel) {
-    if let nextFieldView = self.nextFieldView(field: field) {
-      nextFieldView.becomeFirstResponder()
+  func fieldDidBeginEditing(_ field: FormFieldContainerView) {
+    self.fields
+      .filter({ $0 !== field })
+      .forEach({ $0.blur() })
+  }
+
+  func fieldDidEndEditing(_ field: FormFieldContainerView) {
+    if let nextFieldView = self.nextFieldView(field: field.field) {
+      nextFieldView.focus()
     } else {
-      self.fields.last?.resignFirstResponder()
       self.delegate?.formDidFinish()
     }
   }

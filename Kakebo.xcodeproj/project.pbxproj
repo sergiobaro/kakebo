@@ -19,15 +19,12 @@
 		4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5226C8F20345613BAEB240E4AAF93C /* TableView+delete.swift */; };
 		4E4782FCFB7302C116155205 /* Pods_Kakebo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B58BEBFCEC65008A58B4E9 /* Pods_Kakebo.framework */; };
 		5665355E46B9AAF166920A1E /* Pods_KakeboTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C6F058278EE2C82EE70C1B /* Pods_KakeboTests.framework */; };
-		5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */; };
 		5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */; };
-		5A1E841E228F311C008DA9D1 /* TimeFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E841D228F311C008DA9D1 /* TimeFormFieldPresenter.swift */; };
 		5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */; };
 		5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */; };
 		5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */; };
 		5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */; };
 		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
-		5A45F1B122820D490005AA68 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B022820D490005AA68 /* FormFieldView.swift */; };
 		5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B422820EAA0005AA68 /* FormView.swift */; };
 		5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B62282170D0005AA68 /* FormBuilder.swift */; };
 		5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDF7228B2D4100EECB30 /* FormStyle.swift */; };
@@ -43,6 +40,9 @@
 		5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */; };
 		5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */; };
 		5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */; };
+		5AF8B60D2298048F00654302 /* FormFieldContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8B60C2298048F00654302 /* FormFieldContainerView.swift */; };
+		5AF8B60F229804A900654302 /* FormFieldContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8B60E229804A900654302 /* FormFieldContainerView.xib */; };
+		5AF8B615229878E500654302 /* FormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8B614229878E500654302 /* FormFieldView.swift */; };
 		5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF71E15A4C94355DDA1C916AF2F06A3 /* AppDelegate.swift */; };
 		61F9F205F0DEB544AFFABB970074328A /* ExpensesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75AA432513FB3621AFFDD76C7210792 /* ExpensesListViewController.swift */; };
 		71D4873757587F941196A77256FB374A /* ExpensesListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1329B943996EC7382077DC14A585FE29 /* ExpensesListHeaderView.xib */; };
@@ -102,15 +102,12 @@
 		4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakeboTests.debug.xcconfig"; path = "Target Support Files/Pods-KakeboTests/Pods-KakeboTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListRouter.swift; sourceTree = "<group>"; };
 		57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSpec.swift; sourceTree = "<group>"; };
-		5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldSeparatorView.swift; sourceTree = "<group>"; };
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
-		5A1E841D228F311C008DA9D1 /* TimeFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenter.swift; sourceTree = "<group>"; };
 		5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatter.swift; sourceTree = "<group>"; };
 		5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatterSpec.swift; sourceTree = "<group>"; };
 		5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenter.swift; sourceTree = "<group>"; };
 		5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenterSpec.swift; sourceTree = "<group>"; };
 		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
-		5A45F1B022820D490005AA68 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		5A45F1B422820EAA0005AA68 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		5A45F1B62282170D0005AA68 /* FormBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBuilder.swift; sourceTree = "<group>"; };
 		5A50EDF7228B2D4100EECB30 /* FormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormStyle.swift; sourceTree = "<group>"; };
@@ -126,6 +123,9 @@
 		5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringReplacingSpec.swift; sourceTree = "<group>"; };
 		5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubstringSpec.swift; sourceTree = "<group>"; };
 		5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpensesRepositorySpec.swift; sourceTree = "<group>"; };
+		5AF8B60C2298048F00654302 /* FormFieldContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldContainerView.swift; sourceTree = "<group>"; };
+		5AF8B60E229804A900654302 /* FormFieldContainerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormFieldContainerView.xib; sourceTree = "<group>"; };
+		5AF8B614229878E500654302 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		69A6FD05CF0C9C4A944FE7E5A547F893 /* ArrayGroupSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayGroupSpec.swift; sourceTree = "<group>"; };
 		6E404879358782C7C011BCC4EC023390 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F936E723E0639B7472CF6D56C4B0987 /* DefaultAddExpensePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddExpensePresenter.swift; sourceTree = "<group>"; };
@@ -262,14 +262,6 @@
 			path = Kakebo;
 			sourceTree = "<group>";
 		};
-		5A0B65A9228972A200DA6587 /* Separator */ = {
-			isa = PBXGroup;
-			children = (
-				5A0B65AA228972B500DA6587 /* FormFieldSeparatorView.swift */,
-			);
-			path = Separator;
-			sourceTree = "<group>";
-		};
 		5A0B65AE2289FCE900DA6587 /* Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,7 +269,6 @@
 				5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */,
 				5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */,
 				5A50EDFB228B311000EECB30 /* DateFormFieldPresenter.swift */,
-				5A1E841D228F311C008DA9D1 /* TimeFormFieldPresenter.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -297,9 +288,8 @@
 				5A45F1B422820EAA0005AA68 /* FormView.swift */,
 				5A45F1B62282170D0005AA68 /* FormBuilder.swift */,
 				5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */,
-				5A45F1B022820D490005AA68 /* FormFieldView.swift */,
+				5AF8B60B2298047300654302 /* FieldContainer */,
 				5A0B65AE2289FCE900DA6587 /* Input */,
-				5A0B65A9228972A200DA6587 /* Separator */,
 				5A41D9F22281EEA900794A8F /* Text */,
 			);
 			path = Form;
@@ -391,6 +381,16 @@
 				5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */,
 			);
 			path = Expenses;
+			sourceTree = "<group>";
+		};
+		5AF8B60B2298047300654302 /* FieldContainer */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8B60C2298048F00654302 /* FormFieldContainerView.swift */,
+				5AF8B60E229804A900654302 /* FormFieldContainerView.xib */,
+				5AF8B614229878E500654302 /* FormFieldView.swift */,
+			);
+			path = FieldContainer;
 			sourceTree = "<group>";
 		};
 		60C640ECF64115DAECDF24D83DCA4362 /* AddExpense */ = {
@@ -677,6 +677,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AF8B60F229804A900654302 /* FormFieldContainerView.xib in Resources */,
 				5A93CAD0228A48E50066ED4F /* InputFormFieldView.xib in Resources */,
 				447A94FB3784972DFC36D17F84039C0B /* AddExpenseViewController.xib in Resources */,
 				AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */,
@@ -850,15 +851,14 @@
 				1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */,
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
+				5AF8B615229878E500654302 /* FormFieldView.swift in Sources */,
 				5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */,
-				5A0B65AB228972B500DA6587 /* FormFieldSeparatorView.swift in Sources */,
 				5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
 				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
 				5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */,
 				A66A5351279702857BD5D451E4840551 /* Array+element.swift in Sources */,
-				5A1E841E228F311C008DA9D1 /* TimeFormFieldPresenter.swift in Sources */,
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */,
 				B66D8E586D05264A90716B8EFF0A30A2 /* DefaultExpensesListPresenter.swift in Sources */,
@@ -879,7 +879,7 @@
 				5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */,
 				5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */,
 				5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */,
-				5A45F1B122820D490005AA68 /* FormFieldView.swift in Sources */,
+				5AF8B60D2298048F00654302 /* FormFieldContainerView.swift in Sources */,
 				3CC54CAA9DC4DF3A262FA28C4BF52435 /* String+subscript.swift in Sources */,
 				4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */,
 				C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */,

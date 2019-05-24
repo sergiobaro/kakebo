@@ -30,13 +30,13 @@ class AddExpenseViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.formView.becomeFirstResponder()
+    self.formView.focus()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    self.formView.resignFirstResponder()
+    self.formView.blur()
   }
   
   // MARK: - Setup

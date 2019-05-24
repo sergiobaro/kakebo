@@ -4,18 +4,19 @@ struct FormStyle {
 
   // colors
   static let titleTextColor = UIColor.darkGray
-  static let activeTextColor = UIColor.black
-  static let inactiveTextColor = UIColor.gray
-
-  static let separatorColor = UIColor.lightGray
+  static let textColor = UIColor.black
+  
+  static let borderInactiveColor = UIColor.lightGray
+  static let borderActiveColor = UIColor.darkGray
 
   // fonts
   static let titleFont = UIFont.systemFont(ofSize: 14.0)
-  static let textFont = UIFont.systemFont(ofSize: 18.0)
+  static let textFont = UIFont.systemFont(ofSize: 16.0)
 
   // dimensions
-  static let fieldVerticalPadding = CGFloat(10.0)
-  static let fieldHeight = CGFloat(32.0)
-  static let separatorHeight = CGFloat(0.5)
+  static let margin = CGFloat(6.0)
+  static let fieldHeight = CGFloat(45.0)
+  static let borderActiveWidth = CGFloat(1.0)
+  static let borderInactiveWidth = CGFloat(0.5)
   
 }

@@ -15,14 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqJ-qc-iIb">
-                    <rect key="frame" x="10" y="5" width="42" height="47"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="94x-T8-7Eq">
-                    <rect key="frame" x="62" y="5" width="303" height="47"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -30,18 +24,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="94x-T8-7Eq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="0JX-xc-Drf"/>
-                <constraint firstAttribute="trailing" secondItem="94x-T8-7Eq" secondAttribute="trailing" constant="10" id="2av-m8-avG"/>
-                <constraint firstItem="IqJ-qc-iIb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="9kr-Re-eep"/>
-                <constraint firstItem="94x-T8-7Eq" firstAttribute="leading" secondItem="IqJ-qc-iIb" secondAttribute="trailing" constant="10" id="9m9-JC-8Wt"/>
-                <constraint firstAttribute="bottom" secondItem="94x-T8-7Eq" secondAttribute="bottom" constant="5" id="PaJ-2h-LDQ"/>
-                <constraint firstAttribute="bottom" secondItem="IqJ-qc-iIb" secondAttribute="bottom" constant="5" id="V0A-wz-I0b"/>
-                <constraint firstItem="IqJ-qc-iIb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="wWZ-re-xbb"/>
+                <constraint firstItem="94x-T8-7Eq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0JX-xc-Drf"/>
+                <constraint firstAttribute="trailing" secondItem="94x-T8-7Eq" secondAttribute="trailing" id="2av-m8-avG"/>
+                <constraint firstAttribute="bottom" secondItem="94x-T8-7Eq" secondAttribute="bottom" id="PaJ-2h-LDQ"/>
+                <constraint firstItem="94x-T8-7Eq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lvf-lO-t1I"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="textField" destination="94x-T8-7Eq" id="uSQ-9p-vkV"/>
-                <outlet property="titleLabel" destination="IqJ-qc-iIb" id="JRh-6v-wDU"/>
             </connections>
             <point key="canvasLocation" x="164" y="12.143928035982009"/>
         </view>
