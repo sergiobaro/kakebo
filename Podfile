@@ -13,6 +13,7 @@ target 'Kakebo' do
 
     pod 'Quick'
     pod 'Nimble'
+    pod 'SwiftyMocky'
   end
 
 end

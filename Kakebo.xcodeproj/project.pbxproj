@@ -38,6 +38,7 @@
 		5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C3D228AAFA100FF6DF1 /* Style.swift */; };
 		5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C40228AAFE100FF6DF1 /* Color+hex.swift */; };
 		5A93CAD0228A48E50066ED4F /* InputFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */; };
+		5ABDA9632297D83C001E6D62 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABDA9622297D83C001E6D62 /* Mock.generated.swift */; };
 		5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */; };
 		5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */; };
 		5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */; };
@@ -120,6 +121,7 @@
 		5A830C3D228AAFA100FF6DF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		5A830C40228AAFE100FF6DF1 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
 		5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputFormFieldView.xib; sourceTree = "<group>"; };
+		5ABDA9622297D83C001E6D62 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElementSpec.swift; sourceTree = "<group>"; };
 		5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringReplacingSpec.swift; sourceTree = "<group>"; };
 		5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubstringSpec.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		36F007951E414CA8D634534487C240C1 /* KakeboTests */ = {
 			isa = PBXGroup;
 			children = (
+				5ABDA9622297D83C001E6D62 /* Mock.generated.swift */,
 				16A005027CECFFF92C1104DE86D57301 /* Info.plist */,
 				5AF085B4227A44B8006CE614 /* Repositories */,
 				BEFFFE5708C6D1454CFBA10B2A9D29C4 /* Common */,
@@ -597,6 +600,7 @@
 			buildConfigurationList = D66279847B96FF1DB02D209B8EBF0E84 /* Build configuration list for PBXNativeTarget "KakeboTests" */;
 			buildPhases = (
 				C32D09BED92B1C97660C61E7 /* [CP] Check Pods Manifest.lock */,
+				5ABDA9642297D8A2001E6D62 /* Mocks */,
 				2F27755AB4D41FE365C86E8F3DCE7E61 /* Sources */,
 				431807D37812C8C2942FECFE00BAA15B /* Frameworks */,
 				716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */,
@@ -687,6 +691,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5ABDA9642297D8A2001E6D62 /* Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Mocks;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "Pods/Sourcery/bin/sourcery --config mocky.yml\n";
+		};
 		716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -698,6 +720,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-KakeboTests/Pods-KakeboTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyMocky/SwiftyMocky.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -705,6 +728,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMocky.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -810,6 +834,7 @@
 				5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */,
 				5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */,
 				9C0AE6E0CEAB9666A83907737D17C808 /* ArrayGroupSpec.swift in Sources */,
+				5ABDA9632297D83C001E6D62 /* Mock.generated.swift in Sources */,
 				5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */,
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,

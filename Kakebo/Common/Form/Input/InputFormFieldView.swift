@@ -13,6 +13,7 @@ protocol InputFormFieldPresenter {
 
 }
 
+//sourcery: AutoMockable
 protocol InputFormFieldViewProtocol: class {
 
   func updateValue(_ value: String?)

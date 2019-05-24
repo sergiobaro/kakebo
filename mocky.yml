@@ -1,0 +1,10 @@
+sources:
+  include:
+    - Kakebo
+templates:
+  - Pods/SwiftyMocky/Sources/Templates
+output:
+  KakeboTests
+args:
+  testable:
+    - Kakebo
