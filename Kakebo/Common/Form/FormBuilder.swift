@@ -66,6 +66,7 @@ private extension FormBuilder {
     fieldContainer.field = field
 
     let inputField = self.makeInputFieldView()
+    inputField.presenter = AmountFormFieldPresenter(view: inputField)
     fieldContainer.setFieldView(inputField)
 
     return fieldContainer
@@ -76,21 +77,13 @@ private extension FormBuilder {
     fieldContainer.field = field
 
     let inputField = self.makeInputFieldView()
+    inputField.presenter = DateFormFieldPresenter(
+      view: inputField,
+      formatter: GeneralDateFormatter(fields: ["dd", "MM", "yyyy"], separator: " / ")
+    )
     fieldContainer.setFieldView(inputField)
 
     return fieldContainer
-
-//    let dateField = UIView.loadFromNib(type: InputFormFieldView.self)
-//    dateField.presenter = DateFormFieldPresenter(
-//      view: dateField,
-//      formatter: GeneralDateFormatter(fields: ["dd", "MM", "yyyy"], separator: " / ")
-//    )
-//
-//    dateField.field = field
-//    dateField.value = field.value
-//    dateField.title = field.title
-//
-//    return dateField
   }
 
   func makeTimeField(_ field: FormFieldModel) -> FormFieldContainerView {
@@ -98,28 +91,20 @@ private extension FormBuilder {
     fieldContainer.field = field
 
     let inputField = self.makeInputFieldView()
+    inputField.presenter = DateFormFieldPresenter(
+      view: inputField,
+      formatter: GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
+    )
     fieldContainer.setFieldView(inputField)
 
     return fieldContainer
-
-//    let timeField = UIView.loadFromNib(type: InputFormFieldView.self)
-//    timeField.presenter = DateFormFieldPresenter(
-//      view: timeField,
-//      formatter: GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
-//    )
-//
-//    timeField.field = field
-//    timeField.value = field.value
-//    timeField.title = field.title
-//
-//    return timeField
   }
 
-  func makeTextFieldView() -> FormFieldView {
+  func makeTextFieldView() -> TextFormFieldView {
     return UIView.loadFromNib(type: TextFormFieldView.self)
   }
 
-  func makeInputFieldView() -> FormFieldView {
+  func makeInputFieldView() -> InputFormFieldView {
     return UIView.loadFromNib(type: InputFormFieldView.self)
   }
 }

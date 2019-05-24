@@ -1,8 +1,26 @@
 import UIKit
 
+protocol InputFormFieldViewProtocol: class {
+
+  func updateText(_ text: String?)
+
+}
+
+protocol InputFormFieldPresenter {
+
+  var value: Any? { get set }
+  var hasText: Bool { get }
+
+  func userInsertText(_ text: String)
+  func userDeleteBackward()
+
+}
+
 class InputFormFieldView: FormFieldView {
 
   @IBOutlet private weak var valueLabel: UILabel!
+
+  var presenter: InputFormFieldPresenter!
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -51,7 +69,7 @@ class InputFormFieldView: FormFieldView {
 extension InputFormFieldView: UIKeyInput {
 
   var hasText: Bool {
-    return !(self.valueLabel.text?.isEmpty ?? true)
+    return self.presenter.hasText
   }
 
   func insertText(_ text: String) {
@@ -61,10 +79,17 @@ extension InputFormFieldView: UIKeyInput {
       return
     }
 
-    self.valueLabel.text = self.valueLabel.text.map({ $0 + text }) ?? text
+    self.presenter.userInsertText(text)
   }
 
   func deleteBackward() {
-    self.valueLabel.text = self.valueLabel.text.map({ String($0.dropLast()) })
+    self.presenter.userDeleteBackward()
+  }
+}
+
+extension InputFormFieldView: InputFormFieldViewProtocol {
+
+  func updateText(_ text: String?) {
+    self.valueLabel.text = text
   }
 }
