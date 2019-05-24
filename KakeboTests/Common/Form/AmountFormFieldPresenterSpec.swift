@@ -4,23 +4,6 @@ import SwiftyMocky
 
 @testable import Kakebo
 
-class FormFieldDelegateMock: FormFieldDelegate {
-
-  var fieldCalled: FormFieldModel?
-
-  var fieldDidChangeCalled = false
-  func fieldDidChange(_ field: FormFieldModel) {
-    self.fieldDidChangeCalled = true
-    self.fieldCalled = field
-  }
-
-  var fieldDidEndEditingCalled = false
-  func fieldDidEndEditing(_ field: FormFieldModel) {
-    self.fieldDidEndEditingCalled = true
-    self.fieldCalled = field
-  }
-}
-
 class AmountFormFieldPresenterSpec: QuickSpec {
     override func spec() {
 
@@ -50,9 +33,7 @@ class AmountFormFieldPresenterSpec: QuickSpec {
         expect(presenter.hasText).to(beTrue())
 
         Verify(viewMock, .updateValue("$0.01"))
-
-        expect(formDelegateMock.fieldDidChangeCalled).to(beTrue())
-        expect(formDelegateMock.fieldCalled?.value as? Int).to(equal(1))
+        Verify(formDelegateMock, .fieldDidChange(.matching({ ($0.value as? Int) == 1 })))
       }
 
       it("set value") {
@@ -60,25 +41,23 @@ class AmountFormFieldPresenterSpec: QuickSpec {
 
         expect(presenter.hasText).to(beTrue())
 
-//        expect(viewMock.updateValueCalled).to(beTrue())
-//        expect(viewMock.valueCalled).to(equal("$0.20"))
-
-        expect(formDelegateMock.fieldDidChangeCalled).to(beTrue())
-        expect(formDelegateMock.fieldCalled?.value as? Int).to(equal(20))
+        Verify(viewMock, .updateValue("$0.20"))
+        Verify(formDelegateMock, .fieldDidChange(.matching({ ($0.value as? Int) == 20 })))
       }
 
       it("insert text no number") {
         presenter.userInsertText("n")
 
+        Verify(viewMock, .never, .updateValue(.any))
+        Verify(formDelegateMock, .never, .fieldDidEndEditing(.any))
+
         expect(presenter.hasText).to(beFalse())
-//        expect(viewMock.updateValueCalled).to(beFalse())
-        expect(formDelegateMock.fieldDidChangeCalled).to(beFalse())
       }
 
       it("insert text new line") {
         presenter.userInsertText("\n")
 
-        expect(formDelegateMock.fieldDidEndEditingCalled).to(beTrue())
+        Verify(formDelegateMock, .fieldDidEndEditing(.any))
       }
 
       it("insert text and then another text") {

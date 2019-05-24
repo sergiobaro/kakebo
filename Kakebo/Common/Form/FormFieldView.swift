@@ -1,5 +1,6 @@
 import UIKit
 
+// sourcery: AutoMockable
 protocol FormFieldDelegate: class {
 
   func fieldDidChange(_ field: FormFieldModel)
