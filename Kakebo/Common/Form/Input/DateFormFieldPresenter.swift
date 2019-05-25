@@ -3,13 +3,28 @@ import Foundation
 class DateFormFieldPresenter {
 
   private weak var view: InputFormFieldViewProtocol?
-
+  private weak var formDelegate: FormFieldDelegate?
   private let formatter: GeneralDateFormatter
+  private var field: FormFieldModel
   private var text = ""
 
-  init(view: InputFormFieldViewProtocol, formatter: GeneralDateFormatter) {
+  init(
+    view: InputFormFieldViewProtocol,
+    formDelegate: FormFieldDelegate,
+    field: FormFieldModel,
+    formatter: GeneralDateFormatter
+  ) {
     self.view = view
+    self.formDelegate = formDelegate
+    self.field = field
     self.formatter = formatter
+
+    self.updateValue(date: field.value as? Date)
+  }
+
+  private func updateValue(date: Date?) {
+    let value = self.formatter.string(date: date ?? Date())
+    self.updateValue(value)
   }
 
   private func updateValue(_ string: String) {
@@ -18,24 +33,16 @@ class DateFormFieldPresenter {
     let formattedText = self.formatter.string(string: self.text)
     self.view?.updateText(formattedText)
 
-//    self.field.value = self.value
-//    self.formDelegate?.fieldDidChange(self.field)
+    self.field.value = self.value
+    self.formDelegate?.fieldDidChange(self.field)
   }
 }
 
 extension DateFormFieldPresenter: InputFormFieldPresenter {
 
   var value: Any? {
-    get {
-      if self.text.isEmpty {
-        return Date()
-      }
-      return self.formatter.date(string: self.text)
-    }
-    set {
-      let value = self.formatter.string(date: (newValue as? Date) ?? Date())
-      self.updateValue(value)
-    }
+    get { return self.formatter.date(string: self.text) }
+    set { self.updateValue(date: newValue as? Date) }
   }
 
   var hasText: Bool {
@@ -44,7 +51,7 @@ extension DateFormFieldPresenter: InputFormFieldPresenter {
 
   func userInsertText(_ text: String) {
     guard text != "\n" else {
-//      self.formDelegate?.fieldDidEndEditing(self.field)
+      self.formDelegate?.fieldDidEndEditing(self.field)
       return
     }
 

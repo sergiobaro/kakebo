@@ -68,11 +68,11 @@ class AddExpenseViewController: UIViewController {
 
 extension AddExpenseViewController: FormViewDelegate {
 
-  func fieldDidChange(_ field: FormFieldModel) {
+  func formFieldDidChange(_ field: FormFieldModel) {
     self.presenter.userChanged(fields: self.formView.allFields())
   }
 
-  func formDidFinish() {
+  func formDidFinish(with fields: [FormFieldModel]) {
     self.presenter.userTapDone()
   }
 }

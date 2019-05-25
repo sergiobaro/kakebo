@@ -30,6 +30,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="p0m-sp-Ipw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="RlU-gM-RUc"/>
                 <constraint firstItem="cen-Gr-Vna" firstAttribute="leading" secondItem="p0m-sp-Ipw" secondAttribute="trailing" constant="10" id="bTv-nu-iEi"/>
@@ -42,8 +43,14 @@
             <connections>
                 <outlet property="fieldContainerView" destination="cen-Gr-Vna" id="AiG-rL-w1l"/>
                 <outlet property="titleLabel" destination="p0m-sp-Ipw" id="kiM-rr-ccD"/>
+                <outletCollection property="gestureRecognizers" destination="h0Q-Dq-7dr" appends="YES" id="pBR-Xl-dA6"/>
             </connections>
             <point key="canvasLocation" x="271.01449275362319" y="-19.419642857142858"/>
         </view>
+        <tapGestureRecognizer id="h0Q-Dq-7dr">
+            <connections>
+                <action selector="tapView" destination="iN0-l3-epB" id="l3U-Xs-iIh"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

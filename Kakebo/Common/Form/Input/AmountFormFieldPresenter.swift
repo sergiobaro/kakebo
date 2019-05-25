@@ -3,15 +3,24 @@ import Foundation
 class AmountFormFieldPresenter {
 
   private weak var view: InputFormFieldViewProtocol?
-
+  private weak var formDelegate: FormFieldDelegate?
+  private var field: FormFieldModel
   private let formatter = AmountFormatter()
   private var text: String?
 
-  init(view: InputFormFieldViewProtocol) {
+  required init(view: InputFormFieldViewProtocol, formDelegate: FormFieldDelegate, field: FormFieldModel) {
     self.view = view
+    self.formDelegate = formDelegate
+    self.field = field
+
+    self.updateValue(integer: field.value as? Int)
   }
 
   // MARK: - Private
+
+  private func updateValue(integer: Int?) {
+    self.updateValue(string: integer.flatMap(String.init) )
+  }
 
   private func updateValue(string: String?) {
     self.text = string
@@ -19,14 +28,8 @@ class AmountFormFieldPresenter {
     let formattedText = string.flatMap({ self.formatter.string(string: $0) })
     self.view?.updateText(formattedText)
 
-//    self.field.value = self.value
-//    self.formDelegate?.fieldDidChange(self.field)
-  }
-
-  private func updateValue(integer: Int?) {
-    if let value = integer {
-      self.updateValue(string: String(value))
-    }
+    self.field.value = self.value
+    self.formDelegate?.fieldDidChange(self.field)
   }
 }
 
@@ -43,7 +46,7 @@ extension AmountFormFieldPresenter: InputFormFieldPresenter {
 
   func userInsertText(_ text: String) {
     guard text != "\n" else {
-//      self.formDelegate?.fieldDidEndEditing(self.field)
+      self.formDelegate?.fieldDidEndEditing(self.field)
       return
     }
     guard Int(text) != nil else {

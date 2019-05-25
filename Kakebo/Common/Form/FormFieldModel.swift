@@ -7,11 +7,18 @@ enum FormFieldType {
   case time
 }
 
-struct FormFieldModel {
+class FormFieldModel {
   var type: FormFieldType
   let identifier: String
   let title: String?
   var value: Any?
+
+  init(type: FormFieldType, identifier: String, title: String?, value: Any?) {
+    self.type = type
+    self.identifier = identifier
+    self.title = title
+    self.value = value
+  }
 }
 
 extension FormFieldModel: Equatable {

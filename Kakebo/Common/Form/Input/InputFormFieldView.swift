@@ -32,13 +32,6 @@ class InputFormFieldView: FormFieldView {
     self.valueLabel.text = nil
   }
 
-  // MARK: - Actions
-
-  @IBAction func tapView() {
-    self.becomeFirstResponder()
-    self.container?.fieldDidBecomeFirstResponder()
-  }
-
   // MARK: - UITextInputTraits
 
   var keyboardType: UIKeyboardType = .numberPad
@@ -50,18 +43,19 @@ class InputFormFieldView: FormFieldView {
   override var canBecomeFirstResponder: Bool {
     return true
   }
+}
 
-  // MARK: - FormFieldView
+extension InputFormFieldView: FormFieldViewProtocol {
 
-  override func focus() {
+  func focus() {
     self.becomeFirstResponder()
   }
 
-  override func blur() {
+  func blur() {
     self.resignFirstResponder()
   }
 
-  override func setReturnKeyType(_ type: UIReturnKeyType) {
+  func setReturnKeyType(_ type: UIReturnKeyType) {
     self.returnKeyType = type
   }
 }
@@ -73,12 +67,6 @@ extension InputFormFieldView: UIKeyInput {
   }
 
   func insertText(_ text: String) {
-    if text == "\n" {
-      self.resignFirstResponder()
-      self.container?.fieldDidResignFirstResponder()
-      return
-    }
-
     self.presenter.userInsertText(text)
   }
 

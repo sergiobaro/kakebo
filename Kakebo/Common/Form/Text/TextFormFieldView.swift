@@ -4,6 +4,12 @@ class TextFormFieldView: FormFieldView {
 
   @IBOutlet private weak var textField: UITextField!
 
+  override var field: FormFieldModel! {
+    didSet {
+      self.textField.text = self.field.value as? String
+    }
+  }
+
   override func awakeFromNib() {
     super.awakeFromNib()
 
@@ -15,18 +21,19 @@ class TextFormFieldView: FormFieldView {
     self.textField.textColor = FormStyle.textColor
     self.textField.tintColor = FormStyle.textColor
   }
+}
 
-  // MARK: - FormFieldView
+extension TextFormFieldView: FormFieldViewProtocol {
 
-  override func focus() {
+  func focus() {
     self.textField.becomeFirstResponder()
   }
 
-  override func blur() {
+  func blur() {
     self.textField.resignFirstResponder()
   }
 
-  override func setReturnKeyType(_ type: UIReturnKeyType) {
+  func setReturnKeyType(_ type: UIReturnKeyType) {
     self.textField.returnKeyType = type
   }
 }
@@ -36,22 +43,23 @@ extension TextFormFieldView: UITextFieldDelegate {
   // swiftlint:disable:next line_length
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     if string == "\n" {
-      defer { self.container?.fieldDidResignFirstResponder() }
+      defer { self.formDelegate?.fieldDidEndEditing(self.field) }
       return false
     }
 
-//    if let text = textField.text?.replacing(in: range, with: string) {
-//      self.field?.value = text
-//      self.formDelegate?.fieldDidChange(self.field)
-//    }
+    if let text = textField.text?.replacing(in: range, with: string) {
+      self.field.value = text
+      self.formDelegate?.fieldDidChange(self.field)
+    }
+    
     return true
   }
 
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    self.container?.fieldDidBecomeFirstResponder()
+    self.formDelegate?.fieldDidBeginEditing(self.field)
   }
 
   func textFieldDidEndEditing(_ textField: UITextField) {
-    self.container?.fieldDidResignFirstResponder()
+    self.formDelegate?.fieldDidEndEditing(self.field)
   }
 }

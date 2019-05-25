@@ -33,14 +33,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="valueLabel" destination="gna-P4-7Se" id="DKh-IW-Fzc"/>
-                <outletCollection property="gestureRecognizers" destination="eUu-wO-2B9" appends="YES" id="8DI-Y6-rqx"/>
             </connections>
             <point key="canvasLocation" x="71.014492753623188" y="-5.3571428571428568"/>
         </view>
-        <tapGestureRecognizer id="eUu-wO-2B9">
-            <connections>
-                <action selector="tapView" destination="iN0-l3-epB" id="atf-DK-hXR"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>

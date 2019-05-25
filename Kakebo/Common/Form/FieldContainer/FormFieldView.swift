@@ -1,18 +1,18 @@
 import UIKit
 
+typealias FormField = FormFieldView & FormFieldViewProtocol
+
+protocol FormFieldViewProtocol: class {
+
+  func focus()
+  func blur()
+  func setReturnKeyType(_ type: UIReturnKeyType)
+
+}
+
 class FormFieldView: UIView {
 
-  weak var container: FormFieldContainer?
+  weak var formDelegate: FormFieldDelegate?
+  var field: FormFieldModel!
 
-  func focus() {
-    // to override
-  }
-
-  func blur() {
-    // to override
-  }
-
-  func setReturnKeyType(_ type: UIReturnKeyType) {
-    // to override
-  }
 }

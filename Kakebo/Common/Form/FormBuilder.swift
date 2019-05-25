@@ -66,7 +66,11 @@ private extension FormBuilder {
     fieldContainer.field = field
 
     let inputField = self.makeInputFieldView()
-    inputField.presenter = AmountFormFieldPresenter(view: inputField)
+    inputField.presenter = AmountFormFieldPresenter(
+      view: inputField,
+      formDelegate: fieldContainer,
+      field: field
+    )
     fieldContainer.setFieldView(inputField)
 
     return fieldContainer
@@ -79,6 +83,8 @@ private extension FormBuilder {
     let inputField = self.makeInputFieldView()
     inputField.presenter = DateFormFieldPresenter(
       view: inputField,
+      formDelegate: fieldContainer,
+      field: field,
       formatter: GeneralDateFormatter(fields: ["dd", "MM", "yyyy"], separator: " / ")
     )
     fieldContainer.setFieldView(inputField)
@@ -93,6 +99,8 @@ private extension FormBuilder {
     let inputField = self.makeInputFieldView()
     inputField.presenter = DateFormFieldPresenter(
       view: inputField,
+      formDelegate: fieldContainer,
+      field: field,
       formatter: GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
     )
     fieldContainer.setFieldView(inputField)

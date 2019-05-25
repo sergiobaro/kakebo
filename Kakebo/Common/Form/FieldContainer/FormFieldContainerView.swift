@@ -1,13 +1,6 @@
 import UIKit
 import SnapKit
 
-protocol FormFieldContainer: class {
-
-  func fieldDidBecomeFirstResponder()
-  func fieldDidResignFirstResponder()
-
-}
-
 class FormFieldContainerView: UIView {
 
   weak var formDelegate: FormFieldDelegate?
@@ -21,7 +14,7 @@ class FormFieldContainerView: UIView {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var fieldContainerView: UIView!
 
-  private weak var fieldView: FormFieldView!
+  private weak var fieldView: FormField!
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -38,11 +31,20 @@ class FormFieldContainerView: UIView {
     self.setInactiveStyle()
   }
 
+  // MARK: - Actions
+
+  @IBAction func tapView() {
+    self.becomeFirstResponder()
+    self.focus()
+    self.formDelegate?.fieldDidBeginEditing(self.field)
+  }
+
   // MARK: - Public
 
-  func setFieldView(_ fieldView: FormFieldView) {
+  func setFieldView(_ fieldView: FormField) {
     self.fieldView = fieldView
-    fieldView.container = self
+    fieldView.formDelegate = self
+    fieldView.field = self.field
 
     self.fieldContainerView.addSubview(fieldView)
     fieldView.snp.makeConstraints({ $0.edges.equalToSuperview().inset(FormStyle.margin) })
@@ -75,15 +77,20 @@ class FormFieldContainerView: UIView {
   }
 }
 
-extension FormFieldContainerView: FormFieldContainer {
+extension FormFieldContainerView: FormFieldDelegate {
 
-  func fieldDidBecomeFirstResponder() {
-    self.setActiveStyle()
-    self.formDelegate?.fieldDidBeginEditing(self)
+  func fieldDidChange(_ field: FormFieldModel) {
+    self.field = field
+    self.formDelegate?.fieldDidChange(field)
   }
 
-  func fieldDidResignFirstResponder() {
+  func fieldDidBeginEditing(_ field: FormFieldModel) {
+    self.setActiveStyle()
+    self.formDelegate?.fieldDidBeginEditing(field)
+  }
+
+  func fieldDidEndEditing(_ field: FormFieldModel) {
     self.setInactiveStyle()
-    self.formDelegate?.fieldDidEndEditing(self)
+    self.formDelegate?.fieldDidEndEditing(field)
   }
 }
