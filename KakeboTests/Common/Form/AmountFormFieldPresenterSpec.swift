@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 import SwiftyMocky
-
 @testable import Kakebo
 
 class AmountFormFieldPresenterSpec: QuickSpec {

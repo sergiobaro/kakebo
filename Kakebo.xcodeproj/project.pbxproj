@@ -22,6 +22,7 @@
 		5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */; };
 		5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */; };
 		5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */; };
+		5A25B5AF22A98CAE007AE357 /* FormFieldModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A25B5AE22A98CAE007AE357 /* FormFieldModelSpec.swift */; };
 		5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */; };
 		5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */; };
 		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
@@ -107,6 +108,7 @@
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatter.swift; sourceTree = "<group>"; };
 		5A1E8425228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatterSpec.swift; sourceTree = "<group>"; };
+		5A25B5AE22A98CAE007AE357 /* FormFieldModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldModelSpec.swift; sourceTree = "<group>"; };
 		5A2C3EB6228AEB8300D3F019 /* AmountFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenter.swift; sourceTree = "<group>"; };
 		5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormFieldPresenterSpec.swift; sourceTree = "<group>"; };
 		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			children = (
 				5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */,
 				5A4C5EB4229AD33100E7C155 /* ValidatorsSpec.swift */,
+				5A25B5AE22A98CAE007AE357 /* FormFieldModelSpec.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -852,6 +855,7 @@
 				5ABDA9632297D83C001E6D62 /* Mock.generated.swift in Sources */,
 				5A4C5EB5229AD33100E7C155 /* ValidatorsSpec.swift in Sources */,
 				5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */,
+				5A25B5AF22A98CAE007AE357 /* FormFieldModelSpec.swift in Sources */,
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,
 				5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */,
