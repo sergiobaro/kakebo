@@ -6,7 +6,7 @@ class AmountFormFieldPresenter {
   private weak var formDelegate: FormFieldDelegate?
   private var field: FormFieldModel
   private let formatter = AmountFormatter()
-  private var text: String?
+  private var text = ""
 
   required init(view: InputFormFieldViewProtocol, formDelegate: FormFieldDelegate, field: FormFieldModel) {
     self.view = view
@@ -19,29 +19,24 @@ class AmountFormFieldPresenter {
   // MARK: - Private
 
   private func updateValue(integer: Int?) {
-    self.updateValue(string: integer.flatMap(String.init) )
+    self.updateValue(string: integer.flatMap(String.init) ?? "")
   }
 
-  private func updateValue(string: String?) {
+  private func updateValue(string: String) {
     self.text = string
 
-    let formattedText = string.flatMap({ self.formatter.string(string: $0) })
+    let formattedText = self.formatter.string(string: string)
     self.view?.updateText(formattedText)
 
-    self.field.value = self.value
+    self.field.value = Int(string) ?? 0
     self.formDelegate?.fieldDidChange(self.field)
   }
 }
 
 extension AmountFormFieldPresenter: InputFormFieldPresenter {
 
-  var value: Any? {
-    get { return self.text.flatMap(Int.init) }
-    set { self.updateValue(integer: newValue as? Int) }
-  }
-
   var hasText: Bool {
-    return !(text?.isEmpty ?? true)
+    return !self.text.isEmpty
   }
 
   func userInsertText(_ text: String) {
@@ -53,15 +48,13 @@ extension AmountFormFieldPresenter: InputFormFieldPresenter {
       return
     }
 
-    let newValue = self.text.flatMap({ $0 + text }) ?? text
+    let newValue = self.text + text
     self.updateValue(string: newValue)
   }
 
   func userDeleteBackward() {
-    guard
-      let text = self.text,
-      !text.isEmpty else {
-        return
+    guard !self.text.isEmpty else {
+      return
     }
 
     let newValue = String(text.dropLast())

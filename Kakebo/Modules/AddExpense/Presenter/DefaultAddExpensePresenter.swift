@@ -71,7 +71,6 @@ class DefaultAddExpensePresenter {
       let name = name?.trimmingCharacters(in: .whitespaces),
       !name.isEmpty,
       let amount = amount,
-      amount > 0,
       let createdAt = createdAt
       else {
         return nil
@@ -90,24 +89,28 @@ class DefaultAddExpensePresenter {
       type: .text,
       identifier: "name",
       title: localize("Name"),
+      validators: [NotEmptyValidator()],
       value: expense?.name
     )
     let amountField = FormFieldModel(
       type: .amount,
       identifier: "amount",
       title: localize("Amount"),
+      validators: [NotNilValidator()],
       value: expense?.amount ?? 0
     )
     let dateField = FormFieldModel(
       type: .date,
       identifier: "date",
       title: localize("Date"),
+      validators: [NotNilValidator()],
       value: expense?.createdAt ?? Date()
     )
     let timeField = FormFieldModel(
       type: .time,
       identifier: "time",
       title: localize("Time"),
+      validators: [NotNilValidator()],
       value: expense?.createdAt ?? Date()
     )
 

@@ -5,9 +5,10 @@ struct FormStyle {
   // colors
   static let titleTextColor = UIColor.darkGray
   static let textColor = UIColor.black
-  
-  static let borderInactiveColor = UIColor.lightGray
+
   static let borderActiveColor = UIColor.darkGray
+  static let borderInactiveColor = UIColor.lightGray
+  static let borderErrorColor = UIColor.red
 
   // fonts
   static let titleFont = UIFont.systemFont(ofSize: 14.0)

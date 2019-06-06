@@ -1,5 +1,6 @@
 import UIKit
 
+// sourcery: AutoMockable
 protocol InputFormFieldViewProtocol: class {
 
   func updateText(_ text: String?)
@@ -8,7 +9,6 @@ protocol InputFormFieldViewProtocol: class {
 
 protocol InputFormFieldPresenter {
 
-  var value: Any? { get set }
   var hasText: Bool { get }
 
   func userInsertText(_ text: String)
@@ -43,19 +43,18 @@ class InputFormFieldView: FormFieldView {
   override var canBecomeFirstResponder: Bool {
     return true
   }
-}
 
-extension InputFormFieldView: FormFieldViewProtocol {
+  // MARK: - FormFieldView
 
-  func focus() {
+  override func focus() {
     self.becomeFirstResponder()
   }
 
-  func blur() {
+  override func blur() {
     self.resignFirstResponder()
   }
 
-  func setReturnKeyType(_ type: UIReturnKeyType) {
+  override func setReturnKeyType(_ type: UIReturnKeyType) {
     self.returnKeyType = type
   }
 }

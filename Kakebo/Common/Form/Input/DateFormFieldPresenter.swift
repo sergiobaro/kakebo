@@ -33,17 +33,12 @@ class DateFormFieldPresenter {
     let formattedText = self.formatter.string(string: self.text)
     self.view?.updateText(formattedText)
 
-    self.field.value = self.value
+    self.field.value = self.formatter.date(string: self.text)
     self.formDelegate?.fieldDidChange(self.field)
   }
 }
 
 extension DateFormFieldPresenter: InputFormFieldPresenter {
-
-  var value: Any? {
-    get { return self.formatter.date(string: self.text) }
-    set { self.updateValue(date: newValue as? Date) }
-  }
 
   var hasText: Bool {
     return !self.text.isEmpty

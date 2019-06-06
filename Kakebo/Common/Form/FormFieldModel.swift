@@ -11,12 +11,14 @@ class FormFieldModel {
   var type: FormFieldType
   let identifier: String
   let title: String?
+  let validators: [Validator]
   var value: Any?
 
-  init(type: FormFieldType, identifier: String, title: String?, value: Any?) {
+  init(type: FormFieldType, identifier: String, title: String?, validators: [Validator], value: Any?) {
     self.type = type
     self.identifier = identifier
     self.title = title
+    self.validators = validators
     self.value = value
   }
 }

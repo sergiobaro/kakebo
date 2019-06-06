@@ -14,7 +14,7 @@ class FormFieldContainerView: UIView {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var fieldContainerView: UIView!
 
-  private weak var fieldView: FormField!
+  private weak var fieldView: FormFieldView!
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -41,7 +41,7 @@ class FormFieldContainerView: UIView {
 
   // MARK: - Public
 
-  func setFieldView(_ fieldView: FormField) {
+  func setFieldView(_ fieldView: FormFieldView) {
     self.fieldView = fieldView
     fieldView.formDelegate = self
     fieldView.field = self.field
@@ -51,12 +51,16 @@ class FormFieldContainerView: UIView {
   }
 
   func focus() {
-    self.setActiveStyle()
+    if self.isValid() {
+      self.setActiveStyle()
+    }
     self.fieldView.focus()
   }
 
   func blur() {
-    self.setInactiveStyle()
+    if self.isValid() {
+      self.setInactiveStyle()
+    }
     self.fieldView.blur()
   }
   
@@ -67,13 +71,24 @@ class FormFieldContainerView: UIView {
   // MARK: - Private
 
   private func setActiveStyle() {
-    self.fieldContainerView.layer.borderWidth = FormStyle.borderActiveWidth
-    self.fieldContainerView.layer.borderColor = FormStyle.borderActiveColor.cgColor
+    self.updateBorder(color: FormStyle.borderActiveColor, width: FormStyle.borderActiveWidth)
   }
 
   private func setInactiveStyle() {
-    self.fieldContainerView.layer.borderWidth = FormStyle.borderInactiveWidth
-    self.fieldContainerView.layer.borderColor = FormStyle.borderInactiveColor.cgColor
+    self.updateBorder(color: FormStyle.borderInactiveColor, width: FormStyle.borderInactiveWidth)
+  }
+
+  private func setErrorStyle() {
+    self.updateBorder(color: FormStyle.borderErrorColor, width: FormStyle.borderActiveWidth)
+  }
+
+  private func updateBorder(color: UIColor, width: CGFloat) {
+    self.fieldContainerView.layer.borderWidth = width
+    self.fieldContainerView.layer.borderColor = color.cgColor
+  }
+
+  private func isValid() -> Bool {
+    return self.field.validators.allSatisfy { $0.isValid(self.field.value) }
   }
 }
 
@@ -82,6 +97,12 @@ extension FormFieldContainerView: FormFieldDelegate {
   func fieldDidChange(_ field: FormFieldModel) {
     self.field = field
     self.formDelegate?.fieldDidChange(field)
+
+    if self.isValid() {
+      self.setActiveStyle()
+    } else {
+      self.setErrorStyle()
+    }
   }
 
   func fieldDidBeginEditing(_ field: FormFieldModel) {

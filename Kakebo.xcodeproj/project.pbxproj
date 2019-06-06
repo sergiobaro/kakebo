@@ -27,6 +27,8 @@
 		5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A41D9F32281EED400794A8F /* TextFormFieldView.xib */; };
 		5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B422820EAA0005AA68 /* FormView.swift */; };
 		5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45F1B62282170D0005AA68 /* FormBuilder.swift */; };
+		5A4C5EB3229ACDA800E7C155 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C5EB2229ACDA800E7C155 /* Validator.swift */; };
+		5A4C5EB5229AD33100E7C155 /* ValidatorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C5EB4229AD33100E7C155 /* ValidatorsSpec.swift */; };
 		5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDF7228B2D4100EECB30 /* FormStyle.swift */; };
 		5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDF9228B303900EECB30 /* InputFormFieldView.swift */; };
 		5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A50EDFB228B311000EECB30 /* DateFormFieldPresenter.swift */; };
@@ -110,6 +112,8 @@
 		5A41D9F32281EED400794A8F /* TextFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormFieldView.xib; sourceTree = "<group>"; };
 		5A45F1B422820EAA0005AA68 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		5A45F1B62282170D0005AA68 /* FormBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBuilder.swift; sourceTree = "<group>"; };
+		5A4C5EB2229ACDA800E7C155 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		5A4C5EB4229AD33100E7C155 /* ValidatorsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorsSpec.swift; sourceTree = "<group>"; };
 		5A50EDF7228B2D4100EECB30 /* FormStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormStyle.swift; sourceTree = "<group>"; };
 		5A50EDF9228B303900EECB30 /* InputFormFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputFormFieldView.swift; sourceTree = "<group>"; };
 		5A50EDFB228B311000EECB30 /* DateFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormFieldPresenter.swift; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				5A2C3EB9228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift */,
+				5A4C5EB4229AD33100E7C155 /* ValidatorsSpec.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				5A45F1B422820EAA0005AA68 /* FormView.swift */,
 				5A45F1B62282170D0005AA68 /* FormBuilder.swift */,
 				5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */,
+				5A4C5EB1229ACD9D00E7C155 /* Validator */,
 				5AF8B60B2298047300654302 /* FieldContainer */,
 				5A0B65AE2289FCE900DA6587 /* Input */,
 				5A41D9F22281EEA900794A8F /* Text */,
@@ -302,6 +308,14 @@
 				5A41D9F32281EED400794A8F /* TextFormFieldView.xib */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		5A4C5EB1229ACD9D00E7C155 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				5A4C5EB2229ACDA800E7C155 /* Validator.swift */,
+			);
+			path = Validator;
 			sourceTree = "<group>";
 		};
 		5A50EDFE228B372400EECB30 /* Resources */ = {
@@ -836,6 +850,7 @@
 				5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */,
 				9C0AE6E0CEAB9666A83907737D17C808 /* ArrayGroupSpec.swift in Sources */,
 				5ABDA9632297D83C001E6D62 /* Mock.generated.swift in Sources */,
+				5A4C5EB5229AD33100E7C155 /* ValidatorsSpec.swift in Sources */,
 				5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */,
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,
@@ -852,6 +867,7 @@
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
 				5AF8B615229878E500654302 /* FormFieldView.swift in Sources */,
+				5A4C5EB3229ACDA800E7C155 /* Validator.swift in Sources */,
 				5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */,
 				5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,

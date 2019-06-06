@@ -16,24 +16,24 @@ class TextFormFieldView: FormFieldView {
     self.backgroundColor = .clear
 
     self.textField.delegate = self
+    self.textField.autocapitalizationType = .sentences
 
     self.textField.font = FormStyle.textFont
     self.textField.textColor = FormStyle.textColor
     self.textField.tintColor = FormStyle.textColor
   }
-}
 
-extension TextFormFieldView: FormFieldViewProtocol {
+  // MARK: - FormFieldView
 
-  func focus() {
+  override func focus() {
     self.textField.becomeFirstResponder()
   }
 
-  func blur() {
+  override func blur() {
     self.textField.resignFirstResponder()
   }
 
-  func setReturnKeyType(_ type: UIReturnKeyType) {
+  override func setReturnKeyType(_ type: UIReturnKeyType) {
     self.textField.returnKeyType = type
   }
 }
