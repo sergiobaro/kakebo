@@ -1,6 +1,14 @@
 import UIKit
 
+protocol ExpenseListPresenter {
+
+  func userTapAdd()
+
+}
+
 class ExpenseListViewController: UIViewController {
+
+  var presenter: ExpenseListPresenter!
 
   // MARK: - View lifecycle
 
@@ -29,17 +37,13 @@ class ExpenseListViewController: UIViewController {
   // MARK: - Actions
 
   @objc func tapAdd() {
-//    self.presenter.userTapAdd()
+    self.presenter.userTapAdd()
   }
 }
 
 extension ExpenseListViewController: ExpenseListSelectorViewDelegate {
 
-  func expenseSelectorViewDidSelectDay(_ expenseListSelectorView: ExpenseListSelectorView) {
-    print("Day")
-  }
-
-  func expenseSelectorViewDidSelectMonth(_ expenseListSelectorView: ExpenseListSelectorView) {
-    print("Month")
+  func expenseListSelectorViewDidSelect(type: ExpenseListSelectorViewType) {
+    print(type.rawValue)
   }
 }

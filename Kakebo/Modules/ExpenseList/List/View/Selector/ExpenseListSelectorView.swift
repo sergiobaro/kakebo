@@ -1,10 +1,13 @@
 import UIKit
 
+enum ExpenseListSelectorViewType: String {
+  case day
+  case month
+}
+
 protocol ExpenseListSelectorViewDelegate: class {
 
-  func expenseSelectorViewDidSelectDay(_ expenseListSelectorView: ExpenseListSelectorView)
-  func expenseSelectorViewDidSelectMonth(_ expenseListSelectorView: ExpenseListSelectorView)
-
+  func expenseListSelectorViewDidSelect(type: ExpenseListSelectorViewType)
 }
 
 class ExpenseListSelectorView: UIView {
@@ -32,17 +35,26 @@ class ExpenseListSelectorView: UIView {
   @IBAction func tapDayButton() {
     self.monthButton.isSelected = false
     self.dayButton.isSelected = true
-    self.delegate?.expenseSelectorViewDidSelectDay(self)
+    self.delegate?.expenseListSelectorViewDidSelect(type: .day)
   }
 
   @IBAction func tapMonthButton() {
     self.monthButton.isSelected = true
     self.dayButton.isSelected = false
-    self.delegate?.expenseSelectorViewDidSelectMonth(self)
+    self.delegate?.expenseListSelectorViewDidSelect(type: .month)
   }
 
   private func setup(button: UIButton) {
-    button.setTitleColor(.red, for: .selected)
-//    button.setTitleColor(.green, for: .normal)
+    guard let title = button.title(for: .normal) else {
+        return
+    }
+
+    // normal
+    let titleNormal = NSAttributedString(string: title, attributes: [.font: UIFont.medium])
+    button.setAttributedTitle(titleNormal, for: .normal)
+
+    // selected
+    let titleSelected = NSAttributedString(string: title, attributes: [.font: UIFont.mediumBold])
+    button.setAttributedTitle(titleSelected, for: .selected)
   }
 }
