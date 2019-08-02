@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpensesListCell: UITableViewCell {
+class ExpenseListCell: UITableViewCell {
   
   static let height: CGFloat = 80.0
   

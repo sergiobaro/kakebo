@@ -48,7 +48,7 @@ class RealmExpensesRepository {
   
   // MARK: - Private
   
-  private func findExpense(expense: Expense) -> ExpenseRealm? {
+  private func findExpense(_ expense: Expense) -> ExpenseRealm? {
     return self.realm.object(ofType: ExpenseRealm.self, forPrimaryKey: expense.expenseId)
   }
   
@@ -100,7 +100,7 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func delete(expense: Expense) -> Bool {
-    guard let expense = self.findExpense(expense: expense) else {
+    guard let expense = self.findExpense(expense) else {
       return false
     }
     
@@ -115,7 +115,7 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func update(expense: Expense) -> Bool {
-    guard let expenseRealm = self.findExpense(expense: expense) else {
+    guard let expenseRealm = self.findExpense(expense) else {
       return false
     }
     

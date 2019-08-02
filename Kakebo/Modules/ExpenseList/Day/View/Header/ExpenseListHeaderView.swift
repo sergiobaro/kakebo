@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpensesListHeaderView: UITableViewHeaderFooterView {
+class ExpenseListHeaderView: UITableViewHeaderFooterView {
   
   static let height: CGFloat = 30.0
   

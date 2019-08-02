@@ -1,13 +1,13 @@
 import Foundation
 
-protocol ExpensesListViewProtocol: class {
+protocol ExpenseDayListViewProtocol: class {
 
   func delete(section: Int)
   func deleteRow(at indexPath: IndexPath)
 
 }
 
-class DefaultExpensesListPresenter {
+class DefaultExpenseDayListPresenter {
 
   private typealias ExpenseSections = Sections<Date, Expense>
   
@@ -27,11 +27,11 @@ class DefaultExpensesListPresenter {
   private let amountFormatter = AmountFormatter()
   private var expenses = ExpenseSections()
 
-  private weak var view: ExpensesListViewProtocol?
-  private let router: ExpensesListRouter
+  private weak var view: ExpenseDayListViewProtocol?
+  private let router: ExpenseListRouter
   private let repository: ExpensesRepository
   
-  init(view: ExpensesListViewProtocol, router: ExpensesListRouter, repository: ExpensesRepository) {
+  init(view: ExpenseDayListViewProtocol, router: ExpenseListRouter, repository: ExpensesRepository) {
     self.view = view
     self.router = router
     self.repository = repository
@@ -39,8 +39,8 @@ class DefaultExpensesListPresenter {
   
   // MARK: - Private
   
-  private func map(expense: Expense) -> ExpenseViewModel {
-    return ExpenseViewModel(
+  private func map(expense: Expense) -> ExpenseListViewModel {
+    return ExpenseListViewModel(
       name: expense.name,
       amount: self.amountFormatter.string(integer: expense.amount),
       date: self.rowDateFormatter.string(from: expense.createdAt)
@@ -57,11 +57,7 @@ class DefaultExpensesListPresenter {
   }
 }
 
-extension DefaultExpensesListPresenter: ExpensesListPresenter {
-  
-  func viewReady() {
-    // nop
-  }
+extension DefaultExpenseDayListPresenter: ExpenseDayListPresenter {
   
   func viewAppear() {
     let expenses = self.repository.allExpenses()
@@ -73,7 +69,7 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
     return self.expenses.numberOfSections
   }
   
-  func expenseSection(for section: Int) -> ExpenseSectionViewModel? {
+  func expenseSection(for section: Int) -> ExpenseListSectionViewModel? {
     guard let date = self.expenses.section(at: section) else {
       return nil
     }
@@ -84,7 +80,7 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
       .reduce(0) { return $0 + $1 }
     let totalString = self.amountFormatter.string(integer: totalAmount)
     
-    return ExpenseSectionViewModel(
+    return ExpenseListSectionViewModel(
       title: dateString,
       totalAmount: totalString
     )
@@ -94,7 +90,7 @@ extension DefaultExpensesListPresenter: ExpensesListPresenter {
     return self.expenses.numberOfElements(section: section)
   }
   
-  func expense(at indexPath: IndexPath) -> ExpenseViewModel? {
+  func expense(at indexPath: IndexPath) -> ExpenseListViewModel? {
     return self.expenses.element(at: indexPath).map(self.map(expense:))
   }
   
