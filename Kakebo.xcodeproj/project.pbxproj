@@ -39,7 +39,13 @@
 		5A6C60EB22AADFF80054F1FB /* ExpenseListSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C60EA22AADFF80054F1FB /* ExpenseListSelectorView.swift */; };
 		5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C3D228AAFA100FF6DF1 /* Style.swift */; };
 		5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A830C40228AAFE100FF6DF1 /* Color+hex.swift */; };
+		5A91DFBA22F75AED0004654C /* ExpenseDayListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A91DFB922F75AED0004654C /* ExpenseDayListModuleBuilder.swift */; };
+		5A91DFBC22F75B4F0004654C /* ExpenseDayListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A91DFBB22F75B4F0004654C /* ExpenseDayListViewController.xib */; };
 		5A93CAD0228A48E50066ED4F /* InputFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */; };
+		5ABC60AC22F80F2000A72659 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC60AB22F80F2000A72659 /* EmptyStateView.swift */; };
+		5ABC60AE22F80F4000A72659 /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ABC60AD22F80F4000A72659 /* EmptyStateView.xib */; };
+		5ABC60B122F8158300A72659 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC60B022F8158300A72659 /* UnderlinedButton.swift */; };
+		5ABC60B322F834B900A72659 /* ScrollView+pagging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC60B222F834B900A72659 /* ScrollView+pagging.swift */; };
 		5ABDA9632297D83C001E6D62 /* Mock.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABDA9622297D83C001E6D62 /* Mock.generated.swift */; };
 		5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */; };
 		5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */; };
@@ -125,7 +131,13 @@
 		5A6C60EA22AADFF80054F1FB /* ExpenseListSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListSelectorView.swift; sourceTree = "<group>"; };
 		5A830C3D228AAFA100FF6DF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		5A830C40228AAFE100FF6DF1 /* Color+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+hex.swift"; sourceTree = "<group>"; };
+		5A91DFB922F75AED0004654C /* ExpenseDayListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDayListModuleBuilder.swift; sourceTree = "<group>"; };
+		5A91DFBB22F75B4F0004654C /* ExpenseDayListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpenseDayListViewController.xib; sourceTree = "<group>"; };
 		5A93CACF228A48E50066ED4F /* InputFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputFormFieldView.xib; sourceTree = "<group>"; };
+		5ABC60AB22F80F2000A72659 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		5ABC60AD22F80F4000A72659 /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
+		5ABC60B022F8158300A72659 /* UnderlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
+		5ABC60B222F834B900A72659 /* ScrollView+pagging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+pagging.swift"; sourceTree = "<group>"; };
 		5ABDA9622297D83C001E6D62 /* Mock.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.generated.swift; sourceTree = "<group>"; };
 		5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElementSpec.swift; sourceTree = "<group>"; };
 		5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringReplacingSpec.swift; sourceTree = "<group>"; };
@@ -357,6 +369,32 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
+		5ABC60A922F80F1300A72659 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5ABC60AF22F8157900A72659 /* Button */,
+				5ABC60AA22F80F1700A72659 /* Empty */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5ABC60AA22F80F1700A72659 /* Empty */ = {
+			isa = PBXGroup;
+			children = (
+				5ABC60AB22F80F2000A72659 /* EmptyStateView.swift */,
+				5ABC60AD22F80F4000A72659 /* EmptyStateView.xib */,
+			);
+			path = Empty;
+			sourceTree = "<group>";
+		};
+		5ABC60AF22F8157900A72659 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				5ABC60B022F8158300A72659 /* UnderlinedButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		5ACE92B3227F4B47009092D8 /* Array */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +419,7 @@
 				FF5226C8F20345613BAEB240E4AAF93C /* TableView+delete.swift */,
 				F469BE2DBCE3CDCF547181257E0963D4 /* TableView+register.swift */,
 				B3ACB34EDF298E01FC6592700C9B1AD3 /* UIView+nib.swift */,
+				5ABC60B222F834B900A72659 /* ScrollView+pagging.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -404,6 +443,7 @@
 		5AF2856322F3F3D5001AC3DF /* Day */ = {
 			isa = PBXGroup;
 			children = (
+				5A91DFB922F75AED0004654C /* ExpenseDayListModuleBuilder.swift */,
 				FC109741B80FF33BC7187EF9DB404040 /* Presenter */,
 				5AF2856722F3F473001AC3DF /* View */,
 			);
@@ -413,9 +453,8 @@
 		5AF2856422F3F3E9001AC3DF /* List */ = {
 			isa = PBXGroup;
 			children = (
-				A3CE59BBDF9EF652D6E3DE24538541B3 /* Router */,
-				5AF2856A22F3F77C001AC3DF /* Presenter */,
 				AA4970E9A7C1FA66342690B2FCF4EA98 /* View */,
+				5AF2856A22F3F77C001AC3DF /* Presenter */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -424,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				5AF2856822F3F5C9001AC3DF /* ExpenseListDayViewController.swift */,
+				5A91DFBB22F75B4F0004654C /* ExpenseDayListViewController.xib */,
 				4C0FD5AEF504511078D6C24BED82B4E3 /* Cell */,
 				E5F564ACD8EF229016AD725A4C531F7D /* Header */,
 			);
@@ -501,6 +541,7 @@
 			children = (
 				E7BDBDB7D76EF40F0FCE79AE7A4AEEB4 /* ExpenseListModuleBuilder.swift */,
 				5AF2856B22F3F78D001AC3DF /* Model */,
+				A3CE59BBDF9EF652D6E3DE24538541B3 /* Router */,
 				5AF2856422F3F3E9001AC3DF /* List */,
 				5AF2856322F3F3D5001AC3DF /* Day */,
 			);
@@ -634,6 +675,7 @@
 		FD08A59E93AA36F6E35836C6EDD22B4B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5ABC60A922F80F1300A72659 /* View */,
 				5A830C3C228AAF9900FF6DF1 /* Style */,
 				5A41D9F12281EEA300794A8F /* Form */,
 				FC71E398EF37DFDAB0964A845EB114B2 /* Extensions */,
@@ -734,10 +776,12 @@
 				AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */,
 				799628C939BE48A55A0CA33A26CC00EC /* ExpenseListCell.xib in Resources */,
 				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
+				5ABC60AE22F80F4000A72659 /* EmptyStateView.xib in Resources */,
 				71D4873757587F941196A77256FB374A /* ExpenseListHeaderView.xib in Resources */,
 				101EBE3A20A55FEA46927D2F1890EF69 /* ExpenseListViewController.xib in Resources */,
 				5A6C60E922AADFEE0054F1FB /* ExpenseListSelectorView.xib in Resources */,
 				B8265A91F9823B3177F60B3C9C39F4FC /* LaunchScreen.storyboard in Resources */,
+				5A91DFBC22F75B4F0004654C /* ExpenseDayListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +962,7 @@
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */,
 				5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */,
+				5ABC60B322F834B900A72659 /* ScrollView+pagging.swift in Sources */,
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpenseListCell.swift in Sources */,
 				AFEE71C49E68C5A673D7A42F5360540D /* ExpenseListModuleBuilder.swift in Sources */,
@@ -929,6 +974,7 @@
 				EECFC2C39B9EE020B8F9BABB7701A5AF /* Localization.swift in Sources */,
 				A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */,
 				C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */,
+				5ABC60AC22F80F2000A72659 /* EmptyStateView.swift in Sources */,
 				D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */,
 				5A50EE01228B38E200EECB30 /* Colors.swift in Sources */,
 				5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */,
@@ -939,6 +985,8 @@
 				3CC54CAA9DC4DF3A262FA28C4BF52435 /* String+subscript.swift in Sources */,
 				4CB0FA9534C6EDB9E4B95A0A89DB99CC /* TableView+delete.swift in Sources */,
 				5AF2856922F3F5C9001AC3DF /* ExpenseListDayViewController.swift in Sources */,
+				5A91DFBA22F75AED0004654C /* ExpenseDayListModuleBuilder.swift in Sources */,
+				5ABC60B122F8158300A72659 /* UnderlinedButton.swift in Sources */,
 				C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */,
 				5A6C60EB22AADFF80054F1FB /* ExpenseListSelectorView.swift in Sources */,
 				9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */,

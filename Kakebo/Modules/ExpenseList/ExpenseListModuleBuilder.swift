@@ -11,9 +11,20 @@ class ExpenseListModuleBuilder {
     )
 
     viewController.presenter = DefaultExpenseListPresenter(
-      router: router
+      router: router,
+      repository: repository
     )
 
+    viewController.dayListViewController = ExpenseDayListModuleBuilder().make(
+      router: router,
+      repository: repository
+    )
+
+    viewController.monthListViewController = ExpenseDayListModuleBuilder().make(
+      router: router,
+      repository: repository
+    )
+    
     return UINavigationController(rootViewController: viewController)
   }
   

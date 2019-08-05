@@ -12,7 +12,6 @@ protocol ExpenseDayListPresenter {
 
   func userTapAdd()
   func userSelectExpense(indexPath: IndexPath)
-
 }
 
 class ExpenseDayListViewController: UIViewController {
@@ -54,6 +53,7 @@ class ExpenseDayListViewController: UIViewController {
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
     self.tableView.separatorColor = .separator
+    self.tableView.clipsToBounds = false
   }
 
   // MARK: - Actions
@@ -73,10 +73,8 @@ class ExpenseDayListViewController: UIViewController {
   func refreshHeader(at section: Int) {
     let header = self.tableView.headerView(forSection: section) as? ExpenseListHeaderView
     self.fill(header: header, section: section)
-
     header?.setNeedsDisplay()
   }
-  
 }
 
 extension ExpenseDayListViewController: UITableViewDataSource {

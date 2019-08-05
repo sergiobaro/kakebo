@@ -7,6 +7,7 @@ extension UIColor {
   static let selected = UIColor.from(hex: 0xEEEEEE)
 
   static let textLight = UIColor.white
+  static let textMedium = UIColor.lightGray
   static let textDark = UIColor.darkGray
   
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyStateView" customModule="Kakebo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YT-oV-yZi">
+                    <rect key="frame" x="40" y="413" width="334" height="70"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9i-xv-sGu" customClass="UnderlinedButton" customModule="Kakebo" customModuleProvider="target">
+                            <rect key="frame" x="141" y="36" width="52" height="34"/>
+                            <state key="normal" title="Action">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="tapButton" destination="iN0-l3-epB" eventType="touchUpInside" id="JxF-Lm-yNp"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtG-Rf-9nq">
+                            <rect key="frame" x="0.0" y="0.0" width="334" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="LtG-Rf-9nq" secondAttribute="trailing" id="2wd-ho-vn6"/>
+                        <constraint firstAttribute="bottom" secondItem="O9i-xv-sGu" secondAttribute="bottom" id="4qZ-Sn-7vR"/>
+                        <constraint firstItem="LtG-Rf-9nq" firstAttribute="leading" secondItem="5YT-oV-yZi" secondAttribute="leading" id="6Dd-8v-xdK"/>
+                        <constraint firstItem="O9i-xv-sGu" firstAttribute="top" secondItem="LtG-Rf-9nq" secondAttribute="bottom" constant="15" id="X1r-JL-1vY"/>
+                        <constraint firstItem="LtG-Rf-9nq" firstAttribute="top" secondItem="5YT-oV-yZi" secondAttribute="top" id="bW2-iI-hLp"/>
+                        <constraint firstItem="O9i-xv-sGu" firstAttribute="centerX" secondItem="5YT-oV-yZi" secondAttribute="centerX" id="jOf-5k-eDJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5YT-oV-yZi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="4qk-qQ-FIn"/>
+                <constraint firstItem="5YT-oV-yZi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="KOb-oL-zwB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5YT-oV-yZi" secondAttribute="trailing" constant="40" id="SyM-hp-PxL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="button" destination="O9i-xv-sGu" id="WXE-fS-hmT"/>
+                <outlet property="messageLabel" destination="LtG-Rf-9nq" id="ML2-1U-pBa"/>
+            </connections>
+        </view>
+    </objects>
+</document>
