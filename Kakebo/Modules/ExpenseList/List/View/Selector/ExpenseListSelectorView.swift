@@ -46,7 +46,7 @@ class ExpenseListSelectorView: UIView {
 
   private func setup(button: UIButton) {
     guard let title = button.title(for: .normal) else {
-        return
+      return
     }
 
     // normal

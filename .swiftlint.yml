@@ -4,3 +4,9 @@ excluded:
 
 disabled_rules:
 - trailing_whitespace
+
+opt_in_rules:
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters_brackets
+  - multiline_arguments
