@@ -1,6 +1,12 @@
 import UIKit
 
-protocol ExpenseDayListPresenter {
+protocol ExpenseListViewProtocol: class {
+
+  func delete(section: Int)
+  func deleteRow(at indexPath: IndexPath)
+}
+
+protocol ExpenseListPresenter {
 
   func viewAppear()
 
@@ -8,17 +14,19 @@ protocol ExpenseDayListPresenter {
   func numberOfExpenses(section: Int) -> Int
   func expenseSection(for section: Int) -> ExpenseListSectionViewModel?
   func expense(at indexPath: IndexPath) -> ExpenseListViewModel?
+  func canSelect(at indexPath: IndexPath) -> Bool
+  func canDelete(at indexPath: IndexPath) -> Bool
   func deleteExpense(at indexPath: IndexPath)
 
   func userTapAdd()
   func userSelectExpense(indexPath: IndexPath)
 }
 
-class ExpenseDayListViewController: UIViewController {
+class ExpenseListViewController: UIViewController {
 
   @IBOutlet private weak var tableView: UITableView!
 
-  var presenter: ExpenseDayListPresenter!
+  var presenter: ExpenseListPresenter!
 
   // MARK: - View lifecycle
 
@@ -77,7 +85,7 @@ class ExpenseDayListViewController: UIViewController {
   }
 }
 
-extension ExpenseDayListViewController: UITableViewDataSource {
+extension ExpenseListViewController: UITableViewDataSource {
 
   func numberOfSections(in tableView: UITableView) -> Int {
     return self.presenter.numberOfSections()
@@ -96,6 +104,7 @@ extension ExpenseDayListViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeue(ExpenseListCell.self, for: indexPath)!
+    cell.selectionStyle = self.presenter.canSelect(at: indexPath) ? .default : .none
 
     if let expense = self.presenter.expense(at: indexPath) {
       cell.nameLabel.text = expense.name
@@ -107,7 +116,11 @@ extension ExpenseDayListViewController: UITableViewDataSource {
   }
 }
 
-extension ExpenseDayListViewController: UITableViewDelegate {
+extension ExpenseListViewController: UITableViewDelegate {
+
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return self.presenter.canDelete(at: indexPath) ? .delete : .none
+  }
 
   // swiftlint:disable:next line_length
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -121,7 +134,7 @@ extension ExpenseDayListViewController: UITableViewDelegate {
   }
 }
 
-extension ExpenseDayListViewController: ExpenseDayListViewProtocol {
+extension ExpenseListViewController: ExpenseListViewProtocol {
 
   func delete(section: Int) {
     self.tableView.deleteSection(at: section, with: .left)

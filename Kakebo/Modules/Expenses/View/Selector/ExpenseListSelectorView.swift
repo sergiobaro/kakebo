@@ -32,13 +32,13 @@ class ExpenseListSelectorView: UIView {
     self.dayButton.isSelected = true
   }
 
-  @IBAction func tapDayButton() {
+  @objc func tapDayButton() {
     self.monthButton.isSelected = false
     self.dayButton.isSelected = true
     self.delegate?.expenseListSelectorViewDidSelect(type: .day)
   }
 
-  @IBAction func tapMonthButton() {
+  @objc func tapMonthButton() {
     self.monthButton.isSelected = true
     self.dayButton.isSelected = false
     self.delegate?.expenseListSelectorViewDidSelect(type: .month)

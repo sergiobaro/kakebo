@@ -1,13 +1,6 @@
 import Foundation
 
-protocol ExpenseDayListViewProtocol: class {
-
-  func delete(section: Int)
-  func deleteRow(at indexPath: IndexPath)
-
-}
-
-class DefaultExpenseDayListPresenter {
+class DayExpenseListPresenter {
 
   private typealias ExpenseSections = Sections<Date, Expense>
   
@@ -27,11 +20,11 @@ class DefaultExpenseDayListPresenter {
   private let amountFormatter = AmountFormatter()
   private var expenses = ExpenseSections()
 
-  private weak var view: ExpenseDayListViewProtocol?
+  private weak var view: ExpenseListViewProtocol?
   private let router: ExpenseListRouter
   private let repository: ExpensesRepository
   
-  init(view: ExpenseDayListViewProtocol, router: ExpenseListRouter, repository: ExpensesRepository) {
+  init(view: ExpenseListViewProtocol, router: ExpenseListRouter, repository: ExpensesRepository) {
     self.view = view
     self.router = router
     self.repository = repository
@@ -48,7 +41,7 @@ class DefaultExpenseDayListPresenter {
   }
   
   private func sections(from expenses: [Expense]) -> ExpenseSections {
-    return .init(elements: expenses, groupBy: { self.flat(date: $0.createdAt) })
+    return ExpenseSections(elements: expenses, groupBy: { self.flat(date: $0.createdAt) })
   }
   
   private func flat(date: Date) -> Date {
@@ -57,7 +50,7 @@ class DefaultExpenseDayListPresenter {
   }
 }
 
-extension DefaultExpenseDayListPresenter: ExpenseDayListPresenter {
+extension DayExpenseListPresenter: ExpenseListPresenter {
   
   func viewAppear() {
     let expenses = self.repository.allExpenses()
@@ -92,6 +85,14 @@ extension DefaultExpenseDayListPresenter: ExpenseDayListPresenter {
   
   func expense(at indexPath: IndexPath) -> ExpenseListViewModel? {
     return self.expenses.element(at: indexPath).map(self.map(expense:))
+  }
+
+  func canSelect(at indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  func canDelete(at indexPath: IndexPath) -> Bool {
+    return true
   }
   
   func deleteExpense(at indexPath: IndexPath) {

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     do {
       let expensesRepository = try RealmExpensesRepository.make()
-      self.window!.rootViewController = ExpenseListModuleBuilder().build(repository: expensesRepository)
+      self.window!.rootViewController = ExpensesModuleBuilder().build(repository: expensesRepository)
     } catch {
       print(error)
       fatalError()

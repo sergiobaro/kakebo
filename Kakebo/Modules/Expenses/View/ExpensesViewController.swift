@@ -1,21 +1,19 @@
 import UIKit
 import SnapKit
 
-protocol ExpenseListPresenter {
+protocol ExpensesPresenter {
 
   func hasExpenses() -> Bool
-
   func userTapAdd()
-
 }
 
-class ExpenseListViewController: UIViewController {
+class ExpensesViewController: UIViewController {
 
   @IBOutlet private weak var scrollView: UIScrollView!
 
   private var emptyView: EmptyStateView!
 
-  var presenter: ExpenseListPresenter!
+  var presenter: ExpensesPresenter!
   var dayListViewController: UIViewController!
   var monthListViewController: UIViewController!
 
@@ -99,7 +97,7 @@ class ExpenseListViewController: UIViewController {
   }
 }
 
-extension ExpenseListViewController: ExpenseListSelectorViewDelegate {
+extension ExpensesViewController: ExpenseListSelectorViewDelegate {
 
   func expenseListSelectorViewDidSelect(type: ExpenseListSelectorViewType) {
     switch type {

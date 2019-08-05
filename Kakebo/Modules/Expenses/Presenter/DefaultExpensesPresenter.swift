@@ -1,6 +1,6 @@
 import Foundation
 
-class DefaultExpenseListPresenter {
+class DefaultExpensesPresenter {
 
   private let router: ExpenseListRouter
   private let repository: ExpensesRepository
@@ -11,7 +11,7 @@ class DefaultExpenseListPresenter {
   }
 }
 
-extension DefaultExpenseListPresenter: ExpenseListPresenter {
+extension DefaultExpensesPresenter: ExpensesPresenter {
 
   func hasExpenses() -> Bool {
     return (self.repository.numberOfExpenses() > 0)
