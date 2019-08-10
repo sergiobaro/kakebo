@@ -47,11 +47,11 @@ class MonthExpenseListPresenter {
   }
 
   private func sections(from expenses: [ExpenseDay]) -> ExpenseSections {
-    return ExpenseSections(elements: expenses, groupBy: { self.flat(date: $0.date) })
+    return ExpenseSections(elements: expenses, groupBy: { self.flat(date: $0.date, components: [.month, .year]) })
   }
 
-  private func flat(date: Date) -> Date {
-    let components = Calendar.current.dateComponents([.month, .year], from: date)
+  private func flat(date: Date, components: Set<Calendar.Component>) -> Date {
+    let components = Calendar.current.dateComponents(components, from: date)
     return Calendar.current.date(from: components) ?? date
   }
 }
@@ -60,7 +60,7 @@ extension MonthExpenseListPresenter: ExpenseListPresenter {
 
   func viewAppear() {
     let expensesByDay = self.repository.allExpenses()
-      .group(by: { self.flat(date: $0.createdAt) })
+      .group(by: { self.flat(date: $0.createdAt, components: [.day, .month, .year]) })
       .values
       .map({ ExpenseDay(expenses: $0) })
 
