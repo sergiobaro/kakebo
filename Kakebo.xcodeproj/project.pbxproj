@@ -50,6 +50,7 @@
 		5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */; };
 		5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */; };
 		5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */; };
+		5ACF2B15231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACF2B14231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift */; };
 		5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */; };
 		5AF2856622F3F44A001AC3DF /* DayExpenseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF2856522F3F44A001AC3DF /* DayExpenseListPresenter.swift */; };
 		5AF2856922F3F5C9001AC3DF /* ExpenseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF2856822F3F5C9001AC3DF /* ExpenseListViewController.swift */; };
@@ -142,6 +143,7 @@
 		5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElementSpec.swift; sourceTree = "<group>"; };
 		5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringReplacingSpec.swift; sourceTree = "<group>"; };
 		5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubstringSpec.swift; sourceTree = "<group>"; };
+		5ACF2B14231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpensesRepositoryFactory.swift; sourceTree = "<group>"; };
 		5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpensesRepositorySpec.swift; sourceTree = "<group>"; };
 		5AF2856522F3F44A001AC3DF /* DayExpenseListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayExpenseListPresenter.swift; sourceTree = "<group>"; };
 		5AF2856822F3F5C9001AC3DF /* ExpenseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListViewController.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 			children = (
 				321790082891000F97DCD6916BE8B926 /* ExpensesRepository.swift */,
 				0DCF2CE15E775EA5476A1AE6AC053ABA /* RealmExpensesRepository.swift */,
+				5ACF2B14231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				5AF2856F22F437A9001AC3DF /* DefaultExpensesPresenter.swift in Sources */,
 				1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */,
 				EDF4FFE1DF7BE30603FF3704A2B11CA6 /* AddExpenseRouter.swift in Sources */,
+				5ACF2B15231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift in Sources */,
 				A325415A485BD5354977AFE681EE7045 /* AddExpenseViewController.swift in Sources */,
 				5AF8B615229878E500654302 /* FormFieldView.swift in Sources */,
 				5A4C5EB3229ACDA800E7C155 /* Validator.swift in Sources */,

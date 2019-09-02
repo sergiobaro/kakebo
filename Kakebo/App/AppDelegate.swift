@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
     do {
-      let expensesRepository = try RealmExpensesRepository.make()
+      let expensesRepository = try RealmExpensesRepositoryFactory.make()
       self.window!.rootViewController = ExpensesModuleBuilder().build(repository: expensesRepository)
     } catch {
       print(error)
