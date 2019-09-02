@@ -1,6 +1,6 @@
 import UIKit
 
-class ExpenseListRouter {
+class ExpensesRouter {
 
   private weak var viewController: UIViewController?
   private let addExpenseModuleBuilder: AddExpenseModuleBuilder
@@ -20,5 +20,9 @@ class ExpenseListRouter {
     if let expenseDetail = self.addExpenseModuleBuilder.buildEditExpense(expense: expense) {
       self.viewController?.present(expenseDetail, animated: true)
     }
+  }
+
+  func navigateToExpensesOnDay(_ date: Date) {
+    // TODO: 
   }
 }

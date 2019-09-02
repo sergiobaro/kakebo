@@ -49,6 +49,24 @@ class RealmExpensesRepositorySpec: QuickSpec {
         expect(result).toNot(beNil())
       }
     }
+
+    context("when date between") {
+      it("should return one") {
+        let expense1 = Expense(expenseId: "1", name: "1", amount: 1, createdAt: Date())
+        _ = repository.add(expense: expense1)
+
+        let yesterday = Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())!
+        let expense2 = Expense(expenseId: "2", name: "2", amount: 2, createdAt: yesterday)
+        _ = repository.add(expense: expense2)
+
+        let start = Calendar.current.startOfDay(for: Date())
+        let end = Calendar.current.date(byAdding: DateComponents(day: 1, second: -1), to: start)!
+        let result = repository.findBetween(start: start, end: end)
+
+        expect(result.count).to(equal(1))
+        expect(result.first?.expenseId).to(equal("1"))
+      }
+    }
     
     context("when delete expense") {
       it("when it doesn't exist should return false") {

@@ -18,7 +18,6 @@ protocol ExpenseListPresenter {
   func canDelete(at indexPath: IndexPath) -> Bool
   func deleteExpense(at indexPath: IndexPath)
 
-  func userTapAdd()
   func userSelectExpense(indexPath: IndexPath)
 }
 
@@ -62,12 +61,6 @@ class ExpenseListViewController: UIViewController {
     self.tableView.separatorInset = .zero
     self.tableView.separatorColor = .separator
     self.tableView.clipsToBounds = false
-  }
-
-  // MARK: - Actions
-
-  @objc func tapAdd() {
-    self.presenter.userTapAdd()
   }
 
   // MARK: - Private

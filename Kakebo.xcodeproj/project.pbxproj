@@ -72,7 +72,7 @@
 		AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E404879358782C7C011BCC4EC023390 /* Assets.xcassets */; };
 		AFEE71C49E68C5A673D7A42F5360540D /* ExpensesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDBDB7D76EF40F0FCE79AE7A4AEEB4 /* ExpensesModuleBuilder.swift */; };
 		B8265A91F9823B3177F60B3C9C39F4FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225C673CE7E89A21FD3D6BFBCA38E827 /* LaunchScreen.storyboard */; };
-		BA2F8EC21BC778A610708C621EE1F042 /* ExpensesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */; };
+		BA2F8EC21BC778A610708C621EE1F042 /* ExpensesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesRouter.swift */; };
 		C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */ = {isa = PBXBuildFile; fileRef = F469BE2DBCE3CDCF547181257E0963D4 /* TableView+register.swift */; };
 		C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422426E5194B147159B3009BBF19FFDD /* Sections.swift */; };
 		CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACB34EDF298E01FC6592700C9B1AD3 /* UIView+nib.swift */; };
@@ -109,7 +109,7 @@
 		422426E5194B147159B3009BBF19FFDD /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		46B58BEBFCEC65008A58B4E9 /* Pods_Kakebo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kakebo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakeboTests.debug.xcconfig"; path = "Target Support Files/Pods-KakeboTests/Pods-KakeboTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesListRouter.swift; sourceTree = "<group>"; };
+		4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesRouter.swift; sourceTree = "<group>"; };
 		57EE6CB4B6D52E610D39426E6A62B879 /* SectionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSpec.swift; sourceTree = "<group>"; };
 		5A0B65AF2289FEFA00DA6587 /* FormFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldModel.swift; sourceTree = "<group>"; };
 		5A1E8423228F3CA2008DA9D1 /* GeneralDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDateFormatter.swift; sourceTree = "<group>"; };
@@ -570,7 +570,7 @@
 		A3CE59BBDF9EF652D6E3DE24538541B3 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesListRouter.swift */,
+				4FC5FE37050C524A1C308F902AB9DA79 /* ExpensesRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -958,7 +958,7 @@
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpenseListCell.swift in Sources */,
 				AFEE71C49E68C5A673D7A42F5360540D /* ExpensesModuleBuilder.swift in Sources */,
-				BA2F8EC21BC778A610708C621EE1F042 /* ExpensesListRouter.swift in Sources */,
+				BA2F8EC21BC778A610708C621EE1F042 /* ExpensesRouter.swift in Sources */,
 				FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpenseListHeaderView.swift in Sources */,
 				61F9F205F0DEB544AFFABB970074328A /* ExpensesViewController.swift in Sources */,
 				5A2C3EB7228AEB8300D3F019 /* AmountFormFieldPresenter.swift in Sources */,

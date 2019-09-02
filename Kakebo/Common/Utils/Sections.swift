@@ -1,6 +1,6 @@
 import Foundation
 
-class Sections<Group: Comparable & Hashable, Element> {
+class Sections<Group: Comparable & Hashable, Element: Comparable> {
   
   private class Section: Comparable {
     
@@ -38,10 +38,10 @@ class Sections<Group: Comparable & Hashable, Element> {
       .group(by: groupBy)
       .reduce(into: [Section]()) { result, group in
         let (section, elements) = group
-        result.append(Section(section: section, elements: elements))
+        result.append(Section(section: section, elements: elements.sorted(by: >)))
       }
       .sorted(by: >)
-    
+
     self.init(sections: sections)
   }
   

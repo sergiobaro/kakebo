@@ -80,6 +80,13 @@ extension RealmExpensesRepository: ExpensesRepository {
       .object(ofType: ExpenseRealm.self, forPrimaryKey: expenseId)
       .map(self.map(expense:))
   }
+
+  func findBetween(start: Date, end: Date) -> [Expense] {
+    return self.realm
+      .objects(ExpenseRealm.self)
+      .filter("createdAt BETWEEN %@", [start, end])
+      .map(self.map(expense:))
+  }
   
   func add(expense: Expense) -> Bool {
     do {

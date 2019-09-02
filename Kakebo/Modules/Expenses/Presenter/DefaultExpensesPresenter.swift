@@ -2,10 +2,10 @@ import Foundation
 
 class DefaultExpensesPresenter {
 
-  private let router: ExpenseListRouter
+  private let router: ExpensesRouter
   private let repository: ExpensesRepository
 
-  init(router: ExpenseListRouter, repository: ExpensesRepository) {
+  init(router: ExpensesRouter, repository: ExpensesRepository) {
     self.router = router
     self.repository = repository
   }

@@ -5,7 +5,7 @@ class ExpensesModuleBuilder {
   func build(repository: ExpensesRepository) -> UIViewController? {
     let viewController = ExpensesViewController()
     
-    let router = ExpenseListRouter(
+    let router = ExpensesRouter(
       viewController: viewController,
       addExpenseModuleBuilder: AddExpenseModuleBuilder(repository: repository)
     )
@@ -28,7 +28,7 @@ class ExpensesModuleBuilder {
     return UINavigationController(rootViewController: viewController)
   }
 
-  private func makeDayList(router: ExpenseListRouter, repository: ExpensesRepository) -> UIViewController {
+  private func makeDayList(router: ExpensesRouter, repository: ExpensesRepository) -> UIViewController {
     let viewController = ExpenseListViewController()
 
     viewController.presenter = DayExpenseListPresenter(
@@ -40,10 +40,11 @@ class ExpensesModuleBuilder {
     return viewController
   }
 
-  private func makeMonthList(router: ExpenseListRouter, repository: ExpensesRepository) -> UIViewController {
+  private func makeMonthList(router: ExpensesRouter, repository: ExpensesRepository) -> UIViewController {
     let viewController = ExpenseListViewController()
 
     viewController.presenter = MonthExpenseListPresenter(
+      router: router,
       repository: repository
     )
 

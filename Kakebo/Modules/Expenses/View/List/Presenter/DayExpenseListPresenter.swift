@@ -1,5 +1,16 @@
 import Foundation
 
+extension Expense: Comparable {
+
+  static func == (lhs: Expense, rhs: Expense) -> Bool {
+    return lhs.createdAt == rhs.createdAt
+  }
+
+  static func < (lhs: Expense, rhs: Expense) -> Bool {
+    return lhs.createdAt < rhs.createdAt
+  }
+}
+
 class DayExpenseListPresenter {
 
   private typealias ExpenseSections = Sections<Date, Expense>
@@ -21,10 +32,10 @@ class DayExpenseListPresenter {
   private var expenses = ExpenseSections()
 
   private weak var view: ExpenseListViewProtocol?
-  private let router: ExpenseListRouter
+  private let router: ExpensesRouter
   private let repository: ExpensesRepository
   
-  init(view: ExpenseListViewProtocol, router: ExpenseListRouter, repository: ExpensesRepository) {
+  init(view: ExpenseListViewProtocol, router: ExpensesRouter, repository: ExpensesRepository) {
     self.view = view
     self.router = router
     self.repository = repository
@@ -112,10 +123,6 @@ extension DayExpenseListPresenter: ExpenseListPresenter {
     } else {
       self.view?.deleteRow(at: indexPath)
     }
-  }
-
-  func userTapAdd() {
-    self.router.navigateToAddExpense()
   }
   
   func userSelectExpense(indexPath: IndexPath) {

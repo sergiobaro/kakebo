@@ -1,6 +1,6 @@
 import Foundation
 
-struct ExpenseDay {
+struct ExpenseDay: Comparable {
 
   let amount: Int
   let date: Date
@@ -8,6 +8,14 @@ struct ExpenseDay {
   init(expenses: [Expense]) {
     self.amount = expenses.reduce(0) { $0 + $1.amount }
     self.date = expenses[0].createdAt
+  }
+
+  static func < (lhs: ExpenseDay, rhs: ExpenseDay) -> Bool {
+    return lhs.date < rhs.date
+  }
+
+  static func == (lhs: ExpenseDay, rhs: ExpenseDay) -> Bool {
+    return lhs.date == rhs.date
   }
 }
 
@@ -30,9 +38,11 @@ class MonthExpenseListPresenter {
   private let amountFormatter = AmountFormatter()
   private var expenses = ExpenseSections()
 
+  private let router: ExpensesRouter
   private let repository: ExpensesRepository
 
-  init(repository: ExpensesRepository) {
+  init(router: ExpensesRouter, repository: ExpensesRepository) {
+    self.router = router
     self.repository = repository
   }
 
@@ -108,11 +118,11 @@ extension MonthExpenseListPresenter: ExpenseListPresenter {
     // Nothing
   }
 
-  func userTapAdd() {
-    // Nothing
-  }
-
   func userSelectExpense(indexPath: IndexPath) {
-    // Nothing
+    guard let dayExpense = self.expenses.element(at: indexPath) else {
+      return
+    }
+
+    self.router.navigateToExpensesOnDay(dayExpense.date)
   }
 }
