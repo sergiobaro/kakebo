@@ -1,41 +1,20 @@
-// Generated using Sourcery 0.16.1 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.17.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 
+// Generated with SwiftyMocky 3.3.4
 
-#if MockyCustom
 import SwiftyMocky
-@testable import Kakebo
-
-    public final class MockyAssertion {
-        public static var handler: ((Bool, String, StaticString, UInt) -> Void)?
-    }
-
-    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
-        guard let handler = MockyAssertion.handler else {
-            assert(expression, message, file: file, line: line)
-            return
-        }
-
-        handler(expression(), message(), file, line)
-    }
-#elseif Mocky
-import SwiftyMocky
+#if !MockyCustom
 import XCTest
-@testable import Kakebo
-
-    func MockyAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Verification failed", file: StaticString = #file, line: UInt = #line) {
-        XCTAssert(expression(), message(), file: file, line: line)
-    }
-#else
-import Sourcery
-import SourceryRuntime
 #endif
+@testable import Kakebo
 
 
 // MARK: - FormFieldDelegate
 open class FormFieldDelegateMock: FormFieldDelegate, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -206,6 +185,7 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
 // MARK: - FormViewDelegate
 open class FormViewDelegateMock: FormViewDelegate, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
@@ -361,6 +341,7 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
 // MARK: - InputFormFieldViewProtocol
 open class InputFormFieldViewProtocolMock: InputFormFieldViewProtocol, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
         self.file = file
