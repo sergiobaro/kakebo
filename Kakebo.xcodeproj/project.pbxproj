@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -688,7 +688,6 @@
 			buildConfigurationList = D66279847B96FF1DB02D209B8EBF0E84 /* Build configuration list for PBXNativeTarget "KakeboTests" */;
 			buildPhases = (
 				C32D09BED92B1C97660C61E7 /* [CP] Check Pods Manifest.lock */,
-				5ABDA9642297D8A2001E6D62 /* Mocks */,
 				2F27755AB4D41FE365C86E8F3DCE7E61 /* Sources */,
 				431807D37812C8C2942FECFE00BAA15B /* Frameworks */,
 				716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */,
@@ -783,24 +782,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5ABDA9642297D8A2001E6D62 /* Mocks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Mocks;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "Pods/Sourcery/bin/sourcery --config mocky.yml\n";
-		};
 		716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1010,6 +991,7 @@
 			baseConfigurationReference = 243B3D8E92366CCF1998D1A6 /* Pods-KakeboTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = U45ZNT55FZ;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KakeboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1144,6 +1126,7 @@
 			baseConfigurationReference = 4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = U45ZNT55FZ;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KakeboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

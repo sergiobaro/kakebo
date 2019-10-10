@@ -1,0 +1,12 @@
+sourceryCommand: null
+KakeboTests:
+  sources:
+    include:
+    - ./Kakebo
+  output: ./KakeboTests/Mock.generated.swift
+  targets:
+  - KakeboTests
+  testable:
+  - Kakebo
+  import:
+  - UIKit
