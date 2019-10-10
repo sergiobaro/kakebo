@@ -1,17 +1,17 @@
 PODS:
-  - Nimble (8.0.1)
-  - Quick (2.1.0)
-  - Realm (3.14.2):
-    - Realm/Headers (= 3.14.2)
-  - Realm/Headers (3.14.2)
-  - RealmSwift (3.14.2):
-    - Realm (= 3.14.2)
-  - SnapKit (5.0.0)
-  - Sourcery (0.16.1)
-  - SwiftyMocky (3.2.0):
-    - SwiftyMocky/Core (= 3.2.0)
-  - SwiftyMocky/Core (3.2.0):
-    - Sourcery (> 0.16)
+  - Nimble (8.0.4)
+  - Quick (2.2.0)
+  - Realm (3.19.0):
+    - Realm/Headers (= 3.19.0)
+  - Realm/Headers (3.19.0)
+  - RealmSwift (3.19.0):
+    - Realm (= 3.19.0)
+  - SnapKit (5.0.1)
+  - Sourcery (0.17.0)
+  - SwiftyMocky (3.3.4):
+    - SwiftyMocky/Core (= 3.3.4)
+  - SwiftyMocky/Core (3.3.4):
+    - Sourcery (>= 0.16)
 
 DEPENDENCIES:
   - Nimble
@@ -22,7 +22,7 @@ DEPENDENCIES:
   - SwiftyMocky
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Nimble
     - Quick
     - Realm
@@ -32,14 +32,14 @@ SPEC REPOS:
     - SwiftyMocky
 
 SPEC CHECKSUMS:
-  Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
-  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
-  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
-  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
-  SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
-  Sourcery: 16779170d35ee204666843b09031f36721a84bcc
-  SwiftyMocky: 20ee055796bb023142e83a23bee86d43ecb6c29a
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
+  Realm: 995d585bcf699aaff226715886c849a29dd3d07f
+  RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
+  SwiftyMocky: 7e4e7088166c013559a26ccc8b8d6508c3730826
 
 PODFILE CHECKSUM: 340b3a3ffba7b1993b7a504177b5bec5a6aa261c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3
