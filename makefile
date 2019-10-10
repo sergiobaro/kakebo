@@ -1,2 +1,2 @@
 coverage:
-	slather coverage --html --show
+	bundle exec slather coverage --html --show
