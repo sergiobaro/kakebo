@@ -124,6 +124,7 @@ extension ExpenseListViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     self.presenter.userSelectExpense(indexPath: indexPath)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 

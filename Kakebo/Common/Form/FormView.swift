@@ -22,6 +22,7 @@ class FormView: UIView {
   weak var delegate: FormViewDelegate?
 
   private var fields = [FormFieldContainerView]()
+  private var editing = false
 
   init(fields: [FormFieldContainerView]) {
     self.fields = fields
@@ -71,10 +72,12 @@ class FormView: UIView {
   // MARK: - Public
 
   func focus() {
+    self.editing = true
     self.fields.first?.focus()
   }
 
   func blur() {
+    self.editing = false
     self.fields.first(where: { $0.isFirstResponder })?.blur()
   }
 
@@ -120,6 +123,10 @@ extension FormView: FormFieldDelegate {
   }
 
   func fieldDidEndEditing(_ field: FormFieldModel) {
+    guard self.editing else {
+      return
+    }
+    
     if let nextFieldView = self.nextFieldView(field: field) {
       nextFieldView.focus()
     } else {
