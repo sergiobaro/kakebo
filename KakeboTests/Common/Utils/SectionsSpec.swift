@@ -15,6 +15,8 @@ class SectionsSpec: QuickSpec {
         
         expect(sections.numberOfElements(section: 0)).to(equal(0))
         expect(sections.element(at: IndexPath(row: 0, section: 0))).to(beNil())
+        
+        expect(sections.elements(section: 0).count).to(equal(0))
       }
       it("when has one section") {
         let sections = Sections<Int, Int>(elements: [1, 1, 1], groupBy: { return $0 })
@@ -26,6 +28,9 @@ class SectionsSpec: QuickSpec {
         expect(sections.numberOfElements(section: 1)).to(equal(0))
         expect(sections.element(at: IndexPath(row: 0, section: 0))).to(equal(1))
         expect(sections.element(at: IndexPath(row: 0, section: 1))).to(beNil())
+        
+        expect(sections.elements(section: 0).count).to(equal(3))
+        expect(sections.elements(section: 1).count).to(equal(0))
       }
     }
     

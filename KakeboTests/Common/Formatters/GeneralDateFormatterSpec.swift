@@ -13,6 +13,10 @@ class GeneralDateFormatterSpec: QuickSpec {
       beforeEach {
         timeFormatter = GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
       }
+      
+      it("format") {
+        expect(timeFormatter.format).to(equal("HH : MM"))
+      }
 
       it("string from string") {
         expect(timeFormatter.string(string: nil)).to(equal(""))

@@ -53,7 +53,7 @@ extension AmountFormFieldPresenter: InputFormFieldPresenter {
   }
 
   func userDeleteBackward() {
-    guard !self.text.isEmpty else {
+    guard self.hasText else {
       return
     }
 
