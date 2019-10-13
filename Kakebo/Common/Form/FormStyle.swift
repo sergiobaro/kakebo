@@ -20,4 +20,9 @@ struct FormStyle {
   static let borderActiveWidth = CGFloat(1.0)
   static let borderInactiveWidth = CGFloat(0.5)
   
+  // custom keyboard
+  static let customKeyboardHeight = CGFloat(335.0)
+  static let customKeyboardAnimationDuration = TimeInterval(0.25)
+  static let customKeyboardBackgroundColor = UIColor.groupTableViewBackground
+  
 }

@@ -60,9 +60,9 @@ class ExpensesViewController: UIViewController {
     }
 
     self.view.addSubview(emptyView)
-    emptyView.snp.makeConstraints { (maker) in
-      maker.top.left.right.equalToSuperview()
-      maker.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+    emptyView.snp.makeConstraints {
+      $0.top.left.right.equalToSuperview()
+      $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
     }
 
     self.emptyView = emptyView

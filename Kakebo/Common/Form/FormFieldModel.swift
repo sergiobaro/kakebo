@@ -5,6 +5,7 @@ enum FormFieldType {
   case amount
   case date
   case time
+  case calendar
 }
 
 class FormFieldModel {

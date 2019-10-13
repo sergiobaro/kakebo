@@ -3,7 +3,16 @@ import SnapKit
 
 class FormFieldContainerView: UIView {
 
-  weak var formDelegate: FormFieldDelegate?
+  weak var formDelegate: FormFieldDelegate? {
+    didSet {
+      self.fieldView.formDelegate = self.formDelegate
+    }
+  }
+  weak var formController: FormController? {
+    didSet {
+      self.fieldView.formController = self.formController
+    }
+  }
 
   var field: FormFieldModel! {
     didSet {
@@ -14,7 +23,12 @@ class FormFieldContainerView: UIView {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var fieldContainerView: UIView!
 
-  private weak var fieldView: FormFieldView!
+  private weak var fieldView: FormFieldView! {
+    didSet {
+      self.fieldView.formDelegate = self.formDelegate
+      self.fieldView.formController = self.formController
+    }
+  }
 
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -35,15 +49,14 @@ class FormFieldContainerView: UIView {
 
   @IBAction func tapView() {
     self.becomeFirstResponder()
-    self.focus()
     self.formDelegate?.fieldDidBeginEditing(self.field)
+    self.focus()
   }
 
   // MARK: - Public
 
   func setFieldView(_ fieldView: FormFieldView) {
     self.fieldView = fieldView
-    fieldView.formDelegate = self
     fieldView.field = self.field
 
     self.fieldContainerView.addSubview(fieldView)

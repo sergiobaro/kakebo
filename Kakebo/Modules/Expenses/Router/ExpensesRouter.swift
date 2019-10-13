@@ -23,6 +23,6 @@ class ExpensesRouter {
   }
 
   func navigateToExpensesOnDay(_ date: Date) {
-    // TODO: 
+    // Navigate to expenses on day
   }
 }

@@ -48,12 +48,13 @@ private extension FormBuilder {
       return self.makeDateField(field)
     case .time:
       return self.makeTimeField(field)
+    case .calendar:
+      return self.makeCalendarField(field)
     }
   }
 
   func makeTextField(_ field: FormFieldModel) -> FormFieldContainerView {
-    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
-    fieldContainer.field = field
+    let fieldContainer = self.makeFieldContainerView(field)
 
     let textField = self.makeTextFieldView()
     fieldContainer.setFieldView(textField)
@@ -62,8 +63,7 @@ private extension FormBuilder {
   }
 
   func makeAmountField(_ field: FormFieldModel) -> FormFieldContainerView {
-    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
-    fieldContainer.field = field
+    let fieldContainer = self.makeFieldContainerView(field)
 
     let inputField = self.makeInputFieldView()
     inputField.presenter = AmountFormFieldPresenter(
@@ -77,8 +77,7 @@ private extension FormBuilder {
   }
 
   func makeDateField(_ field: FormFieldModel) -> FormFieldContainerView {
-    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
-    fieldContainer.field = field
+    let fieldContainer = self.makeFieldContainerView(field)
 
     let inputField = self.makeInputFieldView()
     inputField.presenter = DateFormFieldPresenter(
@@ -93,8 +92,7 @@ private extension FormBuilder {
   }
 
   func makeTimeField(_ field: FormFieldModel) -> FormFieldContainerView {
-    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
-    fieldContainer.field = field
+    let fieldContainer = self.makeFieldContainerView(field)
 
     let inputField = self.makeInputFieldView()
     inputField.presenter = DateFormFieldPresenter(
@@ -107,6 +105,15 @@ private extension FormBuilder {
 
     return fieldContainer
   }
+  
+  func makeCalendarField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = self.makeFieldContainerView(field)
+    
+    let calendarField = UIView.loadFromNib(type: CalendarFormFieldView.self)
+    fieldContainer.setFieldView(calendarField)
+    
+    return fieldContainer
+  }
 
   func makeTextFieldView() -> TextFormFieldView {
     return UIView.loadFromNib(type: TextFormFieldView.self)
@@ -114,5 +121,12 @@ private extension FormBuilder {
 
   func makeInputFieldView() -> InputFormFieldView {
     return UIView.loadFromNib(type: InputFormFieldView.self)
+  }
+  
+  func makeFieldContainerView(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = UIView.loadFromNib(type: FormFieldContainerView.self)
+    fieldContainer.field = field
+    
+    return fieldContainer
   }
 }

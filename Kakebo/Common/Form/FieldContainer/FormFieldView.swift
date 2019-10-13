@@ -3,6 +3,7 @@ import UIKit
 class FormFieldView: UIView {
 
   weak var formDelegate: FormFieldDelegate?
+  weak var formController: FormController?
 
   var field: FormFieldModel!
 

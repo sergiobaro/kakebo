@@ -100,14 +100,14 @@ class DefaultAddExpensePresenter {
       value: expense?.amount ?? 0
     )
     let dateField = FormFieldModel(
-      type: .date,
+      type: .calendar, //.date,
       identifier: "date",
       title: localize("Date"),
       validators: [NotNilValidator()],
       value: expense?.createdAt ?? Date()
     )
     let timeField = FormFieldModel(
-      type: .time,
+      type: .calendar, //.time,
       identifier: "time",
       title: localize("Time"),
       validators: [NotNilValidator()],

@@ -14,11 +14,11 @@ extension UIScrollView {
 
     let left = CGFloat(page) * self.frame.width
 
-    view.snp.makeConstraints { (maker) in
-      maker.top.equalTo(self.snp.top)
-      maker.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
-      maker.left.equalTo(left)
-      maker.width.equalTo(self.frame.width)
+    view.snp.makeConstraints {
+      $0.top.equalTo(self.snp.top)
+      $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+      $0.left.equalTo(left)
+      $0.width.equalTo(self.frame.width)
     }
   }
 }
