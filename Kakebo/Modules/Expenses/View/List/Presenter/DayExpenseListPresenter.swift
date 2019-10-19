@@ -131,6 +131,8 @@ extension DayExpenseListPresenter: ExpenseListPresenter {
     } else {
       self.view?.deleteRow(at: indexPath)
     }
+    
+    self.delegate?.didDeleteExpense(expense)
   }
   
   func userSelectExpense(indexPath: IndexPath) {

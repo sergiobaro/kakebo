@@ -27,6 +27,7 @@ protocol ExpenseListPresenter {
 protocol ExpenseListDelegate: class {
   
   func didSelectExpense(_ expense: Expense)
+  func didDeleteExpense(_ expense: Expense)
 }
 
 class ExpenseListViewController: UIViewController {

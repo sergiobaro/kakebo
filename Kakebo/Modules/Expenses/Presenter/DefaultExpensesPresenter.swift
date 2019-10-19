@@ -36,4 +36,8 @@ extension DefaultExpensesPresenter: ExpenseListDelegate {
   func didSelectExpense(_ expense: Expense) {
     self.router.navigateToExpenseDetail(expense: expense, delegate: self)
   }
+  
+  func didDeleteExpense(_ expense: Expense) {
+    self.view?.reloadExpenses()
+  }
 }
