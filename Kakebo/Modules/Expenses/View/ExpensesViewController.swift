@@ -1,6 +1,11 @@
 import UIKit
 import SnapKit
 
+protocol ExpensesViewProtocol: class {
+  
+  func reloadExpenses()
+}
+
 protocol ExpensesPresenter {
 
   func hasExpenses() -> Bool
@@ -14,8 +19,8 @@ class ExpensesViewController: UIViewController {
   private var emptyView: EmptyStateView!
 
   var presenter: ExpensesPresenter!
-  var dayListViewController: UIViewController!
-  var monthListViewController: UIViewController!
+  var dayListViewController: ExpenseListViewController!
+  var monthListViewController: ExpenseListViewController!
 
   // MARK: - View lifecycle
 
@@ -27,13 +32,8 @@ class ExpensesViewController: UIViewController {
     self.setupScrollView()
     self.setupDayList()
     self.setupMonthList()
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
     
-    self.emptyView.isHidden = self.presenter.hasExpenses()
-    self.scrollView.isHidden = !self.emptyView.isHidden
+    self.updateEmptyView()
   }
 
   // MARK: - Setup
@@ -95,6 +95,16 @@ class ExpensesViewController: UIViewController {
   @objc func tapAdd() {
     self.presenter.userTapAdd()
   }
+  
+  // MARK: - Private
+  
+  private func updateEmptyView() {
+    let hasExpenses = self.presenter.hasExpenses()
+    
+    self.emptyView.isHidden = hasExpenses
+    self.scrollView.isHidden = !hasExpenses
+    self.navigationItem.titleView?.isHidden = !hasExpenses
+  }
 }
 
 extension ExpensesViewController: ExpenseListSelectorViewDelegate {
@@ -106,5 +116,15 @@ extension ExpensesViewController: ExpenseListSelectorViewDelegate {
     case .month:
       self.scrollView.scrollTo(page: 1, animated: true)
     }
+  }
+}
+
+extension ExpensesViewController: ExpensesViewProtocol {
+  
+  func reloadExpenses() {
+    self.updateEmptyView()
+    
+    self.dayListViewController.presenter.reloadExpenses()
+    self.monthListViewController.presenter.reloadExpenses()
   }
 }

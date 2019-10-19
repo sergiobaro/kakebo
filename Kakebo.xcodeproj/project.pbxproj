@@ -347,8 +347,8 @@
 		5A68398E22F85CAA0032369D /* List */ = {
 			isa = PBXGroup;
 			children = (
-				5A68399122F85D2A0032369D /* Presenter */,
 				5A68399222F85DD30032369D /* View */,
+				5A68399122F85D2A0032369D /* Presenter */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -356,8 +356,8 @@
 		5A68399122F85D2A0032369D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				5A68398C22F85A380032369D /* MonthExpenseListPresenter.swift */,
 				5AF2856522F3F44A001AC3DF /* DayExpenseListPresenter.swift */,
+				5A68398C22F85A380032369D /* MonthExpenseListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";

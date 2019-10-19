@@ -2,10 +2,12 @@ import Foundation
 
 class DefaultExpensesPresenter {
 
+  private weak var view: ExpensesViewProtocol?
   private let router: ExpensesRouter
   private let repository: ExpensesRepository
 
-  init(router: ExpensesRouter, repository: ExpensesRepository) {
+  init(view: ExpensesViewProtocol, router: ExpensesRouter, repository: ExpensesRepository) {
+    self.view = view
     self.router = router
     self.repository = repository
   }
@@ -18,6 +20,20 @@ extension DefaultExpensesPresenter: ExpensesPresenter {
   }
 
   func userTapAdd() {
-    self.router.navigateToAddExpense()
+    self.router.navigateToAddExpense(delegate: self)
+  }
+}
+
+extension DefaultExpensesPresenter: AddExpenseDelegate {
+  
+  func addExpenseDidSave(expense: Expense) {
+    self.view?.reloadExpenses()
+  }
+}
+
+extension DefaultExpensesPresenter: ExpenseListDelegate {
+  
+  func didSelectExpense(_ expense: Expense) {
+    self.router.navigateToExpenseDetail(expense: expense, delegate: self)
   }
 }

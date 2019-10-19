@@ -32,12 +32,12 @@ class DayExpenseListPresenter {
   private var expenses = ExpenseSections()
 
   private weak var view: ExpenseListViewProtocol?
-  private let router: ExpensesRouter
+  private weak var delegate: ExpenseListDelegate?
   private let repository: ExpensesRepository
   
-  init(view: ExpenseListViewProtocol, router: ExpensesRouter, repository: ExpensesRepository) {
+  init(view: ExpenseListViewProtocol, delegate: ExpenseListDelegate, repository: ExpensesRepository) {
     self.view = view
-    self.router = router
+    self.delegate = delegate
     self.repository = repository
   }
   
@@ -59,14 +59,22 @@ class DayExpenseListPresenter {
     let components = Calendar.current.dateComponents([.day, .month, .year], from: date)
     return Calendar.current.date(from: components) ?? date
   }
+  
+  private func reloadSections() {
+    let expenses = self.repository.allExpenses()
+    self.expenses = self.sections(from: expenses)
+    self.view?.reloadData()
+  }
 }
 
 extension DayExpenseListPresenter: ExpenseListPresenter {
   
-  func viewAppear() {
-    let expenses = self.repository.allExpenses()
-    
-    self.expenses = self.sections(from: expenses)
+  func viewIsReady() {
+    self.reloadSections()
+  }
+  
+  func reloadExpenses() {
+    self.reloadSections()
   }
   
   func numberOfSections() -> Int {
@@ -129,6 +137,7 @@ extension DayExpenseListPresenter: ExpenseListPresenter {
     guard let expense = self.expenses.element(at: indexPath) else {
       return
     }
-    self.router.navigateToExpenseDetail(expense: expense)
+    
+    self.delegate?.didSelectExpense(expense)
   }
 }
