@@ -2,13 +2,16 @@ import UIKit
 
 protocol ExpenseListViewProtocol: class {
 
+  func reloadData()
   func delete(section: Int)
   func deleteRow(at indexPath: IndexPath)
 }
 
 protocol ExpenseListPresenter {
 
-  func viewAppear()
+  func viewIsReady()
+  
+  func reloadExpenses()
 
   func numberOfSections() -> Int
   func numberOfExpenses(section: Int) -> Int
@@ -19,6 +22,12 @@ protocol ExpenseListPresenter {
   func deleteExpense(at indexPath: IndexPath)
 
   func userSelectExpense(indexPath: IndexPath)
+}
+
+protocol ExpenseListDelegate: class {
+  
+  func didSelectExpense(_ expense: Expense)
+  func didDeleteExpense(_ expense: Expense)
 }
 
 class ExpenseListViewController: UIViewController {
@@ -33,13 +42,8 @@ class ExpenseListViewController: UIViewController {
     super.viewDidLoad()
 
     self.setupTableView()
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-    self.presenter.viewAppear()
-    self.tableView.reloadData()
+    
+    self.presenter.viewIsReady()
   }
 
   // MARK: - Setup
@@ -129,6 +133,10 @@ extension ExpenseListViewController: UITableViewDelegate {
 }
 
 extension ExpenseListViewController: ExpenseListViewProtocol {
+  
+  func reloadData() {
+    self.tableView.reloadData()
+  }
 
   func delete(section: Int) {
     self.tableView.deleteSection(at: section, with: .left)

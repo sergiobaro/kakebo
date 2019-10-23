@@ -13,6 +13,7 @@ protocol AddExpenseView: class {
 class DefaultAddExpensePresenter {
   
   private weak var view: AddExpenseView?
+  private weak var delegate: AddExpenseDelegate?
   private let router: AddExpenseRouter
   private let repository: ExpensesRepository
   private let expense: Expense?
@@ -21,8 +22,15 @@ class DefaultAddExpensePresenter {
     return self.expense != nil
   }
   
-  init(view: AddExpenseView, router: AddExpenseRouter, repository: ExpensesRepository, expense: Expense?) {
+  init(
+    view: AddExpenseView,
+    delegate: AddExpenseDelegate,
+    router: AddExpenseRouter,
+    repository: ExpensesRepository,
+    expense: Expense?
+  ) {
     self.view = view
+    self.delegate = delegate
     self.router = router
     self.repository = repository
     self.expense = expense
@@ -141,8 +149,10 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
     }
     
     if self.isEditing && self.repository.update(expense: expense) {
+      self.delegate?.addExpenseDidSave(expense: expense)
       self.router.navigateBack()
     } else if self.repository.add(expense: expense) {
+      self.delegate?.addExpenseDidSave(expense: expense)
       self.router.navigateBack()
     }
   }

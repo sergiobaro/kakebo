@@ -1,5 +1,9 @@
 import UIKit
 
+protocol AddExpenseDelegate: class {
+  func addExpenseDidSave(expense: Expense)
+}
+
 class AddExpenseModuleBuilder {
   
   private let repository: ExpensesRepository
@@ -8,13 +12,14 @@ class AddExpenseModuleBuilder {
     self.repository = repository
   }
   
-  func buildAddExpense() -> UINavigationController? {
+  func buildAddExpense(delegate: AddExpenseDelegate) -> UINavigationController? {
     let viewController = AddExpenseViewController()
     
     let router = AddExpenseRouter(viewController: viewController)
     
     viewController.presenter = DefaultAddExpensePresenter(
       view: viewController,
+      delegate: delegate,
       router: router,
       repository: self.repository,
       expense: nil
@@ -23,13 +28,14 @@ class AddExpenseModuleBuilder {
     return UINavigationController(rootViewController: viewController)
   }
   
-  func buildEditExpense(expense: Expense) -> UINavigationController? {
+  func buildEditExpense(expense: Expense, delegate: AddExpenseDelegate) -> UINavigationController? {
     let viewController = AddExpenseViewController()
     
     let router = AddExpenseRouter(viewController: viewController)
     
     viewController.presenter = DefaultAddExpensePresenter(
       view: viewController,
+      delegate: delegate,
       router: router,
       repository: self.repository,
       expense: expense

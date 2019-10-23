@@ -38,11 +38,11 @@ class MonthExpenseListPresenter {
   private let amountFormatter = AmountFormatter()
   private var expenses = ExpenseSections()
 
-  private let router: ExpensesRouter
+  private weak var view: ExpenseListViewProtocol?
   private let repository: ExpensesRepository
 
-  init(router: ExpensesRouter, repository: ExpensesRepository) {
-    self.router = router
+  init(view: ExpenseListViewProtocol, repository: ExpensesRepository) {
+    self.view = view
     self.repository = repository
   }
 
@@ -64,17 +64,27 @@ class MonthExpenseListPresenter {
     let components = Calendar.current.dateComponents(components, from: date)
     return Calendar.current.date(from: components) ?? date
   }
-}
-
-extension MonthExpenseListPresenter: ExpenseListPresenter {
-
-  func viewAppear() {
+  
+  private func reloadSections() {
     let expensesByDay = self.repository.allExpenses()
       .group(by: { self.flat(date: $0.createdAt, components: [.day, .month, .year]) })
       .values
       .map({ ExpenseDay(expenses: $0) })
 
     self.expenses = self.sections(from: expensesByDay)
+    
+    self.view?.reloadData()
+  }
+}
+
+extension MonthExpenseListPresenter: ExpenseListPresenter {
+
+  func viewIsReady() {
+    self.reloadSections()
+  }
+  
+  func reloadExpenses() {
+    self.reloadSections()
   }
 
   func numberOfSections() -> Int {
@@ -117,12 +127,8 @@ extension MonthExpenseListPresenter: ExpenseListPresenter {
   func deleteExpense(at indexPath: IndexPath) {
     // Nothing
   }
-
+  
   func userSelectExpense(indexPath: IndexPath) {
-    guard let dayExpense = self.expenses.element(at: indexPath) else {
-      return
-    }
-
-    self.router.navigateToExpensesOnDay(dayExpense.date)
+    // Nothing
   }
 }
