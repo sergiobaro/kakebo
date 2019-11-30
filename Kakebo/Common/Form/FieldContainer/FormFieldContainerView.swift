@@ -3,16 +3,8 @@ import SnapKit
 
 class FormFieldContainerView: UIView {
 
-  weak var formDelegate: FormFieldDelegate? {
-    didSet {
-      self.fieldView.formDelegate = self.formDelegate
-    }
-  }
-  weak var formController: FormController? {
-    didSet {
-      self.fieldView.formController = self.formController
-    }
-  }
+  weak var formDelegate: FormFieldDelegate?
+  weak var formController: FormController?
 
   var field: FormFieldModel! {
     didSet {
@@ -25,8 +17,8 @@ class FormFieldContainerView: UIView {
 
   private weak var fieldView: FormFieldView! {
     didSet {
-      self.fieldView.formDelegate = self.formDelegate
-      self.fieldView.formController = self.formController
+      self.fieldView.formDelegate = self
+      self.fieldView.formController = self
     }
   }
 
@@ -126,5 +118,12 @@ extension FormFieldContainerView: FormFieldDelegate {
   func fieldDidEndEditing(_ field: FormFieldModel) {
     self.setInactiveStyle()
     self.formDelegate?.fieldDidEndEditing(field)
+  }
+}
+
+extension FormFieldContainerView: FormController {
+  
+  func showCustomKeyboard(_ keyboardView: UIView) {
+    self.formController?.showCustomKeyboard(keyboardView)
   }
 }
