@@ -1,3 +1,6 @@
+excluded:
+ - Mock.generated.swift
+
 disabled_rules:
   - identifier_name
   - line_length

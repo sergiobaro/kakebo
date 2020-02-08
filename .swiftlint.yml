@@ -1,6 +1,5 @@
 excluded:
  - Pods
- - KakeboTests/Mock.generated.swift
 
 disabled_rules:
 - trailing_whitespace
