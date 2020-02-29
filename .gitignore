@@ -6,3 +6,9 @@ slather/*
 
 # macOS
 .DS_Store
+
+# Pods
+Pods/
+
+# Bundle
+vendor/
