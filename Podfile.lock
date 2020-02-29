@@ -8,10 +8,10 @@ PODS:
     - Realm (= 3.19.0)
   - SnapKit (5.0.1)
   - Sourcery (0.17.0)
-  - SwiftyMocky (3.3.4):
-    - SwiftyMocky/Core (= 3.3.4)
-  - SwiftyMocky/Core (3.3.4):
-    - Sourcery (>= 0.16)
+  - SwiftyMocky (3.5.0):
+    - SwiftyMocky/Core (= 3.5.0)
+  - SwiftyMocky/Core (3.5.0):
+    - Sourcery (>= 0.17)
 
 DEPENDENCIES:
   - Nimble
@@ -38,7 +38,7 @@ SPEC CHECKSUMS:
   RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
-  SwiftyMocky: 7e4e7088166c013559a26ccc8b8d6508c3730826
+  SwiftyMocky: f277174040db328a9da04ce8efa81b6d6d5b9d7d
 
 PODFILE CHECKSUM: 340b3a3ffba7b1993b7a504177b5bec5a6aa261c
 
