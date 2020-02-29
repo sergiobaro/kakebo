@@ -7,10 +7,15 @@ protocol ExpenseListViewProtocol: class {
   func deleteRow(at indexPath: IndexPath)
 }
 
+protocol ExpenseListStandalonePresenter {
+  
+  func title() -> String?
+  func userTapClose()
+}
+
 protocol ExpenseListPresenter {
 
   func viewIsReady()
-  
   func reloadExpenses()
 
   func numberOfSections() -> Int
@@ -24,29 +29,35 @@ protocol ExpenseListPresenter {
   func userSelectExpense(indexPath: IndexPath)
 }
 
-protocol ExpenseListDelegate: class {
-  
-  func didSelectExpense(_ expense: Expense)
-  func didDeleteExpense(_ expense: Expense)
-}
-
 class ExpenseListViewController: UIViewController {
 
   @IBOutlet private weak var tableView: UITableView!
 
   var presenter: ExpenseListPresenter!
+  var standalonePresenter: ExpenseListStandalonePresenter?
 
   // MARK: - View lifecycle
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.setupNavigationBar()
     self.setupTableView()
     
     self.presenter.viewIsReady()
+    self.title = self.standalonePresenter?.title()
   }
 
   // MARK: - Setup
+  
+  private func setupNavigationBar() {
+    self.navigationItem.rightBarButtonItem = .init(
+      title: "Close",
+      style: .plain,
+      target: self,
+      action: #selector(tapClose)
+    )
+  }
 
   private func setupTableView() {
     self.tableView.register(ExpenseListCell.self)
@@ -58,27 +69,33 @@ class ExpenseListViewController: UIViewController {
     self.tableView.rowHeight = UITableView.automaticDimension
     self.tableView.estimatedRowHeight = ExpenseListCell.height
 
-    self.tableView.sectionHeaderHeight = ExpenseListHeaderView.height
-    self.tableView.estimatedSectionHeaderHeight = ExpenseListHeaderView.height
-
     self.tableView.tableFooterView = UIView()
     self.tableView.separatorInset = .zero
     self.tableView.separatorColor = .separator
     self.tableView.clipsToBounds = false
   }
+  
+  // MARK: - Action
+  
+  @objc private func tapClose() {
+    self.standalonePresenter?.userTapClose()
+  }
 
   // MARK: - Private
 
-  private func fill(header: ExpenseListHeaderView?, section: Int) {
-    let expenseSection = self.presenter.expenseSection(for: section)
-    header?.titleLabel.text = expenseSection?.title
-    header?.amountLabel.text = expenseSection?.totalAmount
+  private func fill(header: ExpenseListHeaderView, expenseSection: ExpenseListSectionViewModel) {
+    header.titleLabel.text = expenseSection.title
+    header.amountLabel.text = expenseSection.totalAmount
   }
 
   func refreshHeader(at section: Int) {
-    let header = self.tableView.headerView(forSection: section) as? ExpenseListHeaderView
-    self.fill(header: header, section: section)
-    header?.setNeedsDisplay()
+    guard let expenseSection = self.presenter.expenseSection(for: section),
+      let header = self.tableView.headerView(forSection: section) as? ExpenseListHeaderView else {
+        return
+    }
+    
+    self.fill(header: header, expenseSection: expenseSection)
+    header.setNeedsDisplay()
   }
 }
 
@@ -87,10 +104,14 @@ extension ExpenseListViewController: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return self.presenter.numberOfSections()
   }
-
+  
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = tableView.dequeue(ExpenseListHeaderView.self)
-    self.fill(header: header, section: section)
+    guard let expenseSection = self.presenter.expenseSection(for: section),
+      let header = tableView.dequeue(ExpenseListHeaderView.self) else {
+        return nil
+    }
+
+    self.fill(header: header, expenseSection: expenseSection)
 
     return header
   }
@@ -114,6 +135,14 @@ extension ExpenseListViewController: UITableViewDataSource {
 }
 
 extension ExpenseListViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    if self.presenter.expenseSection(for: section) == nil {
+      return 0
+    } else {
+      return ExpenseListHeaderView.height
+    }
+  }
 
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
     return self.presenter.canDelete(at: indexPath) ? .delete : .none

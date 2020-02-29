@@ -19,6 +19,10 @@ struct ExpenseDay: Comparable {
   }
 }
 
+protocol MonthExpenseListDelegate: class {
+  func didSelectDay(_ expenseDay: ExpenseDay)
+}
+
 class MonthExpenseListPresenter {
 
   private typealias ExpenseSections = Sections<Date, ExpenseDay>
@@ -39,10 +43,12 @@ class MonthExpenseListPresenter {
   private var expenses = ExpenseSections()
 
   private weak var view: ExpenseListViewProtocol?
+  private weak var delegate: MonthExpenseListDelegate?
   private let repository: ExpensesRepository
 
-  init(view: ExpenseListViewProtocol, repository: ExpensesRepository) {
+  init(view: ExpenseListViewProtocol, delegate: MonthExpenseListDelegate, repository: ExpensesRepository) {
     self.view = view
+    self.delegate = delegate
     self.repository = repository
   }
 
@@ -117,7 +123,7 @@ extension MonthExpenseListPresenter: ExpenseListPresenter {
   }
 
   func canSelect(at indexPath: IndexPath) -> Bool {
-    return false
+    return true
   }
 
   func canDelete(at indexPath: IndexPath) -> Bool {
@@ -129,6 +135,10 @@ extension MonthExpenseListPresenter: ExpenseListPresenter {
   }
   
   func userSelectExpense(indexPath: IndexPath) {
-    // Nothing
+    guard let expense = self.expenses.element(at: indexPath) else {
+      return
+    }
+    
+    self.delegate?.didSelectDay(expense)
   }
 }

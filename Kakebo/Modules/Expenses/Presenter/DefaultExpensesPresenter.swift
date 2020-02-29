@@ -31,7 +31,7 @@ extension DefaultExpensesPresenter: AddExpenseDelegate {
   }
 }
 
-extension DefaultExpensesPresenter: ExpenseListDelegate {
+extension DefaultExpensesPresenter: DayExpenseListDelegate {
   
   func didSelectExpense(_ expense: Expense) {
     self.router.navigateToExpenseDetail(expense: expense, delegate: self)
@@ -40,4 +40,18 @@ extension DefaultExpensesPresenter: ExpenseListDelegate {
   func didDeleteExpense(_ expense: Expense) {
     self.view?.reloadExpenses()
   }
+}
+
+extension DefaultExpensesPresenter: MonthExpenseListDelegate {
+  
+  func didSelectDay(_ expenseDay: ExpenseDay) {
+    self.router.navigateToExpenseDayList(date: expenseDay.date, delegate: self)
+  }
+}
+
+extension DefaultExpensesPresenter: ExpenseListDelegate {
+  
+//  func didDeleteExpense(_ expense: Expense) {
+//    self.view?.reloadExpenses()
+//  }
 }
