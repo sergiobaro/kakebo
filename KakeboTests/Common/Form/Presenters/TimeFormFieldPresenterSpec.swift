@@ -14,7 +14,7 @@ class TimeFormFieldPresenterSpec: QuickSpec {
       beforeEach {
         viewMock = InputFormFieldViewProtocolMock()
         formDelegateMock = FormFieldDelegateMock()
-        field = FormFieldModel(type: .time, identifier: "time", title: "Time", validators: [], value: "0000" as Any)
+        field = FormFieldModel(type: .time, identifier: "time", title: "Time", validators: [], value: nil)
 
         presenter = TimeFormFieldPresenter(
           view: viewMock,
@@ -25,7 +25,7 @@ class TimeFormFieldPresenterSpec: QuickSpec {
       }
 
       it("empty state") {
-        expect(presenter.hasText).to(beTrue())
+        expect(presenter.hasText).to(beFalse())
 
         Verify(viewMock, .updateText("00:00"))
       }
