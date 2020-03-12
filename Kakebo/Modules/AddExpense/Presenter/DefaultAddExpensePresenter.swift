@@ -17,6 +17,8 @@ class DefaultAddExpensePresenter {
   private let router: AddExpenseRouter
   private let repository: ExpensesRepository
   private let expense: Expense?
+  
+  private let timeFormatter = TimeFormatter()
 
   private var isEditing: Bool {
     return self.expense != nil
@@ -50,14 +52,14 @@ class DefaultAddExpensePresenter {
     let name = fields.first(where: { $0.identifier == "name" })?.value as? String
     let amount = fields.first(where: { $0.identifier == "amount" })?.value as? Int
     let date = fields.first(where: { $0.identifier == "date" })?.value as? Date
-    let time = fields.first(where: { $0.identifier == "time" })?.value as? Date
+    let time = fields.first(where: { $0.identifier == "time" })?.value as? String
 
     let createdAt = self.createdAt(date: date, time: time)
 
     return self.expense(name: name, amount: amount, createdAt: createdAt)
   }
 
-  private func createdAt(date: Date?, time: Date?) -> Date? {
+  private func createdAt(date: Date?, time: String?) -> Date? {
     guard
       let date = date,
       let time = time
@@ -66,12 +68,20 @@ class DefaultAddExpensePresenter {
     }
 
     var dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
-    let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
+    let timeComponents = self.timeComponents(from: time)
 
     dateComponents.hour = timeComponents.hour
     dateComponents.minute = timeComponents.minute
 
     return Calendar.current.date(from: dateComponents)
+  }
+  
+  private func timeComponents(from time: String) -> DateComponents {
+    let components = time.split(separator: ":")
+    let hour = Int(components[0])
+    let minute = Int(components[1])
+    
+    return DateComponents(hour: hour, minute: minute)
   }
 
   private func expense(name: String?, amount: Int?, createdAt: Date?) -> Expense? {
@@ -118,8 +128,8 @@ class DefaultAddExpensePresenter {
       type: .time,
       identifier: "time",
       title: localize("Time"),
-      validators: [NotNilValidator()],
-      value: expense?.createdAt ?? Date()
+      validators: [NotNilValidator(), TimeValidator()],
+      value: self.timeFormatter.string(date: expense?.createdAt ?? Date())
     )
 
     return [nameField, amountField, dateField, timeField]

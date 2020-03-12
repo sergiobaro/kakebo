@@ -1,10 +1,10 @@
 import Foundation
 
-class DateFormFieldPresenter {
+class TimeFormFieldPresenter {
 
   private weak var view: InputFormFieldViewProtocol?
   private weak var formDelegate: FormFieldDelegate?
-  private let formatter: GeneralDateFormatter
+  private let formatter: TimeFormatter
   private var field: FormFieldModel
   private var text = ""
 
@@ -12,34 +12,29 @@ class DateFormFieldPresenter {
     view: InputFormFieldViewProtocol,
     formDelegate: FormFieldDelegate,
     field: FormFieldModel,
-    formatter: GeneralDateFormatter
+    formatter: TimeFormatter
   ) {
     self.view = view
     self.formDelegate = formDelegate
     self.field = field
     self.formatter = formatter
-
-    self.updateValue(date: field.value as? Date)
-  }
-
-  private func updateValue(date: Date?) {
-    let string = self.formatter.string(date: date ?? Date())
-    self.updateValue(string: string)
+    
+    self.updateValue(string: field.value as? String ?? "")
   }
 
   private func updateValue(string: String) {
     self.text = self.formatter.trim(string: string)
+    
+    let value = self.formatter.string(string: self.text)
+    self.view?.updateText(value)
 
-    let formattedText = self.formatter.string(string: self.text)
-    self.view?.updateText(formattedText)
-
-    self.field.value = self.formatter.date(string: self.text)
+    self.field.value = value
     self.formDelegate?.fieldDidChange(self.field)
   }
 }
 
-extension DateFormFieldPresenter: InputFormFieldPresenter {
-
+extension TimeFormFieldPresenter: InputFormFieldPresenter {
+  
   var hasText: Bool {
     return !self.text.isEmpty
   }
@@ -47,6 +42,9 @@ extension DateFormFieldPresenter: InputFormFieldPresenter {
   func userInsertText(_ text: String) {
     guard text != "\n" else {
       self.formDelegate?.fieldDidEndEditing(self.field)
+      return
+    }
+    guard Int(text) != nil else {
       return
     }
 

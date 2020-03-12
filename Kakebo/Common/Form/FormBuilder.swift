@@ -95,11 +95,11 @@ private extension FormBuilder {
     let fieldContainer = self.makeFieldContainerView(field)
 
     let inputField = self.makeInputFieldView()
-    inputField.presenter = DateFormFieldPresenter(
+    inputField.presenter = TimeFormFieldPresenter(
       view: inputField,
       formDelegate: fieldContainer,
       field: field,
-      formatter: GeneralDateFormatter(fields: ["HH", "mm"], separator: " : ")
+      formatter: TimeFormatter()
     )
     fieldContainer.setFieldView(inputField)
 
