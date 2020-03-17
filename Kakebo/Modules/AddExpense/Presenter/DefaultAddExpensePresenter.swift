@@ -68,7 +68,9 @@ class DefaultAddExpensePresenter {
     }
 
     var dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
-    let timeComponents = self.timeComponents(from: time)
+    guard let timeComponents = self.timeComponents(from: time) else {
+      return nil
+    }
 
     dateComponents.hour = timeComponents.hour
     dateComponents.minute = timeComponents.minute
@@ -76,10 +78,15 @@ class DefaultAddExpensePresenter {
     return Calendar.current.date(from: dateComponents)
   }
   
-  private func timeComponents(from time: String) -> DateComponents {
+  private func timeComponents(from time: String) -> DateComponents? {
     let components = time.split(separator: ":")
-    let hour = Int(components[0])
-    let minute = Int(components[1])
+    
+    guard let hour = Int(components[0]), hour < 60 else {
+      return nil
+    }
+    guard let minute = Int(components[1]), minute < 60 else {
+      return nil
+    }
     
     return DateComponents(hour: hour, minute: minute)
   }
