@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode11.3
+osx_image: xcode11.4
 
 env:
   - CODECOV_TOKEN="dad7732d-7fb3-472e-82c0-a3234ce83b8d"
