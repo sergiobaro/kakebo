@@ -23,6 +23,6 @@ struct FormStyle {
   // custom keyboard
   static let customKeyboardHeight = CGFloat(335.0)
   static let customKeyboardAnimationDuration = TimeInterval(0.25)
-  static let customKeyboardBackgroundColor = UIColor.groupTableViewBackground
+  static let customKeyboardBackgroundColor = UIColor.systemGroupedBackground
   
 }
