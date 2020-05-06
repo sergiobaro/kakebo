@@ -19,6 +19,17 @@ extension Array {
   }
   
   func isValid(index: Int) -> Bool {
-    return (index >= self.startIndex && index < self.endIndex)
+    self.indices.contains(index)
+  }
+}
+
+extension Array where Element: Equatable {
+
+  mutating func remove(_ element: Element) {
+    guard let index = self.firstIndex(of: element) else {
+      return
+    }
+
+    self.remove(at: index)
   }
 }

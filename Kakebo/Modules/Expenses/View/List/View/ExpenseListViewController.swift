@@ -125,9 +125,7 @@ extension ExpenseListViewController: UITableViewDataSource {
     cell.selectionStyle = self.presenter.canSelect(at: indexPath) ? .default : .none
 
     if let expense = self.presenter.expense(at: indexPath) {
-      cell.nameLabel.text = expense.name
-      cell.amountLabel.text = expense.amount
-      cell.dateLabel.text = expense.date
+      cell.fill(with: expense)
     }
 
     return cell

@@ -48,6 +48,16 @@
                ReferencedContainer = "container:Kakebo.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D9E46434245E9CB400A9DD2D"
+               BuildableName = "FormTests.xctest"
+               BlueprintName = "FormTests"
+               ReferencedContainer = "container:Kakebo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

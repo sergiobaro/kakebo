@@ -1,19 +1,8 @@
 import UIKit
 
-protocol AddExpensePresenter {
-  
-  func viewIsReady()
-  
-  func userTapDone()
-  func userTapCancel()
-
-  func userChanged(fields: [FormFieldModel])
-  
-}
-
 class AddExpenseViewController: UIViewController {
 
-  private var formView: FormView!
+  private var formView: FormView?
 
   var presenter: AddExpensePresenter!
   
@@ -30,13 +19,13 @@ class AddExpenseViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.formView.focus()
+    self.formView?.focus()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
-    self.formView.blur()
+    self.formView?.blur()
   }
   
   // MARK: - Setup
@@ -69,11 +58,16 @@ class AddExpenseViewController: UIViewController {
 extension AddExpenseViewController: FormViewDelegate {
 
   func formFieldDidChange(_ field: FormFieldModel) {
-    self.presenter.userChanged(fields: self.formView.allFields())
+    guard let fields = self.formView?.allFields() else { return }
+    self.presenter.userChanged(fields: fields)
   }
 
   func formDidFinish(with fields: [FormFieldModel]) {
     self.presenter.userTapDone()
+  }
+
+  func formDidSelect(_ field: FormFieldModel) {
+    self.presenter.userDidSelectField(field)
   }
 }
 
@@ -84,11 +78,13 @@ extension AddExpenseViewController: AddExpenseView {
   }
 
   func display(fields: [FormFieldModel]) {
+    self.formView?.removeFromSuperview()
+
     self.formView = FormBuilder()
       .add(fields: fields)
-      .add(to: self.view)
+      .add(to: self.view, viewController: self)
 
-    self.formView.delegate = self
+    self.formView?.delegate = self
   }
   
   func displaySave(enabled: Bool) {
@@ -96,6 +92,6 @@ extension AddExpenseViewController: AddExpenseView {
   }
 
   func currentFields() -> [FormFieldModel] {
-    return self.formView.allFields()
+    return self.formView?.allFields() ?? []
   }
 }

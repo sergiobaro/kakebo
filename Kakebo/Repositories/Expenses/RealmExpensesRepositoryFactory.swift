@@ -3,7 +3,7 @@ import RealmSwift
 
 class RealmExpensesRepositoryFactory {
 
-  private static let currentSchemaVersion: UInt64 = 2
+  private static let currentSchemaVersion: UInt64 = 3
 
   static func make() throws -> ExpensesRepository {
     let config = Realm.Configuration(
@@ -17,11 +17,14 @@ class RealmExpensesRepositoryFactory {
           migration.enumerateObjects(ofType: ExpenseRealm.className(), { _, newExpense in
             newExpense!["expenseId"] = UUID().uuidString
           })
+        case 2:
+          migration.enumerateObjects(ofType: ExpenseRealm.className()) { _, newExpense in
+            newExpense!["categories"] = List<CategoryRealm>()
+          }
         default:
           break
         }
-    }
-    )
+    })
 
     let realm = try Realm(configuration: config)
     return RealmExpensesRepository(realm: realm)

@@ -119,6 +119,10 @@ extension FormFieldContainerView: FormFieldDelegate {
     self.setInactiveStyle()
     self.formDelegate?.fieldDidEndEditing(field)
   }
+
+  func fieldDidSelect(_ field: FormFieldModel) {
+    self.formDelegate?.fieldDidSelect(field)
+  }
 }
 
 extension FormFieldContainerView: FormController {
@@ -126,4 +130,9 @@ extension FormFieldContainerView: FormController {
   func showCustomKeyboard(_ keyboardView: UIView) {
     self.formController?.showCustomKeyboard(keyboardView)
   }
+
+  func pushViewController(_ viewController: UIViewController) {
+    self.formController?.pushViewController(viewController)
+  }
+
 }

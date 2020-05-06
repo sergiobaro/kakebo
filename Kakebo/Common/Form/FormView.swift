@@ -5,6 +5,7 @@ protocol FormViewDelegate: class {
 
   func formFieldDidChange(_ field: FormFieldModel)
   func formDidFinish(with fields: [FormFieldModel])
+  func formDidSelect(_ field: FormFieldModel)
 
 }
 
@@ -14,6 +15,7 @@ protocol FormFieldDelegate: class {
   func fieldDidChange(_ field: FormFieldModel)
   func fieldDidBeginEditing(_ field: FormFieldModel)
   func fieldDidEndEditing(_ field: FormFieldModel)
+  func fieldDidSelect(_ field: FormFieldModel)
 
 }
 
@@ -21,18 +23,22 @@ protocol FormFieldDelegate: class {
 protocol FormController: class {
   
   func showCustomKeyboard(_ keyboardView: UIView)
+  func pushViewController(_ viewController: UIViewController)
   
 }
 
 class FormView: UIView {
 
   weak var delegate: FormViewDelegate?
-  
+
+  private weak var viewController: UIViewController?
+
   private var fields = [FormFieldContainerView]()
   private var editing = false
   private weak var customKeyboardContainer: UIView!
 
-  init(fields: [FormFieldContainerView]) {
+  init(viewController: UIViewController, fields: [FormFieldContainerView]) {
+    self.viewController = viewController
     self.fields = fields
 
     super.init(frame: .zero)
@@ -177,6 +183,11 @@ extension FormView: FormFieldDelegate {
       self.delegate?.formDidFinish(with: self.allFields())
     }
   }
+
+  func fieldDidSelect(_ field: FormFieldModel) {
+    self.delegate?.formDidSelect(field)
+  }
+
 }
 
 extension FormView: FormController {
@@ -200,4 +211,9 @@ extension FormView: FormController {
       self.customKeyboardContainer.superview?.layoutIfNeeded()
     }
   }
+
+  func pushViewController(_ viewController: UIViewController) {
+
+  }
+
 }

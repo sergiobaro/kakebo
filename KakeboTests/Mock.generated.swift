@@ -60,21 +60,33 @@ open class FormControllerMock: FormController, Mock {
 		perform?(`keyboardView`)
     }
 
+    open func pushViewController(_ viewController: UIViewController) {
+        addInvocation(.m_pushViewController__viewController(Parameter<UIViewController>.value(`viewController`)))
+		let perform = methodPerformValue(.m_pushViewController__viewController(Parameter<UIViewController>.value(`viewController`))) as? (UIViewController) -> Void
+		perform?(`viewController`)
+    }
+
 
     fileprivate enum MethodType {
         case m_showCustomKeyboard__keyboardView(Parameter<UIView>)
+        case m_pushViewController__viewController(Parameter<UIViewController>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
             case (.m_showCustomKeyboard__keyboardView(let lhsKeyboardview), .m_showCustomKeyboard__keyboardView(let rhsKeyboardview)):
                 guard Parameter.compare(lhs: lhsKeyboardview, rhs: rhsKeyboardview, with: matcher) else { return false } 
                 return true 
+            case (.m_pushViewController__viewController(let lhsViewcontroller), .m_pushViewController__viewController(let rhsViewcontroller)):
+                guard Parameter.compare(lhs: lhsViewcontroller, rhs: rhsViewcontroller, with: matcher) else { return false } 
+                return true 
+            default: return false
             }
         }
 
         func intValue() -> Int {
             switch self {
             case let .m_showCustomKeyboard__keyboardView(p0): return p0.intValue
+            case let .m_pushViewController__viewController(p0): return p0.intValue
             }
         }
     }
@@ -94,6 +106,7 @@ open class FormControllerMock: FormController, Mock {
         fileprivate var method: MethodType
 
         public static func showCustomKeyboard(_ keyboardView: Parameter<UIView>) -> Verify { return Verify(method: .m_showCustomKeyboard__keyboardView(`keyboardView`))}
+        public static func pushViewController(_ viewController: Parameter<UIViewController>) -> Verify { return Verify(method: .m_pushViewController__viewController(`viewController`))}
     }
 
     public struct Perform {
@@ -102,6 +115,9 @@ open class FormControllerMock: FormController, Mock {
 
         public static func showCustomKeyboard(_ keyboardView: Parameter<UIView>, perform: @escaping (UIView) -> Void) -> Perform {
             return Perform(method: .m_showCustomKeyboard__keyboardView(`keyboardView`), performs: perform)
+        }
+        public static func pushViewController(_ viewController: Parameter<UIViewController>, perform: @escaping (UIViewController) -> Void) -> Perform {
+            return Perform(method: .m_pushViewController__viewController(`viewController`), performs: perform)
         }
     }
 
@@ -220,11 +236,18 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
 		perform?(`field`)
     }
 
+    open func fieldDidSelect(_ field: FormFieldModel) {
+        addInvocation(.m_fieldDidSelect__field(Parameter<FormFieldModel>.value(`field`)))
+		let perform = methodPerformValue(.m_fieldDidSelect__field(Parameter<FormFieldModel>.value(`field`))) as? (FormFieldModel) -> Void
+		perform?(`field`)
+    }
+
 
     fileprivate enum MethodType {
         case m_fieldDidChange__field(Parameter<FormFieldModel>)
         case m_fieldDidBeginEditing__field(Parameter<FormFieldModel>)
         case m_fieldDidEndEditing__field(Parameter<FormFieldModel>)
+        case m_fieldDidSelect__field(Parameter<FormFieldModel>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -237,6 +260,9 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
             case (.m_fieldDidEndEditing__field(let lhsField), .m_fieldDidEndEditing__field(let rhsField)):
                 guard Parameter.compare(lhs: lhsField, rhs: rhsField, with: matcher) else { return false } 
                 return true 
+            case (.m_fieldDidSelect__field(let lhsField), .m_fieldDidSelect__field(let rhsField)):
+                guard Parameter.compare(lhs: lhsField, rhs: rhsField, with: matcher) else { return false } 
+                return true 
             default: return false
             }
         }
@@ -246,6 +272,7 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
             case let .m_fieldDidChange__field(p0): return p0.intValue
             case let .m_fieldDidBeginEditing__field(p0): return p0.intValue
             case let .m_fieldDidEndEditing__field(p0): return p0.intValue
+            case let .m_fieldDidSelect__field(p0): return p0.intValue
             }
         }
     }
@@ -267,6 +294,7 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
         public static func fieldDidChange(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_fieldDidChange__field(`field`))}
         public static func fieldDidBeginEditing(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_fieldDidBeginEditing__field(`field`))}
         public static func fieldDidEndEditing(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_fieldDidEndEditing__field(`field`))}
+        public static func fieldDidSelect(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_fieldDidSelect__field(`field`))}
     }
 
     public struct Perform {
@@ -281,6 +309,9 @@ open class FormFieldDelegateMock: FormFieldDelegate, Mock {
         }
         public static func fieldDidEndEditing(_ field: Parameter<FormFieldModel>, perform: @escaping (FormFieldModel) -> Void) -> Perform {
             return Perform(method: .m_fieldDidEndEditing__field(`field`), performs: perform)
+        }
+        public static func fieldDidSelect(_ field: Parameter<FormFieldModel>, perform: @escaping (FormFieldModel) -> Void) -> Perform {
+            return Perform(method: .m_fieldDidSelect__field(`field`), performs: perform)
         }
     }
 
@@ -393,10 +424,17 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
 		perform?(`fields`)
     }
 
+    open func formDidSelect(_ field: FormFieldModel) {
+        addInvocation(.m_formDidSelect__field(Parameter<FormFieldModel>.value(`field`)))
+		let perform = methodPerformValue(.m_formDidSelect__field(Parameter<FormFieldModel>.value(`field`))) as? (FormFieldModel) -> Void
+		perform?(`field`)
+    }
+
 
     fileprivate enum MethodType {
         case m_formFieldDidChange__field(Parameter<FormFieldModel>)
         case m_formDidFinish__with_fields(Parameter<[FormFieldModel]>)
+        case m_formDidSelect__field(Parameter<FormFieldModel>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -406,6 +444,9 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
             case (.m_formDidFinish__with_fields(let lhsFields), .m_formDidFinish__with_fields(let rhsFields)):
                 guard Parameter.compare(lhs: lhsFields, rhs: rhsFields, with: matcher) else { return false } 
                 return true 
+            case (.m_formDidSelect__field(let lhsField), .m_formDidSelect__field(let rhsField)):
+                guard Parameter.compare(lhs: lhsField, rhs: rhsField, with: matcher) else { return false } 
+                return true 
             default: return false
             }
         }
@@ -414,6 +455,7 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
             switch self {
             case let .m_formFieldDidChange__field(p0): return p0.intValue
             case let .m_formDidFinish__with_fields(p0): return p0.intValue
+            case let .m_formDidSelect__field(p0): return p0.intValue
             }
         }
     }
@@ -434,6 +476,7 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
 
         public static func formFieldDidChange(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_formFieldDidChange__field(`field`))}
         public static func formDidFinish(with fields: Parameter<[FormFieldModel]>) -> Verify { return Verify(method: .m_formDidFinish__with_fields(`fields`))}
+        public static func formDidSelect(_ field: Parameter<FormFieldModel>) -> Verify { return Verify(method: .m_formDidSelect__field(`field`))}
     }
 
     public struct Perform {
@@ -445,6 +488,9 @@ open class FormViewDelegateMock: FormViewDelegate, Mock {
         }
         public static func formDidFinish(with fields: Parameter<[FormFieldModel]>, perform: @escaping ([FormFieldModel]) -> Void) -> Perform {
             return Perform(method: .m_formDidFinish__with_fields(`fields`), performs: perform)
+        }
+        public static func formDidSelect(_ field: Parameter<FormFieldModel>, perform: @escaping (FormFieldModel) -> Void) -> Perform {
+            return Perform(method: .m_formDidSelect__field(`field`), performs: perform)
         }
     }
 

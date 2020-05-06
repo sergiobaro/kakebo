@@ -20,8 +20,8 @@ class FormBuilder {
     return self
   }
 
-  func add(to view: UIView) -> FormView {
-    let formView = self.makeFormView()
+  func add(to view: UIView, viewController: UIViewController) -> FormView {
+    let formView = self.makeFormView(viewController: viewController)
 
     view.addSubview(formView)
     formView.snp.makeConstraints({ $0.top.left.right.equalToSuperview() })
@@ -32,8 +32,8 @@ class FormBuilder {
 
 private extension FormBuilder {
 
-  func makeFormView() -> FormView {
-    let formView = FormView(fields: self.fields)
+  func makeFormView(viewController: UIViewController) -> FormView {
+    let formView = FormView(viewController: viewController, fields: self.fields)
 
     return formView
   }
@@ -50,6 +50,8 @@ private extension FormBuilder {
       return self.makeTimeField(field)
     case .calendar:
       return self.makeCalendarField(field)
+    case .options:
+      return self.makeOptionsField(field)
     }
   }
 
@@ -112,6 +114,15 @@ private extension FormBuilder {
     let calendarField = UIView.loadFromNib(type: CalendarFormFieldView.self)
     fieldContainer.setFieldView(calendarField)
     
+    return fieldContainer
+  }
+
+  func makeOptionsField(_ field: FormFieldModel) -> FormFieldContainerView {
+    let fieldContainer = self.makeFieldContainerView(field)
+
+    let optionsField = UIView.loadFromNib(type: OptionsFormFieldView.self)
+    fieldContainer.setFieldView(optionsField)
+
     return fieldContainer
   }
 

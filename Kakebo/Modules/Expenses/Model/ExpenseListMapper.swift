@@ -21,7 +21,8 @@ struct ExpenseListMapper {
     return ExpenseListViewModel(
       name: expense.name,
       amount: self.amountFormatter.string(integer: expense.amount),
-      date: self.createdAtDateFormatter.string(from: expense.createdAt)
+      date: self.createdAtDateFormatter.string(from: expense.createdAt),
+      categories: expense.categories.map({ $0.name }).joined(separator: ", ")
     )
   }
   

@@ -58,7 +58,8 @@ class MonthExpenseListPresenter {
     return ExpenseListViewModel(
       name: self.rowDateFormatter.string(from: expense.date),
       amount: self.amountFormatter.string(integer: expense.amount),
-      date: ""
+      date: "",
+      categories: ""
     )
   }
 

@@ -1,14 +1,28 @@
 import UIKit
 
 class ExpensesModuleBuilder {
+
+  private let repository: ExpensesRepository
+  private let addExpenseModuleBuilder: AddExpenseModuleBuilder
+  private let expenseListModuleBuilder: ExpenseListModuleBuilder
+
+  init(
+    repository: ExpensesRepository,
+    addExpenseModuleBuilder: AddExpenseModuleBuilder,
+    expenseListModuleBuilder: ExpenseListModuleBuilder
+  ) {
+    self.repository = repository
+    self.addExpenseModuleBuilder = addExpenseModuleBuilder
+    self.expenseListModuleBuilder = expenseListModuleBuilder
+  }
   
-  func build(repository: ExpensesRepository) -> UIViewController? {
+  func build() -> UIViewController? {
     let viewController = ExpensesViewController()
     
     let router = ExpensesRouter(
       viewController: viewController,
-      addExpenseModuleBuilder: AddExpenseModuleBuilder(repository: repository),
-      expenseListModuleBuilder: ExpenseListModuleBuilder(repository: repository)
+      addExpenseModuleBuilder: self.addExpenseModuleBuilder,
+      expenseListModuleBuilder: self.expenseListModuleBuilder
     )
 
     let presenter = DefaultExpensesPresenter(

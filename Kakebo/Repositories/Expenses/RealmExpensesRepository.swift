@@ -7,11 +7,23 @@ class ExpenseRealm: Object {
   @objc dynamic var name = ""
   @objc dynamic var amount = 0
   @objc dynamic var createdAt = Date()
+  dynamic var categories = List<CategoryRealm>()
   
   override static func primaryKey() -> String? {
     return "expenseId"
   }
   
+}
+
+class CategoryRealm: Object {
+
+  @objc dynamic var categoryId = UUID().uuidString
+  @objc dynamic var name = ""
+
+  override class func primaryKey() -> String? {
+    return "categoryId"
+  }
+
 }
 
 class RealmExpensesRepository {
@@ -29,36 +41,56 @@ class RealmExpensesRepository {
   }
   
   private func map(expense: ExpenseRealm) -> Expense {
-    return Expense(
+    Expense(
       expenseId: expense.expenseId,
       name: expense.name,
       amount: expense.amount,
-      createdAt: expense.createdAt
+      createdAt: expense.createdAt,
+      categories: expense.categories.map(self.map(category:))
     )
+  }
+
+  private func map(category: CategoryRealm) -> ExpenseCategory {
+    ExpenseCategory(
+      categoryId: category.categoryId,
+      name: category.name
+    )
+  }
+
+  private func findOrCreateCategory(_ category: ExpenseCategory) -> CategoryRealm {
+    if let categoryRealm = self.realm.object(ofType: CategoryRealm.self, forPrimaryKey: category.categoryId) {
+      return categoryRealm
+    }
+
+    let categoryRealm = CategoryRealm()
+    categoryRealm.name = category.name
+    categoryRealm.categoryId = category.categoryId
+    return categoryRealm
   }
 }
 
 extension RealmExpensesRepository: ExpensesRepository {
   
   func numberOfExpenses() -> Int {
-    return self.realm.objects(ExpenseRealm.self).count
+    self.realm
+      .objects(ExpenseRealm.self).count
   }
   
   func allExpenses() -> [Expense] {
-    return self.realm
+    self.realm
       .objects(ExpenseRealm.self)
       .sorted(byKeyPath: "createdAt", ascending: false)
       .map(self.map(expense:))
   }
   
   func find(expenseId: String) -> Expense? {
-    return self.realm
+    self.realm
       .object(ofType: ExpenseRealm.self, forPrimaryKey: expenseId)
       .map(self.map(expense:))
   }
 
   func findBetween(start: Date, end: Date) -> [Expense] {
-    return self.realm
+    self.realm
       .objects(ExpenseRealm.self)
       .filter("createdAt BETWEEN %@", [start, end])
       .map(self.map(expense:))
@@ -107,6 +139,32 @@ extension RealmExpensesRepository: ExpensesRepository {
         expenseRealm.name = expense.name
         expenseRealm.amount = expense.amount
         expenseRealm.createdAt = expense.createdAt
+        expense.categories.forEach {
+          let categoryRealm = self.findOrCreateCategory($0)
+          expenseRealm.categories.append(categoryRealm)
+        }
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  func allCategories() -> [ExpenseCategory] {
+    self.realm
+      .objects(CategoryRealm.self)
+      .sorted(byKeyPath: "name", ascending: false)
+      .map(self.map(category:))
+  }
+
+  func addCategory(_ category: ExpenseCategory) -> Bool {
+    do {
+      try self.realm.write {
+        let categoryRealm = CategoryRealm()
+        categoryRealm.name = category.name
+        categoryRealm.categoryId = category.categoryId
+
+        realm.add(categoryRealm)
       }
       return true
     } catch {

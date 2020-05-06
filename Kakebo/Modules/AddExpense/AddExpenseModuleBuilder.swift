@@ -7,17 +7,25 @@ protocol AddExpenseDelegate: class {
 class AddExpenseModuleBuilder {
   
   private let repository: ExpensesRepository
+  private let categorySelectorModuleBuilder: CategorySelectorModuleBuilder
   
-  init(repository: ExpensesRepository) {
+  init(
+    repository: ExpensesRepository,
+    categorySelectorModuleBuilder: CategorySelectorModuleBuilder
+  ) {
     self.repository = repository
+    self.categorySelectorModuleBuilder = categorySelectorModuleBuilder
   }
   
   func buildAddExpense(delegate: AddExpenseDelegate) -> UINavigationController? {
     let viewController = AddExpenseViewController()
     
-    let router = AddExpenseRouter(viewController: viewController)
+    let router = AddExpenseRouter(
+      viewController: viewController,
+      categorySelectorModuleBuilder: self.categorySelectorModuleBuilder
+    )
     
-    viewController.presenter = DefaultAddExpensePresenter(
+    viewController.presenter = AddExpensePresenter(
       view: viewController,
       delegate: delegate,
       router: router,
@@ -31,9 +39,12 @@ class AddExpenseModuleBuilder {
   func buildEditExpense(expense: Expense, delegate: AddExpenseDelegate) -> UINavigationController? {
     let viewController = AddExpenseViewController()
     
-    let router = AddExpenseRouter(viewController: viewController)
+    let router = AddExpenseRouter(
+      viewController: viewController,
+      categorySelectorModuleBuilder: self.categorySelectorModuleBuilder
+    )
     
-    viewController.presenter = DefaultAddExpensePresenter(
+    viewController.presenter = AddExpensePresenter(
       view: viewController,
       delegate: delegate,
       router: router,

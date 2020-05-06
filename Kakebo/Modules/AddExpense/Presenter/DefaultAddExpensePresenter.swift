@@ -10,7 +10,15 @@ protocol AddExpenseView: class {
   
 }
 
-class DefaultAddExpensePresenter {
+enum ExpenseFormIdentifier: String {
+  case name
+  case amount
+  case date
+  case time
+  case categories
+}
+
+class AddExpensePresenter {
   
   private weak var view: AddExpenseView?
   private weak var delegate: AddExpenseDelegate?
@@ -20,9 +28,9 @@ class DefaultAddExpensePresenter {
   
   private let timeFormatter = TimeFormatter()
 
-  private var isEditing: Bool {
-    return self.expense != nil
-  }
+  private var isEditing: Bool { self.expense != nil }
+
+  private var selectedCategories = [ExpenseCategory]()
   
   init(
     view: AddExpenseView,
@@ -36,6 +44,7 @@ class DefaultAddExpensePresenter {
     self.router = router
     self.repository = repository
     self.expense = expense
+    self.selectedCategories = expense?.categories ?? []
   }
   
   // MARK: - Private
@@ -49,10 +58,10 @@ class DefaultAddExpensePresenter {
   }
 
   private func expense(with fields: [FormFieldModel]) -> Expense? {
-    let name = fields.first(where: { $0.identifier == "name" })?.value as? String
-    let amount = fields.first(where: { $0.identifier == "amount" })?.value as? Int
-    let date = fields.first(where: { $0.identifier == "date" })?.value as? Date
-    let time = fields.first(where: { $0.identifier == "time" })?.value as? String
+    let name = fields.first(where: { $0.identifier == ExpenseFormIdentifier.name.rawValue })?.value as? String
+    let amount = fields.first(where: { $0.identifier == ExpenseFormIdentifier.amount.rawValue })?.value as? Int
+    let date = fields.first(where: { $0.identifier == ExpenseFormIdentifier.date.rawValue })?.value as? Date
+    let time = fields.first(where: { $0.identifier == ExpenseFormIdentifier.time.rawValue })?.value as? String
 
     let createdAt = self.createdAt(date: date, time: time)
 
@@ -63,7 +72,7 @@ class DefaultAddExpensePresenter {
     guard
       let date = date,
       let time = time
-      else {
+    else {
         return nil
     }
 
@@ -81,10 +90,10 @@ class DefaultAddExpensePresenter {
   private func timeComponents(from time: String) -> DateComponents? {
     let components = time.split(separator: ":")
     
-    guard let hour = Int(components[0]), hour < 60 else {
-      return nil
-    }
-    guard let minute = Int(components[1]), minute < 60 else {
+    guard
+      let hour = Int(components[0]), hour < 60,
+      let minute = Int(components[1]), minute < 60
+    else {
       return nil
     }
     
@@ -97,7 +106,7 @@ class DefaultAddExpensePresenter {
       !name.isEmpty,
       let amount = amount,
       let createdAt = createdAt
-      else {
+    else {
         return nil
     }
 
@@ -105,45 +114,53 @@ class DefaultAddExpensePresenter {
       expenseId: self.expense?.expenseId ?? UUID().uuidString,
       name: name,
       amount: amount,
-      createdAt: createdAt
+      createdAt: createdAt,
+      categories: []
     )
   }
 
   private func fields(from expense: Expense?) -> [FormFieldModel] {
     let nameField = FormFieldModel(
       type: .text,
-      identifier: "name",
+      identifier: ExpenseFormIdentifier.name.rawValue,
       title: localize("Name"),
       validators: [NotEmptyValidator()],
       value: expense?.name
     )
     let amountField = FormFieldModel(
       type: .amount,
-      identifier: "amount",
+      identifier: ExpenseFormIdentifier.amount.rawValue,
       title: localize("Amount"),
       validators: [NotNilValidator()],
       value: expense?.amount ?? 0
     )
     let dateField = FormFieldModel(
       type: .date,
-      identifier: "date",
+      identifier: ExpenseFormIdentifier.date.rawValue,
       title: localize("Date"),
       validators: [NotNilValidator()],
       value: expense?.createdAt ?? Date()
     )
     let timeField = FormFieldModel(
       type: .time,
-      identifier: "time",
+      identifier: ExpenseFormIdentifier.time.rawValue,
       title: localize("Time"),
       validators: [NotNilValidator(), TimeValidator()],
       value: self.timeFormatter.string(date: expense?.createdAt ?? Date())
     )
+    let categoryField = FormFieldModel(
+      type: .options,
+      identifier: ExpenseFormIdentifier.categories.rawValue,
+      title: localize("Category"),
+      validators: [],
+      value: selectedCategories.map({ $0.name }).joined(separator: ", ")
+    )
 
-    return [nameField, amountField, dateField, timeField]
+    return [nameField, amountField, dateField, timeField, categoryField]
   }
 }
 
-extension DefaultAddExpensePresenter: AddExpensePresenter {
+extension AddExpensePresenter {
   
   func viewIsReady() {
     let title = self.isEditing ? "Edit" : "Add"
@@ -161,10 +178,12 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
   }
   
   func userTapDone() {
-    guard let expense = self.currentExpense() else {
+    guard var expense = self.currentExpense() else {
       return
     }
-    
+
+    expense.categories = selectedCategories
+
     if self.isEditing && self.repository.update(expense: expense) {
       self.delegate?.addExpenseDidSave(expense: expense)
       self.router.navigateBack()
@@ -176,5 +195,27 @@ extension DefaultAddExpensePresenter: AddExpensePresenter {
   
   func userTapCancel() {
     self.router.navigateBack()
+  }
+
+  func userDidSelectField(_ field: FormFieldModel) {
+    guard field.identifier == ExpenseFormIdentifier.categories.rawValue else { return }
+    self.router.navigateToCategorySelector(
+      selectedCategories: expense?.categories ?? [],
+      delegate: self
+    )
+  }
+}
+
+extension AddExpensePresenter: CategorySelectorDelegate {
+
+  func didSelectCategories(_ categories: [ExpenseCategory]) {
+    guard categories != selectedCategories else {
+      return
+    }
+
+    self.selectedCategories = categories
+    let fields = self.fields(from: expense)
+    self.view?.display(fields: fields)
+    self.view?.displaySave(enabled: true)
   }
 }

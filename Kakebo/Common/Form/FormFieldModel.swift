@@ -6,10 +6,11 @@ enum FormFieldType {
   case date
   case time
   case calendar
+  case options
 }
 
 class FormFieldModel {
-  var type: FormFieldType
+  let type: FormFieldType
   let identifier: String
   let title: String?
   let validators: [Validator]
@@ -27,6 +28,6 @@ class FormFieldModel {
 extension FormFieldModel: Equatable {
 
   static func == (lhs: FormFieldModel, rhs: FormFieldModel) -> Bool {
-    return lhs.identifier == rhs.identifier
+    lhs.identifier == rhs.identifier
   }
 }
