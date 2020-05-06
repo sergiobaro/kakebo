@@ -15,6 +15,5 @@ install:
   - bundle install --without=documentation --path ../travis_bundle_dir
 
 after_success:
-  - bundle exec slather
-  - bash <(curl -s https://codecov.io/bash) -f slather/cobertura.xml -X coveragepy -X gcov -X xcode
+  - bash <(curl -s https://codecov.io/bash)
   
