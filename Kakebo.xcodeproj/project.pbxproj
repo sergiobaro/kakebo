@@ -887,6 +887,7 @@
 			buildConfigurationList = D66279847B96FF1DB02D209B8EBF0E84 /* Build configuration list for PBXNativeTarget "KakeboTests" */;
 			buildPhases = (
 				C32D09BED92B1C97660C61E7 /* [CP] Check Pods Manifest.lock */,
+				D94837B324628FB8005DFEA4 /* Mocks */,
 				2F27755AB4D41FE365C86E8F3DCE7E61 /* Sources */,
 				431807D37812C8C2942FECFE00BAA15B /* Frameworks */,
 				716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */,
@@ -1083,6 +1084,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D94837B324628FB8005DFEA4 /* Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Mocks;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftymocky generate\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
