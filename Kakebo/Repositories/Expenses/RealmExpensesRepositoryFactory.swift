@@ -5,7 +5,7 @@ class RealmExpensesRepositoryFactory {
 
   private static let currentSchemaVersion: UInt64 = 3
 
-  static func make() throws -> ExpensesRepository {
+  static func make() throws -> ExpensesRepository & ExpenseCategoriesRepository {
     let config = Realm.Configuration(
       schemaVersion: self.currentSchemaVersion,
       migrationBlock: { migration, oldSchemaVersion in

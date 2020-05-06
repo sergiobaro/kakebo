@@ -26,7 +26,7 @@ class RealmExpensesRepositorySpec: QuickSpec {
     }
     
     it("when add expense") {
-      let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+      let expense = Expense.with(name: "name")
       
       let result = repository.add(expense: expense)
       
@@ -41,7 +41,7 @@ class RealmExpensesRepositorySpec: QuickSpec {
         expect(expense).to(beNil())
       }
       it("when exists should return the right expense") {
-        let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+        let expense = Expense.with(name: "name")
         _ = repository.add(expense: expense)
         
         let result = repository.find(expenseId: expense.expenseId)
@@ -52,11 +52,11 @@ class RealmExpensesRepositorySpec: QuickSpec {
 
     context("when date between") {
       it("should return one") {
-        let expense1 = Expense(expenseId: "1", name: "1", amount: 1, createdAt: Date(), categories: [])
+        let expense1 = Expense.with(name: "name")
         _ = repository.add(expense: expense1)
 
         let yesterday = Calendar.current.date(byAdding: DateComponents(day: -1), to: Date())!
-        let expense2 = Expense(expenseId: "2", name: "2", amount: 2, createdAt: yesterday, categories: [])
+        let expense2 = Expense.with(name: "name", createdAt: yesterday)
         _ = repository.add(expense: expense2)
 
         let start = Calendar.current.startOfDay(for: Date())
@@ -64,20 +64,20 @@ class RealmExpensesRepositorySpec: QuickSpec {
         let result = repository.findBetween(start: start, end: end)
 
         expect(result.count).to(equal(1))
-        expect(result.first?.expenseId).to(equal("1"))
+        expect(result.first?.expenseId).to(equal(expense1.expenseId))
       }
     }
     
     context("when delete expense") {
       it("when it doesn't exist should return false") {
-        let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+        let expense = Expense.with(name: "name")
         
         let result = repository.delete(expense: expense)
         
         expect(result).to(beFalse())
       }
       it("when is deleted should return true") {
-        let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+        let expense = Expense.with(name: "name")
         _ = repository.add(expense: expense)
         
         let result = repository.delete(expense: expense)
@@ -88,14 +88,14 @@ class RealmExpensesRepositorySpec: QuickSpec {
     
     context("when update expense") {
       it("when it doesn't exist should return false") {
-        let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+        let expense = Expense.with(name: "name")
         
         let result = repository.update(expense: expense)
         
         expect(result).to(beFalse())
       }
       it("when is updated should return true") {
-        let expense = Expense(expenseId: "1", name: "name", amount: 10, createdAt: Date(), categories: [])
+        let expense = Expense.with(name: "name")
         _ = repository.add(expense: expense)
         
         let newExpense = Expense(

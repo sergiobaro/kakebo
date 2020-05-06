@@ -22,7 +22,7 @@ class CategorySelectorPresenter {
   private weak var view: CategorySelectorView?
   private weak var delegate: CategorySelectorDelegate?
   private let router: CategorySelectorRouter
-  private let repository: ExpensesRepository
+  private let repository: ExpenseCategoriesRepository
 
   private var selectedCategories: [ExpenseCategoryViewModel]
 
@@ -31,7 +31,7 @@ class CategorySelectorPresenter {
     delegate: CategorySelectorDelegate,
     selectedCategories: [ExpenseCategory],
     router: CategorySelectorRouter,
-    repository: ExpensesRepository
+    repository: ExpenseCategoriesRepository
   ) {
     self.view = view
     self.delegate = delegate
@@ -85,7 +85,7 @@ extension CategorySelectorPresenter: AddCategoryDelegate {
 
   func didAddCategory(with name: String) {
     let category = ExpenseCategory(categoryId: UUID().uuidString, name: name)
-    if self.repository.addCategory(category) {
+    if self.repository.add(category: category) {
       self.refresh()
     }
   }

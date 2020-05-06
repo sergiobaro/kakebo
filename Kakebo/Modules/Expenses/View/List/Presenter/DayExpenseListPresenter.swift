@@ -1,15 +1,5 @@
 import Foundation
 
-extension Expense: Comparable {
-  static func == (lhs: Expense, rhs: Expense) -> Bool {
-    return lhs.createdAt == rhs.createdAt
-  }
-
-  static func < (lhs: Expense, rhs: Expense) -> Bool {
-    return lhs.createdAt < rhs.createdAt
-  }
-}
-
 protocol DayExpenseListDelegate: class {
   func didSelectExpense(_ expense: Expense)
   func didDeleteExpense(_ expense: Expense)

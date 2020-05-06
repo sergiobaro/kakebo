@@ -8,15 +8,13 @@ struct Expense {
   var categories: [ExpenseCategory]
 }
 
-struct ExpenseCategory {
-  let categoryId: String
-  let name: String
-}
+extension Expense: Comparable {
+  static func == (lhs: Expense, rhs: Expense) -> Bool {
+    return lhs.createdAt == rhs.createdAt
+  }
 
-extension ExpenseCategory: Equatable {
-
-  static func == (lhs: ExpenseCategory, rhs: ExpenseCategory) -> Bool {
-    lhs.categoryId == rhs.categoryId
+  static func < (lhs: Expense, rhs: Expense) -> Bool {
+    return lhs.createdAt < rhs.createdAt
   }
 }
 
@@ -29,7 +27,4 @@ protocol ExpensesRepository {
   func add(expense: Expense) -> Bool
   func delete(expense: Expense) -> Bool
   func update(expense: Expense) -> Bool
-
-  func allCategories() -> [ExpenseCategory]
-  func addCategory(_ category: ExpenseCategory) -> Bool
 }

@@ -36,7 +36,7 @@ class RealmExpensesRepository {
   
   // MARK: - Private
   
-  private func findExpense(_ expense: Expense) -> ExpenseRealm? {
+  private func find(expense: Expense) -> ExpenseRealm? {
     return self.realm.object(ofType: ExpenseRealm.self, forPrimaryKey: expense.expenseId)
   }
   
@@ -57,8 +57,8 @@ class RealmExpensesRepository {
     )
   }
 
-  private func findOrCreateCategory(_ category: ExpenseCategory) -> CategoryRealm {
-    if let categoryRealm = self.realm.object(ofType: CategoryRealm.self, forPrimaryKey: category.categoryId) {
+  private func findOrCreate(category: ExpenseCategory) -> CategoryRealm {
+    if let categoryRealm = self.find(category: category) {
       return categoryRealm
     }
 
@@ -67,13 +67,16 @@ class RealmExpensesRepository {
     categoryRealm.categoryId = category.categoryId
     return categoryRealm
   }
+
+  private func find(category: ExpenseCategory) -> CategoryRealm? {
+    self.realm.object(ofType: CategoryRealm.self, forPrimaryKey: category.categoryId)
+  }
 }
 
 extension RealmExpensesRepository: ExpensesRepository {
   
   func numberOfExpenses() -> Int {
-    self.realm
-      .objects(ExpenseRealm.self).count
+    self.realm.objects(ExpenseRealm.self).count
   }
   
   func allExpenses() -> [Expense] {
@@ -99,14 +102,18 @@ extension RealmExpensesRepository: ExpensesRepository {
   func add(expense: Expense) -> Bool {
     do {
       try self.realm.write {
-        let newExpense = ExpenseRealm()
+        let expenseRealm = ExpenseRealm()
         
-        newExpense.expenseId = expense.expenseId
-        newExpense.name = expense.name
-        newExpense.amount = expense.amount
-        newExpense.createdAt = expense.createdAt
+        expenseRealm.expenseId = expense.expenseId
+        expenseRealm.name = expense.name
+        expenseRealm.amount = expense.amount
+        expenseRealm.createdAt = expense.createdAt
+        expense.categories.forEach {
+          let categoryRealm = self.findOrCreate(category: $0)
+          expenseRealm.categories.append(categoryRealm)
+        }
         
-        realm.add(newExpense)
+        realm.add(expenseRealm)
       }
       return true
     } catch {
@@ -115,7 +122,7 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func delete(expense: Expense) -> Bool {
-    guard let expense = self.findExpense(expense) else {
+    guard let expense = self.find(expense: expense) else {
       return false
     }
     
@@ -130,7 +137,7 @@ extension RealmExpensesRepository: ExpensesRepository {
   }
   
   func update(expense: Expense) -> Bool {
-    guard let expenseRealm = self.findExpense(expense) else {
+    guard let expenseRealm = self.find(expense: expense) else {
       return false
     }
     
@@ -139,8 +146,9 @@ extension RealmExpensesRepository: ExpensesRepository {
         expenseRealm.name = expense.name
         expenseRealm.amount = expense.amount
         expenseRealm.createdAt = expense.createdAt
+        expenseRealm.categories.removeAll()
         expense.categories.forEach {
-          let categoryRealm = self.findOrCreateCategory($0)
+          let categoryRealm = self.findOrCreate(category: $0)
           expenseRealm.categories.append(categoryRealm)
         }
       }
@@ -148,6 +156,13 @@ extension RealmExpensesRepository: ExpensesRepository {
     } catch {
       return false
     }
+  }
+}
+
+extension RealmExpensesRepository: ExpenseCategoriesRepository {
+
+  func numberOfCategories() -> Int {
+    self.realm.objects(CategoryRealm.self).count
   }
 
   func allCategories() -> [ExpenseCategory] {
@@ -157,7 +172,13 @@ extension RealmExpensesRepository: ExpensesRepository {
       .map(self.map(category:))
   }
 
-  func addCategory(_ category: ExpenseCategory) -> Bool {
+  func find(categoryId: String) -> ExpenseCategory? {
+    self.realm
+      .object(ofType: CategoryRealm.self, forPrimaryKey: categoryId)
+      .map(self.map(category:))
+  }
+
+  func add(category: ExpenseCategory) -> Bool {
     do {
       try self.realm.write {
         let categoryRealm = CategoryRealm()
@@ -165,6 +186,35 @@ extension RealmExpensesRepository: ExpensesRepository {
         categoryRealm.categoryId = category.categoryId
 
         realm.add(categoryRealm)
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  func delete(category: ExpenseCategory) -> Bool {
+    guard let categoryRealm = self.find(category: category) else {
+      return false
+    }
+
+    do {
+      try self.realm.write {
+        self.realm.delete(categoryRealm)
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  func update(category: ExpenseCategory) -> Bool {
+    guard let categoryRealm = self.find(category: category) else {
+      return false
+    }
+    do {
+      try self.realm.write {
+        categoryRealm.name = category.name
       }
       return true
     } catch {

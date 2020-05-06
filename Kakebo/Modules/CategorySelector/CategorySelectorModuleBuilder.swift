@@ -6,9 +6,9 @@ protocol CategorySelectorDelegate: class {
 
 class CategorySelectorModuleBuilder {
 
-  private let repository: ExpensesRepository
+  private let repository: ExpenseCategoriesRepository
 
-  init(repository: ExpensesRepository) {
+  init(repository: ExpenseCategoriesRepository) {
     self.repository = repository
   }
 

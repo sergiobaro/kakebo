@@ -84,6 +84,9 @@
 		D90297232352386D00681BFC /* CalendarFormFieldKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90297222352386D00681BFC /* CalendarFormFieldKeyboardView.swift */; };
 		D9121B11241A793D0025DEA2 /* TimeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B10241A793D0025DEA2 /* TimeValidator.swift */; };
 		D9121B13241A7F650025DEA2 /* TimeValidatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B12241A7F650025DEA2 /* TimeValidatorSpec.swift */; };
+		D94837B52462979E005DFEA4 /* ExpenseCategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */; };
+		D94837B72462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B62462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift */; };
+		D94837B92462AFC4005DFEA4 /* ExpenseFactoryMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B82462AFC4005DFEA4 /* ExpenseFactoryMethods.swift */; };
 		D95E5AEF2415512B00CB77F0 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */; };
 		D95E5AF12415514800CB77F0 /* TimerFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */; };
 		D95E5AF3241554AA00CB77F0 /* TimeFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */; };
@@ -212,6 +215,9 @@
 		D90297222352386D00681BFC /* CalendarFormFieldKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFormFieldKeyboardView.swift; sourceTree = "<group>"; };
 		D9121B10241A793D0025DEA2 /* TimeValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeValidator.swift; sourceTree = "<group>"; };
 		D9121B12241A7F650025DEA2 /* TimeValidatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeValidatorSpec.swift; sourceTree = "<group>"; };
+		D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesRepository.swift; sourceTree = "<group>"; };
+		D94837B62462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpenseCategoriesRepositorySpec.swift; sourceTree = "<group>"; };
+		D94837B82462AFC4005DFEA4 /* ExpenseFactoryMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFactoryMethods.swift; sourceTree = "<group>"; };
 		D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
 		D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFormatterSpec.swift; sourceTree = "<group>"; };
 		D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenter.swift; sourceTree = "<group>"; };
@@ -541,6 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				5AF085B6227A44D3006CE614 /* RealmExpensesRepositorySpec.swift */,
+				D94837B62462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift */,
+				D94837B82462AFC4005DFEA4 /* ExpenseFactoryMethods.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -598,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				321790082891000F97DCD6916BE8B926 /* ExpensesRepository.swift */,
+				D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */,
 				0DCF2CE15E775EA5476A1AE6AC053ABA /* RealmExpensesRepository.swift */,
 				5ACF2B14231D8F47007FF4C9 /* RealmExpensesRepositoryFactory.swift */,
 			);
@@ -1120,11 +1129,13 @@
 				5A1E8426228F3D12008DA9D1 /* GeneralDateFormatterSpec.swift in Sources */,
 				D95E5AF5241556E200CB77F0 /* TimeFormFieldPresenterSpec.swift in Sources */,
 				5A25B5AF22A98CAE007AE357 /* FormFieldModelSpec.swift in Sources */,
+				D94837B92462AFC4005DFEA4 /* ExpenseFactoryMethods.swift in Sources */,
 				5ACE92B2227EEF1C009092D8 /* ArrayElementSpec.swift in Sources */,
 				428EE57788FB80514F0AD4B2561F8FD7 /* SectionsSpec.swift in Sources */,
 				D9121B13241A7F650025DEA2 /* TimeValidatorSpec.swift in Sources */,
 				5A2C3EBA228AF2AB00D3F019 /* AmountFormFieldPresenterSpec.swift in Sources */,
 				5ACE92B9227F5135009092D8 /* StringSubstringSpec.swift in Sources */,
+				D94837B72462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,6 +1209,7 @@
 				D9121B11241A793D0025DEA2 /* TimeValidator.swift in Sources */,
 				5A50EE03228B392B00EECB30 /* Fonts.swift in Sources */,
 				5AF2856D22F3F797001AC3DF /* ExpenseListViewModel.swift in Sources */,
+				D94837B52462979E005DFEA4 /* ExpenseCategoriesRepository.swift in Sources */,
 				CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
