@@ -200,7 +200,7 @@ extension AddExpensePresenter {
   func userDidSelectField(_ field: FormFieldModel) {
     guard field.identifier == ExpenseFormIdentifier.categories.rawValue else { return }
     self.router.navigateToCategorySelector(
-      selectedCategories: expense?.categories ?? [],
+      selectedCategories: self.selectedCategories,
       delegate: self
     )
   }
@@ -209,7 +209,7 @@ extension AddExpensePresenter {
 extension AddExpensePresenter: CategorySelectorDelegate {
 
   func didSelectCategories(_ categories: [ExpenseCategory]) {
-    guard categories != selectedCategories else {
+    guard categories != self.selectedCategories else {
       return
     }
 

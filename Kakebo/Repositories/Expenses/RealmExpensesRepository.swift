@@ -168,7 +168,7 @@ extension RealmExpensesRepository: ExpenseCategoriesRepository {
   func allCategories() -> [ExpenseCategory] {
     self.realm
       .objects(CategoryRealm.self)
-      .sorted(byKeyPath: "name", ascending: false)
+      .sorted(byKeyPath: "name", ascending: true)
       .map(self.map(category:))
   }
 

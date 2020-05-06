@@ -21,6 +21,19 @@ class RealmExpenseCategoriesRepositorySpec: QuickSpec {
     }
 
     context("with categories") {
+      it("when fetching categories should be sorted by name") {
+        let cat1 = ExpenseCategory.with(name: "A")
+        let cat2 = ExpenseCategory.with(name: "B")
+        let cat3 = ExpenseCategory.with(name: "C")
+
+        [cat3, cat2, cat1].forEach { _ = repository.add(category: $0) }
+
+        let result = repository.allCategories()
+        expect(result.count).to(equal(3))
+        expect(result[0].name).to(equal("A"))
+        expect(result[1].name).to(equal("B"))
+        expect(result[2].name).to(equal("C"))
+      }
       it("when saving a category") {
         let category = ExpenseCategory.with(name: "Test")
         let result = repository.add(category: category)
