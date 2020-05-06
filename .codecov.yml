@@ -1,10 +1,5 @@
-coverage_service: cobertura_xml
-xcodeproj: Kakebo.xcodeproj
-workspace: Kakebo.xcworkspace
-scheme: Kakebo
-source_directory: Kakebo
-output_directory: slather
-
+codecov:
+  token: "dad7732d-7fb3-472e-82c0-a3234ce83b8d"
 ignore:
   - "**/AppDelegate.swift"
   - "**/*View.swift"

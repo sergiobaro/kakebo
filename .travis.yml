@@ -1,18 +1,9 @@
 language: swift
 osx_image: xcode11.4
 
-env:
-  - CODECOV_TOKEN="dad7732d-7fb3-472e-82c0-a3234ce83b8d"
-
 xcode_workspace: Kakebo.xcworkspace
 xcode_scheme: Kakebo
 xcode_destination: platform=iOS Simulator,OS=13.4,name=iPhone 11
-
-before_install:
-  - rvm use $RVM_RUBY_VERSION
-
-install: 
-  - bundle install --without=documentation --path ../travis_bundle_dir
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
