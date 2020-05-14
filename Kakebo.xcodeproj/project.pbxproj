@@ -10,7 +10,7 @@
 		0AD87E1E4C2E7483C884B52B64107E8D /* ExpensesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321790082891000F97DCD6916BE8B926 /* ExpensesRepository.swift */; };
 		101EBE3A20A55FEA46927D2F1890EF69 /* ExpensesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C789E0BA520F100B39CF1308ADE8C2C /* ExpensesViewController.xib */; };
 		1545061EAB9E7FC72D6A2E682DC04A9F /* AddExpenseModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79849DF7C8A6DFEFE8F308ACC782CBFE /* AddExpenseModuleBuilder.swift */; };
-		1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F936E723E0639B7472CF6D56C4B0987 /* DefaultAddExpensePresenter.swift */; };
+		1D847E3A4FA872E67A402FA1068FAD72 /* AddExpensePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F936E723E0639B7472CF6D56C4B0987 /* AddExpensePresenter.swift */; };
 		2272F3FF647D684F0CDF34965B784ED4 /* AmountFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */; };
 		323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DB32A3BB799C7262F001C1807C9CA5 /* AmountFormatter.swift */; };
 		3CC54CAA9DC4DF3A262FA28C4BF52435 /* String+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78FB59D8954684F220322B118CC7680 /* String+subscript.swift */; };
@@ -82,6 +82,7 @@
 		D902971D2351D2AF00681BFC /* CalendarFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D902971C2351D2AF00681BFC /* CalendarFormFieldView.xib */; };
 		D90297212351D79200681BFC /* CalendarFormFieldKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90297202351D79200681BFC /* CalendarFormFieldKeyboardView.xib */; };
 		D90297232352386D00681BFC /* CalendarFormFieldKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90297222352386D00681BFC /* CalendarFormFieldKeyboardView.swift */; };
+		D9072130246D2DE100D8B3AE /* AddExpenseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D907212F246D2DE100D8B3AE /* AddExpenseMapper.swift */; };
 		D9121B11241A793D0025DEA2 /* TimeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B10241A793D0025DEA2 /* TimeValidator.swift */; };
 		D9121B13241A7F650025DEA2 /* TimeValidatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B12241A7F650025DEA2 /* TimeValidatorSpec.swift */; };
 		D94837B52462979E005DFEA4 /* ExpenseCategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */; };
@@ -197,7 +198,7 @@
 		5AF8B614229878E500654302 /* FormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldView.swift; sourceTree = "<group>"; };
 		69A6FD05CF0C9C4A944FE7E5A547F893 /* ArrayGroupSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayGroupSpec.swift; sourceTree = "<group>"; };
 		6E404879358782C7C011BCC4EC023390 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6F936E723E0639B7472CF6D56C4B0987 /* DefaultAddExpensePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddExpensePresenter.swift; sourceTree = "<group>"; };
+		6F936E723E0639B7472CF6D56C4B0987 /* AddExpensePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpensePresenter.swift; sourceTree = "<group>"; };
 		79849DF7C8A6DFEFE8F308ACC782CBFE /* AddExpenseModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseModuleBuilder.swift; sourceTree = "<group>"; };
 		7BB589B09DE19B3EA5431250FB8274EA /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
 		8BE82D0DA97CC45D08212CB307A6C7A3 /* AmountFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormatterSpec.swift; sourceTree = "<group>"; };
@@ -213,6 +214,7 @@
 		D902971C2351D2AF00681BFC /* CalendarFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarFormFieldView.xib; sourceTree = "<group>"; };
 		D90297202351D79200681BFC /* CalendarFormFieldKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarFormFieldKeyboardView.xib; sourceTree = "<group>"; };
 		D90297222352386D00681BFC /* CalendarFormFieldKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFormFieldKeyboardView.swift; sourceTree = "<group>"; };
+		D907212F246D2DE100D8B3AE /* AddExpenseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseMapper.swift; sourceTree = "<group>"; };
 		D9121B10241A793D0025DEA2 /* TimeValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeValidator.swift; sourceTree = "<group>"; };
 		D9121B12241A7F650025DEA2 /* TimeValidatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeValidatorSpec.swift; sourceTree = "<group>"; };
 		D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesRepository.swift; sourceTree = "<group>"; };
@@ -312,7 +314,8 @@
 		2E9D7B5F11EBAD4BAA1848E2DC6E0FFB /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				6F936E723E0639B7472CF6D56C4B0987 /* DefaultAddExpensePresenter.swift */,
+				6F936E723E0639B7472CF6D56C4B0987 /* AddExpensePresenter.swift */,
+				D907212F246D2DE100D8B3AE /* AddExpenseMapper.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1166,7 +1169,7 @@
 				5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */,
 				A66A5351279702857BD5D451E4840551 /* Array+element.swift in Sources */,
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
-				1D847E3A4FA872E67A402FA1068FAD72 /* DefaultAddExpensePresenter.swift in Sources */,
+				1D847E3A4FA872E67A402FA1068FAD72 /* AddExpensePresenter.swift in Sources */,
 				5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */,
 				5ABC60B322F834B900A72659 /* ScrollView+pagging.swift in Sources */,
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
@@ -1205,6 +1208,7 @@
 				9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */,
 				D96E14E4245DC59E00257E4E /* CategorySelectorPresenter.swift in Sources */,
 				5A68398D22F85A380032369D /* MonthExpenseListPresenter.swift in Sources */,
+				D9072130246D2DE100D8B3AE /* AddExpenseMapper.swift in Sources */,
 				D97586B6245DD97D00CE880A /* CategorySelectorRouter.swift in Sources */,
 				D9121B11241A793D0025DEA2 /* TimeValidator.swift in Sources */,
 				5A50EE03228B392B00EECB30 /* Fonts.swift in Sources */,
