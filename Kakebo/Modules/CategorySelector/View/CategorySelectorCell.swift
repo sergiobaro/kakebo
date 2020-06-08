@@ -2,7 +2,7 @@ import UIKit
 
 class CategorySelectorCell: UITableViewCell {
 
-  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet private weak var iconImageView: UIImageView!
 
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -15,6 +15,7 @@ class CategorySelectorCell: UITableViewCell {
     super.awakeFromNib()
 
     self.nameLabel.text = ""
+    self.nameLabel.font = UIFont.big
     self.iconImageView.image = UIImage(systemName: "checkmark")
     self.iconImageView.tintColor = .black
   }

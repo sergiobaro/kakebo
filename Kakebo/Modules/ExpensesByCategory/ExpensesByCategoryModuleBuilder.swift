@@ -11,7 +11,10 @@ class ExpensesByCategoryModuleBuilder {
   }
 
   func build() -> UIViewController? {
-    let viewController = ExpensesByCategoryViewController()
+    let storyboard = UIStoryboard(name: "ExpensesByCategoryViewController", bundle: .main)
+    guard let viewController = storyboard.instantiateInitialViewController() as? ExpensesByCategoryViewController else {
+      return nil
+    }
 
     viewController.presenter = ExpensesByCategoryPresenter(
       view: viewController,

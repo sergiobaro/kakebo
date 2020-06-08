@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tjf-UU-Erg">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Expenses By Category View Controller-->
+        <scene sceneID="IRO-hg-bob">
+            <objects>
+                <viewController id="tjf-UU-Erg" customClass="ExpensesByCategoryViewController" customModule="Kakebo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aiu-zK-YMc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-OY-lZO">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExpensesByCategoryCell" id="uW6-uy-oPa" customClass="ExpensesByCategoryCell" customModule="Kakebo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uW6-uy-oPa" id="iKR-dp-7H2">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REn-lg-9Rx">
+                                                    <rect key="frame" x="20" y="10" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOc-Fc-nq1">
+                                                    <rect key="frame" x="352" y="10" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EOc-Fc-nq1" firstAttribute="centerY" secondItem="iKR-dp-7H2" secondAttribute="centerY" id="1k4-5e-6Dg"/>
+                                                <constraint firstAttribute="bottom" secondItem="REn-lg-9Rx" secondAttribute="bottom" constant="10" id="NPq-f8-4dy"/>
+                                                <constraint firstItem="REn-lg-9Rx" firstAttribute="top" secondItem="iKR-dp-7H2" secondAttribute="top" constant="10" id="dJt-Ak-R6A"/>
+                                                <constraint firstItem="REn-lg-9Rx" firstAttribute="leading" secondItem="iKR-dp-7H2" secondAttribute="leading" constant="20" id="dYJ-eH-5iq"/>
+                                                <constraint firstAttribute="trailing" secondItem="EOc-Fc-nq1" secondAttribute="trailing" constant="20" id="kvE-mw-pGM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="EOc-Fc-nq1" id="ExX-fS-7pF"/>
+                                            <outlet property="nameLabel" destination="REn-lg-9Rx" id="4nq-O4-Mq5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KUC-OY-lZO" firstAttribute="top" secondItem="hWf-OH-pbK" secondAttribute="top" id="Ka9-be-1SV"/>
+                            <constraint firstItem="hWf-OH-pbK" firstAttribute="bottom" secondItem="KUC-OY-lZO" secondAttribute="bottom" id="Lv2-Se-caF"/>
+                            <constraint firstItem="hWf-OH-pbK" firstAttribute="trailing" secondItem="KUC-OY-lZO" secondAttribute="trailing" id="ReS-Dh-F8g"/>
+                            <constraint firstItem="KUC-OY-lZO" firstAttribute="leading" secondItem="hWf-OH-pbK" secondAttribute="leading" id="cCh-ex-esn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hWf-OH-pbK"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="KUC-OY-lZO" id="YaX-YQ-pYw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQ8-21-kaO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="89.732142857142847"/>
+        </scene>
+    </scenes>
+</document>

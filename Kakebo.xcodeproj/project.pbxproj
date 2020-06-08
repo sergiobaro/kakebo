@@ -78,6 +78,7 @@
 		C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422426E5194B147159B3009BBF19FFDD /* Sections.swift */; };
 		CBF3C7427E1C7CFD7AA5289F166F8640 /* UIView+nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACB34EDF298E01FC6592700C9B1AD3 /* UIView+nib.swift */; };
 		D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C6261B09E1F63A019CB4EFAA5A1815 /* String+replacing.swift */; };
+		D901A6FD248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D901A6FC248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift */; };
 		D902971B2351D28600681BFC /* CalendarFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D902971A2351D28600681BFC /* CalendarFormFieldView.swift */; };
 		D902971D2351D2AF00681BFC /* CalendarFormFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D902971C2351D2AF00681BFC /* CalendarFormFieldView.xib */; };
 		D90297212351D79200681BFC /* CalendarFormFieldKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D90297202351D79200681BFC /* CalendarFormFieldKeyboardView.xib */; };
@@ -105,12 +106,13 @@
 		D9CB023A235308BD006C8F5F /* Color+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB0239235308BD006C8F5F /* Color+random.swift */; };
 		D9D0AE32248E9CFF00FB7FE8 /* ExpensesByCategoryModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE31248E9CFF00FB7FE8 /* ExpensesByCategoryModuleBuilder.swift */; };
 		D9D0AE35248EA25100FB7FE8 /* ExpensesByCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE34248EA25100FB7FE8 /* ExpensesByCategoryViewController.swift */; };
-		D9D0AE37248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE36248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib */; };
 		D9D0AE3A248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE39248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift */; };
 		D9D0AE3C248EAD9000FB7FE8 /* Date+factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */; };
 		D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */; };
 		D9D0AE40248EC09100FB7FE8 /* CategorySelectorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */; };
 		D9D0AE43248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */; };
+		D9D0AE46248EC84F00FB7FE8 /* UITableView+dequeue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE45248EC84F00FB7FE8 /* UITableView+dequeue.swift */; };
+		D9D0AE48248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE47248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard */; };
 		D9D9DDFB240A69A200701340 /* ExpenseListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */; };
 		D9D9DE03240A6BE600701340 /* OnDateExpenseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */; };
 		D9D9DE05240A7F9A00701340 /* ExpenseListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */; };
@@ -217,6 +219,7 @@
 		B75AA432513FB3621AFFDD76C7210792 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		D1F8266052C2C5092491DF56B5C876AB /* AddExpenseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseRouter.swift; sourceTree = "<group>"; };
 		D2564D201747F14FF6502A4F /* Pods-Kakebo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kakebo.debug.xcconfig"; path = "Target Support Files/Pods-Kakebo/Pods-Kakebo.debug.xcconfig"; sourceTree = "<group>"; };
+		D901A6FC248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryCell.swift; sourceTree = "<group>"; };
 		D902971A2351D28600681BFC /* CalendarFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFormFieldView.swift; sourceTree = "<group>"; };
 		D902971C2351D2AF00681BFC /* CalendarFormFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarFormFieldView.xib; sourceTree = "<group>"; };
 		D90297202351D79200681BFC /* CalendarFormFieldKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarFormFieldKeyboardView.xib; sourceTree = "<group>"; };
@@ -244,12 +247,13 @@
 		D9CB0239235308BD006C8F5F /* Color+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+random.swift"; sourceTree = "<group>"; };
 		D9D0AE31248E9CFF00FB7FE8 /* ExpensesByCategoryModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryModuleBuilder.swift; sourceTree = "<group>"; };
 		D9D0AE34248EA25100FB7FE8 /* ExpensesByCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryViewController.swift; sourceTree = "<group>"; };
-		D9D0AE36248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesByCategoryViewController.xib; sourceTree = "<group>"; };
 		D9D0AE39248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryPresenter.swift; sourceTree = "<group>"; };
 		D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+factory.swift"; sourceTree = "<group>"; };
 		D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorCell.swift; sourceTree = "<group>"; };
 		D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategorySelectorViewController.storyboard; sourceTree = "<group>"; };
 		D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryRouter.swift; sourceTree = "<group>"; };
+		D9D0AE45248EC84F00FB7FE8 /* UITableView+dequeue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeue.swift"; sourceTree = "<group>"; };
+		D9D0AE47248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ExpensesByCategoryViewController.storyboard; sourceTree = "<group>"; };
 		D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListModuleBuilder.swift; sourceTree = "<group>"; };
 		D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDateExpenseListPresenter.swift; sourceTree = "<group>"; };
 		D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListMapper.swift; sourceTree = "<group>"; };
@@ -856,7 +860,8 @@
 			isa = PBXGroup;
 			children = (
 				D9D0AE34248EA25100FB7FE8 /* ExpensesByCategoryViewController.swift */,
-				D9D0AE36248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib */,
+				D901A6FC248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift */,
+				D9D0AE47248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -875,6 +880,14 @@
 				D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		D9D0AE44248EC84200FB7FE8 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				D9D0AE45248EC84F00FB7FE8 /* UITableView+dequeue.swift */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		D9D9DE06240A888C00701340 /* Router */ = {
@@ -922,6 +935,7 @@
 		FC71E398EF37DFDAB0964A845EB114B2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D9D0AE44248EC84200FB7FE8 /* Table */,
 				D9D9DE09240A8ADD00701340 /* Date */,
 				5A830C3F228AAFDA00FF6DF1 /* Color */,
 				5ACE92B3227F4B47009092D8 /* Array */,
@@ -1037,7 +1051,7 @@
 				447A94FB3784972DFC36D17F84039C0B /* AddExpenseViewController.xib in Resources */,
 				AB80C4C4D026FC02154ED4EB7EE441EC /* Assets.xcassets in Resources */,
 				799628C939BE48A55A0CA33A26CC00EC /* ExpenseListCell.xib in Resources */,
-				D9D0AE37248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib in Resources */,
+				D9D0AE48248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard in Resources */,
 				D9CB02362352FE99006C8F5F /* CalendarFormFieldViewCell.xib in Resources */,
 				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
 				D9A013DE24548A3B0096B511 /* OptionsFormFieldView.xib in Resources */,
@@ -1227,6 +1241,7 @@
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* AddExpensePresenter.swift in Sources */,
 				5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */,
+				D901A6FD248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift in Sources */,
 				5ABC60B322F834B900A72659 /* ScrollView+pagging.swift in Sources */,
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpenseListCell.swift in Sources */,
@@ -1262,6 +1277,7 @@
 				5AF2856922F3F5C9001AC3DF /* ExpenseListViewController.swift in Sources */,
 				D90297232352386D00681BFC /* CalendarFormFieldKeyboardView.swift in Sources */,
 				5ABC60B122F8158300A72659 /* UnderlinedButton.swift in Sources */,
+				D9D0AE46248EC84F00FB7FE8 /* UITableView+dequeue.swift in Sources */,
 				C31D78FE77010197F4268CAB693481BE /* TableView+register.swift in Sources */,
 				5A6C60EB22AADFF80054F1FB /* ExpenseListSelectorView.swift in Sources */,
 				9FA73AEA08D63F487872C9D0E3D7E67E /* TextFormFieldView.swift in Sources */,

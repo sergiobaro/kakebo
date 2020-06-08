@@ -56,15 +56,12 @@ extension ExpensesByCategoryViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-    if cell == nil {
-      cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
-    }
+    let cell = tableView.dequeue(cell: ExpensesByCategoryCell.self, indexPath: indexPath)
 
     let viewModel = self.viewModels[indexPath.row]
-    cell?.textLabel?.text = viewModel.categoryName
-    cell?.detailTextLabel?.text = viewModel.amount
+    cell.nameLabel.text = viewModel.categoryName
+    cell.amountLabel.text = viewModel.amount
 
-    return cell!
+    return cell
   }
 }
