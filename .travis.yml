@@ -6,7 +6,7 @@ env:
 
 xcode_workspace: Kakebo.xcworkspace
 xcode_scheme: Kakebo
-xcode_destination: platform=iOS Simulator,OS=13.4,name=iPhone 11
+xcode_destination: platform=iOS Simulator,OS=13.4.1,name=iPhone 11
 
 before_install:
   - rvm use $RVM_RUBY_VERSION
