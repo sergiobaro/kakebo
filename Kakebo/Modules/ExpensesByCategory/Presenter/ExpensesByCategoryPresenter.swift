@@ -35,28 +35,46 @@ class ExpensesByCategoryPresenter {
     let end = Date().endOfMonth()
     let expenses = self.expensesRepository.findBetween(start: start, end: end)
 
-    let viewModels = self.group(expenses, with: categories).map { (category, amount) -> ExpensesByCategoryViewModel in
-      ExpensesByCategoryViewModel(
-        categoryId: category.categoryId,
-        categoryName: category.name,
-        amount: self.amountFormatter.string(integer: amount)
-      )
-    }
+    let viewModels = self.group(expenses, with: categories)
+
     self.view?.showViewModels(viewModels)
   }
 
   // MARK: - Private
 
-  private func group(_ expenses: [Expense], with categories: [ExpenseCategory]) -> [ExpenseCategory: Int] {
+  private func group(_ expenses: [Expense], with categories: [ExpenseCategory]) -> [ExpensesByCategoryViewModel] {
     var result = [ExpenseCategory: Int]()
+    for category in categories {
+      result[category] = 0
+    }
 
     for expense in expenses {
       for category in expense.categories {
-        let total = (result[category] ?? 0) + expense.amount
-        result[category] = total
+        result[category]! += expense.amount
       }
     }
 
     return result
+      .map { (category, amount) -> CategoryAmount in
+        CategoryAmount(
+          categoryId: category.categoryId,
+          categoryName: category.name,
+          amount: amount
+        )
+      }
+      .sorted { $0.amount > $1.amount }
+      .map {
+        ExpensesByCategoryViewModel(
+          categoryId: $0.categoryId,
+          categoryName: $0.categoryName,
+          amount: self.amountFormatter.string(integer: $0.amount)
+        )
+      }
   }
+}
+
+private struct CategoryAmount {
+  let categoryId: String
+  let categoryName: String
+  let amount: Int
 }
