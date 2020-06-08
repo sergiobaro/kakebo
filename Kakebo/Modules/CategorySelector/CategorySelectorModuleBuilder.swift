@@ -12,8 +12,12 @@ class CategorySelectorModuleBuilder {
     self.repository = repository
   }
 
-  func build(selectedCategories: [ExpenseCategory], delegate: CategorySelectorDelegate) -> UIViewController {
-    let viewController = CategorySelectorViewController()
+  func build(selectedCategories: [ExpenseCategory], delegate: CategorySelectorDelegate) -> UIViewController? {
+    let storyboard = UIStoryboard(name: "CategorySelectorViewController", bundle: .main)
+    guard let viewController = storyboard.instantiateInitialViewController() as? CategorySelectorViewController else {
+      return nil
+    }
+
     viewController.presenter = CategorySelectorPresenter(
       view: viewController,
       delegate: delegate,

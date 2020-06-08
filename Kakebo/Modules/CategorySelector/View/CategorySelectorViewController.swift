@@ -48,19 +48,16 @@ extension CategorySelectorViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-    if cell == nil {
-      cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: "CategorySelectorCell", for: indexPath)
 
     if let category = categories.element(at: indexPath.row) {
-      cell?.textLabel?.text = category.name
+      cell.textLabel?.text = category.name
       if category.isSelected {
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
       }
     }
     
-    return cell!
+    return cell
   }
 }
 

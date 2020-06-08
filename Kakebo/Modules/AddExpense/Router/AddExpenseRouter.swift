@@ -18,10 +18,12 @@ class AddExpenseRouter {
   }
 
   func navigateToCategorySelector(selectedCategories: [ExpenseCategory], delegate: CategorySelectorDelegate) {
-    let viewController = self.categorySelectorModuleBuilder.build(
+    let categorySelectorViewController = self.categorySelectorModuleBuilder.build(
       selectedCategories: selectedCategories,
       delegate: delegate
     )
+
+    guard let viewController = categorySelectorViewController else { return }
 
     self.viewController?.navigationController?.pushViewController(viewController, animated: true)
   }

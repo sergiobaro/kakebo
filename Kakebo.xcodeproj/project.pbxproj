@@ -94,7 +94,6 @@
 		D95E5AF5241556E200CB77F0 /* TimeFormFieldPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF4241556E200CB77F0 /* TimeFormFieldPresenterSpec.swift */; };
 		D96E14DC245DBE9800257E4E /* CategorySelectorModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96E14DB245DBE9800257E4E /* CategorySelectorModuleBuilder.swift */; };
 		D96E14DF245DBF5400257E4E /* CategorySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96E14DE245DBF5400257E4E /* CategorySelectorViewController.swift */; };
-		D96E14E1245DC16300257E4E /* CategorySelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96E14E0245DC16300257E4E /* CategorySelectorViewController.xib */; };
 		D96E14E4245DC59E00257E4E /* CategorySelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96E14E3245DC59E00257E4E /* CategorySelectorPresenter.swift */; };
 		D97586AF245DD83A00CE880A /* AddCategoryModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97586AE245DD83A00CE880A /* AddCategoryModuleBuilder.swift */; };
 		D97586B6245DD97D00CE880A /* CategorySelectorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97586B5245DD97D00CE880A /* CategorySelectorRouter.swift */; };
@@ -109,6 +108,8 @@
 		D9D0AE37248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE36248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib */; };
 		D9D0AE3A248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE39248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift */; };
 		D9D0AE3C248EAD9000FB7FE8 /* Date+factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */; };
+		D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */; };
+		D9D0AE40248EC09100FB7FE8 /* CategorySelectorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */; };
 		D9D9DDFB240A69A200701340 /* ExpenseListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */; };
 		D9D9DE03240A6BE600701340 /* OnDateExpenseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */; };
 		D9D9DE05240A7F9A00701340 /* ExpenseListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */; };
@@ -231,7 +232,6 @@
 		D95E5AF4241556E200CB77F0 /* TimeFormFieldPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenterSpec.swift; sourceTree = "<group>"; };
 		D96E14DB245DBE9800257E4E /* CategorySelectorModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorModuleBuilder.swift; sourceTree = "<group>"; };
 		D96E14DE245DBF5400257E4E /* CategorySelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewController.swift; sourceTree = "<group>"; };
-		D96E14E0245DC16300257E4E /* CategorySelectorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySelectorViewController.xib; sourceTree = "<group>"; };
 		D96E14E3245DC59E00257E4E /* CategorySelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorPresenter.swift; sourceTree = "<group>"; };
 		D97586AE245DD83A00CE880A /* AddCategoryModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryModuleBuilder.swift; sourceTree = "<group>"; };
 		D97586B5245DD97D00CE880A /* CategorySelectorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorRouter.swift; sourceTree = "<group>"; };
@@ -246,6 +246,8 @@
 		D9D0AE36248EA2B800FB7FE8 /* ExpensesByCategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpensesByCategoryViewController.xib; sourceTree = "<group>"; };
 		D9D0AE39248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryPresenter.swift; sourceTree = "<group>"; };
 		D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+factory.swift"; sourceTree = "<group>"; };
+		D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorCell.swift; sourceTree = "<group>"; };
+		D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategorySelectorViewController.storyboard; sourceTree = "<group>"; };
 		D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListModuleBuilder.swift; sourceTree = "<group>"; };
 		D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDateExpenseListPresenter.swift; sourceTree = "<group>"; };
 		D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListMapper.swift; sourceTree = "<group>"; };
@@ -786,7 +788,8 @@
 			isa = PBXGroup;
 			children = (
 				D96E14DE245DBF5400257E4E /* CategorySelectorViewController.swift */,
-				D96E14E0245DC16300257E4E /* CategorySelectorViewController.xib */,
+				D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */,
+				D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1028,7 +1031,7 @@
 				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
 				D9A013DE24548A3B0096B511 /* OptionsFormFieldView.xib in Resources */,
 				5ABC60AE22F80F4000A72659 /* EmptyStateView.xib in Resources */,
-				D96E14E1245DC16300257E4E /* CategorySelectorViewController.xib in Resources */,
+				D9D0AE40248EC09100FB7FE8 /* CategorySelectorViewController.storyboard in Resources */,
 				71D4873757587F941196A77256FB374A /* ExpenseListHeaderView.xib in Resources */,
 				D902971D2351D2AF00681BFC /* CalendarFormFieldView.xib in Resources */,
 				101EBE3A20A55FEA46927D2F1890EF69 /* ExpensesViewController.xib in Resources */,
@@ -1234,6 +1237,7 @@
 				D9CB02352352FE99006C8F5F /* CalendarFormFieldViewCell.swift in Sources */,
 				5A50EE01228B38E200EECB30 /* Colors.swift in Sources */,
 				5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */,
+				D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */,
 				5AF2856622F3F44A001AC3DF /* DayExpenseListPresenter.swift in Sources */,
 				D902971B2351D28600681BFC /* CalendarFormFieldView.swift in Sources */,
 				5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */,
