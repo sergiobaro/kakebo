@@ -110,6 +110,7 @@
 		D9D0AE3C248EAD9000FB7FE8 /* Date+factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */; };
 		D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */; };
 		D9D0AE40248EC09100FB7FE8 /* CategorySelectorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */; };
+		D9D0AE43248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */; };
 		D9D9DDFB240A69A200701340 /* ExpenseListModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */; };
 		D9D9DE03240A6BE600701340 /* OnDateExpenseListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */; };
 		D9D9DE05240A7F9A00701340 /* ExpenseListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */; };
@@ -248,6 +249,7 @@
 		D9D0AE3B248EAD9000FB7FE8 /* Date+factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+factory.swift"; sourceTree = "<group>"; };
 		D9D0AE3D248EC05A00FB7FE8 /* CategorySelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorCell.swift; sourceTree = "<group>"; };
 		D9D0AE3F248EC09100FB7FE8 /* CategorySelectorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategorySelectorViewController.storyboard; sourceTree = "<group>"; };
+		D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesByCategoryRouter.swift; sourceTree = "<group>"; };
 		D9D9DDFA240A69A200701340 /* ExpenseListModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListModuleBuilder.swift; sourceTree = "<group>"; };
 		D9D9DE02240A6BE600701340 /* OnDateExpenseListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDateExpenseListPresenter.swift; sourceTree = "<group>"; };
 		D9D9DE04240A7F9A00701340 /* ExpenseListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseListMapper.swift; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 			isa = PBXGroup;
 			children = (
 				D9D0AE31248E9CFF00FB7FE8 /* ExpensesByCategoryModuleBuilder.swift */,
+				D9D0AE41248EC60300FB7FE8 /* Router */,
 				D9D0AE38248EAA8400FB7FE8 /* Presenter */,
 				D9D0AE33248EA24200FB7FE8 /* View */,
 			);
@@ -864,6 +867,14 @@
 				D9D0AE39248EAA9200FB7FE8 /* ExpensesByCategoryPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D9D0AE41248EC60300FB7FE8 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D9D0AE42248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		D9D9DE06240A888C00701340 /* Router */ = {
@@ -1240,6 +1251,7 @@
 				D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */,
 				5AF2856622F3F44A001AC3DF /* DayExpenseListPresenter.swift in Sources */,
 				D902971B2351D28600681BFC /* CalendarFormFieldView.swift in Sources */,
+				D9D0AE43248EC61200FB7FE8 /* ExpensesByCategoryRouter.swift in Sources */,
 				5A0B65B02289FEFA00DA6587 /* FormFieldModel.swift in Sources */,
 				5A45F1B522820EAA0005AA68 /* FormView.swift in Sources */,
 				5AF8B60D2298048F00654302 /* FormFieldContainerView.swift in Sources */,

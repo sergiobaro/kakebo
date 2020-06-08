@@ -15,6 +15,7 @@ class ExpensesByCategoryModuleBuilder {
 
     viewController.presenter = ExpensesByCategoryPresenter(
       view: viewController,
+      router: ExpensesByCategoryRouter(viewController: viewController),
       expensesRepository: self.expensesRepository,
       categoriesRepository: self.categoriesRepository
     )

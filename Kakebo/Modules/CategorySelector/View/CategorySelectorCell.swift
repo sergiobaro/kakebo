@@ -15,7 +15,7 @@ class CategorySelectorCell: UITableViewCell {
     super.awakeFromNib()
 
     self.nameLabel.text = ""
-    self.iconImageView.image = UIImage(systemName: "checkmark.circle")
+    self.iconImageView.image = UIImage(systemName: "checkmark")
     self.iconImageView.tintColor = .black
   }
 }

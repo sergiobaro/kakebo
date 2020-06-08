@@ -13,6 +13,7 @@ protocol ExpensesByCategoryView: class {
 class ExpensesByCategoryPresenter {
 
   private weak var view: ExpensesByCategoryView?
+  private let router: ExpensesByCategoryRouter
   private let expensesRepository: ExpensesRepository
   private let categoriesRepository: ExpenseCategoriesRepository
 
@@ -20,10 +21,12 @@ class ExpensesByCategoryPresenter {
 
   init(
     view: ExpensesByCategoryView,
+    router: ExpensesByCategoryRouter,
     expensesRepository: ExpensesRepository,
     categoriesRepository: ExpenseCategoriesRepository
   ) {
     self.view = view
+    self.router = router
     self.expensesRepository = expensesRepository
     self.categoriesRepository = categoriesRepository
   }
@@ -38,6 +41,14 @@ class ExpensesByCategoryPresenter {
     let viewModels = self.group(expenses, with: categories)
 
     self.view?.showViewModels(viewModels)
+  }
+
+  func userTapFilter() {
+    self.router.navigateToFilter()
+  }
+
+  func userTapClose() {
+    self.router.navigateBack()
   }
 
   // MARK: - Private

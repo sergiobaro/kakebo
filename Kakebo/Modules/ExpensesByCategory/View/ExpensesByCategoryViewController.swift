@@ -20,6 +20,13 @@ class ExpensesByCategoryViewController: UIViewController {
       action: #selector(tapClose)
     )
 
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      image: UIImage(systemName: "line.horizontal.3.decrease"),
+      style: .plain,
+      target: self,
+      action: #selector(tapFilter)
+    )
+
     self.tableView.dataSource = self
     self.tableView.allowsSelection = false
 
@@ -27,7 +34,11 @@ class ExpensesByCategoryViewController: UIViewController {
   }
 
   @objc private func tapClose() {
-    self.dismiss(animated: true)
+    self.presenter.userTapClose()
+  }
+
+  @objc private func tapFilter() {
+    self.presenter.userTapFilter()
   }
 }
 
