@@ -1,6 +1,6 @@
 import Foundation
 
-class DefaultExpensesPresenter {
+class ExpensesPresenter {
 
   private weak var view: ExpensesViewProtocol?
   private let router: ExpensesRouter
@@ -11,9 +11,6 @@ class DefaultExpensesPresenter {
     self.router = router
     self.repository = repository
   }
-}
-
-extension DefaultExpensesPresenter: ExpensesPresenter {
 
   func hasExpenses() -> Bool {
     return (self.repository.numberOfExpenses() > 0)
@@ -22,36 +19,40 @@ extension DefaultExpensesPresenter: ExpensesPresenter {
   func userTapAdd() {
     self.router.navigateToAddExpense(delegate: self)
   }
+
+  func userTapChart() {
+    self.router.navigateToExpensesByCategory()
+  }
 }
 
-extension DefaultExpensesPresenter: AddExpenseDelegate {
+extension ExpensesPresenter: AddExpenseDelegate {
   
   func addExpenseDidSave(expense: Expense) {
     self.view?.reloadExpenses()
   }
 }
 
-extension DefaultExpensesPresenter: DayExpenseListDelegate {
+extension ExpensesPresenter: DayExpenseListDelegate {
   
-  func didSelectExpense(_ expense: Expense) {
+  func dayExpenseListDidSelectExpense(_ expense: Expense) {
     self.router.navigateToExpenseDetail(expense: expense, delegate: self)
   }
   
-  func didDeleteExpense(_ expense: Expense) {
+  func dayExpenseListDidDeleteExpense(_ expense: Expense) {
     self.view?.reloadExpenses()
   }
 }
 
-extension DefaultExpensesPresenter: MonthExpenseListDelegate {
+extension ExpensesPresenter: MonthExpenseListDelegate {
   
   func didSelectDay(_ expenseDay: ExpenseDay) {
     self.router.navigateToExpenseDayList(date: expenseDay.date, delegate: self)
   }
 }
 
-extension DefaultExpensesPresenter: ExpenseListDelegate {
-  
-//  func didDeleteExpense(_ expense: Expense) {
-//    self.view?.reloadExpenses()
-//  }
+extension ExpensesPresenter: ExpenseListDelegate {
+
+  func expenseListDidDeleteExpense(_ expense: Expense) {
+    self.view?.reloadExpenses()
+  }
 }

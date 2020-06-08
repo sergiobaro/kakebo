@@ -5,15 +5,18 @@ class ExpensesModuleBuilder {
   private let repository: ExpensesRepository
   private let addExpenseModuleBuilder: AddExpenseModuleBuilder
   private let expenseListModuleBuilder: ExpenseListModuleBuilder
+  private let expensesByCategoryModuleBuilder: ExpensesByCategoryModuleBuilder
 
   init(
     repository: ExpensesRepository,
     addExpenseModuleBuilder: AddExpenseModuleBuilder,
-    expenseListModuleBuilder: ExpenseListModuleBuilder
+    expenseListModuleBuilder: ExpenseListModuleBuilder,
+    expensesByCategoryModuleBuilder: ExpensesByCategoryModuleBuilder
   ) {
     self.repository = repository
     self.addExpenseModuleBuilder = addExpenseModuleBuilder
     self.expenseListModuleBuilder = expenseListModuleBuilder
+    self.expensesByCategoryModuleBuilder = expensesByCategoryModuleBuilder
   }
   
   func build() -> UIViewController? {
@@ -22,10 +25,11 @@ class ExpensesModuleBuilder {
     let router = ExpensesRouter(
       viewController: viewController,
       addExpenseModuleBuilder: self.addExpenseModuleBuilder,
-      expenseListModuleBuilder: self.expenseListModuleBuilder
+      expenseListModuleBuilder: self.expenseListModuleBuilder,
+      expensesByCategoryModuleBuilder: self.expensesByCategoryModuleBuilder
     )
 
-    let presenter = DefaultExpensesPresenter(
+    let presenter = ExpensesPresenter(
       view: viewController,
       router: router,
       repository: repository

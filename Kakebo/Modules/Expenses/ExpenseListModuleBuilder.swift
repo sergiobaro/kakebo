@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ExpenseListDelegate: class {
-  func didDeleteExpense(_ expense: Expense)
+  func expenseListDidDeleteExpense(_ expense: Expense)
 }
 
 class ExpenseListModuleBuilder {

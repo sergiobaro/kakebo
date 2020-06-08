@@ -6,12 +6,6 @@ protocol ExpensesViewProtocol: class {
   func reloadExpenses()
 }
 
-protocol ExpensesPresenter {
-
-  func hasExpenses() -> Bool
-  func userTapAdd()
-}
-
 class ExpensesViewController: UIViewController {
 
   @IBOutlet private weak var scrollView: UIScrollView!
@@ -95,6 +89,10 @@ class ExpensesViewController: UIViewController {
   @objc func tapAdd() {
     self.presenter.userTapAdd()
   }
+
+  @objc func tapChart() {
+    self.presenter.userTapChart()
+  }
   
   // MARK: - Private
   
@@ -103,7 +101,17 @@ class ExpensesViewController: UIViewController {
     
     self.emptyView.isHidden = hasExpenses
     self.scrollView.isHidden = !hasExpenses
+    self.navigationItem.leftBarButtonItem = hasExpenses ? buildChartButton() : nil
     self.navigationItem.titleView?.isHidden = !hasExpenses
+  }
+
+  private func buildChartButton() -> UIBarButtonItem {
+    UIBarButtonItem(
+      image: UIImage(systemName: "chart.bar"),
+      style: .plain,
+      target: self,
+      action: #selector(tapChart)
+    )
   }
 }
 

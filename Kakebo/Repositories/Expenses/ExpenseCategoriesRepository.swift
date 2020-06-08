@@ -1,6 +1,6 @@
 import Foundation
 
-struct ExpenseCategory {
+struct ExpenseCategory: Hashable {
   let categoryId: String
   let name: String
 }

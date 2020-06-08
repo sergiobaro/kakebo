@@ -19,16 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
     do {
-      let expensesRepository = try RealmExpensesRepositoryFactory.make()
+      let repository = try RealmExpensesRepositoryFactory.make()
+
       let addExpenseModuleBuilder = AddExpenseModuleBuilder(
-        repository: expensesRepository,
-        categorySelectorModuleBuilder: CategorySelectorModuleBuilder(repository: expensesRepository)
+        repository: repository,
+        categorySelectorModuleBuilder: CategorySelectorModuleBuilder(repository: repository)
       )
-      let expenseListModuleBuilder = ExpenseListModuleBuilder(repository: expensesRepository)
+      let expenseListModuleBuilder = ExpenseListModuleBuilder(repository: repository)
+      let expensesByCategoryModuleBuilder = ExpensesByCategoryModuleBuilder(
+        expensesRepository: repository,
+        categoriesRepository: repository
+      )
+
       self.window!.rootViewController = ExpensesModuleBuilder(
-        repository: expensesRepository,
+        repository: repository,
         addExpenseModuleBuilder: addExpenseModuleBuilder,
-        expenseListModuleBuilder: expenseListModuleBuilder
+        expenseListModuleBuilder: expenseListModuleBuilder,
+        expensesByCategoryModuleBuilder: expensesByCategoryModuleBuilder
       ).build()
     } catch {
       print(error)

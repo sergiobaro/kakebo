@@ -1,8 +1,8 @@
 import Foundation
 
 protocol DayExpenseListDelegate: class {
-  func didSelectExpense(_ expense: Expense)
-  func didDeleteExpense(_ expense: Expense)
+  func dayExpenseListDidSelectExpense(_ expense: Expense)
+  func dayExpenseListDidDeleteExpense(_ expense: Expense)
 }
 
 class DayExpenseListPresenter {
@@ -97,7 +97,7 @@ extension DayExpenseListPresenter: ExpenseListPresenter {
       self.view?.deleteRow(at: indexPath)
     }
     
-    self.delegate?.didDeleteExpense(expense)
+    self.delegate?.dayExpenseListDidDeleteExpense(expense)
   }
   
   func userSelectExpense(indexPath: IndexPath) {
@@ -105,6 +105,6 @@ extension DayExpenseListPresenter: ExpenseListPresenter {
       return
     }
     
-    self.delegate?.didSelectExpense(expense)
+    self.delegate?.dayExpenseListDidSelectExpense(expense)
   }
 }

@@ -9,10 +9,7 @@ class ExpenseRealm: Object {
   @objc dynamic var createdAt = Date()
   dynamic var categories = List<CategoryRealm>()
   
-  override static func primaryKey() -> String? {
-    return "expenseId"
-  }
-  
+  override static func primaryKey() -> String? { "expenseId" }
 }
 
 class CategoryRealm: Object {
@@ -20,10 +17,7 @@ class CategoryRealm: Object {
   @objc dynamic var categoryId = UUID().uuidString
   @objc dynamic var name = ""
 
-  override class func primaryKey() -> String? {
-    return "categoryId"
-  }
-
+  override class func primaryKey() -> String? { "categoryId" }
 }
 
 class RealmExpensesRepository {
