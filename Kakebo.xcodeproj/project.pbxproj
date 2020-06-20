@@ -89,6 +89,13 @@
 		D94837B52462979E005DFEA4 /* ExpenseCategoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */; };
 		D94837B72462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B62462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift */; };
 		D94837B92462AFC4005DFEA4 /* ExpenseFactoryMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94837B82462AFC4005DFEA4 /* ExpenseFactoryMethods.swift */; };
+		D950021D249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950021C249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift */; };
+		D9500220249E071E006B558E /* DateRangeSelectorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D950021F249E071E006B558E /* DateRangeSelectorViewController.storyboard */; };
+		D9500222249E072A006B558E /* DateRangeSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500221249E072A006B558E /* DateRangeSelectorViewController.swift */; };
+		D9500225249E07D7006B558E /* Storyboard+instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500224249E07D7006B558E /* Storyboard+instantiate.swift */; };
+		D9500229249E0E6B006B558E /* BarButtonItem+factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500228249E0E6B006B558E /* BarButtonItem+factory.swift */; };
+		D950022C249E0FF2006B558E /* DateRangeSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950022B249E0FF2006B558E /* DateRangeSelectorPresenter.swift */; };
+		D950022E249E156E006B558E /* PickerComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950022D249E156E006B558E /* PickerComponents.swift */; };
 		D95E5AEF2415512B00CB77F0 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */; };
 		D95E5AF12415514800CB77F0 /* TimerFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */; };
 		D95E5AF3241554AA00CB77F0 /* TimeFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */; };
@@ -230,6 +237,13 @@
 		D94837B42462979E005DFEA4 /* ExpenseCategoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoriesRepository.swift; sourceTree = "<group>"; };
 		D94837B62462AF15005DFEA4 /* RealmExpenseCategoriesRepositorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExpenseCategoriesRepositorySpec.swift; sourceTree = "<group>"; };
 		D94837B82462AFC4005DFEA4 /* ExpenseFactoryMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFactoryMethods.swift; sourceTree = "<group>"; };
+		D950021C249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeSelectorModuleBuilder.swift; sourceTree = "<group>"; };
+		D950021F249E071E006B558E /* DateRangeSelectorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateRangeSelectorViewController.storyboard; sourceTree = "<group>"; };
+		D9500221249E072A006B558E /* DateRangeSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeSelectorViewController.swift; sourceTree = "<group>"; };
+		D9500224249E07D7006B558E /* Storyboard+instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+instantiate.swift"; sourceTree = "<group>"; };
+		D9500228249E0E6B006B558E /* BarButtonItem+factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BarButtonItem+factory.swift"; sourceTree = "<group>"; };
+		D950022B249E0FF2006B558E /* DateRangeSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeSelectorPresenter.swift; sourceTree = "<group>"; };
+		D950022D249E156E006B558E /* PickerComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerComponents.swift; sourceTree = "<group>"; };
 		D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
 		D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFormatterSpec.swift; sourceTree = "<group>"; };
 		D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenter.swift; sourceTree = "<group>"; };
@@ -313,6 +327,7 @@
 		1A8F70F1036E5BDD5E8BA268D7E71E50 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D950021B249E049C006B558E /* MonthSelector */,
 				D9D0AE30248E9CDE00FB7FE8 /* ExpensesByCategory */,
 				D97586AD245DD82C00CE880A /* AddCategory */,
 				D96E14DA245DBE8600257E4E /* CategorySelector */,
@@ -770,6 +785,50 @@
 			path = Validators;
 			sourceTree = "<group>";
 		};
+		D950021B249E049C006B558E /* MonthSelector */ = {
+			isa = PBXGroup;
+			children = (
+				D950021C249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift */,
+				D950022A249E0FE8006B558E /* Presenter */,
+				D950021E249E0714006B558E /* View */,
+			);
+			path = MonthSelector;
+			sourceTree = "<group>";
+		};
+		D950021E249E0714006B558E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D950021F249E071E006B558E /* DateRangeSelectorViewController.storyboard */,
+				D9500221249E072A006B558E /* DateRangeSelectorViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D9500223249E07C9006B558E /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D9500224249E07D7006B558E /* Storyboard+instantiate.swift */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		D9500227249E0E5F006B558E /* BarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				D9500228249E0E6B006B558E /* BarButtonItem+factory.swift */,
+			);
+			path = BarButtonItem;
+			sourceTree = "<group>";
+		};
+		D950022A249E0FE8006B558E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D950022B249E0FF2006B558E /* DateRangeSelectorPresenter.swift */,
+				D950022D249E156E006B558E /* PickerComponents.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		D95E5AF62415576500CB77F0 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
@@ -935,6 +994,8 @@
 		FC71E398EF37DFDAB0964A845EB114B2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D9500227249E0E5F006B558E /* BarButtonItem */,
+				D9500223249E07C9006B558E /* Storyboard */,
 				D9D0AE44248EC84200FB7FE8 /* Table */,
 				D9D9DE09240A8ADD00701340 /* Date */,
 				5A830C3F228AAFDA00FF6DF1 /* Color */,
@@ -1054,6 +1115,7 @@
 				D9D0AE48248EC98000FB7FE8 /* ExpensesByCategoryViewController.storyboard in Resources */,
 				D9CB02362352FE99006C8F5F /* CalendarFormFieldViewCell.xib in Resources */,
 				5A41D9F42281EED400794A8F /* TextFormFieldView.xib in Resources */,
+				D9500220249E071E006B558E /* DateRangeSelectorViewController.storyboard in Resources */,
 				D9A013DE24548A3B0096B511 /* OptionsFormFieldView.xib in Resources */,
 				5ABC60AE22F80F4000A72659 /* EmptyStateView.xib in Resources */,
 				D9D0AE40248EC09100FB7FE8 /* CategorySelectorViewController.storyboard in Resources */,
@@ -1227,6 +1289,7 @@
 				D9D0AE32248E9CFF00FB7FE8 /* ExpensesByCategoryModuleBuilder.swift in Sources */,
 				D9CB023A235308BD006C8F5F /* Color+random.swift in Sources */,
 				D97586AF245DD83A00CE880A /* AddCategoryModuleBuilder.swift in Sources */,
+				D950022E249E156E006B558E /* PickerComponents.swift in Sources */,
 				5A830C3E228AAFA100FF6DF1 /* Style.swift in Sources */,
 				D9D9DE0B240A8AE600701340 /* Date+components.swift in Sources */,
 				D96E14DF245DBF5400257E4E /* CategorySelectorViewController.swift in Sources */,
@@ -1234,6 +1297,7 @@
 				5A1E8424228F3CA2008DA9D1 /* GeneralDateFormatter.swift in Sources */,
 				5A830C41228AAFE100FF6DF1 /* Color+hex.swift in Sources */,
 				D9D9DE03240A6BE600701340 /* OnDateExpenseListPresenter.swift in Sources */,
+				D9500229249E0E6B006B558E /* BarButtonItem+factory.swift in Sources */,
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
 				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
 				5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */,
@@ -1241,10 +1305,12 @@
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* AddExpensePresenter.swift in Sources */,
 				5A50EDFA228B303900EECB30 /* InputFormFieldView.swift in Sources */,
+				D950022C249E0FF2006B558E /* DateRangeSelectorPresenter.swift in Sources */,
 				D901A6FD248ECA3D0033CDD4 /* ExpensesByCategoryCell.swift in Sources */,
 				5ABC60B322F834B900A72659 /* ScrollView+pagging.swift in Sources */,
 				5A50EDFC228B311000EECB30 /* DateFormFieldPresenter.swift in Sources */,
 				8DF7788DE61ABC814ADBB3E5E8E3AB8E /* ExpenseListCell.swift in Sources */,
+				D9500225249E07D7006B558E /* Storyboard+instantiate.swift in Sources */,
 				AFEE71C49E68C5A673D7A42F5360540D /* ExpensesModuleBuilder.swift in Sources */,
 				BA2F8EC21BC778A610708C621EE1F042 /* ExpensesRouter.swift in Sources */,
 				FE10CEFEA4E8654443D866FF3C0B8C8C /* ExpenseListHeaderView.swift in Sources */,
@@ -1259,9 +1325,11 @@
 				A18C56CDFDF3CC47426260B731A2FE96 /* RealmExpensesRepository.swift in Sources */,
 				C4F15B3579C176C64492F2F6A94E70BE /* Sections.swift in Sources */,
 				5ABC60AC22F80F2000A72659 /* EmptyStateView.swift in Sources */,
+				D9500222249E072A006B558E /* DateRangeSelectorViewController.swift in Sources */,
 				D0518D4EBA9DCE9ABBF0680DD5136061 /* String+replacing.swift in Sources */,
 				D9CB02352352FE99006C8F5F /* CalendarFormFieldViewCell.swift in Sources */,
 				5A50EE01228B38E200EECB30 /* Colors.swift in Sources */,
+				D950021D249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift in Sources */,
 				5A50EDF8228B2D4100EECB30 /* FormStyle.swift in Sources */,
 				D9D0AE3E248EC05A00FB7FE8 /* CategorySelectorCell.swift in Sources */,
 				5AF2856622F3F44A001AC3DF /* DayExpenseListPresenter.swift in Sources */,

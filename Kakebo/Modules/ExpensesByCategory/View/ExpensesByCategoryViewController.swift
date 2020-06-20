@@ -13,12 +13,7 @@ class ExpensesByCategoryViewController: UIViewController {
 
     self.title = localize("Expenses By Category")
 
-    self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-      image: UIImage(systemName: "xmark"),
-      style: .plain,
-      target: self,
-      action: #selector(tapClose)
-    )
+    self.navigationItem.leftBarButtonItem = .close(delegate: self)
 
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(
       image: UIImage(systemName: "line.horizontal.3.decrease"),
@@ -33,12 +28,15 @@ class ExpensesByCategoryViewController: UIViewController {
     presenter.viewIsReady()
   }
 
-  @objc private func tapClose() {
-    self.presenter.userTapClose()
-  }
-
   @objc private func tapFilter() {
     self.presenter.userTapFilter()
+  }
+}
+
+extension ExpensesByCategoryViewController: CloseBarButtonDelegate {
+
+  func tapClose() {
+    self.presenter.userTapClose()
   }
 }
 

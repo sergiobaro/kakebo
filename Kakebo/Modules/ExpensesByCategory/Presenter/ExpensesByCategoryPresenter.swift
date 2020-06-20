@@ -6,6 +6,12 @@ struct ExpensesByCategoryViewModel {
   let amount: String
 }
 
+private struct CategoryAmount {
+  let categoryId: String
+  let categoryName: String
+  let amount: Int
+}
+
 protocol ExpensesByCategoryView: class {
   func showViewModels(_ viewModels: [ExpensesByCategoryViewModel])
 }
@@ -44,7 +50,7 @@ class ExpensesByCategoryPresenter {
   }
 
   func userTapFilter() {
-    self.router.navigateToFilter()
+    self.router.navigateToDateRangeSelector(delegate: self)
   }
 
   func userTapClose() {
@@ -84,8 +90,9 @@ class ExpensesByCategoryPresenter {
   }
 }
 
-private struct CategoryAmount {
-  let categoryId: String
-  let categoryName: String
-  let amount: Int
+extension ExpensesByCategoryPresenter: DateRangeSelectorDelegate {
+
+  func dateSelectorDidSelect(startDate: Date, endDate: Date) {
+    // TODO
+  }
 }

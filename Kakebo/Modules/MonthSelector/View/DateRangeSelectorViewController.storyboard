@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fr2-2T-ggO">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Date Range Selector View Controller-->
+        <scene sceneID="bZn-v6-Ix9">
+            <objects>
+                <viewController storyboardIdentifier="DateRangeSelectorViewController" id="Fr2-2T-ggO" customClass="DateRangeSelectorViewController" customModule="Kakebo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ted-89-HHt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRX-wu-2Ot">
+                                <rect key="frame" x="0.0" y="340" width="414" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="fQ7-Ol-pZb" firstAttribute="trailing" secondItem="NRX-wu-2Ot" secondAttribute="trailing" id="7wL-h7-N9N"/>
+                            <constraint firstItem="NRX-wu-2Ot" firstAttribute="leading" secondItem="fQ7-Ol-pZb" secondAttribute="leading" id="OBx-NA-oCT"/>
+                            <constraint firstItem="NRX-wu-2Ot" firstAttribute="centerY" secondItem="Ted-89-HHt" secondAttribute="centerY" id="bIY-Z7-FbG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fQ7-Ol-pZb"/>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="NRX-wu-2Ot" id="iHx-uw-KjP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OlD-ce-rVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="109"/>
+        </scene>
+    </scenes>
+</document>

@@ -26,9 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         categorySelectorModuleBuilder: CategorySelectorModuleBuilder(repository: repository)
       )
       let expenseListModuleBuilder = ExpenseListModuleBuilder(repository: repository)
+      let dateRangeSelectorModuleBuilder = DateRangeSelectorModuleBuilder(repository: repository)
       let expensesByCategoryModuleBuilder = ExpensesByCategoryModuleBuilder(
         expensesRepository: repository,
-        categoriesRepository: repository
+        categoriesRepository: repository,
+        dateRangeSelectorModuleBuilder: dateRangeSelectorModuleBuilder
       )
 
       self.window!.rootViewController = ExpensesModuleBuilder(

@@ -4,10 +4,16 @@ class ExpensesByCategoryModuleBuilder {
 
   private let expensesRepository: ExpensesRepository
   private let categoriesRepository: ExpenseCategoriesRepository
+  private let dateRangeSelectorModuleBuilder: DateRangeSelectorModuleBuilder
 
-  init(expensesRepository: ExpensesRepository, categoriesRepository: ExpenseCategoriesRepository) {
+  init(
+    expensesRepository: ExpensesRepository,
+    categoriesRepository: ExpenseCategoriesRepository,
+    dateRangeSelectorModuleBuilder: DateRangeSelectorModuleBuilder
+  ) {
     self.expensesRepository = expensesRepository
     self.categoriesRepository = categoriesRepository
+    self.dateRangeSelectorModuleBuilder = dateRangeSelectorModuleBuilder
   }
 
   func build() -> UIViewController? {
@@ -18,7 +24,10 @@ class ExpensesByCategoryModuleBuilder {
 
     viewController.presenter = ExpensesByCategoryPresenter(
       view: viewController,
-      router: ExpensesByCategoryRouter(viewController: viewController),
+      router: ExpensesByCategoryRouter(
+        viewController: viewController,
+        dateRangeSelectorModuleBuilder: self.dateRangeSelectorModuleBuilder
+      ),
       expensesRepository: self.expensesRepository,
       categoriesRepository: self.categoriesRepository
     )
