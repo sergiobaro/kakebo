@@ -59,6 +59,14 @@ class CategorySelectorPresenter {
     self.selectedCategories.remove(category)
   }
 
+  func userDidDeleteCategory(_ category: ExpenseCategoryViewModel) {
+    self.selectedCategories.remove(category)
+    guard let category = self.repository.find(categoryId: category.categoryId) else {
+      return
+    }
+    _ = self.repository.delete(category: category)
+  }
+
   func userDone() {
     let selectedCategories = self.selectedCategories.map {
       ExpenseCategory(categoryId: $0.categoryId, name: $0.name)

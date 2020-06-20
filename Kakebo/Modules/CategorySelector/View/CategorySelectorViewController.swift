@@ -70,6 +70,21 @@ extension CategorySelectorViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
     self.presenter.userDidDeselectCategory(self.categories[indexPath.row])
   }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    true
+  }
+
+  // swiftlint:disable:next line_length
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    guard editingStyle == .delete else { return }
+    guard let category = self.categories.element(at: indexPath.row) else { return }
+
+    self.presenter.userDidDeleteCategory(category)
+    self.categories.remove(at: indexPath.row)
+
+    tableView.deleteRow(at: indexPath, with: .left)
+  }
 }
 
 extension CategorySelectorViewController: CategorySelectorView {
