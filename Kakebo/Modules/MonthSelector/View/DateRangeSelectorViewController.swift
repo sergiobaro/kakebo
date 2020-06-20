@@ -17,7 +17,8 @@ class DateRangeSelectorViewController: UIViewController {
 
   private func setupView() {
     self.title = localize("Select a month")
-    self.navigationItem.leftBarButtonItem = .close(delegate: self)
+    self.navigationItem.leftBarButtonItem = .cancel(delegate: self)
+    self.navigationItem.rightBarButtonItem = .save(delegate: self)
 
     self.pickerView.dataSource = self
     self.pickerView.delegate = self
@@ -26,16 +27,24 @@ class DateRangeSelectorViewController: UIViewController {
 
 extension DateRangeSelectorViewController: DateRangeSelectorView {
 
+  func selectComponent(_ component: Int, index: Int) {
+    self.pickerView.selectRow(index, inComponent: component, animated: false)
+  }
+
   func showComponents(_ components: PickerComponents) {
     self.components = components
     self.pickerView.reloadAllComponents()
   }
 }
 
-extension DateRangeSelectorViewController: CloseBarButtonDelegate {
+extension DateRangeSelectorViewController: CancelBarButtonDelegate, SaveBarButtonDelegate {
 
-  func tapClose() {
-    self.dismiss(animated: true, completion: nil)
+  func tapCancel() {
+    self.presenter.userDidCancel()
+  }
+
+  func tapSave() {
+    self.presenter.userDidSave()
   }
 }
 
@@ -46,14 +55,18 @@ extension DateRangeSelectorViewController: UIPickerViewDataSource {
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    self.components.component(at: component)?.count ?? 0
+    self.components[component].count
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    self.components.component(at: component)?.value(at: row) ?? ""
+    self.components[component][row].title
   }
 }
 
 extension DateRangeSelectorViewController: UIPickerViewDelegate {
 
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    let value = self.components[component][row]
+    self.presenter.userDidSelect(value: value, in: component)
+  }
 }

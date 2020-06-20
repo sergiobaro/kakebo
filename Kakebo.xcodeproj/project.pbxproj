@@ -96,6 +96,8 @@
 		D9500229249E0E6B006B558E /* BarButtonItem+factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500228249E0E6B006B558E /* BarButtonItem+factory.swift */; };
 		D950022C249E0FF2006B558E /* DateRangeSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950022B249E0FF2006B558E /* DateRangeSelectorPresenter.swift */; };
 		D950022E249E156E006B558E /* PickerComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950022D249E156E006B558E /* PickerComponents.swift */; };
+		D9500231249E2373006B558E /* DateRangeSelectorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500230249E2373006B558E /* DateRangeSelectorRouter.swift */; };
+		D9500233249E605C006B558E /* DateFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9500232249E605C006B558E /* DateFactorySpec.swift */; };
 		D95E5AEF2415512B00CB77F0 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */; };
 		D95E5AF12415514800CB77F0 /* TimerFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */; };
 		D95E5AF3241554AA00CB77F0 /* TimeFormFieldPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */; };
@@ -244,6 +246,8 @@
 		D9500228249E0E6B006B558E /* BarButtonItem+factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BarButtonItem+factory.swift"; sourceTree = "<group>"; };
 		D950022B249E0FF2006B558E /* DateRangeSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeSelectorPresenter.swift; sourceTree = "<group>"; };
 		D950022D249E156E006B558E /* PickerComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerComponents.swift; sourceTree = "<group>"; };
+		D9500230249E2373006B558E /* DateRangeSelectorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeSelectorRouter.swift; sourceTree = "<group>"; };
+		D9500232249E605C006B558E /* DateFactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFactorySpec.swift; sourceTree = "<group>"; };
 		D95E5AEE2415512B00CB77F0 /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
 		D95E5AF02415514800CB77F0 /* TimerFormatterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFormatterSpec.swift; sourceTree = "<group>"; };
 		D95E5AF2241554AA00CB77F0 /* TimeFormFieldPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormFieldPresenter.swift; sourceTree = "<group>"; };
@@ -717,6 +721,7 @@
 				5ACE92B1227EEF1C009092D8 /* ArrayElementSpec.swift */,
 				5ACE92B6227F4B8F009092D8 /* StringReplacingSpec.swift */,
 				5ACE92B8227F5135009092D8 /* StringSubstringSpec.swift */,
+				D9500232249E605C006B558E /* DateFactorySpec.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -789,6 +794,7 @@
 			isa = PBXGroup;
 			children = (
 				D950021C249E04BA006B558E /* DateRangeSelectorModuleBuilder.swift */,
+				D950022F249E236B006B558E /* Router */,
 				D950022A249E0FE8006B558E /* Presenter */,
 				D950021E249E0714006B558E /* View */,
 			);
@@ -827,6 +833,14 @@
 				D950022D249E156E006B558E /* PickerComponents.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D950022F249E236B006B558E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				D9500230249E2373006B558E /* DateRangeSelectorRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		D95E5AF62415576500CB77F0 /* Presenters */ = {
@@ -1253,6 +1267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D95E5AF12415514800CB77F0 /* TimerFormatterSpec.swift in Sources */,
+				D9500233249E605C006B558E /* DateFactorySpec.swift in Sources */,
 				2272F3FF647D684F0CDF34965B784ED4 /* AmountFormatterSpec.swift in Sources */,
 				5ACE92B7227F4B8F009092D8 /* StringReplacingSpec.swift in Sources */,
 				5AF085B7227A44D3006CE614 /* RealmExpensesRepositorySpec.swift in Sources */,
@@ -1301,6 +1316,7 @@
 				323F24301A1E53DE441AF56D4E3FEFCB /* AmountFormatter.swift in Sources */,
 				5A45F1B72282170D0005AA68 /* FormBuilder.swift in Sources */,
 				5B915FE143322D23F918F64953B8CDCC /* AppDelegate.swift in Sources */,
+				D9500231249E2373006B558E /* DateRangeSelectorRouter.swift in Sources */,
 				A66A5351279702857BD5D451E4840551 /* Array+element.swift in Sources */,
 				8D6AE39A08FBCCCA53789677D16ECBCC /* Array+group.swift in Sources */,
 				1D847E3A4FA872E67A402FA1068FAD72 /* AddExpensePresenter.swift in Sources */,

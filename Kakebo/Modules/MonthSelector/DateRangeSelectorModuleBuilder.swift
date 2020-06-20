@@ -1,5 +1,10 @@
 import UIKit
 
+struct DateRangeSelectorModel {
+  let startDate: Date
+  let endDate: Date
+}
+
 protocol DateRangeSelectorDelegate: class {
   func dateSelectorDidSelect(startDate: Date, endDate: Date)
 }
@@ -12,12 +17,18 @@ class DateRangeSelectorModuleBuilder {
     self.repository = repository
   }
 
-  func build(delegate: DateRangeSelectorDelegate) -> UIViewController? {
+  func build(model: DateRangeSelectorModel, delegate: DateRangeSelectorDelegate) -> UIViewController? {
     guard let viewController = UIStoryboard.instantiate(type: DateRangeSelectorViewController.self, bundle: nil) else {
       return nil
     }
 
-    viewController.presenter = DateRangeSelectorPresenter(view: viewController, repository: repository)
+    viewController.presenter = DateRangeSelectorPresenter(
+      model: model,
+      view: viewController,
+      delegate: delegate,
+      router: DateRangeSelectorRouter(viewController: viewController),
+      repository: repository
+    )
     return UINavigationController(rootViewController: viewController)
   }
 }

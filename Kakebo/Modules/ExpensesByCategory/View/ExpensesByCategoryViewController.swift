@@ -11,8 +11,6 @@ class ExpensesByCategoryViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.title = localize("Expenses By Category")
-
     self.navigationItem.leftBarButtonItem = .close(delegate: self)
 
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -41,6 +39,11 @@ extension ExpensesByCategoryViewController: CloseBarButtonDelegate {
 }
 
 extension ExpensesByCategoryViewController: ExpensesByCategoryView {
+
+  func showTitle(_ title: String) {
+    self.title = title
+  }
+
   func showViewModels(_ viewModels: [ExpensesByCategoryViewModel]) {
     self.viewModels = viewModels
     self.tableView.reloadData()

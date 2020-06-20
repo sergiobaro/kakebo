@@ -1,28 +1,34 @@
 import Foundation
 
 class PickerComponents {
+
   struct Component {
     var count: Int { self.values.count }
+    let values: [Value]
 
-    private let values: [String]
-    init(values: [String]) {
+    init(values: [Value]) {
       self.values = values
     }
 
-    func value(at index: Int) -> String? {
-      self.values.element(at: index)
+    subscript(index: Int) -> Value {
+      self.values[index]
     }
+  }
+
+  struct Value {
+    let title: String
+    let value: Int
   }
 
   var count: Int { self.components.count }
 
   private var components = [Component]()
 
-  func component(at index: Int) -> Component? {
-    self.components.element(at: index)
+  subscript(index: Int) -> Component {
+    self.components[index]
   }
 
-  func addComponent(values: [String]) {
+  func addComponent(values: [Value]) {
     let component = Component(values: values)
     self.components.append(component)
   }

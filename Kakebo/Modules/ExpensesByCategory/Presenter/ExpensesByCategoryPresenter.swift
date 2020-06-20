@@ -13,6 +13,7 @@ private struct CategoryAmount {
 }
 
 protocol ExpensesByCategoryView: class {
+  func showTitle(_ title: String)
   func showViewModels(_ viewModels: [ExpensesByCategoryViewModel])
 }
 
@@ -24,6 +25,8 @@ class ExpensesByCategoryPresenter {
   private let categoriesRepository: ExpenseCategoriesRepository
 
   private let amountFormatter = AmountFormatter()
+  private var currentStartDate = Date().startOfMonth()
+  private var currentEndDate = Date().endOfMonth()
 
   init(
     view: ExpensesByCategoryView,
@@ -38,19 +41,12 @@ class ExpensesByCategoryPresenter {
   }
 
   func viewIsReady() {
-    let categories = self.categoriesRepository.allCategories()
-
-    let start = Date().startOfMonth()
-    let end = Date().endOfMonth()
-    let expenses = self.expensesRepository.findBetween(start: start, end: end)
-
-    let viewModels = self.group(expenses, with: categories)
-
-    self.view?.showViewModels(viewModels)
+    self.updateView()
   }
 
   func userTapFilter() {
-    self.router.navigateToDateRangeSelector(delegate: self)
+    let model = DateRangeSelectorModel(startDate: self.currentStartDate, endDate: self.currentEndDate)
+    self.router.navigateToDateRangeSelector(model: model, delegate: self)
   }
 
   func userTapClose() {
@@ -58,6 +54,27 @@ class ExpensesByCategoryPresenter {
   }
 
   // MARK: - Private
+
+  func updateView() {
+    self.showTitle(from: self.currentStartDate)
+    self.showViewModels(startDate: self.currentStartDate, endDate: self.currentEndDate)
+  }
+
+  private func showTitle(from date: Date) {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMM YYYY"
+    let title = dateFormatter.string(from: date)
+    
+    self.view?.showTitle(title)
+  }
+
+  private func showViewModels(startDate: Date, endDate: Date) {
+    let categories = self.categoriesRepository.allCategories()
+    let expenses = self.expensesRepository.findBetween(start: startDate, end: endDate)
+    let viewModels = self.group(expenses, with: categories)
+
+    self.view?.showViewModels(viewModels)
+  }
 
   private func group(_ expenses: [Expense], with categories: [ExpenseCategory]) -> [ExpensesByCategoryViewModel] {
     var result = [ExpenseCategory: Int]()
@@ -93,6 +110,9 @@ class ExpensesByCategoryPresenter {
 extension ExpensesByCategoryPresenter: DateRangeSelectorDelegate {
 
   func dateSelectorDidSelect(startDate: Date, endDate: Date) {
-    // TODO
+    self.currentStartDate = startDate
+    self.currentEndDate = endDate
+
+    self.updateView()
   }
 }

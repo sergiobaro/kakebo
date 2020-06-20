@@ -10,8 +10,11 @@ class ExpensesByCategoryRouter {
     self.dateRangeSelectorModuleBuilder = dateRangeSelectorModuleBuilder
   }
 
-  func navigateToDateRangeSelector(delegate: DateRangeSelectorDelegate) {
-    guard let dateRangeSelector = self.dateRangeSelectorModuleBuilder.build(delegate: delegate) else { return }
+  func navigateToDateRangeSelector(model: DateRangeSelectorModel, delegate: DateRangeSelectorDelegate) {
+    guard let dateRangeSelector = self.dateRangeSelectorModuleBuilder.build(model: model, delegate: delegate) else {
+      return
+    }
+    
     self.viewController?.present(dateRangeSelector, animated: true)
   }
 
