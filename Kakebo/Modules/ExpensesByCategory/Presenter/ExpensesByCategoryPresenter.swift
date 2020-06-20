@@ -4,6 +4,7 @@ struct ExpensesByCategoryViewModel {
   let categoryId: String
   let categoryName: String
   let amount: String
+  let amountBold: Bool
 }
 
 private struct CategoryAmount {
@@ -101,7 +102,8 @@ class ExpensesByCategoryPresenter {
         ExpensesByCategoryViewModel(
           categoryId: $0.categoryId,
           categoryName: $0.categoryName,
-          amount: self.amountFormatter.string(integer: $0.amount)
+          amount: self.amountFormatter.string(integer: $0.amount),
+          amountBold: ($0.amount != 0)
         )
       }
   }

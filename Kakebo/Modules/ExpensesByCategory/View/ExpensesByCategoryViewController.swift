@@ -60,8 +60,7 @@ extension ExpensesByCategoryViewController: UITableViewDataSource {
     let cell = tableView.dequeue(cell: ExpensesByCategoryCell.self, indexPath: indexPath)
 
     let viewModel = self.viewModels[indexPath.row]
-    cell.nameLabel.text = viewModel.categoryName
-    cell.amountLabel.text = viewModel.amount
+    cell.showViewModel(viewModel)
 
     return cell
   }
