@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol AutoMockable { }
+@objc public protocol AutoMockable { }
 
 struct Point {
     let x: Float
@@ -41,4 +41,3 @@ protocol ComplicatedServiceType: SampleServiceType, SimpleServiceType {
     func serviceName() -> String
     func aNewWayToSayHooray() -> Void
 }
-

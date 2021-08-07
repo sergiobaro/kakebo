@@ -5,7 +5,7 @@ struct DateRangeSelectorModel {
   let endDate: Date
 }
 
-protocol DateRangeSelectorDelegate: class {
+protocol DateRangeSelectorDelegate: AnyObject {
   func dateSelectorDidSelect(startDate: Date, endDate: Date)
 }
 

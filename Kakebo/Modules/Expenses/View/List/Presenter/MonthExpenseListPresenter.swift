@@ -19,7 +19,7 @@ struct ExpenseDay: Comparable {
   }
 }
 
-protocol MonthExpenseListDelegate: class {
+protocol MonthExpenseListDelegate: AnyObject {
   func didSelectDay(_ expenseDay: ExpenseDay)
 }
 

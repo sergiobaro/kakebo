@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CategorySelectorDelegate: class {
+protocol CategorySelectorDelegate: AnyObject {
   func didSelectCategories(_ categories: [ExpenseCategory])
 }
 

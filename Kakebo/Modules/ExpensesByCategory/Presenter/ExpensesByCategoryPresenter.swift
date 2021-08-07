@@ -13,7 +13,7 @@ private struct CategoryAmount {
   let amount: Int
 }
 
-protocol ExpensesByCategoryView: class {
+protocol ExpensesByCategoryView: AnyObject {
   func showTitle(_ title: String)
   func showViewModels(_ viewModels: [ExpensesByCategoryViewModel])
 }

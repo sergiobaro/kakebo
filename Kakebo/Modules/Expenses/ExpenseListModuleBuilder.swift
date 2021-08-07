@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ExpenseListDelegate: class {
+protocol ExpenseListDelegate: AnyObject {
   func expenseListDidDeleteExpense(_ expense: Expense)
 }
 

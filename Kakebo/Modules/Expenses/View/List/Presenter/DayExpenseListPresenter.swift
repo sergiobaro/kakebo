@@ -1,6 +1,6 @@
 import Foundation
 
-protocol DayExpenseListDelegate: class {
+protocol DayExpenseListDelegate: AnyObject {
   func dayExpenseListDidSelectExpense(_ expense: Expense)
   func dayExpenseListDidDeleteExpense(_ expense: Expense)
 }

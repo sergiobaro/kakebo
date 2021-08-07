@@ -1,7 +1,7 @@
 import UIKit
 
 // sourcery: AutoMockable
-protocol InputFormFieldViewProtocol: class {
+protocol InputFormFieldViewProtocol: AnyObject {
 
   func updateText(_ text: String?)
 

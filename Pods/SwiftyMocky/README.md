@@ -1,7 +1,8 @@
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyMocky.svg?style=flat)](http://cocoapods.org/pods/SwiftyMocky)
-[![Build Status](https://travis-ci.org/MakeAWishFoundation/SwiftyMocky.svg?branch=master)](https://travis-ci.org/MakeAWishFoundation/SwiftyMocky)
 [![Docs](https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/master/docs/badge.svg)](https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/master/docs/index.html)
 [![License](https://img.shields.io/cocoapods/l/SwiftyMocky.svg?style=flat)](http://cocoapods.org/pods/SwiftyMocky)
+[![Build Status](https://img.shields.io/travis/MakeAWishFoundation/SwiftyMocky.svg?label=SwiftyMocky&logo=travis)](https://travis-ci.org/MakeAWishFoundation/SwiftyMocky)
+[![Integration tests](https://img.shields.io/travis/MakeAWishFoundation/SM-Integration-Tests.svg?label=Integration%20Tests&logo=travis)](https://travis-ci.org/MakeAWishFoundation/SM-Integration-Tests)
 
 [![Version](https://img.shields.io/cocoapods/v/SwiftyMocky.svg?style=flat)](http://cocoapods.org/pods/SwiftyMocky)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -17,7 +18,7 @@ Check out [guides][link-guides-contents], or full [documentation][link-docs]
 ## Table of contents
 
 1. [Overview](#overview)
-1. [Current version](#current-version)
+1. [Current Version](#current-version)
 1. [Getting started:](#getting-started)
     1. [Installing SwiftyMocky CLI](#installation)
     1. [Integrating SwiftyMocky runtime into test target](#integration)
@@ -54,23 +55,27 @@ The idea of **SwiftyMocky** is to automatically mock Swift protocols. The main f
 
 <a name="current-version"></a>
 
-## Current version
+## **Important!!!** Version 4.x.x
 
-We consider current version as stable. We are moving toward using the new [Mockfile][link-guides-mockfile] but the previous configuration format would be still supported, until SwiftyMocky 4.0. Library works with Swift **4.1, 4.2, 5.0, 5.1.2**  and  Sourcery 0.17.0.
+Current version has several significant changes. It removes deprecated methods (which might be breaking) and moves CLI to the new [repository](https://github.com/MakeAWishFoundation/SwiftyMockyCLI).
+
+**SwiftyPrototype** was also extracted to separate library. There are no more compilation flags, so if you were relying on **SwiftyMocky** with `-DMockyCustom`, you will have to switch to `SwiftyPrototype`.
+
+We consider current version as stable. We are moving toward using the new [Mockfile][link-guides-mockfile] but the previous configuration format would be still supported. Library works with Swift **4.1, 4.2, 5.0, 5.1.2**  and  Sourcery 1.0.x.
 
 While it is technically possible to integrate SwiftyMocky on Linux targets, there is no Mock generation feature there yet. You can use SwiftyMokcy runtime via SwiftPM though, as long as your are fine with generating mocks on mac machine.
-
-<a name="getting-started"></a>
 
 ## Migration from 3.2.0 and below
 
 The migration is not required, you can keep using **SwiftyMocky** as you did before. The [Legacy setup](https://github.com/MakeAWishFoundation/SwiftyMocky/blob/master/guides/Legacy.md) is described in [guides section](https://github.com/MakeAWishFoundation/SwiftyMocky/blob/master/guides/Contents.md).
 
-Still, we would encourage to try new **CLI** and share a feedback. We believe it will make using and setting up **SwiftyMocky** way easier. If you have an existing setup, try:
+Still, we would encourage to try new **CLI** and share a feedback. We believe it will make using and setting up **SwiftyMocky** way easier. If you have an existing setup, install CLI as per this [guide](https://github.com/MakeAWishFoundation/SwiftyMocky/blob/master/guides/Installation.md) and try:
 
 ```bash
 > swiftymocky migrate
 ```
+
+<a name="getting-started"></a>
 
 ## Getting started
 
@@ -88,20 +93,24 @@ To start working with **SwiftyMocky** you need to:
 
 ```bash
 > brew install mint
-> mint install MakeAWishFoundation/SwiftyMocky
+> mint install MakeAWishFoundation/SwiftyMocky-CLI
 ```
 
 **[Marathon 🏃](https://github.com/JohnSundell/Marathon)**:
 
 ```bash
-> marathon install MakeAWishFoundation/SwiftyMocky
+> marathon install MakeAWishFoundation/SwiftyMocky-CLI
 ```
+
+**Make**:
+
+Clone from https://github.com/MakeAWishFoundation/SwiftyMockyCLI and run `make` in the root directory.
 
 <a name="integration"></a>
 
 ### 2. Integrating SwiftyMocky runtime into test target:
 
-**[CocoaPods](http://cocoapods.org)**: 
+**[CocoaPods](http://cocoapods.org)**:
 
 SwiftyMocky is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
@@ -109,7 +118,7 @@ SwiftyMocky is available through [CocoaPods](http://cocoapods.org). To install i
 pod "SwiftyMocky"
 ```
 
-**[Carthage](https://github.com/Carthage/Carthage)**: 
+**[Carthage](https://github.com/Carthage/Carthage)**:
 
 To install, add following to you Cartfile:
 
@@ -119,7 +128,7 @@ github "MakeAWishFoundation/SwiftyMocky"
 
 Then execute `carthage update`
 
-For [Carthage](https://github.com/Carthage/Carthage), few additional steps are required ⚠️. For detailed install instructions, see full [documentation][link-docs-installation-carthage].
+For [Carthage](https://github.com/Carthage/Carthage), few additional steps are required ⚠️. For detailed install instructions, see full [documentation][link-docs-installation-carthage] or consult [Carthage documentation][carthage-adding-framework].
 
 **[Swift Package Manager](https://swift.org/package-manager/)**:
 
@@ -127,7 +136,7 @@ Add **SwiftyMocky** to you **Package.swift** dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/MakeAWishFoundation/SwiftyMocky", from: "3.5.0"),
+    .package(url: "https://github.com/MakeAWishFoundation/SwiftyMocky", from: "4.0.4"),
 ]
 ```
 
@@ -139,7 +148,7 @@ dependencies: [
 
 [Annotate your protocols](#mock-annotate) that are going to be mocked, making them adopt `AutoMockable` protocol, or adding annotation comment above their definition in the source code.
 
-Mocks are generated from your project root directory, based on configuration inside [Mockfile][link-guides-mockfile]. 
+Mocks are generated from your project root directory, based on configuration inside [Mockfile][link-guides-mockfile].
 
 ```bash
 > swiftymocky setup     # if you don't have a Mockfile yet
@@ -179,16 +188,6 @@ protocol ToBeMocked {
 ```
 
 Every protocol in source directories, having this annotation, will be added to `Mock.generated.swift`
-
-@objc protocols are also supported, but needs to be explicitly marked with ObjcProtocol annotation:
-
-```swift
-//sourcery: AutoMockable
-//sourcery: ObjcProtocol
-@objc protocol NonSwiftProtocol {
-  // ...
-}
-```
 
 <a name="given"></a>
 
@@ -251,7 +250,7 @@ Verify(mockStorage, 3, .storeUser(name: .any, surname: .any))
 // storeUser method should be triggered 2 times with name Johny
 Verify(mockStorage, 2, .storeUser(name: .value("Johny"), surname: .any))
 // storeUser method should be triggered at least 2 times with name longer than 3
-Verify(mockStorage, .moreOrEqual(to: 2), .storeUser(name: .matching({ $0.count > 3 }}), surname: .any))
+Verify(mockStorage, .moreOrEqual(to: 2), .storeUser(name: .matching({ $0.count > 3 }), surname: .any))
 ```
 
 For **Verify**, you can use **Count** to specify how many times you expect something to be triggered. **Count** can be defined as explicit value, like `1`,`2`,... or in more descriptive and flexible way, like `.never`, `more(than: 1)`, etc.
@@ -315,7 +314,7 @@ For more examples, check out our example project, or examples section in [guides
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-To trigger mocks generation, run `rake mock` from root directory.
+To trigger mocks generation, run `rake mock` or `swiftymocky generate` from root directory (if you installed CLI).
 
 <a name="roadmap"></a>
 
@@ -365,13 +364,15 @@ SwiftyMocky is available under the MIT license. See the [LICENSE][link-license] 
 [link-guides-cli-generate]: ./guides/Command%20Line%20Interface.md#generate
 [link-guides-mockfile]: ./guides/Mockfile.md
 
+[carthage-adding-framework]: https://github.com/Carthage/Carthage#adding-frameworks-to-unit-tests-or-a-framework
+
 <!-- Links based on tag -->
 
-[link-docs]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.5.0/docs/index.html
-[link-docs-features]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.5.0/docs/supported-features.html
-[link-docs-installation]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.5.0/docs/installation.html
-[link-docs-installation-carthage]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.5.0/docs/installation.html#installation-carthage
-[link-docs-setup]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/3.5.0/docs/setup-in-project.html
+[link-docs]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/4.0.4/docs/index.html
+[link-docs-features]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/4.0.4/docs/supported-features.html
+[link-docs-installation]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/4.0.4/docs/installation.html
+[link-docs-installation-carthage]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/4.0.4/docs/installation.html#installation-carthage
+[link-docs-setup]: https://cdn.rawgit.com/MakeAWishFoundation/SwiftyMocky/4.0.4/docs/setup-in-project.html
 
 <!-- Assets -->
 

@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-protocol ExpensesViewProtocol: class {
+protocol ExpensesViewProtocol: AnyObject {
   
   func reloadExpenses()
 }

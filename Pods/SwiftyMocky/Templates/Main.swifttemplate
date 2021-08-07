@@ -10,7 +10,9 @@
     let inlineMockable = protocolToDecorate != nil
     guard let aProtocol = autoMockable ? type : protocolToDecorate else { continue }
     mockedCount += 1
+
     let associatedTypes: [String]? = Helpers.extractAssociatedTypes(from: aProtocol)
+    let attributes: String = Helpers.extractAttributes(from: type.attributes)
     let typeAliases: [String] = Helpers.extractTypealiases(from: aProtocol)
     let genericTypesModifier: String = Helpers.extractGenericTypesModifier(associatedTypes)
     let genericTypesConstraints: String = Helpers.extractGenericTypesConstraints(associatedTypes)
@@ -20,10 +22,10 @@
     let allStaticVariables = uniques(variables: aProtocol.allVariables.filter({ $0.isStatic }))
     let containsStaticVariables = !allStaticVariables.isEmpty
     let allMethods = uniques(methods: aProtocol.allMethods.filter({ !$0.isStatic }))
-    let accessModifier: String = {
-        let selfConstrained = allMethods.map(wrapMethod).contains(where: { $0.returnsGenericConstrainedToSelf || $0.parametersContainsSelf })
-        return selfConstrained ? "public final" : "open"
-    }()
+    let selfConstrained = allMethods.map(wrapMethod).contains(where: { $0.returnsGenericConstrainedToSelf || $0.parametersContainsSelf })
+    let accessModifier: String = selfConstrained ? "public final" : "open"
+    Current.accessModifier = accessModifier // TODO: Temporary workaround for access modifiers
+    let inheritFromNSObject = type.annotations["ObjcProtocol"] != nil || attributes.contains("@objc")
     let allMethodsForMethodType = uniquesWithoutGenericConstraints(methods: aProtocol.allMethods.filter({ !$0.isStatic }))
     let allStaticMethods = uniques(methods: aProtocol.allMethods.filter({ $0.isStatic }))
     let allStaticMethodsForMethodType = uniquesWithoutGenericConstraints(methods: aProtocol.allMethods.filter({ $0.isStatic }))
@@ -31,8 +33,9 @@
     let conformsToMock = !allMethods.isEmpty || !allVariables.isEmpty -%><%_ -%><%_ -%>
 <%_ if autoMockable { -%>
 // MARK: - <%= type.name %>
-<%= accessModifier %> class <%= type.name %>Mock<%= genericTypesModifier %>:<%= type.annotations["ObjcProtocol"] != nil ? " NSObject," : "" %> <%= type.name %>, Mock<%= conformsToStaticMock ? ", StaticMock" : "" %><%= genericTypesConstraints %> {
-    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+<%= attributes %>
+<%= accessModifier %> class <%= type.name %><%= mockTypeName %><%= genericTypesModifier %>:<%= inheritFromNSObject ? " NSObject," : "" %> <%= type.name %>, Mock<%= conformsToStaticMock ? ", StaticMock" : "" %><%= genericTypesConstraints %> {
+    public init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
         SwiftyMockyTestObserver.setup()
         self.sequencingPolicy = sequencingPolicy
         self.stubbingPolicy = stubbingPolicy
@@ -48,6 +51,8 @@
     var matcher: Matcher = Matcher.default
     var stubbingPolicy: StubbingPolicy = .wrap
     var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+
+    private var queue = DispatchQueue(label: "com.swiftymocky.invocations", qos: .userInteractive)
     private var invocations: [MethodType] = []
     private var methodReturnValues: [Given] = []
     private var methodPerformValues: [Perform] = []
@@ -80,12 +85,13 @@
     static var matcher: Matcher = Matcher.default
     static var stubbingPolicy: StubbingPolicy = .wrap
     static var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    static private var queue = DispatchQueue(label: "com.swiftymocky.invocations.static", qos: .userInteractive)
     static private var invocations: [StaticMethodType] = []
     static private var methodReturnValues: [StaticGiven] = []
     static private var methodPerformValues: [StaticPerform] = []
     public typealias StaticPropertyStub = StaticGiven
     public typealias StaticMethodStub = StaticGiven
-    
+
     /// Clear mock internals. You can specify what to reset (invocations aka verify, givens or performs) or leave it empty to clear all mock internals
     public static func resetMock(_ scopes: MockScope...) {
         let scopes: [MockScope] = scopes.isEmpty ? [.invocation, .given, .perform] : scopes
@@ -98,7 +104,7 @@
   <%# ================================================== VARIABLES -%><%_ -%>
     <%_ for variable in allVariables { -%>
     <%_ if autoMockable { -%>
-    <%= stubProperty(variable,"\(type.name)Mock") %>
+    <%= stubProperty(variable,"\(type.name)\(mockTypeName)") %>
     <%_ } else { %>
     <%= stubProperty(variable,"\(type.name)") %>
     <%_ } %>
@@ -107,7 +113,7 @@
   <%# ================================================== STATIC VARIABLES -%><%_ -%>
     <%_ for variable in allStaticVariables { -%>
     <%_ if autoMockable { -%>
-    <%= stubProperty(variable,"\(type.name)Mock") %>
+    <%= stubProperty(variable,"\(type.name)\(mockTypeName)") %>
     <%_ } else { %>
     <%= stubProperty(variable,"\(type.name)") %>
     <%_ } %>
@@ -117,9 +123,9 @@
     <%_ MethodWrapper.clear() -%>
     <%_ SubscriptWrapper.clear() -%>
     <%_ if autoMockable { -%>
-    <%_ Current.selfType = "\(type.name)Mock\(genericTypesModifier)" -%>
+    <%_ Current.selfType = "\(type.name)\(mockTypeName)\(genericTypesModifier)" -%>
     <%_ } else { %>
-    <%_ Current.selfType = "\(type.name)Mock\(genericTypesModifier)" -%>
+    <%_ Current.selfType = "\(type.name)\(mockTypeName)\(genericTypesModifier)" -%>
     <%_ } %>
     <%_ let wrappedSubscripts = allSubscripts.map(wrapSubscript) -%>
     <%_ let wrappedMethods = allMethods.map(wrapMethod).filter({ $0.wrappedInMethodType() }) -%>
@@ -137,8 +143,6 @@
     <%_ let variableCasesCount: Int = wrappedVariables.reduce(0) { return $0 + $1.casesCount } -%><%_ -%>
     <%_ let subscriptsCasesCount: Int = wrappedSubscripts.reduce(0) { return $0 + $1.casesCount } -%><%_ -%>
     <%_ let staticVariableCasesCount: Int = wrappedStaticVariables.reduce(0) { return $0 + $1.casesCount } -%><%_ -%>
-    <%_ let generateOldAccessorsForMethods: Bool = false -%><%_ -%>
-    <%_ let generateOldAccessorsForStaticMethods: Bool = false -%><%_ -%>
 
   <%# ================================================== STATIC STUBS -%><%_ -%>
     <%_ for method in wrappedStaticMethods { -%>
@@ -169,20 +173,18 @@
     <%_ if conformsToStaticMock { -%>
     fileprivate enum StaticMethodType {
     <%_ for method in wrappedStaticMethodsForMethodType { -%>
-        case <%= method.methodTypeDeclarationWithParameters() _%>
+        <%= method.methodTypeDeclarationWithParameters() _%>
     <%_  } %> <%_ for variable in allStaticVariables { -%>
         <%= propertyMethodTypes(variable) %>
     <%_ } %> <%_ %>
     <%_ -%>
-        static func compareParameters(lhs: StaticMethodType, rhs: StaticMethodType, matcher: Matcher) -> Bool {
+        static func compareParameters(lhs: StaticMethodType, rhs: StaticMethodType, matcher: Matcher) -> Matcher.ComparisonResult {
             switch (lhs, rhs) { <%_ for method in wrappedStaticMethodsForMethodType { %>
-            <%= method.equalCase -%><% for parameter in method.parameters { %>
-                <%= parameter.comparator -%> <%  } %>
-                return true <% } %>
-            <%_ for variable in allStaticVariables { -%>
-            <%= propertyMethodTypesCompare(variable) %>
-        <%_ } %> <%_ -%> <%_ if wrappedStaticMethods.count + staticVariableCasesCount > 1 { -%>
-            default: return false
+            <%= method.equalCases() %>
+            <%_ } %> <%_ for variable in wrappedStaticVariables { -%>
+            <%= variable.compareCases() %>
+            <%_ } %> <%_ -%> <%_ if wrappedStaticMethods.count + staticVariableCasesCount > 1 { -%>
+            default: return .none
             <%_ } -%>
             }
         }
@@ -193,6 +195,14 @@
                 <%_ for variable in allStaticVariables { -%>
                 <%= propertyMethodTypesIntValue(variable) %>
                 <%_ } %> <%_ -%>
+            }
+        }
+        func assertionName() -> String {
+            switch self { <%_ for method in wrappedStaticMethodsForMethodType { %>
+            <%= method.assertionName -%><% } %>
+            <%_ for variable in wrappedStaticVariables { -%>
+            <%= variable.assertionName %>
+            <%_ } %>
             }
         }
     }
@@ -214,11 +224,6 @@
         <%= method.givenConstructorName(prefix: "Static") -%> {
             <%= method.givenConstructor(prefix: "Static") _%>
         }
-        <%_ if generateOldAccessorsForStaticMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.givenConstructorName(prefix: "Static", deprecated: true) %> {
-            <%= method.givenConstructor(prefix: "Static") _%>
-        }
-        <%_ } -%>
         <%_ } -%>
         <%_ for method in wrappedStaticMethodsForMethodType.filter({ !$0.method.throws && !$0.method.rethrows && !$0.method.returnTypeName.isVoid && !$0.method.isInitializer }) { -%>
         <%= method.givenProduceConstructorName(prefix: "Static") -%> {
@@ -229,11 +234,6 @@
         <%= method.givenConstructorNameThrows(prefix: "Static") -%> {
             <%= method.givenConstructorThrows(prefix: "Static") _%>
         }
-        <%_ if generateOldAccessorsForStaticMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.givenConstructorNameThrows(prefix: "Static", deprecated: true) %> {
-            <%= method.givenConstructorThrows(prefix: "Static") _%>
-        }
-        <%_ } -%>
         <%= method.givenProduceConstructorNameThrows(prefix: "Static") -%> {
             <%= method.givenProduceConstructorThrows(prefix: "Static") _%>
         }
@@ -245,9 +245,6 @@
 
         <%_ for method in wrappedStaticMethodsForMethodType { -%>
         <%= method.verificationProxyConstructorName(prefix: "Static") -%> { <%= method.verificationProxyConstructor(prefix: "Static") _%> }
-        <%_ if generateOldAccessorsForStaticMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.verificationProxyConstructorName(prefix: "Static", deprecated: true) %> { <%= method.verificationProxyConstructor(prefix: "Static") _%> }
-        <%_ } -%>
         <%_ } %> <%_ -%>
         <%_ for variable in allStaticVariables { -%>
         <%= propertyTypes(variable) %>
@@ -262,11 +259,6 @@
         <%= method.performProxyConstructorName(prefix: "Static") -%> {
             <%= method.performProxyConstructor(prefix: "Static") _%>
         }
-        <%_ if generateOldAccessorsForStaticMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.performProxyConstructorName(prefix: "Static", deprecated: true) %> {
-            <%= method.performProxyConstructor(prefix: "Static") _%>
-        }
-        <%_ } -%>
         <%_ } %> <%_ -%>
     }
 
@@ -276,24 +268,22 @@
 
     fileprivate enum MethodType {
     <%_ for method in wrappedMethodsForMethodType { -%>
-        case <%= method.methodTypeDeclarationWithParameters() _%>
+        <%= method.methodTypeDeclarationWithParameters() _%>
     <%_  } -%> <%_ for variable in allVariables { -%>
         <%= propertyMethodTypes(variable) %>
     <%_ } %> <%_ %> <%_ for wrapped in wrappedSubscripts { -%>
         <%= wrapped.subscriptCases() _%>
     <%_ } %> <%_ %>
     <%_ -%>
-        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Matcher.ComparisonResult {
             switch (lhs, rhs) { <%_ for method in wrappedMethodsForMethodType { %>
-            <%= method.equalCase -%><% for parameter in method.parameters { %>
-                <%= parameter.comparator -%> <%  } %>
-                return true <% } %>
-            <%_ for variable in allVariables { -%>
-            <%= propertyMethodTypesCompare(variable) %>
+            <%= method.equalCases() %>
+            <%_ } %> <%_ for variable in wrappedVariables { -%>
+            <%= variable.compareCases() %>
             <%_ } %> <%_ -%> <%_ for wrapped in wrappedSubscripts { -%>
             <%= wrapped.equalCases() %>
-        <%_ } %> <%_ if wrappedMethods.count + variableCasesCount + subscriptsCasesCount > 1 { -%>
-            default: return false
+            <%_ } %> <%_ if wrappedMethods.count + variableCasesCount + subscriptsCasesCount > 1 { -%>
+            default: return .none
             <%_ } -%>
             }
         }
@@ -308,11 +298,22 @@
             <%_ } -%>
             }
         }
+        func assertionName() -> String {
+            switch self { <%_ for method in wrappedMethodsForMethodType { %>
+            <%= method.assertionName -%><% } %>
+            <%_ for variable in wrappedVariables { -%>
+            <%= variable.assertionName %>
+            <%_ } %> <%_ for wrapped in wrappedSubscripts { -%>
+            <%= wrapped.assertionName %>
+            <%_ } -%>
+            }
+        }
     }
     <%_ } else { %>
     fileprivate struct MethodType {
-        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool { return true }
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Matcher.ComparisonResult { return .match }
         func intValue() -> Int { return 0 }
+        func assertionName() -> String { return "" }
     }
     <%_ } -%><%_ -%>
 
@@ -333,11 +334,6 @@
         <%= method.givenConstructorName() -%> {
             <%= method.givenConstructor() _%>
         }
-        <%_ if generateOldAccessorsForMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.givenConstructorName(prefix: "", deprecated: true) %> {
-            <%= method.givenConstructor() _%>
-        }
-        <%_ } -%>
         <%_ } -%>
         <%_ for method in wrappedMethodsForMethodType.filter({ !$0.method.throws && !$0.method.rethrows && !$0.method.returnTypeName.isVoid && !$0.method.isInitializer }) { -%>
         <%= method.givenProduceConstructorName() -%> {
@@ -353,11 +349,6 @@
         <%= method.givenConstructorNameThrows() -%> {
             <%= method.givenConstructorThrows() _%>
         }
-        <%_ if generateOldAccessorsForMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.givenConstructorNameThrows(prefix: "", deprecated: true) %> {
-            <%= method.givenConstructorThrows() _%>
-        }
-        <%_ } -%>
         <%= method.givenProduceConstructorNameThrows() -%> {
             <%= method.givenProduceConstructorThrows() _%>
         }
@@ -369,9 +360,6 @@
 
         <%_ for method in wrappedMethodsForMethodType { -%>
         <%= method.verificationProxyConstructorName() -%> { <%= method.verificationProxyConstructor() _%> }
-        <%_ if generateOldAccessorsForMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.verificationProxyConstructorName(prefix: "", deprecated: true) %> { <%= method.verificationProxyConstructor() _%> }
-        <%_ } -%>
         <%_ } %> <%_ -%>
         <%_ for variable in allVariables { -%>
         <%= propertyTypes(variable) %>
@@ -392,11 +380,6 @@
         <%= method.performProxyConstructorName() -%> {
             <%= method.performProxyConstructor() _%>
         }
-        <%_ if generateOldAccessorsForMethods, method.containsEmptyArgumentLabels() { -%>
-        <%= method.performProxyConstructorName(prefix: "", deprecated: true) %> {
-            <%= method.performProxyConstructor() _%>
-        }
-        <%_ } -%>
         <%_ } %> <%_ -%>
     }
 
@@ -411,28 +394,47 @@
     }
 
     public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
-        let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        let fullMatches = matchingCalls(method, file: file, line: line)
+        let success = count.matches(fullMatches)
+        let assertionName = method.method.assertionName()
+        let feedback: String = {
+            guard !success else { return "" }
+            return Utils.closestCallsMessage(
+                for: self.invocations.map { invocation in
+                    matcher.set(file: file, line: line)
+                    defer { matcher.clearFileAndLine() }
+                    return MethodType.compareParameters(lhs: invocation, rhs: method.method, matcher: matcher)
+                },
+                name: assertionName
+            )
+        }()
+        MockyAssert(success, "Expected: \(count) invocations of `\(assertionName)`, but was: \(fullMatches).\(feedback)", file: file, line: line)
     }
 
     private func addInvocation(_ call: MethodType) {
-        invocations.append(call)
+        self.queue.sync { invocations.append(call) }
     }
     private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        matcher.set(file: self.file, line: self.line)
+        defer { matcher.clearFileAndLine() }
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
-        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher).isFullMatch })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
         return product
     }
     private func methodPerformValue(_ method: MethodType) -> Any? {
-        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        matcher.set(file: self.file, line: self.line)
+        defer { matcher.clearFileAndLine() }
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher).isFullMatch }
         return matched?.performs
     }
-    private func matchingCalls(_ method: MethodType) -> [MethodType] {
-        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    private func matchingCalls(_ method: MethodType, file: StaticString?, line: UInt?) -> [MethodType] {
+        matcher.set(file: file ?? self.file, line: line ?? self.line)
+        defer { matcher.clearFileAndLine() }
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher).isFullMatch }
     }
-    private func matchingCalls(_ method: Verify) -> Int {
-        return matchingCalls(method.method).count
+    private func matchingCalls(_ method: Verify, file: StaticString?, line: UInt?) -> Int {
+        return matchingCalls(method.method, file: file, line: line).count
     }
     private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
         do {
@@ -450,10 +452,8 @@
         }
     }
     private func onFatalFailure(_ message: String) {
-        #if Mocky
         guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
-        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
-        #endif
+        SwiftyMockyTestObserver.handleFatalError(message: message, file: file, line: line)
     }
   <%# ================================================== STATIC MOCK METHODS -%><%_ -%>
     <%_ if conformsToStaticMock { -%>
@@ -468,28 +468,43 @@
     }
 
     static public func verify(_ method: StaticVerify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
-        let invocations = matchingCalls(method.method)
-        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+        let fullMatches = matchingCalls(method, file: file, line: line)
+        let success = count.matches(fullMatches)
+        let assertionName = method.method.assertionName()
+        let feedback: String = {
+            guard !success else { return "" }
+            return Utils.closestCallsMessage(
+                for: self.invocations.map { invocation in
+                    matcher.set(file: file, line: line)
+                    defer { matcher.clearFileAndLine() }
+                    return StaticMethodType.compareParameters(lhs: invocation, rhs: method.method, matcher: matcher)
+                },
+                name: assertionName
+            )
+        }()
+        MockyAssert(success, "Expected: \(count) invocations of `\(assertionName)`, but was: \(fullMatches).\(feedback)", file: file, line: line)
     }
 
     static private func addInvocation(_ call: StaticMethodType) {
-        invocations.append(call)
+        self.queue.sync { invocations.append(call) }
     }
     static private func methodReturnValue(_ method: StaticMethodType) throws -> StubProduct {
         let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
-        let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        let matched = candidates.first(where: { $0.isValid && StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher).isFullMatch })
         guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
         return product
     }
     static private func methodPerformValue(_ method: StaticMethodType) -> Any? {
-        let matched = methodPerformValues.reversed().first { StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        let matched = methodPerformValues.reversed().first { StaticMethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher).isFullMatch }
         return matched?.performs
     }
-    static private func matchingCalls(_ method: StaticMethodType) -> [StaticMethodType] {
-        return invocations.filter { StaticMethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    static private func matchingCalls(_ method: StaticMethodType, file: StaticString?, line: UInt?) -> [StaticMethodType] {
+        matcher.set(file: file, line: line)
+        defer { matcher.clearFileAndLine() }
+        return invocations.filter { StaticMethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher).isFullMatch }
     }
-    static private func matchingCalls(_ method: StaticVerify) -> Int {
-        return matchingCalls(method.method).count
+    static private func matchingCalls(_ method: StaticVerify, file: StaticString?, line: UInt?) -> Int {
+        return matchingCalls(method.method, file: file, line: line).count
     }
     static private func givenGetterValue<T>(_ method: StaticMethodType, _ message: String) -> T {
         do {

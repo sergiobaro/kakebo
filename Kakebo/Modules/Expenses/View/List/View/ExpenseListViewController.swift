@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ExpenseListViewProtocol: class {
+protocol ExpenseListViewProtocol: AnyObject {
 
   func reloadData()
   func delete(section: Int)

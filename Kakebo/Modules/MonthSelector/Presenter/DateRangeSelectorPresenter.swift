@@ -1,6 +1,6 @@
 import Foundation
 
-protocol DateRangeSelectorView: class {
+protocol DateRangeSelectorView: AnyObject {
   func selectComponent(_ component: Int, index: Int)
   func showComponents(_ components: PickerComponents)
 }

@@ -5,7 +5,7 @@ enum ExpenseListSelectorViewType: String {
   case month
 }
 
-protocol ExpenseListSelectorViewDelegate: class {
+protocol ExpenseListSelectorViewDelegate: AnyObject {
 
   func expenseListSelectorViewDidSelect(type: ExpenseListSelectorViewType)
 }

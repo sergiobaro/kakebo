@@ -5,7 +5,15 @@ class VariableWrapper {
     var privatePrototypeName: String { return "__p_\(variable.name)".replacingOccurrences(of: "`", with: "") }
     var casesCount: Int { return readonly ? 1 : 2 }
 
-    let deprecatedMessage = "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value."
+    var accessModifier: String {
+        // TODO: Fix access levels for SwiftyPrototype
+        // guard variable.type?.accessLevel != "internal" else { return "" }
+        return "public "
+    }
+    var attributes: String {
+        let value = Helpers.extractAttributes(from: self.variable.attributes)
+        return value.isEmpty ? "\(accessModifier)" : "\(value)\n\t\t\(accessModifier)"
+    }
     var noStubDefinedMessage: String { return "\(scope) - stub value for \(variable.name) was not defined" }
 
     var getter: String {
@@ -16,8 +24,7 @@ class VariableWrapper {
     var setter: String {
         let staticModifier = variable.isStatic ? "\(scope)." : ""
         if readonly {
-            let annotation = readonly ? "\n\t\t@available(*, deprecated, message: \"\(deprecatedMessage)\")" : ""
-            return "\(annotation)\n\t\tset {\t\(variable.isStatic ? "\(scope)." : "")\(privatePrototypeName) = newValue }"
+            return ""
         } else {
             return "\n\t\tset {\t\(staticModifier)invocations.append(.\(propertyCaseSetName)(.value(newValue))); \(variable.isStatic ? "\(scope)." : "")\(privatePrototypeName) = newValue }"
         }
@@ -25,10 +32,17 @@ class VariableWrapper {
     var prototype: String {
         let staticModifier = variable.isStatic ? "static " : ""
 
-        return "public \(staticModifier)var \(variable.name): \(variable.typeName.name) {" +
+        return "\(attributes)\(staticModifier)var \(variable.name): \(variable.typeName.name) {" +
             "\(getter)" +
             "\(setter)" +
         "\n\t}"
+    }
+    var assertionName: String {
+        var result = "case .\(propertyCaseGetName): return \"[get] .\(variable.name)\""
+        if !readonly {
+            result += "\n\t\t\tcase .\(propertyCaseSetName): return \"[set] .\(variable.name)\""
+        }
+        return result
     }
 
     var privatePrototype: String {
@@ -40,6 +54,14 @@ class VariableWrapper {
     init(_ variable: SourceryRuntime.Variable, scope: String) {
         self.variable = variable
         self.scope = scope
+    }
+
+    func compareCases() -> String {
+        var result =  propertyCaseGetCompare()
+        if !readonly {
+            result += "\n\t\t\t\(propertyCaseSetCompare())"
+        }
+        return result
     }
 
     func propertyGet() -> String {
@@ -57,7 +79,7 @@ class VariableWrapper {
         return "case \(propertyCaseGetName)"
     }
     func propertyCaseGetCompare() -> String {
-        return "case (.\(propertyCaseGetName),.\(propertyCaseGetName)): return true"
+        return "case (.\(propertyCaseGetName),.\(propertyCaseGetName)): return Matcher.ComparisonResult.match"
     }
     func propertyCaseGetIntValue() -> String {
         return "case .\(propertyCaseGetName): return 0"
@@ -68,7 +90,11 @@ class VariableWrapper {
         return "case \(propertyCaseSetName)(\(nestedType))"
     }
     func propertyCaseSetCompare() -> String {
-        return "case (.\(propertyCaseSetName)(let left),.\(propertyCaseSetName)(let right)): return \(nestedType).compare(lhs: left, rhs: right, with: matcher)"
+        let lhsName = "left"
+        let rhsName = "right"
+        let comaprison = "Matcher.ParameterComparisonResult(\(nestedType).compare(lhs: \(lhsName), rhs: \(rhsName), with: matcher), \(lhsName), \(rhsName), \"newValue\")"
+        let result = "Matcher.ComparisonResult([\(comaprison)])"
+        return "case (.\(propertyCaseSetName)(let left),.\(propertyCaseSetName)(let right)): return \(result)"
     }
     func propertyCaseSetIntValue() -> String {
         return "case .\(propertyCaseSetName)(let newValue): return newValue.intValue"
@@ -76,7 +102,7 @@ class VariableWrapper {
 
     // Given
     func givenConstructorName(prefix: String = "") -> String {
-        return "public static func \(variable.name)(getter defaultValue: \(TypeWrapper(variable.typeName).stripped)...) -> \(prefix)PropertyStub"
+        return "\(attributes)static func \(variable.name)(getter defaultValue: \(TypeWrapper(variable.typeName).stripped)...) -> \(prefix)PropertyStub"
     }
 
     func givenConstructor(prefix: String = "") -> String {

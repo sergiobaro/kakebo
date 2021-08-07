@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AddExpenseView: class {
+protocol AddExpenseView: AnyObject {
   
   func display(title: String)
   func display(fields: [FormFieldModel])

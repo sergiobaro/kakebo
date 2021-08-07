@@ -13,7 +13,7 @@ extension ExpenseCategoryViewModel: Equatable {
   }
 }
 
-protocol CategorySelectorView: class {
+protocol CategorySelectorView: AnyObject {
   func showCategories(_ categories: [ExpenseCategoryViewModel])
 }
 

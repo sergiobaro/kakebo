@@ -1,6 +1,6 @@
 import UIKit
 
-protocol AddCategoryDelegate: class {
+protocol AddCategoryDelegate: AnyObject {
   func didAddCategory(with name: String)
 }
 

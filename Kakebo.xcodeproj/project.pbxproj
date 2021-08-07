@@ -1041,7 +1041,6 @@
 			buildConfigurationList = D66279847B96FF1DB02D209B8EBF0E84 /* Build configuration list for PBXNativeTarget "KakeboTests" */;
 			buildPhases = (
 				C32D09BED92B1C97660C61E7 /* [CP] Check Pods Manifest.lock */,
-				D94837B324628FB8005DFEA4 /* Mocks */,
 				2F27755AB4D41FE365C86E8F3DCE7E61 /* Sources */,
 				431807D37812C8C2942FECFE00BAA15B /* Frameworks */,
 				716332F3E51EBF33FF945281 /* [CP] Embed Pods Frameworks */,
@@ -1061,7 +1060,7 @@
 			buildConfigurationList = 5525ADE0F05DAE83349BF6A2235ADB9B /* Build configuration list for PBXNativeTarget "Kakebo" */;
 			buildPhases = (
 				AB8607E454A9F562B7543712 /* [CP] Check Pods Manifest.lock */,
-				8F2775557FCF36A517FE4EAC0B7ABB04 /* Swift lint */,
+				8F2775557FCF36A517FE4EAC0B7ABB04 /* SwiftLint */,
 				3D168973123E81312D25793A0E2630E1 /* Sources */,
 				80C961031A9D3C15BA3CBA8B70F58ED1 /* Resources */,
 				D9F528B5D8A09E3A953DB513113CA1F5 /* Frameworks */,
@@ -1084,7 +1083,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					9D144BF9D4741CE607A2BAD3A130E34E = {
 						LastSwiftMigration = 1020;
@@ -1179,7 +1178,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kakebo/Pods-Kakebo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F2775557FCF36A517FE4EAC0B7ABB04 /* Swift lint */ = {
+		8F2775557FCF36A517FE4EAC0B7ABB04 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1188,14 +1187,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift lint";
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint --quiet\n";
 		};
 		AB8607E454A9F562B7543712 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1240,24 +1239,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D94837B324628FB8005DFEA4 /* Mocks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Mocks;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftymocky >/dev/null; then\n    swiftymocky generate\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1415,7 +1396,7 @@
 			baseConfigurationReference = 243B3D8E92366CCF1998D1A6 /* Pods-KakeboTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = U45ZNT55FZ;
+				DEVELOPMENT_TEAM = 2HB42W942M;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KakeboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1457,6 +1438,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1517,6 +1499,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1550,7 +1533,7 @@
 			baseConfigurationReference = 4F1F8F5FE99128803DD017B1 /* Pods-KakeboTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = U45ZNT55FZ;
+				DEVELOPMENT_TEAM = 2HB42W942M;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = KakeboTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

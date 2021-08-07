@@ -1,6 +1,6 @@
 import UIKit
 
-protocol AddExpenseDelegate: class {
+protocol AddExpenseDelegate: AnyObject {
   func addExpenseDidSave(expense: Expense)
 }
 

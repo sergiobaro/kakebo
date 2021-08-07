@@ -1,7 +1,7 @@
 import UIKit
 
 // sourcery: AutoMockable
-protocol FormViewDelegate: class {
+protocol FormViewDelegate: AnyObject {
 
   func formFieldDidChange(_ field: FormFieldModel)
   func formDidFinish(with fields: [FormFieldModel])
@@ -10,7 +10,7 @@ protocol FormViewDelegate: class {
 }
 
 // sourcery: AutoMockable
-protocol FormFieldDelegate: class {
+protocol FormFieldDelegate: AnyObject {
 
   func fieldDidChange(_ field: FormFieldModel)
   func fieldDidBeginEditing(_ field: FormFieldModel)
@@ -20,7 +20,7 @@ protocol FormFieldDelegate: class {
 }
 
 // sourcery: AutoMockable
-protocol FormController: class {
+protocol FormController: AnyObject {
   
   func showCustomKeyboard(_ keyboardView: UIView)
   func pushViewController(_ viewController: UIViewController)

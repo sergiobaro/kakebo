@@ -8,6 +8,10 @@ class SubscriptWrapper {
     let genericTypesList: [String]
     let genericTypesModifier: String?
 
+    private var methodAttributes: String {
+        return Helpers.extractAttributes(from: self.wrapped.attributes)
+    }
+
     private let noStubDefinedMessage = "Stub return value not specified for subscript. Use given first."
 
     private static var registered: [String: Int] = [:]
@@ -16,6 +20,7 @@ class SubscriptWrapper {
     public static func clear() -> String {
         SubscriptWrapper.registered = [:]
         SubscriptWrapper.suffixes = [:]
+        namesWithoutReturnType = [:]
         return ""
     }
     static func register(_ name: String, _ uniqueName: String) {
@@ -63,7 +68,9 @@ class SubscriptWrapper {
     func subscriptCall() -> String {
         let get = "\n\t\tget {\(getter())\n\t\t}"
         let set = readonly ? "" : "\n\t\tset {\(setter())\n\t\t}"
-        return "\(uniqueName) {\(get)\(set)\n\t}"
+        var attributes = self.methodAttributes.replacingOccurrences(of:"@objc", with: "")
+        attributes = attributes.isEmpty ? "" : "\(attributes)\n\t"
+        return "\(attributes)\(uniqueName) {\(get)\(set)\n\t}"
     }
     private func getter() -> String {
         let method = ".\(subscriptCasePrefix("get"))(\(parametersForMethodCall()))"
@@ -81,6 +88,14 @@ class SubscriptWrapper {
         return "\n\t\t\taddInvocation(\(method))"
     }
 
+    var assertionName: String {
+        return readonly ? assertionName("get") : "\(assertionName("get"))\n\t\t\t\(assertionName("set"))"
+    }
+    private func assertionName(_ accessor: String) -> String {
+        return "case .\(subscriptCasePrefix(accessor)): return " +
+            "\"[\(accessor)] `subscript`\(genericTypesModifier ?? "")[\(parametersForAssertionName())]\""
+    }
+
     // method type
     func subscriptCasePrefix(_ accessor: String) -> String {
         return "\(registrationName(accessor))\(nameSuffix(accessor))"
@@ -89,19 +104,25 @@ class SubscriptWrapper {
         return "\(subscriptCasePrefix(accessor))(\(parametersForMethodTypeDeclaration(set: accessor == "set")))"
     }
     func subscriptCases() -> String {
-        return readonly ? "case \(subscriptCaseName("get"))" : "case \(subscriptCaseName("get"))\n\t\tcase \(subscriptCaseName("set"))"
+        let availability = wrapped.attributes["available"]?.description
+        let attributes = availability != nil ? "\(availability!)\n\t\t" : ""
+        return readonly ? "\(attributes)case \(subscriptCaseName("get"))" : "\(attributes)case \(subscriptCaseName("get"))\n\t\t\(attributes)case \(subscriptCaseName("set"))"
     }
     func equalCase(_ accessor: String) -> String {
         var lhsParams = wrapped.parameters.map { "lhs\($0.name.capitalized)" }.joined(separator: ", ")
         var rhsParams = wrapped.parameters.map { "rhs\($0.name.capitalized)" }.joined(separator: ", ")
-        var comparators = wrappedParameters.map { "\t\t\t\t\($0.comparator)" }.joined(separator: "\n")
+        var comparators = "\t\t\t\tvar results: [Matcher.ParameterComparisonResult] = []\n"
+        comparators += wrappedParameters.map { "\t\t\t\t\($0.comparatorResult())" }.joined(separator: "\n")
+
         if accessor == "set" {
             lhsParams += ", lhsDidSet"
             rhsParams += ", rhsDidSet"
-            comparators += "\n\t\t\t\treturn Parameter.compare(lhs: lhsDidSet, rhs: rhsDidSet, with: matcher)"
-        } else {
-            comparators += "\n\t\t\t\treturn true"
+            comparators += "\n\t\t\t\tresults.append(Matcher.ParameterComparisonResult(Parameter.compare(lhs: lhsDidSet, rhs: rhsDidSet, with: matcher), lhsDidSet, rhsDidSet, \"newValue\"))"
         }
+
+        comparators += "\n\t\t\t\treturn Matcher.ComparisonResult(results)"
+
+        // comparatorResult()
         return "case (let .\(subscriptCasePrefix(accessor))(\(lhsParams)), let .\(subscriptCasePrefix(accessor))(\(rhsParams))):\n" + comparators
     }
     func equalCases() -> String {
@@ -122,7 +143,9 @@ class SubscriptWrapper {
     // Given
     func givenConstructorName() -> String {
         let returnTypeString = returnsSelf ? replaceSelf : TypeWrapper(wrapped.returnTypeName).stripped
-        return "public static func `subscript`\(genericTypesModifier ?? "")(\(parametersForProxySignature()), willReturn: \(returnTypeString)...) -> SubscriptStub"
+        var attributes = self.methodAttributes.replacingOccurrences(of:"@objc", with: "")
+        attributes = attributes.isEmpty ? "" : "\(attributes)\n\t\t"
+        return "\(attributes)public static func `subscript`\(genericTypesModifier ?? "")(\(parametersForProxySignature()), willReturn: \(returnTypeString)...) -> SubscriptStub"
     }
     func givenConstructor() -> String {
         return "return Given(method: .\(subscriptCasePrefix("get"))(\(parametersForProxyInit())), products: willReturn.map({ StubProduct.return($0 as Any) }))"
@@ -132,7 +155,9 @@ class SubscriptWrapper {
     func verifyConstructorName(set: Bool = false) -> String {
         let returnTypeString = returnsSelf ? replaceSelf : nestedType
         let returning = set ? "" : returningParameter(true, true)
-        return "public static func `subscript`\(genericTypesModifier ?? "")(\(parametersForProxySignature())\(returning)\(set ? ", set newValue: \(returnTypeString)" : "")) -> Verify"
+        var attributes = self.methodAttributes.replacingOccurrences(of:"@objc", with: "")
+        attributes = attributes.isEmpty ? "" : "\(attributes)\n\t\t"
+        return "\(attributes)public static func `subscript`\(genericTypesModifier ?? "")(\(parametersForProxySignature())\(returning)\(set ? ", set newValue: \(returnTypeString)" : "")) -> Verify"
     }
     func verifyConstructor(set: Bool = false) -> String {
         return "return Verify(method: .\(subscriptCasePrefix(set ? "set" : "get"))(\(parametersForProxyInit(set: set))))"
@@ -186,6 +211,9 @@ class SubscriptWrapper {
     }
     private func parametersForProxySignature(set: Bool = false) -> String {
         return wrappedParameters.map { "\($0.labelAndName()): \($0.nestedType)" }.joined(separator: ", ") + (set ? ", set newValue: \(nestedType)" : "")
+    }
+    private func parametersForAssertionName() -> String {
+        return wrappedParameters.map { "\($0.labelAndName())" }.joined(separator: ", ")
     }
     private func parametersForMethodCall(set: Bool = false) -> String {
         let generics = getGenerics()

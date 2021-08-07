@@ -1,8 +1,8 @@
 // Collision management
 func areThereCollisions(between methods: [MethodWrapper]) -> Bool {
-    let givenSet = Set<String>(methods.map({ $0.givenConstructorName(prefix: "", deprecated: true, annotated: false) }))
+    let givenSet = Set<String>(methods.map({ $0.givenConstructorName(prefix: "") }))
     guard givenSet.count == methods.count else { return true } // there would be conflicts in Given
-    let verifySet = Set<String>(methods.map({ $0.verificationProxyConstructorName(prefix: "", deprecated: true, annotated: false) }))
+    let verifySet = Set<String>(methods.map({ $0.verificationProxyConstructorName(prefix: "") }))
     guard verifySet.count == methods.count else { return true } // there would be conflicts in Verify
     return false
 }
@@ -127,11 +127,6 @@ func propertyTypes(_ variable: SourceryRuntime.Variable) -> String {
 func propertyMethodTypes(_ variable: SourceryRuntime.Variable) -> String {
     let wrapper = VariableWrapper(variable, scope: "")
     return "\(wrapper.propertyCaseGet())" + (wrapper.readonly ? "" : "\n\t\t\(wrapper.propertyCaseSet())")
-}
-
-func propertyMethodTypesCompare(_ variable: SourceryRuntime.Variable) -> String {
-    let wrapper = VariableWrapper(variable, scope: "")
-    return "\(wrapper.propertyCaseGetCompare())" + (wrapper.readonly ? "" : "\n\t\t\t\(wrapper.propertyCaseSetCompare())")
 }
 
 func propertyMethodTypesIntValue(_ variable: SourceryRuntime.Variable) -> String {

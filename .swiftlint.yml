@@ -10,3 +10,8 @@ opt_in_rules:
   - multiline_literal_brackets
   - multiline_parameters_brackets
   - multiline_arguments
+
+excluded:
+  - "KakeboTests/Mock.generated.swift"
+  - "Pods"
+  - "vendor"
