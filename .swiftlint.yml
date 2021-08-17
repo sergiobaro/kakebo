@@ -15,3 +15,7 @@ excluded:
   - "KakeboTests/Mock.generated.swift"
   - "Pods"
   - "vendor"
+
+identifier_name:
+  excluded:
+    - id

@@ -6,8 +6,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
 
-  // swiftlint:disable:next line_length
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  private var importManager: ImportManager!
+
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
     #if DEBUG
     if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
       return true
@@ -17,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Style.applyApperance()
 
     self.window = UIWindow(frame: UIScreen.main.bounds)
+    self.importManager = ImportManager()
 
     do {
       let repository = try RealmExpensesRepositoryFactory.make()
@@ -45,8 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     self.window!.makeKeyAndVisible()
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      let url = Bundle.main.url(forResource: "Movements", withExtension: "csv")!
+      _ = self.importManager.open(url: url)
+    }
     
     return true
   }
-  
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+    importManager.open(url: url)
+  }
 }
