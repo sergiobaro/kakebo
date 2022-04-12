@@ -70,10 +70,12 @@ GEM
     nanaimo (0.3.0)
     nap (1.1.0)
     netrc (0.11.0)
-    nokogiri (1.12.2-arm64-darwin)
+    nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     public_suffix (4.0.6)
-    racc (1.5.2)
+    racc (1.6.0)
     rexml (3.2.5)
     ruby-macho (1.4.0)
     slather (2.7.1)
@@ -97,6 +99,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   cocoapods
